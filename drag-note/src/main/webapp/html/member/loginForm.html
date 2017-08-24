@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DRAG NOTE 로그인</title>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<meta name="google-signin-client_id" content="40981048355-5ic1f5hugkggi7ihl1jo2icspts1kvri.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="/drag-note/js/sweetalert-master/dist/sweetalert.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/drag-note/js/sweetalert-master/dist/sweetalert.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+	#loginBox {
+		width: 314px; height: 250px; position: absolute;
+		left: 611px; top: 220px;
+	}
+	#loginInfo {
+		width: 314px;
+		padding: 10px 10px 10px 10px;
+	}
+	table {
+		text-align: center;
+	}
+	th {
+		text-align: left;
+	}
+	btns {
+		text-align: center;
+	}
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('/drag-note/html/images/dragnote.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+</head>
+<body>
+	<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+	<div id="loginBox" >
+		
+		 <h1 class="w3-jumbo w3-animate-top">LOGIN</h1>
+		<form name="loginfrm" id="loginfrm" >       
+	    	<table id="loginInfo">
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="email">Email:</label>
+	    			 <input type="text" class="form-control" id="email" name="email" placeholder="Email Address" required="" autofocus="" />
+	    			</div>		
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+					    <label for="password">Password:</label>
+					    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required=""/>
+	    			</div>
+	    		</tr>
+			    <tr>
+			    	<td id="btns" colspan="2">
+					    <button id="loginBtn" class="btn btn-default" style="width: 314px; background: #8fd8c5;">로그인</button>   
+			    	</td>
+			    </tr>
+			    <tr>
+			    	<td id="btns" colspan="2">
+					    <button id="joinFormBtn" class="btn btn-default" style="width: 314px; background: #dcf7f0;">회원가입</button>
+			    	</td>
+			    </tr>
+    		</table>
+	    </form>
+		<div align="center" class="g-signin2" data-onsuccess="onSignIn" style="width: 314px; text-align: center;"></div>
+  	</div>
+  	</div>
+	<script>
+ 		// 센터로 오게 하기.
+		$(document).ready(function () {
+			$("#loginBox").attr({"style": "left:" + ((window.innerWidth - 314)/2) + "px; top:" + ((window.innerHeight - 400)/2) + "px;"});
+		});
+	
+		$(window).resize(function(){
+			$("#loginBox").attr({"style": "left:" + ((window.innerWidth - 314)/2) + "px; top:" + ((window.innerHeight - 400)/2) + "px;"});
+		});
+		
+		// 로그인
+		$("#loginBtn").click(function () {
+			$.ajax ({
+				url: "/drag-note/member/login.do",
+				type: "POST",
+				dataType: "json",
+				data: {
+					"email" : $("input[name=email]").val(),
+					"password" : $("input[name=password]").val()
+				}
+			}).done(function(result) {
+				if(result.loginChk){
+					swal({
+						  title: "로그인 성공 ＼(^o^)／",
+						  text: "메인페이지로 이동하겠습니다~",
+						  type: "success",
+						  showCancelButton: false,
+						  confirmButtonColor: "green",
+						  confirmButtonText: "확인 :)",
+						  closeOnConfirm: false
+						},
+						function(){
+							localStorage.setItem("memberNo", result.memberNo);
+							localStorage.setItem("name", result.name);
+							// 페이지 이동 하면 될 듯!
+							location.href='/drag-note/html/main/main.html';
+						});
+				}
+				else {
+					swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","아이디 또는 비밀번호를 확인해주세요");
+				}
+				})
+				.fail(function(jqXhr, testStatus, errorText){
+				alert("에러발생 :" + errorText);
+			});
+			return false;
+		});
+
+		// 회원가입폼 이동
+		$("#joinFormBtn").click(function () {
+			location.href='/drag-note/html/member/joinForm.html';
+			return false;
+		});
+		
+		
+		function googleJoin(email, name){
+			localStorage.setItem("email", email);
+			localStorage.setItem("name", name);
+			location.href='/drag-note/html/member/googleJoinForm.html';
+		}
+		
+		// 구글 연동 로그인 회원 정보 얻어오기
+		function onSignIn(googleUser) {
+		  var profile = googleUser.getBasicProfile();
+		  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		  console.log('Name: ' + profile.getName());
+		  console.log('Image URL: ' + profile.getImageUrl());
+		  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		  
+			$.ajax ({
+				url: "/drag-note/member/googleLogin.do",
+				type: "POST",
+				dataType: "json",
+				data: {
+					"email" : profile.getEmail()
+				}
+			})
+			.done(function (result){
+				console.log(result)
+				if(result.google){
+					swal({
+						  title: "구글 로그인 성공 ＼(^o^)／",
+						  text: "메인페이지로 이동하겠습니다~",
+						  type: "success",
+						  showCancelButton: false,
+						  confirmButtonColor: "green",
+						  confirmButtonText: "확인 :)",
+						  closeOnConfirm: false
+						},
+						function(){
+							localStorage.setItem("memberNo", result.memberNo);
+							localStorage.setItem("name", result.name);
+							// 페이지 이동 하면 될 듯!
+							location.href='/drag-note/html/main/main.html';
+						});
+				}
+				else{
+					swal({
+						  title: "회원이 아니시네요 * :-O",
+						  text: "회원가입 페이지로 이동하겠습니다~ o^_^)o",
+						  type: "info",
+						  showCancelButton: false,
+						  confirmButtonText: "확인 :)",
+						  closeOnConfirm: false
+						},
+						function(){
+							googleJoin(profile.getEmail(),profile.getName())
+						});
+				}
+			})
+		}
+		
+
+		
+		// 구글 연동 로그아웃
+		function signOut() {
+			alert("로그아웃");
+		 	
+			var auth2 = gapi.auth2.getAuthInstance();
+		    console.log(auth2);
+		    auth2.signOut().then(function () {
+		    console.log('User signed out.');
+		    
+		    if (!confirm("로그아웃 하시겠습니까?"))
+				return;
+		    
+		    location.href='/drag-note/index.html';
+		    });
+		}
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta name="google-signin-client_id" content="40981048355-5ic1f5hugkggi7ihl1jo2icspts1kvri.apps.googleusercontent.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="/00_drag-note/js/sweetalert-master/dist/sweetalert.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<!-- 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="/00_drag-note/js/sweetalert-master/dist/sweetalert.min.js"></script>
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <title>Creative - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/creative.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+	<style>
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+body {font-family: "Open Sans"}
+	#loginBox {
+		width: 314px; height: 250px; position: absolute;
+		left: 611px; top: 220px;
+	}
+	#loginInfo {
+		width: 314px;
+		padding: 10px 10px 10px 10px;
+	}
+	table {
+		text-align: center;
+	}
+	th {
+		text-align: left;
+	}
+	btns {
+		text-align: center;
+	}
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.modal-content {
+	width: 400px;
+	
+}
+</style>
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">DRAG NOTE</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">드래그가 글이되는 공간, 드래그노트</h1>
+                <hr>
+                <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
+                <button class="btn btn-primary" onclick="document.getElementById('subscribe').style.display='block'" data-toggle="modal" data-target="#myModal">로그인</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">오직 드래그만으로 !</h2>
+                    <hr class="light">
+                    <p class="text-faded">기존에 있는 노트들 보다 사용법이 간단해 누구나 손쉽게 사용할 수 있습니다.</p>
+                    <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">At Your Service</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
+                        <h3>드래그만으로 노트를!</h3>
+                        <p class="text-muted">드래그만으로 나만의 노트를 작성해보세요.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
+                        <h3>간편한 사용법</h3>
+                        <p class="text-muted">오직 마우스로만 !</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                        <h3>실시간 뉴스 정보</h3>
+                        <p class="text-muted">실시간으로 업데이트 되는 뉴스정보 또한 드래그만으로 !</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
+                        <h3>파일 저장 및 공유</h3>
+                        <p class="text-muted">작성된 노트를 내 컴퓨터로 다운로드 받거나, 메일로 보낼 수 있습니다 !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="no-padding" id="portfolio1">
+        <div class="container-fluid">
+           	두번째
+        </div>
+    </section>
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter popup-gallery">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/1.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/1.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/2.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/2.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/3.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/3.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/4.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/4.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/5.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/5.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/6.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/6.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Free Download at Start Bootstrap!</h2>
+                <a href="http://startbootstrap.com/template-overviews/creative/" class="btn btn-default btn-xl sr-button">Download Now!</a>
+            </div>
+        </div>
+    </aside>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x sr-contact"></i>
+                    <p>123-456-6789</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+	<!-- 로그인 회원가입 모달 -->
+	
+	<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <br>
+          <br>
+          <h4 class="modal-title" id="dragNoteTitle">DRAG NOTE LOGIN</h4>
+          <br>
+        </div>
+        <br>
+        	<div class="modal-body" id="joinModal"  style="display: none;">
+          	<form name="joinfrm" id="joinfrm">       
+	    	<table id="joinInfo">
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="name">name:</label>
+	    			 <input type="text" class="form-control" id="name" name="name" placeholder="이름음 입력하세요" required="" autofocus="" />
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="email">Email:</label>
+	    			 <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required="" autofocus="" />
+	    			 <span id="emailck"></span>
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="password">password:</label>
+	    			 <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="passwordConf">password:</label>
+	    			 <input type="password" class="form-control" id="passwordConf" name="passwordConf" placeholder="비밀번호를 확인하세요" required="" autofocus="" />
+	    			 <span id="checkPwd"></span>
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="2">&nbsp;&nbsp;</td>
+	    		</tr>
+	    		<tr>
+	    			<td id="btns" colspan="2">
+<!-- 					    <a href="/00_drag-note/html/member/loginForm.html"> -->
+<!-- 						<input type="button" class="btn btn-default" value="로그인 화면으로" /></a>  -->
+					    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <button id="joinBtn" class="btn btn-default">회원가입</button>   
+	    			</td>
+	    		</tr>
+    		</table>
+	    </form>
+        	</div>
+        	
+        <div class="modal-body" id="loginModal" >
+          	
+          	
+          	
+          	<form name="loginfrm" id="loginfrm" >       
+	    	<table id="loginInfo">
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="loginEmail">Email:</label>
+	    			 <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="Email Address" required="" autofocus="" />
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+					    <label for="loginPassword">Password:</label>
+					    <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password" required=""/>
+	    			</div>
+	    		</tr>
+	    		<br>
+			    <tr >
+			    	<td id="btns" colspan="2" style="width: 368px;">
+					    <button id="loginBtn" class="btn btn-default"  style="width: 368px;background: #8fd8c5; margin: 0 auto;">로그인</button>   
+			    	</td>
+			    </tr>
+			    <tr>
+			    	<td id="btns" colspan="2" style="width: 368px;">
+					    <div id="joinFormBtn" class="btn btn-default"  style="width: 368px;background: #dcf7f0; margin: 0 auto;">회원가입</div>
+			    	</td>
+			    </tr>
+    		</table>
+	    </form>
+          <div id="googleLoginDiv" align="center" class="g-signin2" data-onsuccess="onSignIn" style="width: 368px; text-align: center;"></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/creative.min.js"></script>
+    
+   
+   <!-- 드래그노트 메인 -->
+    <script type="text/javascript">
+    $("#joinFormBtn").click(function (){
+    	$("#dragNoteTitle").html("DRAG NOTE JOIN")
+    	document.getElementById("loginModal").style.display = "none";
+    	document.getElementById("joinModal").style.display = "block";
+    	return false;
+    })
+
+    // 로그인
+    $("#loginBtn").click(function () {
+    	
+    	$.ajax ({
+    		url: "/00_drag-note/member/login.do",
+    		type: "POST",
+    		dataType: "json",
+    		data: {
+    			"email" : $("input[name=loginEmail]").val(),
+    			"password" : $("input[name=loginPassword]").val()
+    		}
+    	}).done(function(result) {
+    		if(result.loginChk){
+    			swal({
+    				  title: "로그인 성공 ＼(^o^)／",
+    				  text: "메인페이지로 이동하겠습니다~",
+    				  type: "success",
+    				  showCancelButton: false,
+    				  confirmButtonColor: "green",
+    				  confirmButtonText: "확인 :)",
+    				  closeOnConfirm: false
+    				},
+    				function(){
+    					localStorage.setItem("memberNo", result.memberNo);
+    					localStorage.setItem("name", result.name);
+    					// 페이지 이동 하면 될 듯!
+    					location.href='/00_drag-note/html/main/main.html';
+    				});
+    		}
+    		else {
+    			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","아이디 또는 비밀번호를 확인해주세요");
+    		}
+    		})
+    		.fail(function(jqXhr, testStatus, errorText){
+    		alert("에러발생 :" + errorText);
+    	});
+    	return false;
+    });
+
+    // 회원가입폼 이동
+    // $("#joinFormBtn").click(function () {
+//     	location.href='/00_drag-note/html/member/joinForm.html';
+//     	return false;
+    // });
+
+
+    function googleJoin(email, name){
+    	localStorage.setItem("email", email);
+    	localStorage.setItem("name", name);
+    	location.href='/00_drag-note/html/member/googleJoinForm.html';
+    }
+
+    // 구글 연동 로그인 회원 정보 얻어오기
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      
+    	$.ajax ({
+    		url: "/00_drag-note/member/googleLogin.do",
+    		type: "POST",
+    		dataType: "json",
+    		data: {
+    			"email" : profile.getEmail()
+    		}
+    	})
+    	.done(function (result){
+    		console.log(result)
+    		if(result.google){
+    			swal({
+    				  title: "구글 로그인 성공 ＼(^o^)／",
+    				  text: "메인페이지로 이동하겠습니다~",
+    				  type: "success",
+    				  showCancelButton: false,
+    				  confirmButtonColor: "green",
+    				  confirmButtonText: "확인 :)",
+    				  closeOnConfirm: false
+    				},
+    				function(){
+    					localStorage.setItem("memberNo", result.memberNo);
+    					localStorage.setItem("name", result.name);
+    					// 페이지 이동 하면 될 듯!
+    					location.href='/00_drag-note/html/main/main.html';
+    				});
+    		}
+    		else{
+    			swal({
+    				  title: "회원이 아니시네요 * :-O",
+    				  text: "회원가입 페이지로 이동하겠습니다~ o^_^)o",
+    				  type: "info",
+    				  showCancelButton: false,
+    				  confirmButtonText: "확인 :)",
+    				  closeOnConfirm: false
+    				},
+    				function(){
+    					googleJoin(profile.getEmail(),profile.getName())
+    				});
+    		}
+    	})
+    }
+
+
+
+    // 구글 연동 로그아웃
+    function signOut() {
+    	alert("로그아웃");
+     	
+    	var auth2 = gapi.auth2.getAuthInstance();
+        console.log(auth2);
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        
+        if (!confirm("로그아웃 하시겠습니까?"))
+    		return;
+        
+        location.href='/00_drag-note/index.html';
+        });
+    }
+
+
+
+    //이메일 중복체크
+    $("#email").on("keyup",function(){
+    	$.ajax({
+    		url : "/00_drag-note/member/emailCheck.do",
+    		type:"POST",
+    		data :{email: $("input[name=email]").val()},
+    		dataType : "json"
+    	})
+    	.done(function (result) {
+    		console.log(result)
+    		if(result.emailChk){
+    			document.getElementById('emailck').style.color = "red";
+    			$("#emailck").html("사용중인 이메일입니다.");
+    		}
+    		else {
+    			document.getElementById('emailck').style.color = "green";
+    			$("#emailck").html("사용가능한 이메일입니다.");}
+    	})
+    });
+
+    $("#passwordConf").on("keyup",function(){
+      var f1 = document.joinfrm;
+      var pw1 = f1.password.value;
+      var pw2 = f1.passwordConf.value;
+      if(pw1!=pw2){
+       document.getElementById('checkPwd').style.color = "red";
+       document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+      }else{
+       document.getElementById('checkPwd').style.color = "green";
+       document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+       
+      }
+    });
+      
+
+
+    // 회원가입
+    $("#joinBtn").click(function () {
+    	
+    	var frm = document.joinfrm;
+    	
+    	
+    	
+    	if (frm.name.value == "") {
+    		frm.name.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","이름을 입력하세요.");
+    		return false;
+    	}
+    	if (frm.email.value == "") {
+    		frm.email.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","이메일을 입력하세요.");
+    		return false;
+    	}
+    	
+    	if (frm.password.value == "") {
+    		frm.password.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","비밀번호를 입력하세요.");
+    		return false;
+    	}
+    	if (frm.passwordConf.value == "") {
+    		frm.passwordConf.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","비밀번호를 입력하세요.");
+    		return false;
+    	}
+    	if(frm.password.value != frm.passwordConf.value){
+    		frm.passwordConf.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","비밀번호를 확인해주세요.");
+    		   return false;	  
+    	}
+    	swal({
+    		  title: "회원가입 하시겠습니까?",
+    		  text: "로그인 화면으로 이동하겠습니다~",
+    		  type: "success",
+    		  showCancelButton: false,
+    		  confirmButtonColor: "green",
+    		  confirmButtonText: "확인 :)",
+    		  closeOnConfirm: false
+    		},
+    		function(){
+    			$.ajax ({
+    				url: "/00_drag-note/member/join.do",
+    				type: "POST",
+    				dataType: "json",
+    				data: {
+    					"name" : $("input[name=name]").val(),
+    					"email" : $("input[name=email]").val(),
+    					"password" : $("input[name=password]").val()
+    				}
+    			}).done(function(result) {
+    				swal({
+    					 title: result.msg,
+    					  type: "success",
+    					  showCancelButton: false,
+    					  confirmButtonColor: "green",
+    					  confirmButtonText: "확인 :)",
+    					  closeOnConfirm: true
+    				},
+    				function(){
+//     					$("#dragNoteTitle").html("DRAG NOTE LOGIN")
+//     					document.getElementById("loginModal").style.display = "block";
+//     					document.getElementById("joinModal").style.display = "none";
+    					location.href='/00_drag-note';
+    					$("#myModal").modal('toggle');
+    				})
+    				
+    			
+    			})
+    			.fail(function(jqXhr, testStatus, errorText){
+    				alert("에러발생 :" + errorText);
+    			});
+    		});
+    	return false;
+    });
+    </script>
+
+</body>
+
+</html>

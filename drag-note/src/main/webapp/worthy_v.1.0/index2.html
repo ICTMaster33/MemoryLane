@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html>
+<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>(3)드래그 노트</title>
+		<meta name="description" content="Just one drag becomes a note.">
+		<meta name="author" content="htmlcoder.me">
+		
+		<!-- 드래그 노트 -->
+		<!-- Jquery and Bootstap core js files -->
+		<script type="text/javascript" src="plugins/jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		
+		<!-- Isotope javascript -->
+		<script type="text/javascript" src="plugins/isotope/isotope.pkgd.min.js"></script>
+		
+<!-- 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+<!-- 		<script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> -->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="/drag-note/js/search.js"></script>
+		<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+		<script src="/drag-note/js/sweetalert-master/dist/sweetalert.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src='/drag-note/html/fullcalendar-3.2.0/lib/moment.min.js'></script>
+		<script src='/drag-note/html/fullcalendar-3.2.0/fullcalendar.js'></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/drag-note/js/sweetalert-master/dist/sweetalert.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel='stylesheet' href='/drag-note/html/fullcalendar-3.2.0/fullcalendar.css' />
+		<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css">
+		
+		<!-- Mobile Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="images/favicon.ico">
+
+		<!-- Web Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+		<!-- Font Awesome CSS -->
+		<link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+		<!-- Plugins -->
+		<link href="css/animations.css" rel="stylesheet">
+
+		<!-- Worthy core CSS file -->
+		<link href="css/style.css" rel="stylesheet">
+
+		<!-- Custom css --> 
+		<link href="css/custom.css" rel="stylesheet">
+		
+		<style>
+
+div.desc {
+	padding: 15px;
+    text-align: center;
+    width: 178px !important;
+    height:50px !important;
+}
+div.desc p {
+    width: 138px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*  .gallery figure img { */
+/* 	-webkit-transform: scale(1); */
+/* 	transform: scale(1); */
+/* 	-webkit-transition: .3s ease-in-out; */
+/* 	transition: .3s ease-in-out; */
+/* } */
+/* .gallery figure:hover img { */
+/* 	-webkit-transform: scale(1.3); */
+/* 	transform: scale(1.3); */
+/* } */
+/* figure { */
+/* 	width: 178px; */
+/* 	height: 138px; */
+/* 	margin: 0; */
+/* 	padding: 0; */
+/* 	background: #fff; */
+/* 	overflow: hidden; */
+/* } */
+		</style>
+		
+	</head>
+
+	<body class="no-trans">
+		<!-- scrollToTop -->
+		<!-- ================ -->
+		<div class="scrollToTop"><i class="icon-up-open-big"></i></div>
+
+		<!-- header start -->
+		<!-- ================ --> 
+		<header class="header fixed clearfix navbar navbar-fixed-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+
+						<!-- header-left start -->
+						<!-- ================ -->
+						<div class="header-left clearfix">
+
+							<!-- logo -->
+							<div class="logo smooth-scroll">
+								<a href="#banner"><span style="color: #f9ef7f;font-size:60px;font-weight: bold;">D</span></a>
+							</div>
+
+							<!-- name-and-slogan -->
+							<div class="site-name-and-slogan smooth-scroll">
+								<div class="site-name"><a href="#banner">Drag Note</a></div>
+								<div class="site-slogan">Just one drag becomes a note. </div>
+							</div>
+
+						</div>
+						<!-- header-left end -->
+
+					</div>
+					<div class="col-md-8">
+
+						<!-- header-right start -->
+						<!-- ================ -->
+						<div class="header-right clearfix">
+
+							<!-- main-navigation start -->
+							<!-- ================ -->
+							<div class="main-navigation animated">
+
+								<!-- navbar start -->
+								<!-- ================ -->
+								<nav class="navbar navbar-default" role="navigation">
+									<div class="container-fluid">
+
+										<!-- Toggle get grouped for better mobile display -->
+										<div class="navbar-header">
+											<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+												<span class="sr-only">Toggle navigation</span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+										</div>
+
+										<!-- Collect the nav links, forms, and other content for toggling -->
+										<div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
+											<ul class="nav navbar-nav navbar-right">
+												<li id="homeLi" class="active"><a href="#banner">Home</a></li>
+												<li id="searchLi"><a href="#about">Search</a></li>
+												<li id="newsLi"><a href="#services">News</a></li>
+												<li id="noteLi"><a href="#portfolio">Note</a></li>
+												<li id="detailLi"><a href="#clients">Detail</a></li>
+												<li id="writeLi"><a href="#contact">Write a Note</a></li>
+											</ul>
+										</div>
+
+									</div>
+								</nav>
+								<!-- navbar end -->
+
+							</div>
+							<!-- main-navigation end -->
+
+						</div>
+						<!-- header-right end -->
+
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- header end -->
+
+		<!-- 홈 banner start -->
+		<!-- ================ -->
+		<div id="banner" class="banner">
+			<div class="banner-image"></div>
+			<div class="banner-caption">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 object-non-visible" data-animation-effect="fadeIn">
+						<h1 class="text-center">Drag <span>Note</span></h1>
+							<p class="lead text-center">드래그가 글이 되는 공간, 드래그노트 </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- banner end -->
+
+		<!-- 검색 section start -->
+		<!-- ================ -->
+		<div class="section clearfix object-non-visible" data-animation-effect="fadeIn">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 id="about" class="title text-center">키워드를 검색하여 <span>텍스트를 드래그하세요</span></h1>
+						<div class="space"></div>
+						<div id="daumForm" class="input-group w3-card" >
+							<input id="daumSearch" type="text" class="form-control" placeholder="Search" value="" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();"/>
+							 <div class="input-group-btn">
+					      		 <button id="daumSubmit" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+								 <button onclick="goBack()" class="btn btn-default"><i class="fa fa-hand-o-left w3-large"></i></button>
+				     		 </div>
+						</div>
+						<div id="daumView" style="display: none;">
+						    <div class="w3-card w3-padding">
+						    	<h3 style="color:grey; text-align: center;" class='w3-margin'>Image</h3>
+						        <div id="daumImage"></div>
+						    </div>
+						    <div class="w3-card w3-padding">
+						    	<h3 style="color:grey; text-align: center;" class='w3-margin'>Board</h3>   
+						        <div id="daumBoard"></div>
+					        </div>
+						    <div class="w3-card w3-padding"> 
+						    	<h3 style="color:grey; text-align: center;" class='w3-margin'>Web</h3>
+						        <div id="daumWeb"></div>
+					       	</div>
+						    <div class="w3-card w3-padding">
+						    	<h3 style="color:grey; text-align: center;" class='w3-margin'>Knowledge</h3>
+						        <div id="daumKnowledge"></div>
+						    </div>
+						    <div class="w3-card w3-padding">
+						    	<h3 style="color:grey; text-align: center;" class='w3-margin'>Book</h3>
+						        <div id="daumBook"></div>
+						    </div>
+						</div>
+						<div id="searchResult" style="display: none;" class="w3-card w3-padding">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section end -->
+
+		<!-- 뉴스 section start -->
+		<!-- ================ -->
+		<div class="section translucent-bg bg-image-1 blue">
+			<div class="container object-non-visible" data-animation-effect="fadeIn">
+				<h1 id="services"  class="text-center title">News Stand</h1>
+				<div class="space"></div>
+				<div class="row">
+					<ul class="nav nav-tabs" id="newsStand">
+						<li class="active"><a data-toggle="tab" onclick="getNews(1)">전체</a></li>
+						<li class="active"><a data-toggle="tab" onclick="getNews(2)">정치</a></li>
+						<li class="active"><a data-toggle="tab" onclick="getNews(3)">경제</a></li>
+						<li class="active"><a data-toggle="tab" onclick="getNews(4)">사회</a></li>
+						<li class="active"><a data-toggle="tab" onclick="getNews(5)">생활/문화</a></li>
+						<li class="active"><a data-toggle="tab" onclick="getNews(6)">세계</a></li>
+						<li class="active"><a data-toggle="tab" onclick="getNews(7)">IT/과학</a></li>
+					</ul>
+					<div class="tab-content"><br><br>
+						<div id="newsSection" style='position:relative; width:100%; height:500px; overflow:auto;'></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section end -->
+
+		<!-- 중간 쉼 section start -->
+		<!-- ================ -->
+		<div class="default-bg space blue">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<h1 class="text-center">Let's Write!</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section end -->
+
+		<!-- 노트 section start -->
+		<!-- ================ -->
+		<div class="section">
+			<div class="container">
+				<h1 class="text-center title" id="portfolio">Note</h1>
+				<div class="separator"></div>
+				<p class="lead text-center">노트 속 간직하고 있는 글과 감성을 꺼내 보세요.</p>
+				<br>			
+				<div class="row object-non-visible" data-animation-effect="fadeIn">
+					<div class="col-md-12">
+						
+<!-- 						<ul class="nav nav-tabs" id="categoryList"> -->
+<!-- 						</ul> -->
+<!-- 						<div class="tab-content"><br><br> -->
+<!-- 							노트카드 뿌리기 -->
+<!-- 							<div id="noteCardList" style='position:relative; width:100%; height:500px;'></div> -->
+<!-- 						</div> -->
+						
+						
+						<!-- 카테고리  -->
+						<div class="filters text-center">
+							<ul class="nav nav-pills" id="categoryList">
+								
+							</ul>
+						</div>
+<!-- 						isotope filters end -->
+
+<!-- 						portfolio items start -->
+						<div class="isotope-container row grid-space-20" id="noteCardList">
+<!-- 								Modal -->
+<!-- 								<div class="modal fade" id="project-1" tabindex="-1" role="dialog" aria-labelledby="project-1-label" aria-hidden="true"> -->
+<!-- 									<div class="modal-dialog modal-lg"> -->
+<!-- 										<div class="modal-content"> -->
+<!-- 											<div class="modal-header"> -->
+<!-- 												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+<!-- 												<h4 class="modal-title" id="project-1-label">Project Title</h4> -->
+<!-- 											</div> -->
+<!-- 											<div class="modal-body"> -->
+<!-- 												<h3>Project Description</h3> -->
+<!-- 												<div class="row"> -->
+<!-- 													<div class="col-md-6"> -->
+<!-- 														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sed, quidem quis praesentium, ut unde. Quae sed, incidunt laudantium nesciunt, optio corporis quod earum pariatur omnis illo saepe numquam suscipit, nemo placeat dignissimos eius mollitia et quas officia doloremque ipsum labore rem deserunt vero! Magnam totam delectus accusantium voluptas et, tempora quos atque, fugiat, obcaecati voluptatibus commodi illo voluptates dolore nemo quo soluta quis.</p> -->
+<!-- 														<p>Molestiae sed enim laboriosam atque delectus voluptates rerum nostrum sapiente obcaecati molestias quasi optio exercitationem, voluptate quis consequatur libero incidunt, in, quod. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos nobis officiis, autem earum tenetur quidem. Quae non dicta earum. Ipsum autem eaque cum dolor placeat corporis quisquam dolorum at nesciunt.</p> -->
+<!-- 													</div> -->
+<!-- 													<div class="col-md-6"> -->
+<!-- 														<img src="images/portfolio-1.jpg" alt=""> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="modal-footer"> -->
+<!-- 												<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								Modal end -->
+						</div>
+<!-- 						portfolio items end -->
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 노트 section end -->
+
+		<!-- 노트 디테일 section start -->
+		<!-- ================ -->
+		<div class="section translucent-bg bg-image-2 pb-clear">
+			<div class="container object-non-visible" data-animation-effect="fadeIn">
+				<h1 id="clients" class="title text-center">Note Detail</h1>
+				<div class="space"></div>
+				<div class="row">
+					<div class="col-md-12" style="background-color: white; color: black;">
+						<div class="media-body">
+							<div id='titleNote' class="w3-margin w3-padding" style="height: 10%; width: 95%; text-align: center; color: black;">
+							</div>
+							<div id='dateNote' class="w3-margin w3-padding" style="height: 10%; width: 95%; text-align: right;" >
+							</div>
+							<div id='contentNote' class="w3-margin w3-padding" style="height: 70%; width: 95%; text-align: left;">
+							</div>
+							<div id='updateNote' class="w3-margin w3-padding" style="height: 10%; width: 95%; text-align: right;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">메일 보내기 :)</h4>
+        </div>
+        <div class="modal-body">
+         	<div class="input-group">
+         <span class="input-group-addon">email</span>
+    		<input id="email" type="text" class="form-control" name="email" placeholder="받는 사람">
+         	</div>
+        </div>
+        <div class="modal-footer">
+          <div id="emailNoteSubmitBtn" class="btn btn-default" data-dismiss="modal">보내기</div>
+          <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+	<!-- Modal -->
+  <div class="modal fade" id="downloadNoteModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">노트 다운로드</h4>
+        </div>
+        <div class="modal-body">
+        	<h2>노트를 다운로드 하시겠어요~?</h2><br>
+        	<a id="downloadNotePath" class="btn btn-default">다운로드 할게요~</a>
+	        <div type="button" class="btn btn-default" data-dismiss="modal">아니요~</div>
+        </div>
+      </div>
+    </div>
+  </div>
+		</div>
+		<!-- section end -->
+
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="default-bg space">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<h1 class="text-center"></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section end -->
+
+		<!-- 에디터 footer start -->
+		<!-- ================ -->
+		<footer id="footer">
+
+			<!--.footer start -->
+			<!-- ================ -->
+			<div class="footer section">
+				<div class="container">
+					<h1 class="title text-center" id="contact">Write a Note</h1>
+					<div class="space"></div>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="footer-content">
+								<p class="large">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel nam magnam natus tempora cumque, aliquam deleniti voluptatibus voluptas. Repellat vel, et itaque commodi iste ab, laudantium voluptas deserunt nobis.</p>
+								<ul class="list-icons">
+									<li><i class="fa fa-map-marker pr-10"></i> One infinity loop, 54100</li>
+									<li><i class="fa fa-phone pr-10"></i> +00 1234567890</li>
+									<li><i class="fa fa-fax pr-10"></i> +00 1234567891 </li>
+									<li><i class="fa fa-envelope-o pr-10"></i> your@email.com</li>
+								</ul>
+								<ul class="social-links">
+									<li class="facebook"><a target="_blank" href="https://www.facebook.com/pages/HtmlCoder/714570988650168"><i class="fa fa-facebook"></i></a></li>
+									<li class="twitter"><a target="_blank" href="https://twitter.com/HtmlcoderMe"><i class="fa fa-twitter"></i></a></li>
+									<li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
+									<li class="skype"><a target="_blank" href="http://www.skype.com"><i class="fa fa-skype"></i></a></li>
+									<li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+									<li class="youtube"><a target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube"></i></a></li>
+									<li class="flickr"><a target="_blank" href="http://www.flickr.com"><i class="fa fa-flickr"></i></a></li>
+									<li class="pinterest"><a target="_blank" href="http://www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="footer-content">
+								<form role="form" id="footer-form">
+									<div class="form-group has-feedback">
+										<label class="sr-only" for="noteTitle">Title</label>
+										<input type="text" class="form-control" id="noteTitle" name="noteTitle" placeholder="제목을 입력하세요" required>
+									</div>
+									<div class="form-group has-feedback">
+										<label class="sr-only" for="myNicEditor">Content</label>
+										<textarea class="form-control" rows="8" id="myNicEditor" name="myNicEditor" required></textarea>
+									</div>
+									<table style="z-index: 2;">
+										<tr>
+											<td>
+												<label for="category">카테고리</label>
+											</td>
+											<td>&nbsp;&nbsp;</td>
+											<td>
+										        <select name="category" id="category" class="form-control">
+										        </select>
+											</td>
+											<td>&nbsp;&nbsp;</td>
+											<td>
+												<i class="fa fa-plus-circle w3-xlarge" onclick="showInput();"></i>
+											</td>
+											<td>&nbsp;&nbsp;</td>
+											<td>
+									        	<input type ="text" id="categoryToAdd" name="categoryToAdd" style="display: none;" />
+											</td>
+											<td>&nbsp;&nbsp;</td>
+											<td>
+									        	<i id="Category1" style="display: none;" class="fa fa-check-circle w3-xlarge" onclick="addCategory();"></i>
+											</td>
+											<td>&nbsp;&nbsp;</td>
+											<td>
+									        	<i id="Category2" style="display: none;" class="fa fa-times-circle w3-xlarge" onclick="closeInput();"></i>
+											</td>
+										</tr>
+									</table>
+									<div class="btn btn-default" id="noteSubmitBtn">등록</div>
+									<div class="btn btn-default" id="noteUpdateBtn" style="display: none;">수정</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .footer end -->
+
+			<!-- .subfooter start -->
+			<!-- ================ -->
+			<div class="subfooter">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<p class="text-center">Copyright © 2014 Worthy by <a target="_blank" href="http://htmlcoder.me">HtmlCoder</a>.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .subfooter end -->
+
+		</footer>
+		<!-- footer end -->
+
+		<!-- JavaScript files placed at the end of the document so the pages load faster
+		================================================== -->
+				<!-- Modernizr javascript -->
+		<script type="text/javascript" src="plugins/modernizr.js"></script>
+
+		
+		<!-- Backstretch javascript -->
+		<script type="text/javascript" src="plugins/jquery.backstretch.min.js"></script>
+
+		<!-- Appear javascript -->
+		<script type="text/javascript" src="plugins/jquery.appear.js"></script>
+
+		<!-- Initialization of Plugins -->
+		<script type="text/javascript" src="js/template.js"></script>
+
+		<!-- Custom Scripts -->
+		<script type="text/javascript" src="js/custom.js"></script>
+
+		<!-- 드래그 노트 js.. -->
+		<script>
+		// 뉴스 뿌리기
+		function getNews(newsNo) {
+			var urltoread = "";
+			switch(newsNo){
+			case 1: urltoread = "http://localhost:10001/naverNewsNow"; break;
+			case 2: urltoread = "http://localhost:10002/naverNewsPolitics"; break;
+			case 3: urltoread = "http://localhost:10003/naverNewsEconomy"; break;
+			case 4: urltoread = "http://localhost:10004/naverNewsSociety"; break;
+			case 5: urltoread = "http://localhost:10005/naverNewsCulture"; break;
+			case 6: urltoread = "http://localhost:10006/naverNewsGlobal"; break;
+			case 7: urltoread = "http://localhost:10007/naverNewsIT"; break;
+			}
+			var newsTitle = "";
+			$.ajax({
+				type: "GET",
+				url : urltoread,
+				dataType : "json"
+			})
+			.done(function (result) {
+				for (var i = 0; i < result.length; i++) {
+					newsTitle += "<a href='"+ result[i].url +"'><img src='" + result[i].img + "'>" + result[i].title + "</a><br>";
+				}
+				$("#newsSection").html(newsTitle);
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		}
+		
+		$("button").click(function(event){
+			var urltoread;
+			var btnId = event.target.id.substring(4);
+			switch(event.target.id.substring(4)){
+			case "1": urltoread = "http://localhost:10001/naverNewsNow"; break;
+			case "2": urltoread = "http://localhost:10001/naverNewsPolitics"; break;
+			case "3": urltoread = "http://localhost:10001/naverNewsEconomy"; break;
+			case "4": urltoread = "http://localhost:10001/naverNewsSociety"; break;
+			case "5": urltoread = "http://localhost:10001/naverNewsCulture"; break;
+			case "6": urltoread = "http://localhost:10001/naverNewsGlobal"; break;
+			case "7": urltoread = "http://localhost:10001/naverNewsIT"; break;
+			}
+			getNews(urltoread);
+		})
+		
+		// 노트 검색
+		function searchList(){
+			var searchWrd = $("#searchWrd").val();
+			var memberNo = localStorage.getItem("memberNo");
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/noteList.do",
+				data: {"searchWrd" : searchWrd,
+					   "memberNo" : memberNo
+				 	},
+				dataType : "json"
+			})
+			.done(function (result) {
+				var html = "";
+				for (var i = 0; i < result.length; i++) {
+		
+					var note = result[i];	
+					var noteNo = note.noteNo;
+					var categoryNo = note.categoryNo;
+					html += "<div class='gallery' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"'  >";
+					// 이미지 뿌리기
+					var noteContent = note.noteContent;
+					if(noteContent.indexOf('<img') != -1) {
+						var noteImgSrc = noteContent.split('<img src="')[1].split('"')[0];
+						html += '<figure><img src="' + noteImgSrc + '" alt="" onclick="noteDetail('+note.noteNo+')"></figure>';
+					} else {
+						html += '<figure><img src="/drag-note/html/images/rainy_window.jpg" alt="" onclick="noteDetail('+note.noteNo+')"></figure>';
+					}
+					html += "	<div  class='desc' style='height:51px;'>" + note.noteTitle + "</div>";
+					// 시간 뿌리기
+		// 			var date = new Date(note.noteRegDate);
+		// 			var time = date.getFullYear() + "-" 
+		// 			         + (date.getMonth() + 1) + "-" 
+		// 			         + date.getDate() + " "
+		// 			         + date.getHours() + ":"
+		// 			         + date.getMinutes() + ":"
+		// 			         + date.getSeconds();
+		// 			html += "<p>" + time + "</p>";
+					//시간 뿌리기 끝
+					html += "</div>";
+			
+				}
+				if (result.length == 0) {
+					html += "<div class='gallery'>";
+					html += '	<img src="/drag-note/html/images/rainy_window.jpg" alt="" width="300px" height="200px" >';
+					html += "	<div  class='desc'> 작성한 노트가 없습니다. </div>";
+					html += "</div>";
+				}
+				$("#noteCardList").html(html);
+				document.getElementById("noteView").style.display = "none";
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+			
+		}
+		
+		
+		//메일로 노트 보내기
+		$("#emailNoteSubmitBtn").click(function(){
+			var memberNo = localStorage.getItem("memberNo");
+			var noteNo = localStorage.getItem("emailNoteNo");
+			var emailTo = $("#email").val()
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/mailNote.do",
+				data: {"noteNo" : noteNo,
+					   "memberNo" : memberNo,
+					   "emailTo"  : emailTo
+				},
+				dataType : "json"
+			})
+			.done(function (result) {
+				swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+		        $("#email").val("");
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				swal("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		})
+		function saveNoteNo(noteNo){
+			localStorage.setItem("emailNoteNo",noteNo);
+		}
+		
+		//노트 디테일
+		function noteDetail(noteNo){
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/noteDetail.do",
+				data: {"noteNo" : noteNo},
+				dataType : "json"
+			})
+			.done(function (result) {
+				var title = result.noteTitle;
+				var content = result.noteContent;
+				// 시간 뿌리기
+				var date = new Date(result.noteRegDate);
+				var time = date.getFullYear() + "-" 
+				         + (date.getMonth() + 1) + "-" 
+				         + date.getDate() + " "
+				         + date.getHours() + ":"
+				         + date.getMinutes() + ":"
+				         + date.getSeconds();
+				//시간 뿌리기 끝
+				$("#titleNote").html("<h3>" + title +"</h3>");
+				$("#dateNote").html(time);
+				$("#contentNote").html(content);
+				$("#updateNote").html("<div class='btn btn-default' onclick='updateNote("+noteNo+");'>수정</div><div class='btn btn-default' onclick='downloadNote("+noteNo+");' data-toggle='modal' data-target='#downloadNoteModal'>다운로드</div><div class='btn btn-default' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'>메일로 보내기</div>");
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		}
+		//노트 캘린더
+		
+// 		function makeCalendar() {
+// 		// 	var events = [];
+// 		// 	if (result != null) {
+// 		// 		for (var i = 0; i < result.length; i++) {
+// 		// 			var event = result[i];
+// 		// 			var date = new Date(event.eventDate);
+// 		// 			var time = date.getFullYear() + "-" 
+// 		// 			+ (date.getMonth() + 1) + "-" 
+// 		// 			+ date.getDate();
+// 		// 			events.push({title: event.eventName, start: time, url: event.eventNo});
+// 		// 		}
+// 		// 	}
+			
+// 		    $('#calendar').fullCalendar({
+// 		        dayClick: function(date) {
+// 		        	var date = date.format()
+// 		        	$.ajax({
+// 		        		type: "POST",
+// 		        		url : "/drag-note/note/noteByDate.do",
+// 		        		data: {"memberNo" : localStorage.getItem("memberNo"),
+// 		        			   "date" : date
+// 		        		},
+// 		        		dataType : "json"
+// 		        	})
+// 		        	.done(function (result) {
+// 		        		var html = "";
+// 		        		for (var i = 0; i < result.length; i++) {
+		
+// 		        			var note = result[i];	
+// 		        			var noteNo = note.noteNo;
+		        			
+// 		        			console.log("노트번호"+noteNo)
+// 		        			html += " <div class='quote-box w3-margin w3-padding'' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"'  >";
+// 		//         			html += " <blockquote class='quote-box'>;
+// 		        			html += " <p class='quotation-mark'> “ </p> ";
+// 		        			html += " <p class='quote-text'>" + note.noteTitle +" </p>";
+// 		        			html += " <hr>";
+// 		        			html += " <div class='blog-post-actions'>";
+// 		        			// 시간 뿌리기
+// 		        			var date = new Date(note.noteRegDate);
+// 		        			var time = date.getFullYear() + "-" 
+// 		        			         + (date.getMonth() + 1) + "-" 
+// 		        			         + date.getDate() + " "
+// 		        			         + date.getHours() + ":"
+// 		        			         + date.getMinutes() + ":"
+// 		        			         + date.getSeconds();
+// 		        			html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
+		        					         
+// 		        			html += "<p class='blog-post-bottom pull-right'>";         
+// 		        			html += "   <span class='badge quote-badge'> <i class='fa fa-envelope-o' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></span>";
+// 		        			html += "	<span class='badge quote-badge'> <i class='fa fa-download' onclick='downloadNote("+noteNo+");'></i> </span></p>";
+// 		        			//시간 뿌리기 끝
+		        			
+// 		        			html += "</div>";
+// 		        			html += "</div>";
+// 		        		}
+// 		        		if (result.length == 0) {
+// 		        			html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
+// 		        			html += "<h6>작성된 노트가 없습니다.</h6>";
+// 		        			html += "</div>";
+// 		        		}
+// 		        		$("#noteList").html(html);
+// 		        	})
+// 		        	.fail(function(jqXhr, textStatus, errorText){
+// 		        		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+// 		        	});
+// 		        }
+// 		        ,editable : false
+// 		        ,eventLimit : true
+// 		//         ,events: events
+// 		//         ,eventClick: function(event) {
+// 		//             loadEventTimeline(event.url);
+// 		//             return false
+		        
+// 		    })
+// 		}
+// 		makeCalendar();
+		
+		
+		//메인에 카테고리 별로 리스트 뿌리기
+		function getNoteByCategoryNo(categoryNo){
+			var categoryNo = categoryNo;
+			var memberNo = localStorage.getItem("memberNo");
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/noteCartegoryList.do",
+				data: {"memberNo" : memberNo,
+					   "categoryNo" : categoryNo		
+				},
+				dataType : "json"
+			})
+			.done(function (result) {
+				var html = "";
+				for (var i = 0; i < result.length; i++) {
+		
+					var note = result[i];	
+					var noteNo = note.noteNo;
+					var categoryNo = note.categoryNo;
+					html += "<div class='gallery category"+categoryNo+"' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"'  >";
+					// 이미지 뿌리기
+					var noteContent = note.noteContent;
+					if(noteContent.indexOf('<img') != -1) {
+						var noteImgSrc = noteContent.split('<img src="')[1].split('"')[0];
+						html += '<img src="' + noteImgSrc + '" alt="" onclick="noteDetail('+note.noteNo+')">';
+					} else {
+						html += '<img src="/drag-note/html/images/rainy_window.jpg" alt="" onclick="noteDetail('+note.noteNo+')">';
+					}
+					html += "	<div  class='desc' style='height:51px;'><p>" + note.noteTitle + "</p></div>";
+					html += "</div>";
+			
+				}
+				if (result.length == 0) {
+					html += "<div class='gallery'>";
+					html += '	<img src="/drag-note/html/images/rainy_window.jpg" alt="" width="300px" height="200px" >';
+					html += "	<div  class='desc'> 작성한 노트가 없네요. </div>";
+					html += "</div>";
+				}
+				$("#noteCardList").html(html);
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		}
+		
+		
+		// 메인에 카테고리 뿌리기
+		function getMainCategory(){
+			var memberNo = localStorage.getItem("memberNo");
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/getCategory.do",
+				data: {"memberNo" : memberNo},
+				dataType : "json"
+			})
+			.done(function (result) {
+				var html = '<li class="active"><a data-toggle="tab" onclick="mainNoteList()" href="#" data-filter="*">전체</a></li>';
+				var categoryList = result.categoryList;
+				for(var i = 0; i < categoryList.length; i++){
+					var category = categoryList[i];
+					var categoryNo = category.categoryNo;
+					html += "<li ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"'>"
+					html += "<a data-filter='.cate"+category.categoryNo+"' href='#'>"+category.categoryName+"</a>";
+					html += "</li>";
+				}
+				$("#categoryList").html(html);
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		}
+		//카테고리 수정
+// 		function categoryUpdate(event){
+// 			var categoryToUpdate = event.target.id;
+// 			var categoryInput = "categoryUpdate" + categoryToUpdate.substring(8);
+// 			alert(categoryInput);
+// 			document.getElementById(categoryToUpdate).style.display = "none";
+// 			$("#"+categoryInput).attr("style","display:block !important");
+// 		}
+		
+		// 메인에 노트 뿌리기
+		function mainNoteList() {
+			var memberNo = localStorage.getItem("memberNo");
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/noteList.do",
+				data: {"memberNo" : memberNo},
+				dataType : "json"
+			})
+			.done(function (result) {
+				var html = "";
+				for (var i = 0; i < result.length; i++) {
+		
+					var note = result[i];	
+					var noteNo = note.noteNo;
+					var categoryNo = note.categoryNo;
+					html += "<div class='col-sm-6 col-md-3 isotope-item cate"+categoryNo+"'>";
+					html += "<div class='image-box'>";
+					html += "<div class='overlay-container' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"'>";
+					// 이미지 뿌리기
+					var noteContent = note.noteContent;
+					if(noteContent.indexOf('<img') != -1) {
+						var noteImgSrc = noteContent.split('<img src="')[1].split('"')[0];
+						html += '<img src="' + noteImgSrc + '" alt="" >';
+					} else {
+						html += '<img src="/drag-note/html/images/rainy_window.jpg" alt="" >';
+					}
+					html += "</div>";
+					html += "	<a class='btn btn-default btn-block' >" + note.noteTitle + "</a>";
+					html += "</div>";
+					html += "</div>";
+			
+				}
+				if (result.length == 0) {
+					html += "<div class='col-sm-6 col-md-3 isotope-item'>";
+					html += "<div class='image-box'>";
+					html += "<div class='overlay-container'>"
+					html += '	<img src="/drag-note/html/images/rainy_window.jpg" alt="">';
+					html += "</div>";
+					html += "	<a class='btn btn-default btn-block' >작성한 노트가 없네요.</a>";
+					html += "</div>";
+					html += "</div>";
+				}
+				$("#noteCardList").html(html);
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		}
+		
+		//다음 검색 버튼 클릭 
+		$("#daumSubmit").click(function(){
+		    daumSearch.init();
+		    daumSearch.search();
+		    document.getElementById("daumView").style.display = "block";
+			return false;
+		})
+		
+		
+	
+		// 로딩 시 위치 지정
+		$(document).ready(
+			function () {
+				// 에디터 가져오기
+				bkLib.onDomLoaded(nicEditors.allTextAreas); 
+				mainNoteList();
+				getMainCategory();
+				getCategory();
+			}
+		)
+		
+		// 브라우저 창 크기 변화 시 위치 지정 
+// 		$(window).resize(function(){
+// 			document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
+// 			document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
+// 			document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
+// 			document.getElementById("searchView").style.height = window.innerHeight +"px";
+// 			document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
+// 			document.getElementById("noteView").style.height = window.innerHeight +"px";
+// 			document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
+// 			document.getElementById("mainView").style.height = window.innerHeight +"px";
+// 			document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
+// 			document.getElementById("editorView").style.height = window.innerHeight +"px";
+// 		});
+		
+		// 내비바 아이콘으로 열고 닫기
+// 		function drag_open() {
+// 			document.getElementById("sideDragBar").style.display = "none";
+// 			document.getElementById("noteBar").style.display = "none";
+// 			$("#sideDragBar").show("slide", {direction: "left" }, 600);
+// 		    makeDragList();
+// 			getCategory(); // 카테고리 셀렉박스에 옵션 넣기
+// 		}
+		
+// 		function drag_close() {
+// 			$("#noteBar").hide("slide", {direction: "left" }, 600);
+// 		}
+		
+// 		function note_open() {
+// 			document.getElementById("noteBar").style.display = "none";
+// 			document.getElementById("sideDragBar").style.display = "none";
+// 			$("#noteBar").show("slide", {direction: "left" }, 600);
+// 			makeNoteList();
+// 			getCategory(); // 카테고리 셀렉박스에 옵션 넣기
+// 		}
+		
+// 		function note_close() {
+// 		    document.getElementById("noteBar").style.display = "none";
+// 		}
+		
+// 		function search_open() {
+// 			document.getElementById("mainView").style.display = "none";
+// 			document.getElementById("noteView").style.display = "none";
+// 			$("#sideDragBar").show("slide", {direction: "left" }, 600);
+// 			document.getElementById("searchView").style.display = "block";
+// 		}
+		
+// 		function main_open() {
+// 			document.getElementById("noteView").style.display = "none";
+// 			document.getElementById("noteBar").style.display = "none";
+// 			document.getElementById("sideDragBar").style.display = "block";
+// 			document.getElementById("mainView").style.display = "block";
+// 			getMainCategory();
+// 			getCategory();
+// 			mainNoteList();
+// 		}
+		
+// 		function open_editor() {
+// 			document.getElementById("editorBtnDiv").style.display = "block";
+// 			document.getElementById("mainView").style.display = "none";
+// 			document.getElementById("searchView").style.display = "none";
+// 			document.getElementById("noteView").style.display = "none";
+// 			getMainCategory();
+// 			mainNoteList();
+// 			getCategory();
+// 			if(updateYn){
+// 				document.getElementById("noteUpdateBtn").style.display = "block";
+// 				document.getElementById("noteSubmitBtn").style.display = "none";
+// 			} else {
+// 				document.getElementById("noteUpdateBtn").style.display = "none";
+// 				document.getElementById("noteSubmitBtn").style.display = "block";
+// 			}
+// 		}
+		
+		
+		var updateYn = false;
+		
+		//노트 다운로드
+		function downloadNote(noteNo){
+			var url = "/drag-note/download/downloadNote.do?noteNo=" + noteNo;
+			$("#downloadNotePath").attr("href", url);
+		}
+		
+		
+		//노트 업데이트
+		function updateNote(noteNo){
+			localStorage.setItem("noteNoToUpdate",noteNo);
+			
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/noteDetail.do",
+				data: {"noteNo" : noteNo},
+				dataType : "json"
+			})
+			.done(function (result) {
+				var title = result.noteTitle;
+				var content = result.noteContent;
+				$("input[name=noteTitle]").val(title);
+				$(".nicEdit-main").html(content);
+				updateYn = true;
+				open_editor();
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+			
+		}
+		// 검색 뒤로 가기
+		function goBack() {
+			document.getElementById("searchResult").style.display = "none";
+			document.getElementById("daumView").style.display = "block";
+		}
+		
+		// 노트 에티터 뿌리기
+// 		$("#editorOpenBtn").click(function() {
+// 			document.getElementById("mainView").style.display = "none";
+// 			document.getElementById("searchView").style.display = "none";
+// 			document.getElementById("noteView").style.display = "none";
+// 			$("#editorView").show("slide", {direction: "left" }, 600);
+// 			$("#editorOpenBtn").toggle();
+// 			$("#editorCloseBtn").toggle();
+// 		});
+		
+		// 노트 에디터 닫기
+// 		$("#editorCloseBtn").click(function() {
+// 			$("#editorView").hide("slide", {direction: "left" }, 700);
+// 			$("#searchView").show("slide", {direction: "left" }, 1300);
+// 			$("#searchView").show("slide", {direction: "left" }, 1300);
+// 			$("#editorOpenBtn").toggle();
+// 			$("#editorCloseBtn").toggle();
+// 		});
+		
+		// 노트 등록
+		$("#noteSubmitBtn").click(function() {
+		
+			if ($("#noteTitle").val() == "") {
+				swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","제목을 입력하세요.");
+				frm.noteTitle.focus();
+				return false;
+			}
+			if ($("#category").val() == "") {
+				swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 선택하세요.");
+				return false;
+			}
+		// 	if (!confirm("노트를 등록하시겠습니까?"))
+		// 		return;
+		
+			var fd = new FormData();
+			
+			fd.append("memberNo",localStorage.getItem("memberNo"));
+			fd.append("noteTitle",$("input[name=noteTitle]").val());
+			fd.append("noteContent",$(".nicEdit-main").html());
+			fd.append("categoryNo", $("#category").val());
+			$.ajax({
+				url : "/drag-note/note/note.do",
+				type:"POST",
+				data :fd,
+				dataType : "json",
+				processData: false,
+				contentType:false
+			})
+			.done(function (result) {
+// 								swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+				$("input[name=noteTitle]").val("");
+				$(".nicEdit-main").html("");
+				$("#category").val("");
+				$("#homeLi").attr("class", "");
+				$("#writeLi").attr("class", "");
+				$("#noteLi").attr("class", "active");
+				document.querySelector('#portfolio').scrollIntoView({ 
+					  behavior: 'smooth' 
+					});
+				$('#noteLi').get(0).scrollIntoView(true);
+			})
+			.fail(function (jqXhr, textStatus, errorText) {
+				alert("에러발생 : " + errorText);
+			});
+			
+			return false;
+		});
+		
+		// 노트 수정
+		$("#noteUpdateBtn").click(function() {
+			var frm = document.noteFrm;
+			if (frm.noteTitle.value == "") {
+				swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","제목을 입력하세요.");
+				frm.noteTitle.focus();
+				return false;
+			}
+			if (frm.category.value == "") {
+				swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 선택하세요.");
+				return false;
+			}
+		// 	if (!confirm("노트를 등록하시겠습니까?"))
+		// 		return;
+		
+			var fdUpdate = new FormData();
+			
+			fdUpdate.append("memberNo",localStorage.getItem("memberNo"));
+			fdUpdate.append("noteTitle",$("input[name=noteTitle]").val());
+			fdUpdate.append("noteContent",$(".nicEdit-main").html());
+			fdUpdate.append("categoryNo", $("#category").val());
+			fdUpdate.append("noteNo", localStorage.getItem("noteNoToUpdate"));
+			$.ajax({
+				url : "/drag-note/note/noteUpdate.do",
+				type:"POST",
+				data :fdUpdate,
+				dataType : "json",
+				processData: false,
+				contentType:false
+			})
+			.done(function (result) {
+				swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+				updateYn = false;
+				$("input[name=noteTitle]").val("");
+				$(".nicEdit-main").html("");
+				$("#category").val("");
+				$("#homeLi").attr("class", "");
+				$("#noteLi").attr("class", "active");
+			})
+			.fail(function (jqXhr, textStatus, errorText) {
+				alert("에러발생 : " + errorText);
+			});
+			
+			return false;
+		});
+		
+		// 노트리스트 만들기
+		function makeNoteList() {
+			var memberNo = localStorage.getItem("memberNo");
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/noteList.do",
+				data: {"memberNo" : memberNo},
+				dataType : "json"
+			})
+			.done(function (result) {
+				var html = "";
+				for (var i = 0; i < result.length; i++) {
+		
+					var note = result[i];	
+					var noteNo = note.noteNo;
+					
+					console.log("노트번호"+noteNo)
+					html += " <div class='quote-box w3-margin w3-padding'' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"'  >";
+		// 			html += " <blockquote class='quote-box'>;
+					html += " <p class='quotation-mark'> “ </p> ";
+					html += " <p class='quote-text'>" + note.noteTitle +" </p>";
+					html += " <hr>";
+					html += " <div class='blog-post-actions'>";
+					// 시간 뿌리기
+					var date = new Date(note.noteRegDate);
+					var time = date.getFullYear() + "-" 
+					         + (date.getMonth() + 1) + "-" 
+					         + date.getDate() + " "
+					         + date.getHours() + ":"
+					         + date.getMinutes() + ":"
+					         + date.getSeconds();
+					html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
+							         
+					html += "<p class='blog-post-bottom pull-right'>";         
+					html += "   <span class='badge quote-badge'> <i class='fa fa-envelope-o' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></span>";
+					html += "	<span class='badge quote-badge'> <i class='fa fa-download' onclick='downloadNote("+noteNo+");'></i> </span></p>";
+					//시간 뿌리기 끝
+					
+					html += "</div>";
+					html += "</div>";
+			
+				}
+				if (result.length == 0) {
+					html += "<div class='container'>";
+					html += "<h6>작성된 노트가 없습니다.</h6>";
+					html += "</div>";
+				}
+				$("#noteList").html(html);
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		}
+		
+		// 노트 드래그로 삭제
+		function deleteNote(noteNo) {
+			var noteNo = noteNo;
+			var memberNo = localStorage.getItem("memberNo");
+			
+			swal({
+				  title: "* :-O",
+				  text: "노트를 삭제하시겠어요~?",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonText: "네, 삭제해주세요 :)",
+				  cancelButtonText: "아니요!",
+				  closeOnConfirm: false
+				},
+				function(){
+					$.ajax({
+						url:"/drag-note/note/deleteNote.do",
+						dataType:"json",
+						data: {"noteNo":noteNo},
+						type: "POST"
+						}).done(function (result){
+							swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg);
+							makeNoteList();
+							mainNoteList();
+					});
+				}
+			);
+		}
+		//카테고리 삭제
+		function deleteCategory(categoryNo) {
+			
+			swal({
+				  title: "* :-O",
+				  text: "카테고리와 해당 게시물을 모두 삭제하시겠어요?",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonText: "네, 삭제해주세요 :)",
+				  cancelButtonText: "아니요!",
+				  closeOnConfirm: false
+				},
+				function(){
+					$.ajax({
+						url:"/drag-note/note/deleteCategory.do",
+						dataType:"json",
+						data: {"categoryNo":categoryNo},
+						type: "POST"
+						}).done(function (result){
+							swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg);
+							makeNoteList();
+							mainNoteList();
+							getMainCategory();
+					});
+				}
+			);
+		}	
+		
+		// 이전 드래그 텍스트
+		var prevText;
+		
+		// 드래그 등록
+		$("#searchView").mouseup(function(){
+		     var selection = window.getSelection();
+			 var text = selection.toString();
+			 // 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
+			 if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
+				 // 드래그 저장
+				var dragfd = new FormData();
+				
+				dragfd.append("memberNo",localStorage.getItem("memberNo"));
+				dragfd.append("dragContent", text);
+				$.ajax({
+					url : "/drag-note/drag/registDrag.do",
+					type:"POST",
+					data :dragfd,
+					dataType : "json",
+					processData: false,
+					contentType:false
+				})
+				.done(function (result) {
+					swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡",result.msg);
+					prevText = text;
+					makeDragList();
+				})
+				.fail(function (jqXhr, textStatus, errorText) {
+					alert("에러발생 : " + errorText);
+				});
+				
+				return false;
+			 }	
+		 });
+		 
+		// 드래그 노트에 추가하기.
+		$("div[id^=drag]").click(function(event){
+			var addDragNo = event.target.id.substring(4);
+			var eoBtnStyle = $("#editorOpenBtn").attr("style");
+			var ecBtnStyle = $("#editorCloseBtn").attr("style");
+		// 	alert("eoBtnStyle" + eoBtnStyle);
+		// 	alert("ecBtnStyle" + ecBtnStyle);
+			if (eoBtnStyle.indexOf('none') !== -1 && ecBtnStyle.indexOf('display') == -1) {
+				$.ajax({
+					url : "/drag-note/drag/selectDrag.do",
+					type:"POST",
+					data :{"dragNo" : addDragNo},
+					dataType : "json"
+				})
+				.done(function (result) {
+					$(".nicEdit-main").append(result.dragContent + "<br>");
+				})
+				.fail(function (jqXhr, textStatus, errorText) {
+					alert("에러발생 : " + errorText);
+				});
+			}
+			return false;
+		});
+		
+		// 드래그 리스트 만들기
+// 		function makeDragList() {
+// 			var memberNo = localStorage.getItem("memberNo");
+// 			$.ajax({
+// 				type: "POST",
+// 				url : "/drag-note/drag/dragList.do",
+// 				data: {"memberNo" : memberNo},
+// 				dataType : "json"
+// 			})
+// 			.done(function (result) {
+// 				var html = "";
+// 				for (var i = 0; i < result.length; i++) {
+		
+// 					var drag = result[i];	
+// 					var dragNo = drag.dragNo;
+					
+// 					html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'  style='max-height:200px;'; ondragstart='drag(event)' draggable='true' id='drag"+ drag.dragNo+"' >";
+// 					html += "	<div style='overflow:auto;max-height:170px;'>"
+// 					html += "		<div id='drag"+ drag.dragNo+"'>" + drag.dragContent + "</div><br>";
+// 					html += "	</div>";
+// 					// 시간 뿌리기
+// 					var date = new Date(drag.dragRegDate);
+// 					var time = date.getFullYear() + "-" 
+// 					         + (date.getMonth() + 1) + "-" 
+// 					         + date.getDate() + " "
+// 					         + date.getHours() + ":"
+// 					         + date.getMinutes() + ":"
+// 					         + date.getSeconds();
+// 					html += "		<span class='w3-right w3-opacity' id='drag"+ drag.dragNo+"'>" + time + "</span>";
+// 					//시간 뿌리기 끝
+// 					html += "</div>";
+			
+// 				}
+// 				if (result.length == 0) {
+// 					html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
+// 					html += "<h6>드래그가 없습니다.</h6>";
+// 					html += "</div>";
+// 				}
+// 				$("#dragList").html(html);
+// 			})
+// 			.fail(function(jqXhr, textStatus, errorText){
+// 				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+// 			});
+// 		}
+		
+		// 드래그 드래그로 삭제
+		function deleteDrag(dragNo) {
+			var dragNo = dragNo;
+			var memberNo = localStorage.getItem("memberNo");
+			
+			swal({
+				  title: "* :-O",
+				  text: "드래그를 삭제하시겠어요~?",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonText: "네, 삭제해주세요 :)",
+				  cancelButtonText: "아니요!",
+				  closeOnConfirm: false
+				},
+				function(){
+					$.ajax({
+						url:"/drag-note/drag/deleteDrag.do",
+						dataType:"json",
+						data: {"dragNo":dragNo},
+						type: "POST"
+						}).done(function (result){
+							swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg);
+							makeDragList();
+					});
+				}
+			);
+			
+		}	
+		
+		// 드롭 허용
+		function allowDrop(ev) {
+			ev.preventDefault(); 
+			}
+		
+		// 드래그 이벤트
+		function drag(ev) { 
+			ev.dataTransfer.setData("text", ev.target.id); 
+			} 
+		
+		// 노트 및 드래그 삭제 드랍 이벤트
+		function drop(ev) {
+			ev.preventDefault();
+			var deleteId = ev.dataTransfer.getData("text"); 
+			var deleteNum = deleteId.substring(4);
+			if (deleteId.startsWith("d")){
+			 	deleteDrag(deleteNum);
+			} else if (deleteId.startsWith("c")){
+				deleteNum = deleteId.substring(8);
+				deleteCategory(deleteNum);
+			} else{
+			 	deleteNote(deleteNum);
+			} 
+		}
+		
+		// 카테고리 인풋창 열기
+		function showInput() {
+			document.getElementById("categoryToAdd").style.display = "block";
+		    document.getElementById("Category1").style.display = "block";
+		    document.getElementById("Category2").style.display = "block";
+		    return false;
+		}
+		
+		// 카테고리 인풋창 끄기
+		function closeInput() {
+			document.getElementById("categoryToAdd").style.display = "none";
+		    document.getElementById("Category1").style.display = "none";
+		    document.getElementById("Category2").style.display = "none";
+		    $("#categoryToAdd").val("");
+		    return false;
+		}
+		
+		// 카테고리 추가
+		function addCategory(){
+			
+			var categoryName = $("#categoryToAdd").val();
+			var memberNo = localStorage.getItem("memberNo");
+			
+			if (categoryName == "") {
+				swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 입력하세요");
+				return false;
+			}
+			
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/addCategory.do",
+				data: {"categoryName" : categoryName,
+						"memberNo"	  : memberNo},
+				dataType : "json"
+			})
+			.done(function (result) {
+				alert(result.msg);
+				appendCategory(result.categoryList);
+				document.getElementById("categoryToAdd").style.display = "none";
+			    document.getElementById("Category1").style.display = "none";
+			    document.getElementById("Category2").style.display = "none";
+			    $("#categoryToAdd").val("");
+			    $("#homeLi").attr("class", "");
+			    $("#writeLi").attr("class", "active");
+				
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		}
+		
+		// 카테고리 셀렉박스에 옵션 추가
+		function appendCategory(categoryList){
+			 $("#category option").remove();
+			 for(var i = 0; i < categoryList.length; i++){
+					var category = categoryList[i];
+					var categoryName = category.categoryName;
+					var categoryNo = category.categoryNo;
+					$("#category").append("<option value='"+categoryNo+"'>"+categoryName+"</option>");
+			}
+		}
+		
+		// DB에서 카테고리 가져오기
+		function getCategory(){
+			var memberNo = localStorage.getItem("memberNo");
+			$.ajax({
+				type: "POST",
+				url : "/drag-note/note/getCategory.do",
+				data: {"memberNo" : memberNo},
+				dataType : "json"
+			})
+			.done(function (result) {
+				appendCategory(result.categoryList);
+				
+			})
+			.fail(function(jqXhr, textStatus, errorText){
+				alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			});
+		}
+	
+		// 로그아웃
+			function signOut() {
+				
+				swal({
+					  title: "* :-O",
+					  text: "로그아웃 하시겠어요~?",
+					  type: "info",
+					  showCancelButton: true,
+					  confirmButtonText: "네:)",
+					  cancelButtonText: "아니요!",
+					  closeOnConfirm: false
+					},
+					function(){
+						 location.href='/drag-note/index.html';
+					}
+				);
+			}
+		
+		     
+</script>
+		
+	</body>
+</html>

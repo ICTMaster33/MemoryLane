@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>(2)Drag Note | Easy Note Drive</title>
+		<meta name="description" content="Worthy a Bootstrap-based, Responsive HTML5 Template">
+		<meta name="author" content="htmlcoder.me">
+		<meta name="google-signin-client_id" content="40981048355-5ic1f5hugkggi7ihl1jo2icspts1kvri.apps.googleusercontent.com">
+		<!-- Mobile Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Jquery and Bootstap core js files -->
+		<script type="text/javascript" src="plugins/jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="images/favicon.ico">
+
+		<!-- Web Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+		<!-- Font Awesome CSS -->
+		<link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+		<!-- Plugins -->
+		<link href="css/animations.css" rel="stylesheet">
+
+		<!-- Worthy core CSS file -->
+		<link href="css/style.css" rel="stylesheet">
+
+		<!-- Custom css --> 
+		<link href="css/custom.css" rel="stylesheet">
+		
+		<!-- 스크립트 -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/drag-note/js/sweetalert-master/dist/sweetalert.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="/drag-note/js/sweetalert-master/dist/sweetalert.min.js"></script>
+	</head>
+
+	<body class="no-trans">
+		<!-- scrollToTop -->
+		<!-- ================ -->
+		<div class="scrollToTop"><i class="icon-up-open-big"></i></div>
+
+		<!-- header start -->
+		<!-- ================ --> 
+		<header class="header fixed clearfix navbar navbar-fixed-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+
+						<!-- header-left start -->
+						<!-- ================ -->
+						<div class="header-left clearfix">
+
+							<!-- logo -->
+							<div class="logo smooth-scroll">
+								<a href="#banner"><span style="color: #f9ef7f;font-size:60px;font-weight: bold;">D</span></a>
+							</div>
+
+							<!-- name-and-slogan -->
+							<div class="site-name-and-slogan smooth-scroll">
+								<div class="site-name"><a href="#banner">Drag Note</a></div>
+								<div class="site-slogan">Just one drag becomes a note.</div>
+							</div>
+
+						</div>
+						<!-- header-left end -->
+
+					</div>
+					<div class="col-md-8">
+
+						<!-- header-right start -->
+						<!-- ================ -->
+						<div class="header-right clearfix">
+
+							<!-- main-navigation start -->
+							<!-- ================ -->
+							<div class="main-navigation animated">
+
+								<!-- navbar start -->
+								<!-- ================ -->
+								<nav class="navbar navbar-default" role="navigation">
+									<div class="container-fluid">
+
+										<!-- Toggle get grouped for better mobile display -->
+										<div class="navbar-header">
+											<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+												<span class="sr-only">Toggle navigation</span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+										</div>
+
+										<!-- Collect the nav links, forms, and other content for toggling -->
+										<div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
+											<ul class="nav navbar-nav navbar-right">
+												<li class="active"><a href="#banner">Home</a></li>
+												<li><a href="#about">About</a></li>
+												<li><a href="#clients">Download</a></li>
+											</ul>
+										</div>
+
+									</div>
+								</nav>
+								<!-- navbar end -->
+
+							</div>
+							<!-- main-navigation end -->
+
+						</div>
+						<!-- header-right end -->
+
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- header end -->
+
+		<!-- banner start -->
+		<!-- ================ -->
+		<div id="banner" class="banner">
+			<div class="banner-image"></div>
+			<div class="banner-caption">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 object-non-visible" data-animation-effect="fadeIn">
+							<h1 class="text-center" onclick="document.getElementById('subscribe').style.display='block'" data-toggle="modal" data-target="#myModal">Drag <span>Note</span></h1>
+							<p class="lead text-center ">
+								 <a href="" onclick="document.getElementById('subscribe').style.display='block'" data-toggle="modal" data-target="#myModal" class="typewrite" data-period="2000" data-type='[ "드래그가 글이 되는 공간, 드래그노트. ", "로그인을 해주세요 :)   ", "Click Click !   " ]'>
+								    <span class="wrap"></span>
+								 </a>
+							</p>
+<!-- 							<button class="btn btn-primary"  onclick="document.getElementById('subscribe').style.display='block'" data-toggle="modal" data-target="#myModal">로그인</button> -->
+						</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- banner end -->
+
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="section clearfix object-non-visible" data-animation-effect="fadeIn">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 id="about" class="title text-center">About</h1>
+						<p class="lead text-center">Just one drag becomes a note.</p>
+						<div class="space"></div>
+						<div class="row">
+							
+							<div class="col-md-6">
+<!-- 								<img src="images/123.jpg" alt=""> -->
+								 <div class="md-macbook-pro md-glare">
+					                <div class="md-lid">
+					                    <div class="md-camera"></div>
+					                    <div class="md-screen">
+					                    <!-- content goes here -->                
+					                        <div class="tab-featured-image">
+					                            <div class="tab-content">
+					                                <div class="tab-pane  in active" id="tab1">
+					                                        <img src="images/123.jpg" alt="tab1" class="img img-responsive">
+					                                </div>
+					                                <div class="tab-pane " id="tab2">
+					                                    
+					                                        <img src="images/1234.jpg" alt="tab1" class="img img-responsive">
+					                                    
+					                                </div>
+					                                <div class="tab-pane fade" id="tab3">
+					                                     <img src="images/12345.jpg" alt="tab1" class="img img-responsive">
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+										<div class="space"></div>
+<!-- 					                <div class="md-base"></div> -->
+           						 </div> <!-- end macbook pro mockup -->
+								
+							</div>
+							
+							
+							<div class="col-md-6">
+								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+									<div class="panel panel-default">
+										<div class="panel-heading" role="tab" data-target="#tab1" data-toggle="tab" id="headingOne" aria-expanded="false">
+											<h4 class="panel-title" style="text-align: center;">
+												<a data-toggle="collapse" role="tab" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+													단지 드래그만으로 텍스트 저장
+												</a>
+											</h4>
+										</div>
+										<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+											<div class="panel-body" style="padding: 40px; font-size: 17px;">
+												드래그 노트의 크롬 확장프로그램을 통해 인터넷 서핑 중에 원하는 글감을 드래그하세요. 바로 드래그 노트의 드래그 박스에 저장이 됩니다. 언제든지 꺼내 볼 수 있어요.
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading" data-target="#tab2" data-toggle="tab" role="tab" id="headingTwo" aria-expanded="false">
+											<h4 class="panel-title" style="text-align: center;">
+												<a class="collapsed" role="tab" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+													빠른 노트 작성 그리고 공유 기능까지
+												</a>
+											</h4>
+										</div>
+										<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+											<div class="panel-body" style="padding: 40px; font-size: 17px;">
+												검색을 끝낸 뒤 드래그 박스에서 저장해놓은 텍스트를 클릭해보세요. 에디터에 텍스트가 바로 올라와 빠르게 글을 정리할 수 있습니다. 작성한 노트를 메일로 공유할 수 있고, 당신의 PC로 다운로드도 가능합니다.
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading" data-target="#tab3" data-toggle="tab" role="tab" id="headingThree" aria-expanded="false">
+											<h4 class="panel-title" style="text-align: center;">
+												<a class="collapsed" role="tab" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+													누구나 손쉽게, 간결한 디자인
+												</a>
+											</h4>
+										</div>
+										<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+											<div class="panel-body" style="padding: 40px; font-size: 17px;">
+												드래그와 클릭으로 간편하게 조작이 가능합니다. 누구나 손쉽게 사용이 가능한 노트 클라우드 서비스입니다. 간결한 디자인으로 두고 두고 꺼내보고 싶은 나만의 노트를 작성해보세요. 
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+								<div class="space" style="text-align: center;"></div>
+									<h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;드래그가 글이 되는 공간, 드래그 노트</h2>
+								</div>
+							<div class="col-md-6">
+								<p></p>
+								<p></p>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+			    <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">이전과는 다른 편리함을 경험해보세요.</h2>
+                    <hr class="primary">
+                </div>
+		<div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-hand-pointer-o text-primary sr-icons"></i>
+                        <h3>드래그만으로 노트를!</h3>
+                        <p class="text-muted">이제 ctrl+c, ctrl+v 도 귀찮다.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
+                        <h3>간편한 사용법</h3>
+                        <p class="text-muted">오직 마우스로만 !</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                        <h3>실시간 뉴스 정보</h3>
+                        <p class="text-muted">실시간으로 업데이트 되는 뉴스정보<br> 또한 드래그만으로 !</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
+                        <h3>파일 저장 및 공유</h3>
+                        <p class="text-muted">작성된 노트를 내 컴퓨터로<br> 다운로드 받거나, <br>메일로 보낼 수 있습니다 !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- section end -->
+
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="default-bg space blue">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="section translucent-bg bg-image-2 pb-clear">
+			<div class="container object-non-visible" data-animation-effect="fadeIn">
+				<h1 id="clients" class="title text-center">Download</h1>
+				<div class="space"></div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="media testimonial">
+							<div class="media-left">
+								<img src="images/testimonial-1.png" alt="">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">You are Amazing!</h3>
+								<blockquote>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure aperiam consequatur quo.</p>
+									<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="media testimonial">
+							<div class="media-left">
+								<img src="images/testimonial-2.png" alt="">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Yeah!</h3>
+								<blockquote>
+									<p>Iure aperiam consequatur quo quis exercitationem reprehenderit dolor vel ducimus.</p>
+									<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="media testimonial">
+							<div class="media-left">
+								<img src="images/testimonial-3.png" alt="">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Thank You!</h3>
+								<blockquote>
+									<p>Aperiam consequatur quo quis exercitationem reprehenderit suscipit iste placeat.</p>
+									<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="media testimonial">
+							<div class="media-left">
+								<img src="images/testimonial-2.png" alt="">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Thank You!</h3>
+								<blockquote>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure aperiam consequatur quo.</p>
+									<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="media testimonial">
+							<div class="media-left">
+								<img src="images/testimonial-3.png" alt="">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Amazing!</h3>
+								<blockquote>
+									<p>Iure aperiam consequatur quo quis exercitationem reprehenderit dolor vel ducimus.</p>
+									<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="media testimonial">
+							<div class="media-left">
+								<img src="images/testimonial-1.png" alt="">
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Best!</h3>
+								<blockquote>
+									<p>Aperiam consequatur quo quis exercitationem reprehenderit suscipit iste placeat.</p>
+									<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section start -->
+			<!-- ================ -->
+			<div class="translucent-bg blue">
+				<div class="container">
+					<div class="list-horizontal">
+						<div class="row">
+							<div class="col-xs-2">
+								<div class="list-horizontal-item">
+									<img src="images/client-1.png" alt="client">
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<div class="list-horizontal-item">
+									<img src="images/client-2.png" alt="client">
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<div class="list-horizontal-item">
+									<img src="images/client-3.png" alt="client">
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<div class="list-horizontal-item">
+									<img src="images/client-4.png" alt="client">
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<div class="list-horizontal-item">
+									<img src="images/client-5.png" alt="client">
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<div class="list-horizontal-item">
+									<img src="images/client-6.png" alt="client">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section end -->
+		</div>
+		<!-- section end -->
+
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="default-bg space">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<h1 class="text-center">지금 바로 드래그 노트를 이용해보세요!</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section end -->
+
+
+		<!-- 로그인 및 회원가입 모달 -->
+			<!-- 로그인 회원가입 모달 -->
+	
+	<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width:400px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <br>
+          <br>
+          <h4 class="modal-title" id="dragNoteTitle" style="text-align: center;">DRAG NOTE LOGIN</h4>
+          <br>
+        </div>
+        <br>
+        	<div class="modal-body" id="joinModal"  style="display: none;">
+          	<form name="joinfrm" id="joinfrm">       
+	    	<table id="joinInfo">
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="name">name:</label>
+	    			 <input type="text" class="form-control" id="name" name="name" placeholder="이름음 입력하세요" required="" autofocus="" />
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="email">Email:</label>
+	    			 <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required="" autofocus="" />
+	    			 <span id="emailck"></span>
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="password">password:</label>
+	    			 <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="passwordConf">password:</label>
+	    			 <input type="password" class="form-control" id="passwordConf" name="passwordConf" placeholder="비밀번호를 확인하세요" required="" autofocus="" />
+	    			 <span id="checkPwd"></span>
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="2">&nbsp;&nbsp;</td>
+	    		</tr>
+	    		<tr>
+	    			<td id="btns" colspan="2">
+<!-- 					    <a href="/drag-note/html/member/loginForm.html"> -->
+<!-- 						<input type="button" class="btn btn-default" value="로그인 화면으로" /></a>  -->
+					    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <button id="joinBtn" class="btn btn-default">회원가입</button>   
+	    			</td>
+	    		</tr>
+    		</table>
+	    </form>
+        	</div>
+        	
+        <div class="modal-body" id="loginModal" >
+          	
+          	
+          	
+          	<form name="loginfrm" id="loginfrm" >       
+	    	<table id="loginInfo">
+	    		<tr>
+	    			<div class="form-group">
+	    			 <label for="loginEmail">Email:</label>
+	    			 <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="Email Address" required="" autofocus="" />
+	    			</div>
+	    		</tr>
+	    		<tr>
+	    			<div class="form-group">
+					    <label for="loginPassword">Password:</label>
+					    <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password" required=""/>
+	    			</div>
+	    		</tr>
+	    		<br>
+			    <tr >
+			    	<td id="btns" colspan="2" style="width: 368px;">
+					    <button id="loginBtn" class="btn btn-default"  style="width: 368px;background: #8fd8c5; margin: 0 auto;">로그인</button>   
+			    	</td>
+			    </tr>
+			    <tr>
+			    	<td id="btns" colspan="2" style="width: 368px;">
+					    <div id="joinFormBtn" class="btn btn-default"  style="width: 368px;background: #dcf7f0; margin: 0 auto;">회원가입</div>
+			    	</td>
+			    </tr>
+    		</table>
+	    </form>
+          <div id="googleLoginDiv" align="center" class="g-signin2" data-onsuccess="onSignIn" style="width: 368px; text-align: center;"></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+		<!-- footer start -->
+		<!-- ================ -->
+		<footer id="footer">
+		</footer>
+		<!-- footer end -->
+
+		<!-- JavaScript files placed at the end of the document so the pages load faster
+		================================================== -->
+		
+		<!-- Modernizr javascript -->
+		<script type="text/javascript" src="plugins/modernizr.js"></script>
+
+		<!-- Isotope javascript -->
+		<script type="text/javascript" src="plugins/isotope/isotope.pkgd.min.js"></script>
+		
+		<!-- Backstretch javascript -->
+		<script type="text/javascript" src="plugins/jquery.backstretch.min.js"></script>
+
+		<!-- Appear javascript -->
+		<script type="text/javascript" src="plugins/jquery.appear.js"></script>
+
+		<!-- Initialization of Plugins -->
+		<script type="text/javascript" src="js/template.js"></script>
+
+		<!-- Custom Scripts -->
+		<script type="text/javascript" src="js/custom.js"></script>
+		
+		<!-- 드래그 노트 로그인 및 회원가입 -->
+		   <script type="text/javascript">
+    $("#joinFormBtn").click(function (){
+    	$("#dragNoteTitle").html("DRAG NOTE JOIN")
+    	document.getElementById("loginModal").style.display = "none";
+    	document.getElementById("joinModal").style.display = "block";
+    	return false;
+    })
+
+    // 로그인
+    $("#loginBtn").click(function () {
+    	
+    	$.ajax ({
+    		url: "/drag-note/member/login.do",
+    		type: "POST",
+    		dataType: "json",
+    		data: {
+    			"email" : $("input[name=loginEmail]").val(),
+    			"password" : $("input[name=loginPassword]").val()
+    		}
+    	}).done(function(result) {
+    		if(result.loginChk){
+    			swal({
+    				  title: "로그인 성공 ＼(^o^)／",
+    				  text: "메인페이지로 이동하겠습니다~",
+    				  type: "success",
+    				  showCancelButton: false,
+    				  confirmButtonColor: "green",
+    				  confirmButtonText: "확인 :)",
+    				  closeOnConfirm: false
+    				},
+    				function(){
+    					localStorage.setItem("memberNo", result.memberNo);
+    					localStorage.setItem("name", result.name);
+    					// 페이지 이동 하면 될 듯!
+    					location.href='/drag-note/html/main/main.html';
+    				});
+    		}
+    		else {
+    			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","아이디 또는 비밀번호를 확인해주세요");
+    		}
+    		})
+    		.fail(function(jqXhr, testStatus, errorText){
+    		alert("에러발생 :" + errorText);
+    	});
+    	return false;
+    });
+
+    // 회원가입폼 이동
+    // $("#joinFormBtn").click(function () {
+//     	location.href='/drag-note/html/member/joinForm.html';
+//     	return false;
+    // });
+
+
+    function googleJoin(email, name){
+    	localStorage.setItem("email", email);
+    	localStorage.setItem("name", name);
+    	location.href='/drag-note/html/member/googleJoinForm.html';
+    }
+
+    // 구글 연동 로그인 회원 정보 얻어오기
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      
+    	$.ajax ({
+    		url: "/drag-note/member/googleLogin.do",
+    		type: "POST",
+    		dataType: "json",
+    		data: {
+    			"email" : profile.getEmail()
+    		}
+    	})
+    	.done(function (result){
+    		console.log(result)
+    		if(result.google){
+    			swal({
+    				  title: "구글 로그인 성공 ＼(^o^)／",
+    				  text: "메인페이지로 이동하겠습니다~",
+    				  type: "success",
+    				  showCancelButton: false,
+    				  confirmButtonColor: "green",
+    				  confirmButtonText: "확인 :)",
+    				  closeOnConfirm: false
+    				},
+    				function(){
+    					localStorage.setItem("memberNo", result.memberNo);
+    					localStorage.setItem("name", result.name);
+    					// 페이지 이동 하면 될 듯!
+    					location.href='/drag-note/html/main/main.html';
+    				});
+    		}
+    		else{
+    			swal({
+    				  title: "회원이 아니시네요 * :-O",
+    				  text: "회원가입 페이지로 이동하겠습니다~ o^_^)o",
+    				  type: "info",
+    				  showCancelButton: false,
+    				  confirmButtonText: "확인 :)",
+    				  closeOnConfirm: false
+    				},
+    				function(){
+    					googleJoin(profile.getEmail(),profile.getName())
+    				});
+    		}
+    	})
+    }
+
+
+
+    // 구글 연동 로그아웃
+    function signOut() {
+    	alert("로그아웃");
+     	
+    	var auth2 = gapi.auth2.getAuthInstance();
+        console.log(auth2);
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        
+        if (!confirm("로그아웃 하시겠습니까?"))
+    		return;
+        
+        location.href='/drag-note/worthy_v.1.0/index.html';
+        });
+    }
+
+
+
+    //이메일 중복체크
+    $("#email").on("keyup",function(){
+    	$.ajax({
+    		url : "/drag-note/member/emailCheck.do",
+    		type:"POST",
+    		data :{email: $("input[name=email]").val()},
+    		dataType : "json"
+    	})
+    	.done(function (result) {
+    		console.log(result)
+    		if(result.emailChk){
+    			document.getElementById('emailck').style.color = "red";
+    			$("#emailck").html("사용중인 이메일입니다.");
+    		}
+    		else {
+    			document.getElementById('emailck').style.color = "green";
+    			$("#emailck").html("사용가능한 이메일입니다.");}
+    	})
+    });
+
+    $("#passwordConf").on("keyup",function(){
+      var f1 = document.joinfrm;
+      var pw1 = f1.password.value;
+      var pw2 = f1.passwordConf.value;
+      if(pw1!=pw2){
+       document.getElementById('checkPwd').style.color = "red";
+       document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+      }else{
+       document.getElementById('checkPwd').style.color = "green";
+       document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+       
+      }
+    });
+      
+
+
+    // 회원가입
+    $("#joinBtn").click(function () {
+    	
+    	var frm = document.joinfrm;
+    	
+    	
+    	
+    	if (frm.name.value == "") {
+    		frm.name.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","이름을 입력하세요.");
+    		return false;
+    	}
+    	if (frm.email.value == "") {
+    		frm.email.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","이메일을 입력하세요.");
+    		return false;
+    	}
+    	
+    	if (frm.password.value == "") {
+    		frm.password.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","비밀번호를 입력하세요.");
+    		return false;
+    	}
+    	if (frm.passwordConf.value == "") {
+    		frm.passwordConf.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","비밀번호를 입력하세요.");
+    		return false;
+    	}
+    	if(frm.password.value != frm.passwordConf.value){
+    		frm.passwordConf.focus();
+    		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","비밀번호를 확인해주세요.");
+    		   return false;	  
+    	}
+    	swal({
+    		  title: "회원가입 하시겠습니까?",
+    		  text: "로그인 화면으로 이동하겠습니다~",
+    		  type: "success",
+    		  showCancelButton: false,
+    		  confirmButtonColor: "green",
+    		  confirmButtonText: "확인 :)",
+    		  closeOnConfirm: false
+    		},
+    		function(){
+    			$.ajax ({
+    				url: "/drag-note/member/join.do",
+    				type: "POST",
+    				dataType: "json",
+    				data: {
+    					"name" : $("input[name=name]").val(),
+    					"email" : $("input[name=email]").val(),
+    					"password" : $("input[name=password]").val()
+    				}
+    			}).done(function(result) {
+    				swal({
+    					 title: result.msg,
+    					  type: "success",
+    					  showCancelButton: false,
+    					  confirmButtonColor: "green",
+    					  confirmButtonText: "확인 :)",
+    					  closeOnConfirm: true
+    				},
+    				function(){
+//     					$("#dragNoteTitle").html("DRAG NOTE LOGIN")
+//     					document.getElementById("loginModal").style.display = "block";
+//     					document.getElementById("joinModal").style.display = "none";
+    					location.href='/drag-note/worthy_v.1.0/index.html';
+    					$("#myModal").modal('toggle');
+    				})
+    				
+    			
+    			})
+    			.fail(function(jqXhr, testStatus, errorText){
+    				alert("에러발생 :" + errorText);
+    			});
+    		});
+    	return false;
+    });
+    
+   
+    //메인 텍스트 슬라이드
+    var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+    </script>
+		
+	</body>
+</html>

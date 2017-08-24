@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html>
+<title>(2)DRAG NOTE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<script src="/drag-note/js/search.js"></script>
+<script src="/drag-note/lib/js/NicEdit-Korean/nicEdit.js" type="text/javascript"></script>
+<script src="/drag-note/js/sweetalert-master/dist/sweetalert.min.js"></script>
+<script src='/drag-note/html/fullcalendar-3.2.0/lib/moment.min.js'></script>
+<script src='/drag-note/html/fullcalendar-3.2.0/fullcalendar.js'></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/drag-note/js/sweetalert-master/dist/sweetalert.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='/drag-note/html/fullcalendar-3.2.0/fullcalendar.css' />
+<style>
+::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; }
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 10px; background: #fff}
+::-webkit-scrollbar-track {background: #fff; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: #fff; -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans DemiLight", "Malgun Gothic";
+    -webkit-font-smoothing: antialiased;
+}
+nav {background-color: #f1f1f1 !important; padding-top: 10px; }
+/* 내비게이션 글꼴 */
+/* nav>a>p, nav>div>p {font-family: 'Lobster', cursive !important; font-size: large;} */
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {
+	width: 80px; 
+    box-shadow: -4px 6px 20px 0px rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 80px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+.w3-bar-item {background-color: #f1f1f1; }
+#editorView, #searchView, #mainView, #newsView {
+	left: 420px; top: 0px; position: absolute; background-color: white;
+	padding: 30px 120px 30px 50px;
+}
+div[id^=daum] {
+	position: relative; 
+}
+/* .NICEDIT-PANELCONTAIN { */
+/*   HEIGHT: 43PX !IMPORTANT; */
+/* } */
+.nicEdit-main {
+  width: 100% !important;
+  min-height: 410px !important;
+/*   margin: 4px auto !important; */
+  padding: 6px 12px !important;
+  margin: 0 !important;
+  background-color: white;
+}
+ul {
+	list-style: none;
+}
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+    height:180px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+div.gallery img {
+    width:178px; height:138px;
+}
+
+div.desc {
+	padding: 10px 20px 10px 20px;
+    text-align: center;
+    width: 178px !important;
+    height:50px !important;
+}
+div.desc p {
+    width: 138px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#searchResult img {
+	max-width: 100%;
+}
+#content img {
+	max-width: 100%;
+}
+.w3-card, .w3-card-2 {
+        box-shadow: 1px 1px 16px 0px rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.tit_brunch {
+    margin-top: 0;
+    font-size: 40px;
+    font-weight: 400;
+    color: #1a1a1a;
+    text-align: left;
+}
+
+.desc_brunch {
+    width: 960px;
+/*     margin: 0 auto; */
+}
+
+body {
+	background: #fff;
+	color: #333;
+}
+
+body,th,td,input,select,textarea,button {
+	font-size:14px;
+	line-height:1.5;
+}
+.desc_brunch {
+    padding-bottom: 16px;
+    margin-top: -3px;
+    font-size: 32px;
+    line-height: 46px;
+    color: #cacaca;
+}
+.desc_brunch, .tit_brunch {
+    font-family: "Nanum Myeongjo",sans-serif;
+    letter-spacing: -.05em;
+}
+.txt_brunch {
+    color: #dee4ec;
+}
+.nav-tabs > li.active > a:hover {
+	background-color: #F1F1F1;
+	color: #555;
+	cursor: default;
+	border: 1px solid #ddd;
+	border-bottom-color: transparent;
+}
+
+#daumForm {
+	width: 645px;
+}
+
+  .bg-1 { 
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 { 
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 { 
+      background-color: #fff; /* White */
+      color: #555555;
+  }
+  
+  .gallery figure img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.gallery figure:hover img {
+	-webkit-transform: scale(1.3);
+	transform: scale(1.3);
+}
+figure {
+	width: 178px;
+	height: 138px;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	overflow: hidden;
+}
+
+blockquote{
+    border-left:none
+}
+
+.quote-badge{
+    background-color: rgba(0, 0, 0, 0.2);   
+}
+
+.quote-box{
+    
+    overflow: hidden;
+    margin-top: -50px;
+    padding-top: -100px;
+    border-radius: 17px;
+    background-color: #4ADFCC;
+    margin-top: 25px;
+    color:white;
+    width: 255px;
+    box-shadow: 2px 2px 2px 2px #E0E0E0;
+    
+}
+.quote-box1{
+    
+    overflow: hidden;
+    margin-top: -50px;
+    padding-top: -100px;
+    border-radius: 17px;
+    background-color: #fefeff;
+    margin-top: 25px;
+    color:gray;
+    width: 255px;
+    box-shadow: 2px 2px 2px 2px #E0E0E0;
+    
+}
+
+.quotation-mark{
+    
+    margin-top: -10px;
+    font-weight: bold;
+    font-size:80px;
+    color:white;
+    font-family: "Times New Roman", Georgia, Serif;
+    
+}
+.quotation-mark1{
+    
+    margin-top: -10px;
+    font-weight: bold;
+    font-size:60px;
+    color:gray;
+    font-family: "Times New Roman", Georgia, Serif;
+    
+}
+
+.quote-text{
+    
+    font-size: 19px;
+    margin-top: -65px;
+}
+#newsDetailSection {
+	padding: 50px;
+}
+
+#newsContentDiv{
+	font-size: 15px;
+	line-height: 1.8;
+	text-align: justify; 
+}
+#newsTitleDiv{
+	font-family: "Nanum Myeongjo",sans-serif;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	font-weight: bold;
+}
+#newsImgDiv img {
+	margin: 0 auto;
+	position: relative;
+	top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 0%)
+}
+
+#newsSection>a>div {
+	font-size: 15px;
+	height: 60px;
+	overflow: hidden;
+}
+
+#newsSection>a>div>img{ 
+	position: relative;
+ 	float: left;
+ 	margin: 0px 5px 0px 0px;
+ 	line-height: 60px;
+} 
+/* #newsSection div>div{ */
+/* 	position: relative; */
+/* 	float: left; */
+/* } */
+.newsTitleP {
+	font-weight: bold;
+}
+.newsContentP {
+}
+#newsSection>a>div:hover {
+	color: #1fad9a;
+}
+
+#daumImage {
+	min-height: 400px;
+}
+#title span {
+	color: grey;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.search-form .form-group {
+  float: right !important;
+  transition: all 0.35s, border-radius 0s;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+.search-form .form-group input.form-control {
+  padding-right: 20px;
+  border: 0 none;
+  background: transparent;
+  box-shadow: none;
+  display:block;
+}
+.search-form .form-group input.form-control::-webkit-input-placeholder {
+  display: none;
+}
+.search-form .form-group input.form-control:-moz-placeholder {
+  /* Firefox 18- */
+  display: none;
+}
+.search-form .form-group input.form-control::-moz-placeholder {
+  /* Firefox 19+ */
+  display: none;
+}
+.search-form .form-group input.form-control:-ms-input-placeholder {
+  display: none;
+}
+.search-form .form-group:hover,
+.search-form .form-group.hover {
+  width: 100%;
+  border-radius: 4px 25px 25px 4px;
+}
+.search-form .form-group span.form-control-feedback {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  color: #3596e0;
+  left: initial;
+  font-size: 14px;
+}
+
+</style>
+<body class="w3-white">
+
+<!-- 아이콘바  -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-center" style="z-index: 103;">
+  <!-- Avatar image in top left corner -->
+  <a href="#" onclick="main_open()" class="w3-bar-item w3-button w3-padding-large w3-hover-none">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>Home</p>
+  </a>
+  <div>
+  <br>
+  </div>
+  <a href="#" onclick="search_open()" class="w3-bar-item w3-button w3-padding-large">
+    <i class="fa fa-search w3-xxlarge"></i>
+    <p>Search</p>
+  </a>
+  <a href="#" onclick="news_open()" class="w3-bar-item w3-button w3-padding-large">
+    <i class="fa fa-newspaper-o w3-xxlarge"></i>
+    <p>News</p>
+  </a>
+  <a href="#" onclick="drag_open()" class="w3-bar-item w3-button w3-padding-large">
+    <i class="fa fa-inbox w3-xxlarge"></i>
+    <p>Drags</p>
+  </a>
+  <a href="#" onclick="note_open()" class="w3-bar-item w3-button w3-padding-large">
+    <i class="fa fa-book w3-xxlarge"></i>
+    <p>Notes</p>
+  </a>
+  <a href="#"  class="w3-bar-item w3-button w3-padding-large" data-toggle="modal" data-target="#profileModal">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>Profile</p>
+  </a>
+  <a href="#" onclick="signOut()" class="w3-bar-item w3-button w3-padding-large">
+    <i class="fa fa-sign-out w3-xxlarge"></i>
+    <p>Sign out</p>
+  </a>
+  <div id="deleteZone" ondrop="drop(event)" ondragover="allowDrop(event)" class="w3-bar-item w3-padding-large">
+  	<i class="fa fa-trash w3-xxlarge"></i>
+  	 <p>Delete</p>
+  </div>
+</nav>
+
+<!-- 본문내용 시작 -->
+<div class="w3-padding-large" id="main" style="padding-left: 0px !important; padding-top: 0px !important;">
+
+  <!-- 드래그바 -->
+  <div class="w3-sidebar w3-round" style="background-color: white; width: 300px; z-index: 102;" id="sideDragBar">
+	<div style="padding: 8px 25px; margin-top: 20px; text-align: center;"><i class="fa fa-inbox w3-xlarge"></i> DRAGS </div>
+  	<!-- 드래그 리스트 -->
+	<div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class="form-control input-lg" name="searchWrd1" id="searchWrd1" placeholder="Search" onkeydown="javascript:if(event.keyCode == 13) searchDragList();"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button" onclick="searchDragList();">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+	<div id="dragList"></div>
+  </div>
+
+  <!-- 노트바 -->
+  <div class="w3-sidebar w3-round" style="display:none; background-color: white; width: 300px; z-index: 101;" id="noteBar">
+    <div style="padding: 8px 25px; margin-top: 20px; text-align: center;">
+	    <i class="fa fa-book w3-xlarge"></i> NOTES 
+	    <i class="fa fa-plus-circle w3-xlarge w3-right" onclick="open_editor();" ></i>
+    </div>
+	<!-- 노트 캘린더 -->
+	<div id='calendar' style="width: 260px;" class="w3-margin">	
+    </div>
+  	<!-- 노트 리스트 -->
+	<div id="noteList"></div>
+  </div>
+  
+  <!-- 에디터 버튼  -->
+  <div id="editorBtnDiv" style="display:none;height: 100%;  width: 360px; z-index: 100;">
+    <i id="editorOpenBtn" class="fa fa-chevron-right w3-xxlarge" style="position: relative; left:315px; display:none;"></i>
+    <i id="editorCloseBtn" class="fa fa-chevron-left w3-xxlarge" style="position: relative; left:315px;"></i>
+  </div>
+
+	<!-- 에디터 -->
+	<div id="editorView"  style="z-index: 2;">
+		<div>
+			<br>
+			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
+			
+			<p class="desc_brunch">
+			<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
+			<span class="part">그리고 다시 꺼내 보세요.<br></span> 
+			<span class="part"><span class="txt_brunch">서랍 속 간직하고 있는 글과 감성을.</span></span>
+			</p>
+		</div>
+		
+		<form name="noteFrm" id="noteFrm" method="POST"	enctype="multipart/form-data" style="z-index: 2;">
+			<div>
+				<table>
+					<tr>
+						<td><input type ="text" id="noteTitle" name="noteTitle" style="width:1069px; " placeholder="제목을 입력하세요"/></td>
+					</tr>
+					<tr>
+						<td><textarea id="myNicEditor" name="myNicEditor" cols="150" rows="30" ></textarea></td>
+					</tr>
+				</table>
+			</div>
+			<table style="z-index: 2;">
+				<tr>
+					<td>
+						<label for="category">카테고리</label>
+					</td>
+					<td>&nbsp;&nbsp;</td>
+					<td>
+				        <select name="category" id="category" class="form-control">
+				        </select>
+					</td>
+					<td>&nbsp;&nbsp;</td>
+					<td>
+						<i class="fa fa-plus-circle w3-xlarge" onclick="showInput();"></i>
+					</td>
+					<td>&nbsp;&nbsp;</td>
+					<td>
+			        	<input type ="text" id="categoryToAdd" name="categoryToAdd" style="display: none;" />
+					</td>
+					<td>&nbsp;&nbsp;</td>
+					<td>
+			        	<i id="Category1" style="display: none;" class="fa fa-check-circle w3-xlarge" onclick="addCategory();"></i>
+					</td>
+					<td>&nbsp;&nbsp;</td>
+					<td>
+			        	<i id="Category2" style="display: none;" class="fa fa-times-circle w3-xlarge" onclick="closeInput();"></i>
+					</td>
+				</tr>
+<!-- 				<tr> -->
+<!-- 					<td colspan="11"> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+			</table>
+			<div align="center">
+				<div class="btn btn-default" style="width: 60px;" id="noteSubmitBtn">등록</div>
+				<div class="btn btn-default" style="width: 60px;" id="noteUpdateBtn" style="display: none;">수정</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">메일 보내기 :)</h4>
+        </div>
+        <div class="modal-body">
+         	<div class="input-group">
+         <span class="input-group-addon">email</span>
+    		<input id="email" type="text" class="form-control" name="email" placeholder="받는 사람">
+         	</div>
+        </div>
+        <div class="modal-footer">
+          <div id="emailNoteSubmitBtn" class="btn btn-default" data-dismiss="modal">보내기</div>
+          <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+	<!-- Modal -->
+  <div class="modal fade" id="downloadNoteModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">노트 다운로드</h4>
+        </div>
+        <div class="modal-body">
+        	<h2>노트를 다운로드 하시겠어요~?</h2><br>
+        	<a id="downloadNotePath" class="btn btn-default">다운로드 할게요~</a>
+	        <div type="button" class="btn btn-default" data-dismiss="modal">아니요~</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+	<!-- 노트뷰 -->
+<!-- 	<div id="noteView" style="display: none; z-index: 9;">		 -->
+<!-- 		<div align="left"> -->
+<!-- 			<br> -->
+<!-- 		</div> -->
+<!-- 		<div class="w3-card w3-padding" style="min-height: 80%; width: 1069px;" > -->
+<!-- 			<div id='title' class="w3-margin w3-padding" style="height: 10%; width: 95%; text-align: center;" > -->
+<!-- 			</div> -->
+<!-- 			<div id='date' class="w3-margin w3-padding" style="height: 10%; width: 95%; text-align: right;" > -->
+<!-- 			</div> -->
+<!-- 			<div id='content' class="w3-margin w3-padding" style="height: 70%; width: 95%; text-align: left;"> -->
+<!-- 			</div> -->
+<!-- 			<div id='update' class="w3-margin w3-padding" style="height: 10%; width: 95%; text-align: right;"> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	
+	<!-- 노트모달 -->
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<div id='title' class="w3-margin w3-padding" style="text-align: center;" >
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div id='date' class="w3-margin w3-padding" style="text-align: right;" >
+							</div>
+							<div id='content' class="w3-margin w3-padding" style="text-align: left;">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<span id='update' class="w3-margin w3-padding" style="text-align: right;">
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 뉴스뷰 -->
+	<div id='newsView' style="z-index: 4; min-height: 100%; width: 1200px;">
+	  	<div>
+			<br>
+			<h3 class="tit_brunch">무슨 일이 벌어지고 있을까요, 뉴스 스탠드</h3>
+			
+			<p class="desc_brunch">
+			<span class="part">드래그만으로 원하는 기사를 담아보세요.<br></span>
+			</p>
+		</div>
+	  	<div>
+			<ul class="nav nav-tabs" id="newsStand">
+				<li class="active"><a data-toggle="tab" onclick="getNews(1)">전체</a></li>
+				<li class="active"><a data-toggle="tab" onclick="getNews(2)">정치</a></li>
+				<li class="active"><a data-toggle="tab" onclick="getNews(3)">경제</a></li>
+				<li class="active"><a data-toggle="tab" onclick="getNews(4)">사회</a></li>
+				<li class="active"><a data-toggle="tab" onclick="getNews(5)">생활/문화</a></li>
+				<li class="active"><a data-toggle="tab" onclick="getNews(6)">세계</a></li>
+				<li class="active"><a data-toggle="tab" onclick="getNews(7)">IT/과학</a></li>
+			</ul>
+			<div class="tab-content"><br><br>
+				<div id="newsSection" style='position:relative; width:100%; height:800px; overflow:auto;'></div>
+				<div id="newsDetailSection" style="display: none;position:relative; width:100%; height:800px; overflow:auto; background-color: #fbfbfb;">
+					<h2 id='newsTitleDiv'></h2><br>
+					<div id='newsDateDiv' style="text-align: right;font-size: 15px;"></div>
+					<div id='myCarousel' class="carousel" data-ride="carousel" style='width: 70%; margin: 5% 15% 5% 15%;'>
+						<!-- Indicators -->
+   						<ol class="carousel-indicators">
+   						</ol>
+   						
+   						<!-- Wrapper for slides -->
+    					<div class="carousel-inner">
+   						</div>
+   						
+   						<!-- Left and right controls -->
+					    <a class="left carousel-control" href="#myCarousel" data-slide="prev" style='color: gray;'>
+					      <span class="glyphicon glyphicon-chevron-left"></span>
+					      <span class="sr-only">Previous</span>
+					    </a>
+					    <a class="right carousel-control" href="#myCarousel" data-slide="next" style='color: gray;'>
+					      <span class="glyphicon glyphicon-chevron-right"></span>
+					      <span class="sr-only">Next</span>
+					    </a>
+					</div>
+					<br>
+					<div id='newsContentDiv'></div>
+				</div>
+			</div>
+	  	</div>
+  	</div>
+	
+	<!-- 서치뷰 -->
+	<div id='searchView' style="z-index: 5;">
+		<div>
+			<br>
+			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
+			
+			<p class="desc_brunch">
+			<span class="part">키워드를 검색하여 필요한 텍스트를 드래그하세요.<br></span>
+			</p>
+		</div>
+		<div id="daumForm" class="input-group w3-card" >
+			<input id="daumSearch" type="text" class="form-control" placeholder="Search" value="" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();"/>
+			 <div class="input-group-btn">
+	      		 <button id="daumSubmit" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				 <button onclick="goBack()" class="btn btn-default"><i class="fa fa-hand-o-left w3-large"></i></button>
+     		 </div>
+		</div>
+		<div id="daumView" style="display: none;">
+		    <div class="w3-card w3-padding">
+		    	<h3 style="color:grey; text-align: center;" class='w3-margin'>이미지 검색 결과</h3>
+		        <div id="daumImage"></div>
+		    </div>
+<!-- 		    <div class="w3-card w3-padding"> -->
+<!-- 		    	<h3 style="color:grey; text-align: center;" class='w3-margin'>게시판 검색 결과</h3>    -->
+<!-- 		        <div id="daumBoard"></div> -->
+<!-- 	        </div> -->
+<!-- 	        <div class="w3-card w3-padding">    -->
+<!-- 		    	<h3 style="color:grey; text-align: center;" class='w3-margin'>블로그 검색 결과</h3> -->
+<!-- 		        <div id="daumBlog"></div> -->
+<!-- 		    </div> -->
+		    <div class="w3-card w3-padding"> 
+		    	<h3 style="color:grey; text-align: center;" class='w3-margin'>웹 검색 결과</h3>
+		        <div id="daumWeb"></div>
+	       	</div>
+		    <div class="w3-card w3-padding">
+		    	<h3 style="color:grey; text-align: center;" class='w3-margin'>지식 검색 결과</h3>
+		        <div id="daumKnowledge"></div>
+		    </div>
+		    <div class="w3-card w3-padding">
+		    	<h3 style="color:grey; text-align: center;" class='w3-margin'>책 검색 결과</h3>
+		        <div id="daumBook"></div>
+		    </div>
+<!-- 		    <div class="w3-card w3-padding"> -->
+<!-- 		    	<h3 style="color:grey; text-align: center;" class='w3-margin'>카페 검색 결과</h3> -->
+<!-- 		        <div id="daumCafe"></div> -->
+<!-- 			</div>		         -->
+		</div>
+		<div id="searchResult" style="display: none;" class="w3-card w3-padding">
+		</div>
+		<div>
+		<br>
+		<br>	
+		</div>
+		<div id="daumScript" style="display: none;">
+		    <div id="daumImageScript"></div>
+		    <div id="daumBoardScript"></div>
+		    <div id="daumBlogScript"></div>
+		    <div id="daumWebScript"></div>
+		    <div id="daumKnowledgeScript"></div>
+		    <div id="daumBookScript"></div>
+		    <div id="daumCafeScript"></div>
+		</div>
+	</div>
+	
+	<!-- 메인뷰 -->
+	<div id="mainView" class="container" style="z-index: 7;">
+										<!-- 검색 -->		
+		<div>
+			<br>
+			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
+			<p class="desc_brunch">
+			<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
+			<span class="part">그리고 다시 꺼내 보세요.<br></span> 
+			<span class="part"><span class="txt_brunch">노트 속 간직하고 있는 글과 감성을.</span></span>
+			<span class="part">
+			       			<div class="col-md-4 col-md-offset">
+           		 <div action="" class="search-form">
+                	<div class="form-group has-feedback" onkeydown="javascript:if(event.keyCode == 13) searchList();">
+            			<label for="search" class="sr-only">Search</label>
+            			<input type="text" class="form-control" name="searchWrd" id="searchWrd" placeholder="search" >
+              		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+            		</div>
+           		 </div>
+           		</div>
+			</span>
+			</p>
+		</div>
+		<br>
+		<br>
+		<br>
+		<!-- 카테고리 선택 -->
+		 <ul class="nav nav-tabs" id="categoryList">
+		  
+		  </ul>
+		<div class="tab-content"><br><br>
+<!-- 			<div id="categoryList" class="btn-group" style='position:relative; width:100%; height:60px;'></div> -->
+			<!-- 노트카드 뿌리기 -->
+			<div id="noteCardList" style='position:relative; width:100%; height:500px;'></div>
+		</div>
+	</div>
+
+	<!-- profile modal -->
+  <div id="profileModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">설정</h4>
+      </div>
+      <div class="modal-body">
+      
+      <div class="container">
+		  <h2>이메일 설정</h2>
+		  <br>
+		  <p>보낼 이메일을 설정해주세요 :)</p>
+		  <br>
+		  <form class="form-inline">
+		    <div class="form-group">
+		      <label for="email">Email:</label>
+		      <input type="email" class="form-control" id="email" placeholder="Enter email">
+		    </div>
+		    <div class="form-group">
+		      <label for="pwd">Password:</label>
+		      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+		    </div>
+		    <button type="submit" class="btn btn-default">설정</button>
+		  </form>
+		</div>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 본문내용 끝 -->
+</div>
+
+<script>
+//노트 검색
+function searchList(){
+	var searchWrd = $("#searchWrd").val();
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/noteList.do",
+		data: {"searchWrd" : searchWrd,
+			   "memberNo" : memberNo
+		 	},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var note = result[i];	
+			var noteNo = note.noteNo;
+			var categoryNo = note.categoryNo;
+			html += "<div class='gallery' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal'  >";
+			// 이미지 뿌리기
+			var noteContent = note.noteContent;
+			if(noteContent.indexOf('<img') != -1) {
+				var noteImgSrc = noteContent.split('<img src="')[1].split('"')[0];
+				html += '<figure><img src="' + noteImgSrc + '" alt="" onclick="noteDetail('+note.noteNo+')"></figure>';
+			} else {
+				html += '<figure><img src="/drag-note/html/images/rainy_window.jpg" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
+			}
+			html += "	<div  class='desc' style='height:51px;'>" + note.noteTitle + "</div>";
+			// 시간 뿌리기
+// 			var date = new Date(note.noteRegDate);
+// 			var time = date.getFullYear() + "-" 
+// 			         + (date.getMonth() + 1) + "-" 
+// 			         + date.getDate() + " "
+// 			         + date.getHours() + ":"
+// 			         + date.getMinutes() + ":"
+// 			         + date.getSeconds();
+// 			html += "<p>" + time + "</p>";
+			//시간 뿌리기 끝
+			html += "</div>";
+			
+		}
+		if (result.length == 0) {
+			html += "<div class='gallery'>";
+			html += '	<img src="/drag-note/html/images/rainy_window.jpg" alt="" width="300px" height="200px" >';
+			html += "	<div  class='desc'> 작성한 노트가 없습니다. </div>";
+			html += "</div>";
+		}
+		$("#noteCardList").html(html);
+		$("#searchWrd").val("");
+		return false;
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+	
+}
+//검색 드래그 리스트 만들기
+function searchDragList() {
+	var searchWrd = $("#searchWrd1").val();
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/drag/dragList.do",
+		data: {"searchWrd" : searchWrd,
+				"memberNo" : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var drag = result[i];	
+			var dragNo = drag.dragNo;
+			
+			html += "<div class='quote-box1 w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='drag"+ drag.dragNo+"'  >";
+			html += "<p class='quotation-mark1' id='drag"+ drag.dragNo+"'> “ </p> ";
+			html += "<br>";
+			html += "<div class='quote-text' style='overflow:auto;max-height:170px; font-size:15px;'>";
+			html += "		<div id='drag"+ drag.dragNo+"'>" + drag.dragContent + "</div><br>";
+			html += "</div>";
+			html += " <hr>";
+			html += " <div class='blog-post-actions'>";
+			html += "</div>";
+			// 시간 뿌리기
+			var date = new Date(drag.dragRegDate);
+			var time = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate() + " "
+			         + date.getHours() + ":"
+			         + date.getMinutes() + ":"
+			         + date.getSeconds();
+			html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
+			//시간 뿌리기 끝
+// 			html += "<p class='blog-post-bottom pull-right'>";         
+// 			html += "   <span class='badge quote-badge'> <i class='fa fa-envelope-o' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></span>";
+// 			html += "	<span class='badge quote-badge'> <i class='fa fa-download' onclick='downloadNote("+noteNo+");'></i> </span></p>";
+			html += "</div>";
+	
+			
+			
+	         
+		}
+		if (result.length == 0) {
+			html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
+			html += "<h6>드래그가 없습니다.</h6>";
+			html += "</div>";
+		}
+		$("#dragList").html(html);
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+
+//뉴스 상세 뿌리기
+function getNewsDetail(url) {
+	var urlToRead = "http://localhost:10010/naverNewsDetail?url=" + url;
+	var html = "";
+	$.ajax({
+		type: "GET",
+		url : urlToRead,
+		dataType : "json"
+	})
+	.done(function (result) {
+		$.ajax({
+			type: "GET",
+			url : "http://localhost:10010/naverNewsDetailBack",
+			dataType : "json"
+		})
+		.done(function (result) {
+			$("#newsTitleDiv").html(result[0].title);
+			$("#newsDateDiv").html(result[0].date);
+			var imgs = "";
+			var lis = "";
+			if(result[0].images[0] != null){
+				for(var i = 0; i < result[0].images.length; i++){
+					$("#myCarousel").attr("style", "display:block;width: 70%; margin: 5% 15% 5% 15%;");
+					if (i == 0){
+						imgs += '<div class="item active">';
+						imgs += "<img src='" + result[0].images[i] + "' alt='' style='width:100%;'>";
+						imgs += "</div>";
+						lis += '<li data-target="#myCarousel" data-slide-to="' + i + '" class="active"></li>';
+					}else{
+						imgs += '<div class="item">';
+						imgs += "<img src='" + result[0].images[i] + "' alt='' style='width:100%;'>";
+						imgs += "</div>";
+						lis += '<li data-target="#myCarousel" data-slide-to="' + i + '"></li>';
+					}
+				}				
+				$(".carousel-inner").html(imgs);
+				$(".carousel-indicators").html(lis);
+			}else {
+				$(".carousel-inner").html("");
+				$(".carousel-indicators").html("");
+				$("#myCarousel").attr("style", "display:none;width: 70%; margin: 5% 15% 5% 15%;");
+			}		
+// 			if(result[0].images[0].length > 0){
+// 				for(var i = 0; i < result[0].images.length; i++){
+// 					imgs += "<img src='" + result[0].images[i] + "'>";
+// 				}				
+// 				$("#newsImgDiv").html(imgs);
+// 			}else {
+// 				$("#newsImgDiv").html("");
+// 			}	
+
+			if(result[0].content.indexOf("{}") != -1){
+				var beautifulContent = result[0].content.split("{}")[1].trim();
+				$("#newsContentDiv").html(beautifulContent);
+			}else{
+				$("#newsContentDiv").html(result[0].content);
+			}
+			document.getElementById("newsSection").style.display = "none";
+			document.getElementById("newsDetailSection").style.display = "block";
+			return false;
+		})		
+	})
+}
+
+//뉴스 뿌리기
+function getNews(newsNo) {
+	var urltoread = "";
+	switch(newsNo){
+	case 1: urltoread = "http://localhost:10001/naverNewsNow"; break;
+	case 2: urltoread = "http://localhost:10002/naverNewsPolitics"; break;
+	case 3: urltoread = "http://localhost:10003/naverNewsEconomy"; break;
+	case 4: urltoread = "http://localhost:10004/naverNewsSociety"; break;
+	case 5: urltoread = "http://localhost:10005/naverNewsCulture"; break;
+	case 6: urltoread = "http://localhost:10006/naverNewsGlobal"; break;
+	case 7: urltoread = "http://localhost:10007/naverNewsIT"; break;
+	}
+	var newsTitle = "";
+	$.ajax({
+		type: "GET",
+		url : urltoread,
+		dataType : "json"
+	})
+	.done(function (result) {
+		for (var i = 0; i < result.length; i++) {
+			newsTitle += "<a href='#' onclick='please(event)' id='"+result[i].url+"'>";
+			newsTitle += "<div id='"+result[i].url+"'>";
+			if(result[i].img != null){
+				newsTitle += "<img src='" + result[i].img + "' id='"+result[i].url+"'>";
+			}
+			newsTitle += "<div>";
+			newsTitle += "<p class='newsTitleP' id='"+result[i].url+"'>" + result[i].title + "</p>";
+			newsTitle += "<p class='newsContentP' id='"+result[i].url+"'>" + result[i].content.split("…")[0] + "…</p>";
+			newsTitle += "</div>";
+			newsTitle += "</div>";
+			newsTitle += "</a>";
+		}
+		$("#newsSection").html(newsTitle);
+		document.getElementById("newsSection").style.display = "block";
+		document.getElementById("newsDetailSection").style.display = "none";
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("628에러발생: " + errorText + "<br>" + "상태: " + textStatus);
+	});
+}
+
+function please(event){
+	var url2 = event.target.id;
+	getNewsDetail(url2);
+}
+// function memberInfo() {
+// 		var memberNo = localStorage.getItem("memberNo");
+// 		$.ajax({
+// 			type: "POST",
+// 			url : "/drag-note/member/memberInfo.do",
+// 			data: {"memberNo" : memberNo},
+// 			dataType : "json"
+// 		})
+// 		.done(function (result) {
+// 			var html = "";
+//  			$("#memeberName").append("<h3>"+result.name+"</h3>");
+// // 				html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin' onclick='notedetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' >";
+// // 				html += "	<h4>" + note.noteTitle + "</h4><br>";
+// // 				html += "</div>";
+
+// 		})
+// 		.fail(function(jqXhr, textStatus, errorText){
+// 			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+// 		});
+// 	}
+// 	memberInfo();
+
+//메일로 노트 보내기
+$("#emailNoteSubmitBtn").click(function(){
+	var memberNo = localStorage.getItem("memberNo");
+	var noteNo = localStorage.getItem("emailNoteNo");
+	var emailTo = $("#email").val()
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/mailNote.do",
+		data: {"noteNo" : noteNo,
+			   "memberNo" : memberNo,
+			   "emailTo"  : emailTo
+		},
+		dataType : "json"
+	})
+	.done(function (result) {
+		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+        $("#email").val("");
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		swal("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+})
+function saveNoteNo(noteNo){
+	localStorage.setItem("emailNoteNo",noteNo);
+}
+
+//노트 디테일
+function noteDetail(noteNo){
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/noteDetail.do",
+		data: {"noteNo" : noteNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var title = result.noteTitle;
+		var content = result.noteContent;
+		// 시간 뿌리기
+		var date = new Date(result.noteRegDate);
+		var time = date.getFullYear() + "-" 
+		         + (date.getMonth() + 1) + "-" 
+		         + date.getDate() + " "
+		         + date.getHours() + ":"
+		         + date.getMinutes() + ":"
+		         + date.getSeconds();
+		//시간 뿌리기 끝
+// 		document.getElementById("noteView").style.display = "block";
+		$("#title").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
+		$("#date").html(time);
+		$("#content").html(content);
+		$("#update").html("<span class='badge quote-badge'> <i class='fa fa-text-width' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></span>&nbsp;<span class='badge quote-badge'> <i class='fa fa-envelope-o' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></span>&nbsp;<span class='badge quote-badge'> <i class='fa fa-download' data-dismiss='modal' data-toggle='modal' data-target='#downloadNoteModal' onclick='downloadNote("+noteNo+");'></i> </span>");
+		document.getElementById("editorBtnDiv").style.display = "none";
+		
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+//노트 캘린더
+makeCalendar();
+function makeCalendar() {
+// 	var events = [];
+// 	if (result != null) {
+// 		for (var i = 0; i < result.length; i++) {
+// 			var event = result[i];
+// 			var date = new Date(event.eventDate);
+// 			var time = date.getFullYear() + "-" 
+// 			+ (date.getMonth() + 1) + "-" 
+// 			+ date.getDate();
+// 			events.push({title: event.eventName, start: time, url: event.eventNo});
+// 		}
+// 	}
+	
+    $('#calendar').fullCalendar({
+        dayClick: function(date) {
+        	var date = date.format()
+        	$.ajax({
+        		type: "POST",
+        		url : "/drag-note/note/noteByDate.do",
+        		data: {"memberNo" : localStorage.getItem("memberNo"),
+        			   "date" : date
+        		},
+        		dataType : "json"
+        	})
+        	.done(function (result) {
+        		var html = "";
+        		for (var i = 0; i < result.length; i++) {
+
+        			var note = result[i];	
+        			var noteNo = note.noteNo;
+        			
+        			console.log("노트번호"+noteNo)
+        			html += " <div class='quote-box w3-margin w3-padding'' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal'  >";
+//         			html += " <blockquote class='quote-box'>;
+        			html += " <p class='quotation-mark'> “ </p><br> ";
+        			html += " <p class='quote-text'>" + note.noteTitle +" </p>";
+        			html += " <hr>";
+        			html += " <div class='blog-post-actions'>";
+        			// 시간 뿌리기
+        			var date = new Date(note.noteRegDate);
+        			var time = date.getFullYear() + "-" 
+        			         + (date.getMonth() + 1) + "-" 
+        			         + date.getDate() + " "
+        			         + date.getHours() + ":"
+        			         + date.getMinutes() + ":"
+        			         + date.getSeconds();
+        			html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
+        					         
+        			html += "<p class='blog-post-bottom pull-right'>";         
+        			html += "   <span class='badge quote-badge'> <i class='fa fa-envelope-o' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></span>";
+        			html += "	<span class='badge quote-badge'> <i class='fa fa-download' onclick='downloadNote("+noteNo+");'></i> </span></p>";
+        			//시간 뿌리기 끝
+        			
+        			html += "</div>";
+        			html += "</div>";
+        		}
+        		if (result.length == 0) {
+        			html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
+        			html += "<h6>작성된 노트가 없습니다.</h6>";
+        			html += "</div>";
+        		}
+        		$("#noteList").html(html);
+        	})
+        	.fail(function(jqXhr, textStatus, errorText){
+        		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+        	});
+        }
+        ,editable : false
+        ,eventLimit : true
+//         ,events: events
+//         ,eventClick: function(event) {
+//             loadEventTimeline(event.url);
+//             return false
+        
+    })
+}
+//메인에 카테고리 뿌리기
+function getMainCategory(){
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/getCategory.do",
+		data: {"memberNo" : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = '<li class="active"><a data-toggle="tab" onclick="mainNoteList()">전체</a></li>';
+		var categoryList = result.categoryList;
+		for(var i = 0; i < categoryList.length; i++){
+			var category = categoryList[i];
+			var categoryNo = category.categoryNo;
+			html += "<li class='active' onclick='getNoteByCategoryNo("+category.categoryNo+")' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' aria-expanded='false' style='min-width:20px;'>"
+			html += "<a data-toggle='tab' ondblclick='categoryUpdate(event);' href='#' ondragstart='drag(event)' draggable='true' id='category"+category.categoryNo+"' style='min-width:20px;'>"+category.categoryName+"</a>";
+			html += "<a data-toggle='tab' contenteditable='true' style='min-width:20px; display:none;' id='categoryUpdate"+category.categoryNo+"'>"+category.categoryName+"</a>";
+			html += "</li>";
+		}
+		$("#categoryList").html(html);
+// 		document.getElementById("noteView").style.display = "none";
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+//카테고리 수정
+function categoryUpdate(event){
+	var categoryToUpdate = event.target.id;
+	var categoryInput = "categoryUpdate" + categoryToUpdate.substring(8);
+	alert(categoryInput);
+	document.getElementById(categoryToUpdate).style.display = "none";
+// 	document.getElementById(categoryInput).style.display = "block";
+	$("#"+categoryInput).attr("style","display:block !important");
+}
+
+//메인에 카테고리 별로 리스트 뿌리기
+function getNoteByCategoryNo(categoryNo){
+	var categoryNo = categoryNo;
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/noteCartegoryList.do",
+		data: {"memberNo" : memberNo,
+			   "categoryNo" : categoryNo		
+		},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var note = result[i];	
+			var noteNo = note.noteNo;
+			var categoryNo = note.categoryNo;
+			html += "<div class='gallery category"+categoryNo+"' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal'  >";
+			// 이미지 뿌리기
+			var noteContent = note.noteContent;
+			if(noteContent.indexOf('<img') != -1) {
+				var noteImgSrc = noteContent.split('<img src="')[1].split('"')[0];
+				html += '<figure><img src="' + noteImgSrc + '" alt="" onclick="noteDetail('+note.noteNo+')"></figure>';
+			} else {
+				html += '<figure><img src="/drag-note/html/images/rainy_window.jpg" alt="" onclick="noteDetail('+note.noteNo+')"></figure>';
+			}
+			html += "	<div  class='desc'><p>" + note.noteTitle + "</p></div>";
+			html += "</div>";
+	
+		}
+		if (result.length == 0) {
+			html += "<div class='gallery'>";
+			html += '	<img src="/drag-note/html/images/rainy_window.jpg" alt="" width="300px" height="200px" >';
+			html += "	<div  class='desc'> 작성한 노트가 없네요. </div>";
+			html += "</div>";
+		}
+		$("#noteCardList").html(html);
+// 		document.getElementById("noteView").style.display = "none";
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+
+// 메인에 노트 뿌리기
+function mainNoteList() {
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/noteList.do",
+		data: {"memberNo" : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var note = result[i];	
+			var noteNo = note.noteNo;
+			var categoryNo = note.categoryNo;
+			html += "<div class='gallery' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal'  >";
+			// 이미지 뿌리기
+			var noteContent = note.noteContent;
+			if(noteContent.indexOf('<img') != -1) {
+				var noteImgSrc = noteContent.split('src="')[1].split('"')[0];
+				html += '<figure><img src="' + noteImgSrc + '" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
+			} else {
+				html += '<figure><img src="/drag-note/html/images/rainy_window.jpg" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
+			}
+			html += "	<div  class='desc'><p>" + note.noteTitle + "</p></div>";
+			html += "</div>";
+	
+		}
+		if (result.length == 0) {
+			html += "<div class='gallery'>";
+			html += '	<img src="/drag-note/html/images/rainy_window.jpg" alt="" width="300px" height="200px" >';
+			html += "	<div  class='desc'> 작성한 노트가 없네요. </div>";
+			html += "</div>";
+		}
+		$("#noteCardList").html(html);
+// 		document.getElementById("noteView").style.display = "none";
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+
+
+
+//다음 검색 버튼 클릭 
+$("#daumSubmit").click(function(){
+    daumSearch.init();
+    daumSearch.search();
+    document.getElementById("daumView").style.display = "block";
+	return false;
+})
+
+// 에디터 가져오기
+bkLib.onDomLoaded(nicEditors.allTextAreas); 
+
+// 로딩 시 위치 지정
+window.onload = function () {
+	document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
+	document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
+	document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
+	document.getElementById("searchView").style.height = window.innerHeight +"px";
+// 	document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
+// 	document.getElementById("noteView").style.height = window.innerHeight +"px";
+	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
+	document.getElementById("mainView").style.height = window.innerHeight +"px";
+	document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
+	document.getElementById("editorView").style.height = window.innerHeight +"px";
+	getMainCategory();
+	mainNoteList();
+}
+
+// 브라우저 창 크기 변화 시 위치 지정 
+$(window).resize(function(){
+	document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
+	document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
+	document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
+	document.getElementById("searchView").style.height = window.innerHeight +"px";
+// 	document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
+// 	document.getElementById("noteView").style.height = window.innerHeight +"px";
+	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
+	document.getElementById("mainView").style.height = window.innerHeight +"px";
+	document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
+	document.getElementById("editorView").style.height = window.innerHeight +"px";
+});
+
+// 내비바 아이콘으로 열고 닫기
+function drag_open() {
+	document.getElementById("sideDragBar").style.display = "none";
+// 	document.getElementById("editorBtnDiv").style.display = "none";
+	document.getElementById("noteBar").style.display = "none";
+	$("#sideDragBar").show("slide", {direction: "left" }, 600);
+// 	$("#editorBtnDiv").show("slide", {direction: "left" }, 600);
+    makeDragList();
+	getCategory(); // 카테고리 셀렉박스에 옵션 넣기
+}
+
+function drag_close() {
+	$("#noteBar").hide("slide", {direction: "left" }, 600);
+}
+
+function note_open() {
+// 	document.getElementById("searchView").style.display = "none";
+	document.getElementById("noteBar").style.display = "none";
+// 	document.getElementById("mainView").style.display = "none";
+// 	document.getElementById("editorBtnDiv").style.display = "none";
+	document.getElementById("sideDragBar").style.display = "none";
+	$("#noteBar").show("slide", {direction: "left" }, 600);
+// 	$("#editorBtnDiv").show("slide", {direction: "left" }, 600);
+	makeNoteList();
+	getCategory(); // 카테고리 셀렉박스에 옵션 넣기
+}
+
+function note_close() {
+    document.getElementById("noteBar").style.display = "none";
+}
+
+function search_open() {
+	document.getElementById("mainView").style.display = "none";
+	document.getElementById("newsView").style.display = "none";
+	$("#sideDragBar").show("slide", {direction: "left" }, 600);
+	document.getElementById("searchView").style.display = "block";
+}
+
+function news_open() {
+	document.getElementById("mainView").style.display = "none";
+// 	document.getElementById("noteView").style.display = "none";
+	document.getElementById("searchView").style.display = "none";
+	document.getElementById("newsView").style.display = "block";
+}
+
+function main_open() {
+	document.getElementById("newsView").style.display = "none";
+	document.getElementById("noteBar").style.display = "none";
+	document.getElementById("sideDragBar").style.display = "block";
+// 	document.getElementById("editorBtnDiv").style.display = "none";
+	document.getElementById("mainView").style.display = "block";
+	getMainCategory();
+	getCategory();
+	mainNoteList();
+}
+
+function open_editor() {
+	document.getElementById("editorBtnDiv").style.display = "block";
+	document.getElementById("mainView").style.display = "none";
+	document.getElementById("searchView").style.display = "none";
+	document.getElementById("newsView").style.display = "none";
+	getMainCategory();
+	mainNoteList();
+	getCategory();
+	if(updateYn){
+		document.getElementById("noteUpdateBtn").style.display = "block";
+		document.getElementById("noteSubmitBtn").style.display = "none";
+	} else {
+		document.getElementById("noteUpdateBtn").style.display = "none";
+		document.getElementById("noteSubmitBtn").style.display = "block";
+	}
+}
+
+
+var updateYn = false;
+
+//노트 다운로드
+function downloadNote(noteNo){
+	var url = "/drag-note/download/downloadNote.do?noteNo=" + noteNo;
+	$("#downloadNotePath").attr("href", url);
+}
+
+$("#downloadNotePath").click(function(){
+	$("#downloadNoteModal").modal('hide');
+})
+
+//노트 업데이트
+function updateNote(noteNo){
+	localStorage.setItem("noteNoToUpdate",noteNo);
+	
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/noteDetail.do",
+		data: {"noteNo" : noteNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var title = result.noteTitle;
+		var content = result.noteContent;
+		$("input[name=noteTitle]").val(title);
+		$(".nicEdit-main").html(content);
+		updateYn = true;
+		open_editor();
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+	
+}
+// 검색 뒤로 가기
+function goBack() {
+	document.getElementById("searchResult").style.display = "none";
+	document.getElementById("daumView").style.display = "block";
+}
+
+// 노트 에티터 뿌리기
+$("#editorOpenBtn").click(function() {
+	document.getElementById("mainView").style.display = "none";
+	document.getElementById("searchView").style.display = "none";
+	document.getElementById("newsView").style.display = "none";
+	$("#editorView").show("slide", {direction: "left" }, 600);
+	$("#editorOpenBtn").toggle();
+	$("#editorCloseBtn").toggle();
+});
+
+// 노트 에디터 닫기
+$("#editorCloseBtn").click(function() {
+	$("#editorView").hide("slide", {direction: "left" }, 700);
+	$("#searchView").show("slide", {direction: "left" }, 1300);
+	$("#searchView").show("slide", {direction: "left" }, 1300);
+	$("#editorOpenBtn").toggle();
+	$("#editorCloseBtn").toggle();
+});
+
+// 노트 등록
+$("#noteSubmitBtn").click(function() {
+
+	var frm = document.noteFrm;
+	if (frm.noteTitle.value == "") {
+		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","제목을 입력하세요.");
+		frm.noteTitle.focus();
+		return false;
+	}
+	if (frm.category.value == "") {
+		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 선택하세요.",'success');
+		return false;
+	}
+// 	if (!confirm("노트를 등록하시겠습니까?"))
+// 		return;
+
+	var fd = new FormData();
+	
+	fd.append("memberNo",localStorage.getItem("memberNo"));
+	fd.append("noteTitle",$("input[name=noteTitle]").val());
+	fd.append("noteContent",$(".nicEdit-main").html());
+	fd.append("categoryNo", $("#category").val());
+	$.ajax({
+		url : "/drag-note/note/note.do",
+		type:"POST",
+		data :fd,
+		dataType : "json",
+		processData: false,
+		contentType:false
+	})
+	.done(function (result) {
+		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+		makeNoteList();
+		noteDetail(result.noteNo);
+		$("input[name=noteTitle]").val("");
+		$(".nicEdit-main").html("");
+		$("#category").val("");
+	})
+	.fail(function (jqXhr, textStatus, errorText) {
+		alert("에러발생 : " + errorText);
+	});
+	
+	return false;
+});
+// 노트 수정
+$("#noteUpdateBtn").click(function() {
+	var frm = document.noteFrm;
+	if (frm.noteTitle.value == "") {
+		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","제목을 입력하세요.");
+		frm.noteTitle.focus();
+		return false;
+	}
+	if (frm.category.value == "") {
+		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 선택하세요.");
+		return false;
+	}
+// 	if (!confirm("노트를 등록하시겠습니까?"))
+// 		return;
+
+	var fdUpdate = new FormData();
+	
+	fdUpdate.append("memberNo",localStorage.getItem("memberNo"));
+	fdUpdate.append("noteTitle",$("input[name=noteTitle]").val());
+	fdUpdate.append("noteContent",$(".nicEdit-main").html());
+	fdUpdate.append("categoryNo", $("#category").val());
+	fdUpdate.append("noteNo", localStorage.getItem("noteNoToUpdate"));
+	$.ajax({
+		url : "/drag-note/note/noteUpdate.do",
+		type:"POST",
+		data :fdUpdate,
+		dataType : "json",
+		processData: false,
+		contentType:false
+	})
+	.done(function (result) {
+		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+		makeNoteList();
+		noteDetail(result.noteNo);
+		updateYn = false;
+		$("input[name=noteTitle]").val("");
+		$(".nicEdit-main").html("");
+		$("#category").val("");
+	})
+	.fail(function (jqXhr, textStatus, errorText) {
+		alert("에러발생 : " + errorText);
+	});
+	
+	return false;
+});
+
+// 노트리스트 만들기
+function makeNoteList() {
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/noteList.do",
+		data: {"memberNo" : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var note = result[i];	
+			var noteNo = note.noteNo;
+			
+			console.log("노트번호"+noteNo)
+			html += " <div class='quote-box w3-margin w3-padding'' onclick='noteDetail("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' data-toggle='modal' data-target='#detailModal' >";
+// 			html += " <blockquote class='quote-box'>;
+			html += " <p class='quotation-mark'> “ </p><br> ";
+			html += " <p class='quote-text'>" + note.noteTitle +" </p>";
+			html += " <hr>";
+			html += " <div class='blog-post-actions'>";
+			// 시간 뿌리기
+			var date = new Date(note.noteRegDate);
+			var time = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate() + " "
+			         + date.getHours() + ":"
+			         + date.getMinutes() + ":"
+			         + date.getSeconds();
+			html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
+					         
+			html += "<p class='blog-post-bottom pull-right'>";         
+			html += "   <span class='badge quote-badge'> <i class='fa fa-envelope-o' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></span>";
+			html += "	<span class='badge quote-badge'> <i class='fa fa-download' onclick='downloadNote("+noteNo+");'></i> </span></p>";
+			//시간 뿌리기 끝
+			html += "</div>";
+			html += "</div>";
+			
+	
+		}
+		if (result.length == 0) {
+			html += "<div class='container'>";
+			html += "<h6>작성된 노트가 없습니다.</h6>";
+			html += "</div>";
+		}
+		$("#noteList").html(html);
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+
+// 노트 드래그로 삭제
+function deleteNote(noteNo) {
+	var noteNo = noteNo;
+	var memberNo = localStorage.getItem("memberNo");
+	
+	swal({
+		  title: "* :-O",
+		  text: "노트를 삭제하시겠어요~?",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonText: "네, 삭제해주세요 :)",
+		  cancelButtonText: "아니요!",
+		  closeOnConfirm: false
+		},
+		function(){
+			$.ajax({
+				url:"/drag-note/note/deleteNote.do",
+				dataType:"json",
+				data: {"noteNo":noteNo},
+				type: "POST"
+				}).done(function (result){
+					swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg,'success');
+					makeNoteList();
+					mainNoteList();
+			});
+		}
+	);
+}
+//카테고리 삭제
+function deleteCategory(categoryNo) {
+	
+	swal({
+		  title: "* :-O",
+		  text: "카테고리와 해당 게시물을 모두 삭제하시겠어요?",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonText: "네, 삭제해주세요 :)",
+		  cancelButtonText: "아니요!",
+		  closeOnConfirm: false
+		},
+		function(){
+			$.ajax({
+				url:"/drag-note/note/deleteCategory.do",
+				dataType:"json",
+				data: {"categoryNo":categoryNo},
+				type: "POST"
+				}).done(function (result){
+					swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg,'success');
+					makeNoteList();
+					mainNoteList();
+					getMainCategory();
+			});
+		}
+	);
+}	
+
+// 이전 드래그 텍스트
+var prevText;
+
+// 서치뷰에서 드래그 등록
+$("#searchView").mouseup(function(){
+     var selection = window.getSelection();
+	 var text = selection.toString();
+	 // 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
+	 if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
+		 // 드래그 저장
+		var dragfd = new FormData();
+		
+		dragfd.append("memberNo",localStorage.getItem("memberNo"));
+		dragfd.append("dragContent", text);
+		$.ajax({
+			url : "/drag-note/drag/registDrag.do",
+			type:"POST",
+			data :dragfd,
+			dataType : "json",
+			processData: false,
+			contentType:false
+		})
+		.done(function (result) {
+			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡",result.msg,'success');
+			prevText = text;
+			makeDragList();
+		})
+		.fail(function (jqXhr, textStatus, errorText) {
+			alert("에러발생 : " + errorText);
+		});
+		
+		return false;
+	 }	
+ });
+// 뉴스뷰에서 드래그 등록
+$("#newsView").mouseup(function(){
+     var selection = window.getSelection();
+	 var text = selection.toString();
+	 // 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
+	 if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
+		 // 드래그 저장
+		var dragfd = new FormData();
+		
+		dragfd.append("memberNo",localStorage.getItem("memberNo"));
+		dragfd.append("dragContent", text);
+		$.ajax({
+			url : "/drag-note/drag/registDrag.do",
+			type:"POST",
+			data :dragfd,
+			dataType : "json",
+			processData: false,
+			contentType:false
+		})
+		.done(function (result) {
+			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡",result.msg,'success');
+			prevText = text;
+			makeDragList();
+		})
+		.fail(function (jqXhr, textStatus, errorText) {
+			alert("에러발생 : " + errorText);
+		});
+		
+		return false;
+	 }	
+ });
+ 
+// 드래그 노트에 추가하기.
+$("div[id^=drag]").click(function(event){
+	var addDragNo = event.target.id.substring(4);
+	var eoBtnStyle = $("#editorOpenBtn").attr("style");
+	var ecBtnStyle = $("#editorCloseBtn").attr("style");
+// 	alert("eoBtnStyle" + eoBtnStyle);
+// 	alert("ecBtnStyle" + ecBtnStyle);
+	if (eoBtnStyle.indexOf('none') !== -1 && ecBtnStyle.indexOf('display') == -1) {
+		$.ajax({
+			url : "/drag-note/drag/selectDrag.do",
+			type:"POST",
+			data :{"dragNo" : addDragNo},
+			dataType : "json"
+		})
+		.done(function (result) {
+			$(".nicEdit-main").append(result.dragContent + "<br>");
+		})
+		.fail(function (jqXhr, textStatus, errorText) {
+			alert("에러발생 : " + errorText);
+		});
+	}
+	return false;
+});
+
+// 드래그 리스트 만들기
+function makeDragList() {
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/drag/dragList.do",
+		data: {"memberNo" : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var drag = result[i];	
+			var dragNo = drag.dragNo;
+			
+			html += "<div class='quote-box1 w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='drag"+ drag.dragNo+"'  >";
+			html += "<p class='quotation-mark1' id='drag"+ drag.dragNo+"'> “ </p> ";
+			html += "<br>";
+			html += "<div class='quote-text' style='overflow:auto;max-height:170px; font-size:15px;'>";
+			html += "		<div id='drag"+ drag.dragNo+"'>" + drag.dragContent  + "</div><br>";
+			html += "</div>";
+			html += " <hr>";
+			html += " <div class='blog-post-actions'>";
+			html += "</div>";
+			// 시간 뿌리기
+			var date = new Date(drag.dragRegDate);
+			var time = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate() + " "
+			         + date.getHours() + ":"
+			         + date.getMinutes() + ":"
+			         + date.getSeconds();
+			html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
+			html += "<span class='badge quote-badge'> <i class='fa fa-link' onclick='openUrl(event);' id='" + drag.dragUrl + "'></i> </span>";
+			//시간 뿌리기 끝
+// 			html += "<p class='blog-post-bottom pull-right'>";         
+// 			html += "   <span class='badge quote-badge'> <i class='fa fa-envelope-o' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></span>";
+// 			html += "	<span class='badge quote-badge'> <i class='fa fa-download' onclick='downloadNote("+noteNo+");'></i> </span></p>";
+			html += "</div>";
+	
+			
+			
+	         
+		}
+		if (result.length == 0) {
+			html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
+			html += "<h6>드래그가 없습니다.</h6>";
+			html += "</div>";
+		}
+		$("#dragList").html(html);
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+
+function openUrl(event) {
+	window.open(event.target.id, "_blank");
+}
+
+// 드래그 드래그로 삭제
+function deleteDrag(dragNo) {
+	var dragNo = dragNo;
+	var memberNo = localStorage.getItem("memberNo");
+	
+	swal({
+		  title: "* :-O",
+		  text: "드래그를 삭제하시겠어요~?",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonText: "네, 삭제해주세요 :)",
+		  cancelButtonText: "아니요!",
+		  closeOnConfirm: false
+		},
+		function(){
+			$.ajax({
+				url:"/drag-note/drag/deleteDrag.do",
+				dataType:"json",
+				data: {"dragNo":dragNo},
+				type: "POST"
+				}).done(function (result){
+					swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, 'success');
+					makeDragList();
+			});
+		}
+	);
+	
+}	
+
+// 드롭 허용
+function allowDrop(ev) {
+	ev.preventDefault(); 
+	}
+
+// 드래그 이벤트
+function drag(ev) { 
+	ev.dataTransfer.setData("text", ev.target.id); 
+	} 
+
+// 노트 및 드래그 삭제 드랍 이벤트
+function drop(ev) {
+	ev.preventDefault();
+	var deleteId = ev.dataTransfer.getData("text"); 
+	var deleteNum = deleteId.substring(4);
+	if (deleteId.startsWith("d")){
+	 	deleteDrag(deleteNum);
+	} else if (deleteId.startsWith("c")){
+		deleteNum = deleteId.substring(8);
+		deleteCategory(deleteNum);
+	} else{
+	 	deleteNote(deleteNum);
+	} 
+}
+
+makeDragList();
+
+
+// 카테고리 인풋창 열기
+function showInput() {
+	document.getElementById("categoryToAdd").style.display = "block";
+    document.getElementById("Category1").style.display = "block";
+    document.getElementById("Category2").style.display = "block";
+    return false;
+}
+
+// 카테고리 인풋창 끄기
+function closeInput() {
+	document.getElementById("categoryToAdd").style.display = "none";
+    document.getElementById("Category1").style.display = "none";
+    document.getElementById("Category2").style.display = "none";
+    $("#categoryToAdd").val("");
+    return false;
+}
+
+// 카테고리 추가
+function addCategory(){
+	
+	var categoryName = $("#categoryToAdd").val();
+	var memberNo = localStorage.getItem("memberNo");
+	
+	if (categoryName == "") {
+		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 입력하세요",'success');
+		return false;
+	}
+	
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/addCategory.do",
+		data: {"categoryName" : categoryName,
+				"memberNo"	  : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		swal(result.msg);
+		appendCategory(result.categoryList);
+		document.getElementById("categoryToAdd").style.display = "none";
+	    document.getElementById("Category1").style.display = "none";
+	    document.getElementById("Category2").style.display = "none";
+	    $("#categoryToAdd").val("");
+		
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+
+// 카테고리 셀렉박스에 옵션 추가
+function appendCategory(categoryList){
+	 $("#category option").remove();
+	 for(var i = 0; i < categoryList.length; i++){
+			var category = categoryList[i];
+			var categoryName = category.categoryName;
+			var categoryNo = category.categoryNo;
+			$("#category").append("<option value='"+categoryNo+"'>"+categoryName+"</option>");
+	}
+}
+
+// DB에서 카테고리 가져오기
+function getCategory(){
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/getCategory.do",
+		data: {"memberNo" : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		appendCategory(result.categoryList);
+		
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+ 
+// 로그아웃
+	function signOut() {
+		
+		swal({
+			  title: "* :-O",
+			  text: "로그아웃 하시겠어요~?",
+			  type: "info",
+			  showCancelButton: true,
+			  confirmButtonText: "네:)",
+			  cancelButtonText: "아니요!",
+			  closeOnConfirm: false
+			},
+			function(){
+				 location.href='/drag-note/worthy_v.1.0/index.html';
+			}
+		);
+	}
+
+     
+</script>
+</body>
+</html>

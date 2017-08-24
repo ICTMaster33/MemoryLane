@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="kr.co.mlec.vo.CategoryVO" alias="CategoryVO" />
+		<typeAlias type="kr.co.mlec.vo.DragImgVO" alias="DragImgVO" />
+		<typeAlias type="kr.co.mlec.vo.DragVO" alias="DragVO" />
+		<typeAlias type="kr.co.mlec.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="kr.co.mlec.vo.NoteImgVO" alias="NoteImgVO" />
+		<typeAlias type="kr.co.mlec.vo.NoteVO" alias="NoteVO" />
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mapper/drag.xml" />
+		<mapper resource="mapper/member.xml" />
+		<mapper resource="mapper/note.xml" />
+	</mappers>
+</configuration>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="/drag-note/CKEditor/ckeditor.js"></script> -->
+<script src="/drag-note/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/drag-note/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/drag-note/lib/js/NicEdit-Korean/nicEdit.js"
+  type="text/javascript"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif;}
+nav {background-color: #f1f1f1 !important; padding-top: 10px;}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+.w3-bar-item {background-color: #f1f1f1;}
+
+.nicEdit-panelContain {
+  height: 43px !important;
+}
+.nicEdit-main {
+  width: 100% !important;
+  min-height: 410px !important;
+/*   margin: 4px auto !important; */
+  padding: 6px 12px !important;
+  margin: 0 !important;
+  background-color: white;
+}
+
+</style>
+<body class="w3-white">
+
+
+
+
+<!-- isotope filters start -->
+						<div class="filters text-center">
+							<ul class="nav nav-pills">
+								<li class="active"><a href="#" data-filter="*">All</a></li>
+								<li><a href="#" data-filter=".web-design">Web design</a></li>
+								<li><a href="#" data-filter=".app-development">App development</a></li>
+								<li><a href="#" data-filter=".site-building">Site building</a></li>
+							</ul>
+						</div>
+<!-- 						isotope filters end -->
+
+<!-- 						portfolio items start -->
+						<div class="isotope-container row grid-space-20">
+							<div class="col-sm-6 col-md-3 isotope-item web-design">
+								<div class="image-box">
+									<div class="overlay-container">
+										<img src="images/portfolio-1.jpg" alt="">
+										<a class="overlay" data-toggle="modal" data-target="#project-1">
+											<i class="fa fa-search-plus"></i>
+											<span>Web Design</span>
+										</a>
+									</div>
+									<a class="btn btn-default btn-block" data-toggle="modal" data-target="#project-1">Project Title</a>
+								</div>
+<!-- 								Modal -->
+								<div class="modal fade" id="project-1" tabindex="-1" role="dialog" aria-labelledby="project-1-label" aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+												<h4 class="modal-title" id="project-1-label">Project Title</h4>
+											</div>
+											<div class="modal-body">
+												<h3>Project Description</h3>
+												<div class="row">
+													<div class="col-md-6">
+														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sed, quidem quis praesentium, ut unde. Quae sed, incidunt laudantium nesciunt, optio corporis quod earum pariatur omnis illo saepe numquam suscipit, nemo placeat dignissimos eius mollitia et quas officia doloremque ipsum labore rem deserunt vero! Magnam totam delectus accusantium voluptas et, tempora quos atque, fugiat, obcaecati voluptatibus commodi illo voluptates dolore nemo quo soluta quis.</p>
+														<p>Molestiae sed enim laboriosam atque delectus voluptates rerum nostrum sapiente obcaecati molestias quasi optio exercitationem, voluptate quis consequatur libero incidunt, in, quod. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos nobis officiis, autem earum tenetur quidem. Quae non dicta earum. Ipsum autem eaque cum dolor placeat corporis quisquam dolorum at nesciunt.</p>
+													</div>
+													<div class="col-md-6">
+														<img src="images/portfolio-1.jpg" alt="">
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+<!-- 								Modal end -->
+							</div>
+						</div>
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 아이콘바 (사이드바 - 작은 스크린에서 숨겨진다.) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-center w3-border-right">
+  <!-- Avatar image in top left corner -->
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-none">
+  <img src="/drag-note/html/images/drag-note-logo.png" style="width:100%">
+  </a>
+  <a href="#" onclick="drag_open()" class="w3-bar-item w3-button w3-padding-large">
+    <i class="fa fa-inbox w3-xxlarge"></i>
+    <p>DRAGS</p>
+  </a>
+  <a href="#" onclick="note_open()" class="w3-bar-item w3-button w3-padding-large">
+    <i class="fa fa-book w3-xxlarge"></i>
+    <p>NOTES</p>
+  </a>
+  <a href="#" onclick="profilePopup()" class="w3-bar-item w3-button w3-padding-large">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>PROFILE</p>
+  </a>
+  <div id="b" ondrop="drop(event)" ondragover="allowDrop(event)">
+  	<i class="fa fa-trash w3-xxlarge"></i>
+  	 <p>DELETE</p>
+  </div>
+
+</nav>
+
+<!-- 본문내용 시작 -->
+<div class="w3-padding-large" id="main" style="padding-left: 0px !important; padding-top: 0px !important;">
+
+<!-- 드래그바 -->
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; background-color: white; width: 300px;" id="dragBar">
+	<div class="w3-bar-item w3-large w3-border-bottom">DRAGS <span onclick="drag_close()" style="position: relative; float: right;"><i class="fa fa-times" aria-hidden="true"></i></span></div>
+</div>
+<!-- 노트바 -->
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; background-color: white; width: 300px;" id="noteBar">
+	<div class="w3-bar-item w3-large w3-border-bottom">NOTES <span onclick="note_close()" style="position: relative; float: right;"><i class="fa fa-times" aria-hidden="true"></i></span></div>
+	
+	
+	<!-- 노트 리스트 -->
+	<div id="noteList">
+	 	
+	</div>
+	<!-- 삭제 시킬 공간 -->
+	
+
+</div>
+
+ <div id= "editorDiv" style="z-index:50">
+ 	<form name="noteFrm" id="noteFrm" method="POST"	enctype="multipart/form-data">
+				<div align="center">
+					<table>
+						<tr>
+							<th><label for=noteTitle>제목</label></th>
+							<td><input type ="text" id="noteTitle" name="noteTitle"/></td>
+						</tr>
+						<tr>
+							<th><label for=myNicEditor>내용</label></th>
+							<td><textarea id="myNicEditor" name="myNicEditor" cols="80" rows="10"></textarea></td>
+						</tr>
+					</table>
+				</div>
+			        <label for="category">카테고리 아이콘
+			        <select name="category" id="category" class="form-control">
+			          <option id="category1" value="">카테고리를 추가해주세요</option>
+			        </select>
+			        </label>
+				<div align="center">
+					<button class="w3-button w3-blue-grey">등록</button>
+				</div>
+			</form>
+ 			 		<button class="w3-button w3-blue-grey" id="addCategory" onclick="showInput();">카테고리 추가</button>
+			        <input type ="text" id="categoryToAdd" name="categoryToAdd" style="display: none;"  />
+			     	<button class="w3-button w3-blue-grey" id="Category1" style="display: none;" onclick="addCategory();">등록</button>
+			        <button class="w3-button w3-blue-grey" id="Category2" style="display: none;">취소</button>
+ </div>
+    
+  
+   <div id="noteView">
+   		<table border="1">
+   			<tr>
+   				<th id='title' style="height:50px;"></th>
+   			</tr>
+   			<tr>
+   				<td id='content' style="min-height:300px;"></td>
+   			</tr>
+   		</table>
+   </div>
+
+<!-- 본문내용 끝 -->
+</div>
+
+
+<script>
+
+
+function showInput() {
+	document.getElementById("categoryToAdd").style.display = "block";
+    document.getElementById("Category1").style.display = "block";
+    document.getElementById("Category2").style.display = "block";
+    return false;
+}
+// 드래그바 & 노트바 
+function drag_open() {
+	document.getElementById("noteBar").style.display = "none";
+    document.getElementById("dragBar").style.display = "block";
+}
+function drag_close() {
+    document.getElementById("dragBar").style.display = "none";
+}
+function note_open() {
+	document.getElementById("dragBar").style.display = "none";
+	document.getElementById("noteBar").style.display = "block";
+	makeNoteList();
+}
+function note_close() {
+    document.getElementById("noteBar").style.display = "none";
+}
+
+
+// window.onload=function()
+// {
+// CKEDITOR.replace('noteContent', {
+//     width:'100%',
+//     height:'400px',
+// 	filebrowserUploadUrl: '/drag-note/note/ckeditorImageUpload.do'	
+// });
+// }
+
+
+ bkLib.onDomLoaded(nicEditors.allTextAreas); 
+
+
+$("#noteFrm").submit(function() {
+
+	var frm = document.noteFrm;
+	if (frm.noteTitle.value == "") {
+		alert("제목을 입력하세요.");
+		frm.noteTitle.focus();
+		return false;
+	}
+	if (frm.category.value == "") {
+		alert("카테고리를 선택하세요");
+		return false;
+	}
+// 	if (!confirm("노트를 등록하시겠습니까?"))
+// 		return;
+
+	var fd = new FormData();
+	
+	fd.append("memberNo",localStorage.getItem("memberNo"));
+	fd.append("noteTitle",$("input[name=noteTitle]").val());
+	fd.append("noteContent",$(".nicEdit-main").html());
+	fd.append("categoryNo", $("#category").val());
+	$.ajax({
+		url : "/drag-note/note/note.do",
+		type:"POST",
+		data :fd,
+		dataType : "json",
+		processData: false,
+		contentType:false
+	})
+	.done(function (result) {
+		alert(result.msg);
+		makeNoteList();
+	})
+	.fail(function (jqXhr, textStatus, errorText) {
+		alert("에러발생 : " + errorText);
+	});
+	
+	return false;
+});
+
+function makeNoteList() {
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/noteList.do",
+		data: {"memberNo" : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var note = result[i];	
+			var noteNo = note.noteNo;
+			
+			console.log("노트번호"+noteNo)
+			html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin' onclick='openNote("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"'  >";
+			html += "	<h4>" + note.noteTitle + "</h4><br>";
+			// 시간 뿌리기
+			var date = new Date(note.noteRegDate);
+			var time = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate() + " "
+			         + date.getHours() + ":"
+			         + date.getMinutes() + ":"
+			         + date.getSeconds();
+			html += "	<span class='w3-right w3-opacity'>" + time + "</span>";
+			//시간 뿌리기 끝
+			html += "</div>";
+	
+		}
+		if (result.length == 0) {
+			html += '작성한 노트가 없습니다.';
+		}
+		$("#noteList").html(html);
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+
+function mainNoteList() {
+	var memberNo = localStorage.getItem("memberNo");
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/mainNoteList.do",
+		data: {"memberNo" : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var note = result[i];	
+			var noteNo = note.noteNo;
+			var categoryNo = note.categoryNo;
+			alert(categoryNo);
+			html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin' onclick='openNote("+note.noteNo+")' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"'  >";
+			html += "	<h4>" + note.noteTitle + "</h4><br>";
+			// 시간 뿌리기
+			var date = new Date(note.noteRegDate);
+			var time = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate() + " "
+			         + date.getHours() + ":"
+			         + date.getMinutes() + ":"
+			         + date.getSeconds();
+			html += "	<span class='w3-right w3-opacity'>" + time + "</span>";
+			//시간 뿌리기 끝
+			html += "</div>";
+	
+		}
+		if (result.length == 0) {
+			html += '작성한 노트가 없습니다.';
+		}
+		$("#noteList").html(html);
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+
+function deleteNote(noteNo) {
+	var noteNo = noteNo;
+	var memberNo = localStorage.getItem("memberNo");
+	
+	if (!confirm("노트를 삭제하시겠습니까?"))
+		return;
+
+	
+	$.ajax({
+		url:"/drag-note/note/deleteNote.do",
+		dataType:"json",
+		data: {"noteNo":noteNo},
+		type: "POST"
+		}).done(function (result){
+			alert(result.msg);
+			makeNoteList();
+		});
+	
+}	
+function allowDrop(ev) {
+	ev.preventDefault(); 
+	}
+
+
+function drag(ev) { 
+	ev.dataTransfer.setData("text", ev.target.id); 
+	} 
+
+function drop(ev) {
+	ev.preventDefault();
+	var c = ev.dataTransfer.getData("text"); 
+	var noteNum = c.substring(4);
+ 	deleteNote(noteNum);
+}
+
+function openNote(noteNo){
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/noteDetail.do",
+		data: {"noteNo" : noteNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		var title = result.noteTitle;
+		var content = result.noteContent;
+	    document.getElementById("noteFrm").style.display = "none";
+		$("#title").html(title);
+		$("#content").html(content);
+		
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+function addCategory(){
+	
+	var categoryName = $("#categoryToAdd").val();
+	var memberNo = localStorage.getItem("memberNo");
+	
+	if (categoryName == "") {
+		alert("카테고리를 입력하세요");
+		return false;
+	}
+	
+	$.ajax({
+		type: "POST",
+		url : "/drag-note/note/addCategory.do",
+		data: {"categoryName" : categoryName,
+				"memberNo"	  : memberNo},
+		dataType : "json"
+	})
+	.done(function (result) {
+		alert(result.msg);
+		appendCategory(result.categoryList);
+		document.getElementById("categoryToAdd").style.display = "none";
+	    document.getElementById("Category1").style.display = "none";
+	    document.getElementById("Category2").style.display = "none";
+	    $("#categoryToAdd").val("");
+		
+	})
+	.fail(function(jqXhr, textStatus, errorText){
+		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	});
+}
+ function appendCategory(categoryList){
+	 $("#category option").remove();
+	 for(var i = 0; i < categoryList.length; i++){
+			var category = categoryList[i];
+			var categoryName = category.categoryName;
+			var categoryNo = category.categoryNo;
+			$("#category").append("<option value='"+categoryNo+"'>"+categoryName+"</option>");
+		}
+ }
+ 
+ function getCategory(){
+		var memberNo = localStorage.getItem("memberNo");
+		$.ajax({
+			type: "POST",
+			url : "/drag-note/note/getCategory.do",
+			data: {"memberNo" : memberNo},
+			dataType : "json"
+		})
+		.done(function (result) {
+			appendCategory(result.categoryList);
+			
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+		});
+	}
+ 
+ 
+ 
+ 
+ //프로필 팝업 열기
+ function profilePopup(){
+	   
+	 	var width = 800;
+		var height = 800;
+		var left = 10;
+		var top = 10;
+
+		window.open('/drag-note/html/note/pop.html','profilePopup',"toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width="
+								+ width
+								+ ", height="
+								+ height
+								+ ", left="
+								+ left + ", top=" + top);
+	 	
+		
+		
+ }
+ 
+getCategory();
+</script>
+</body>
+</html>

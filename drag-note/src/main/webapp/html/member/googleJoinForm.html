@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DRAG NOTE 회원가입</title>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/drag-note/js/sweetalert-master/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/drag-note/js/sweetalert-master/dist/sweetalert.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+	#joinBox {
+		width: 314px; height: 250px; position: absolute;
+		left: 611px; top: 266px;
+	}
+	#joinInfo {
+		width: 314px;
+		padding: 10px 10px 10px 10px;
+	}
+	table {
+		text-align: center;
+	}
+	th {
+		text-align: left;
+	}
+	btns {
+		text-align: center;
+	}
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('/drag-note/html/images/dragnote.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+</head>
+<body>
+	<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+	<div id="joinBox">
+		 <h1 class="w3-jumbo w3-animate-top">JOIN</h1>
+		<form name="joinfrm" id="joinfrm" >       
+	    	<table id="joinInfo">
+	    		<tr>
+	    			<th>이름</th>
+	    			<td>
+			      		<input type="text" id="name" name="name" readonly="readonly" placeholder="이름음 입력하세요" required="" autofocus="" />
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<th>이메일</th>
+	    			<td>
+			      		<input type="text" id="email" name="email" readonly="readonly" placeholder="이메일을 입력하세요" required="" autofocus="" />
+			      		<span id="emailck"></span>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<th>비밀번호</th>
+	    			<td>
+			      		<input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required=""/>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<th>비밀번호 확인</th>
+	    			<td>
+			      		<input type="password" id="passwordConf" name="passwordConf" placeholder="비밀번호를 확인하세요" required=""/>
+	    				<span id="checkPwd"></span>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="2">&nbsp;&nbsp;</td>
+	    		</tr>
+	    		<tr>
+	    			<td id="btns" colspan="2">
+					    <a href="/drag-note/html/member/loginForm.html">
+						<input type="button" class="btn btn-default" value="로그인 화면으로" /></a> 
+					    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <button id="joinBtn" class="btn btn-default">회원가입</button>   
+	    			</td>
+	    		</tr>
+    		</table>
+	    </form>
+  	</div>
+  	</div>
+	<script>
+		// 센터로 오게 하기.
+		$(document).ready(function () {
+			$("#joinBox").attr({"style": "left:" + ((window.innerWidth - 312)/2) + "px; top:" + ((window.innerHeight - 260)/2) + "px;"});
+		});
+	
+		$(window).resize(function(){
+			$("#joinBox").attr({"style": "left:" + ((window.innerWidth - 312)/2) + "px; top:" + ((window.innerHeight - 260)/2) + "px;"});
+		});
+		
+		//이메일 중복체크
+		$("#email").on("keyup",function(){
+//				alert("오니?");
+			$.ajax({
+				url : "/drag-note/member/emailCheck.do",
+				type:"POST",
+				data :{email: $("input[name=email]").val()},
+				dataType : "json"
+			})
+			.done(function (result) {
+				console.log(result)
+				if(result.emailChk){
+					$("#emailck").html("사용중인 이메일입니다");
+				}
+				else {$("#emailck").html("사용가능한 이메일입니다");}
+			})
+		});
+		
+		$("#passwordConf").on("keyup",function(){
+		  var f1 = document.joinfrm;
+		  var pw1 = f1.password.value;
+		  var pw2 = f1.passwordConf.value;
+		  if(pw1!=pw2){
+		   document.getElementById('checkPwd').style.color = "red";
+		   document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+		  }else{
+		   document.getElementById('checkPwd').style.color = "black";
+		   document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+		   
+		  }
+		});
+		  
+		
+		
+		// 회원가입
+		$("#joinBtn").click(function () {
+			
+			var frm = document.joinfrm;
+			
+			if (frm.name.value == "") {
+				alert("이름을 입력하세요.");
+				frm.name.focus();
+				return false;
+			}
+			if (frm.email.value == "") {
+				alert("이메일을 입력해주세요.");
+				frm.email.focus();
+				return false;
+			}
+			
+			if (frm.password.value == "") {
+				alert("비밀번호를 입력해주세요.");
+				frm.password.focus();
+				return false;
+			}
+			if (frm.passwordConf.value == "") {
+				alert("비밀번호를 입력해주세요.");
+				frm.passwordConf.focus();
+				return false;
+			}
+			if(frm.password.value != frm.passwordConf.value){
+				alert("비밀번호를 확인해주세요.");
+				frm.passwordConf.focus();
+				   return false;	  
+			}
+			
+			
+			if (!confirm("회원가입 하시겠습니까?"))
+				return;
+			
+			
+			$.ajax ({
+				url: "/drag-note/member/join.do",
+				type: "POST",
+				dataType: "json",
+				data: {
+					"name" : $("input[name=name]").val(),
+					"email" : $("input[name=email]").val(),
+					"password" : $("input[name=password]").val()
+				}
+			}).done(function(result) {
+				alert(result.msg);
+				location.href='/drag-note/html/member/loginForm.html';
+			})
+			.fail(function(jqXhr, testStatus, errorText){
+				alert("에러발생 :" + errorText);
+			});
+			return false;
+		});
+
+		// 로그인화면 이동
+		$("#loginFormBtn").click(function () {
+			location.href='/drag-note/html/member/joinForm.html';
+			return false;
+		});
+		
+		var email = localStorage.getItem("email");
+		$("input[name=email]").val(email);
+		var name = localStorage.getItem("name");		
+		$("input[name=name]").val(name);
+	</script>
+</body>
+</html>

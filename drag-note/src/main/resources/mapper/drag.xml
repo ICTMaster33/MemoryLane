@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.mlec.dao.DragDao">
+
+	<resultMap type="dragVO" id="dragMap">
+		<result property="dragNo" column="drag_no" />
+		<result property="memberNo" column="mem_no" />
+		<result property="dragContent" column="drag_content" />
+		<result property="dragUrl" column="drag_url" />
+		<result property="dragUrlTitle" column="drag_url_title" />
+		<result property="dragRegDate" column="drag_reg_date" />
+		<result property="dragUpdateDate" column="drag_update_date" />
+	</resultMap>	
+	<!-- 드래그 등록 -->	
+	<insert id="insertDrag" parameterType="dragVO">
+		insert into t_drag values (
+			DRAG_NO.NEXTVAL, #{memberNo}, #{dragContent}, #{dragUrl, jdbcType=VARCHAR}, #{dragUrlTitle, jdbcType=VARCHAR}, SYSDATE, SYSDATE, 0
+		)
+	</insert>
+	<!-- 드래그 리스트 -->
+	<select id="dragList" parameterType="dragVO" resultMap="dragMap">
+		select *
+		  from t_drag
+		 where mem_no = #{memberNo}
+		 	<if test='searchWrd != "" and searchWrd != null '>
+				AND (
+						(drag_content LIKE '%'||#{searchWrd}||'%')
+					)
+			</if>
+		 
+		 order by drag_no desc
+	</select>
+	<!-- 드래그 삭제 -->
+	<delete id="deleteDrag" parameterType="int">
+		delete 
+		  from t_drag
+		 where drag_no = #{dragNo}
+	</delete>
+	<!-- 드래그 하나 선택 -->
+	<select id="selectDrag" parameterType="int" resultMap="dragMap">
+		select *
+		  from t_drag
+		 where drag_no = #{dragNo}
+	</select>
+</mapper>
+
