@@ -1,16 +1,11 @@
 package kr.co.mlec.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -19,16 +14,12 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.mlec.service.DragService;
 import kr.co.mlec.vo.DragVO;
-import kr.co.mlec.vo.NoteVO;
 
 @RestController
 @RequestMapping("/drag")
@@ -38,7 +29,8 @@ public class DragController {
 	private FileOutputStream fos;	//파일을 쓰기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private ObjectOutputStream oos;	//객체를 쓰기위한
-	private String FILE_PATH = "c:/test/";
+	private String FILE_PATH = "C:/test/";
+//	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
 	
 	@Autowired
 	private DragService service;
@@ -85,7 +77,7 @@ public class DragController {
 		for(DragVO n : dragList){
 			try{
 			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
-			fis = new FileInputStream("c:/test/"+n.getDragContent());
+			fis = new FileInputStream(FILE_PATH + n.getDragContent());
 			
 			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
 			ois = new ObjectInputStream(fis);
