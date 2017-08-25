@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="com.test.memory.dao.MemberMapper">
+
+	<!-- 회원 가입 정보 저장 -->
+	<insert id="join" parameterType="MemberVO">
+		INSERT INTO T_MEMBER VALUES (MEMBER_NO.NEXTVAL, #{name}, #{email}, #{password})
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="MemberVO" resultType="MemberVO">
+		SELECT mem_no, name, email FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{password}
+	</select>
+</mapper>
