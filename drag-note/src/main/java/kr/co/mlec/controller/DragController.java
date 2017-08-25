@@ -1,6 +1,7 @@
 package kr.co.mlec.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class DragController {
 	private FileOutputStream fos;	//파일을 쓰기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private ObjectOutputStream oos;	//객체를 쓰기위한
+	private String FILE_PATH = "c:/test/";
 	
 	@Autowired
 	private DragService service;
@@ -50,7 +52,7 @@ public class DragController {
 		//drag save
 		String FileName = UUID.randomUUID().toString();
 		try{
-			fos = new FileOutputStream("c:/test/"+FileName);
+			fos = new FileOutputStream(FILE_PATH + FileName);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(value);
 		} catch(Exception e){
@@ -108,8 +110,6 @@ public class DragController {
 
 	@RequestMapping("/selectDrag.do")
 	public DragVO selectDrag(String dragNo) throws Exception {
-		System.out.println(service.selectDrag(Integer.parseInt(dragNo)).getDragContent());
-		System.out.println(service.selectDrag(Integer.parseInt(dragNo)).getDragUrl());
 		
 		DragVO n = service.selectDrag(Integer.parseInt(dragNo));
 		Calendar cal = Calendar.getInstance();
@@ -121,12 +121,19 @@ public class DragController {
 
 	@RequestMapping("/deleteDrag.do")
 	public Map<String, String> deleteNote(String dragNo) throws Exception {
-		service.deleteNote(Integer.parseInt(dragNo));
+		//삭제부
+		DragVO data = service.selectDrag(Integer.parseInt(dragNo));
+		String fileName = data.getDragContent(); //내용 데이터파일 이름추출
+		service.deleteNote(Integer.parseInt(dragNo)); //DB처리
+		File file = new File(FILE_PATH + fileName); //내용 데이터파일 경로
+		if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
+		//메세지출력
 		Map<String, String> msg = new HashMap<>();
 		msg.put("msg", "드래그가 삭제 되었습니다.");
 		return msg;
 	}
 	
+	//파일 관련 스트림 close
 	private void closeStreams() {
 		try {
 			if(fis != null) fis.close();
