@@ -29,8 +29,8 @@ public class DragController {
 	private FileOutputStream fos;	//파일을 쓰기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private ObjectOutputStream oos;	//객체를 쓰기위한
-	private String FILE_PATH = "C:/test/";
-//	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
+//	private String FILE_PATH = "C:/datatest/";
+	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
 	
 	@Autowired
 	private DragService service;
@@ -85,18 +85,17 @@ public class DragController {
 			// 오브젝트 스트림으로부터 오브젝트를 읽어 ArrayList<Human>으로 형변환
 			String content = (String) ois.readObject();
 			n.setDragContent(content);
-		} catch(Exception e) {
-			// e.printStackTrace();
-			System.out.println("[에러] 파일 읽기에 실패하였습니다.");
-		} finally {
-			closeStreams();
-		}			
+			} catch(Exception e) {
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+			} finally {
+				closeStreams();
+			}
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(n.getDragRegDate());
 			cal.add(Calendar.HOUR, -0);
 			n.setDragRegDate(cal.getTime());
 		}
-		
 		return dragList;
 	}
 
@@ -104,9 +103,24 @@ public class DragController {
 	public DragVO selectDrag(String dragNo) throws Exception {
 		
 		DragVO n = service.selectDrag(Integer.parseInt(dragNo));
+		try{
+		// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+		fis = new FileInputStream(FILE_PATH + n.getDragContent());
+		
+		// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+		ois = new ObjectInputStream(fis);
+		
+		// 오브젝트 스트림으로부터 오브젝트를 읽어 ArrayList<Human>으로 형변환
+		String content = (String) ois.readObject();
+		n.setDragContent(content);
+		} catch(Exception e) {
+			// e.printStackTrace();
+			System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+		} finally {
+			closeStreams();
+		}
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(n.getDragRegDate());
-		cal.add(Calendar.HOUR, -0);
 		n.setDragRegDate(cal.getTime());
 		return n;
 	}
@@ -116,7 +130,7 @@ public class DragController {
 		//삭제부
 		DragVO data = service.selectDrag(Integer.parseInt(dragNo));
 		String fileName = data.getDragContent(); //내용 데이터파일 이름추출
-		service.deleteNote(Integer.parseInt(dragNo)); //DB처리
+		service.deleteDrag(Integer.parseInt(dragNo)); //DB처리
 		File file = new File(FILE_PATH + fileName); //내용 데이터파일 경로
 		if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
 		//메세지출력
