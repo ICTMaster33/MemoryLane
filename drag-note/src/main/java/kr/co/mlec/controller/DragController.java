@@ -48,7 +48,7 @@ public class DragController {
 		String value = new String(ptext, "UTF-8").replaceAll("amp;", "&");
 		
 		//drag save
-		String FileName = UUID.randomUUID().toString()+".txt";
+		String FileName = UUID.randomUUID().toString();
 		try{
 			fos = new FileOutputStream("c:/test/"+FileName);
 			oos = new ObjectOutputStream(fos);
@@ -81,6 +81,22 @@ public class DragController {
 		
 		List<DragVO> dragList = service.dragList(drag);
 		for(DragVO n : dragList){
+			try{
+			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+			fis = new FileInputStream("c:/test/"+n.getDragContent());
+			
+			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+			ois = new ObjectInputStream(fis);
+			
+			// 오브젝트 스트림으로부터 오브젝트를 읽어 ArrayList<Human>으로 형변환
+			String content = (String) ois.readObject();
+			n.setDragContent(content);
+		} catch(Exception e) {
+			// e.printStackTrace();
+			System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+		} finally {
+			closeStreams();
+		}			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(n.getDragRegDate());
 			cal.add(Calendar.HOUR, -0);
