@@ -1371,7 +1371,6 @@ $("#noteSubmitBtn").click(function() {
 	.done(function (result) {
 		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
 		makeNoteList();
-		noteDetail(result.noteNo);
 		$("input[name=noteTitle]").val("");
 		$(".nicEdit-main").html("");
 		main_open();
@@ -1415,6 +1414,7 @@ $("#noteUpdateBtn").click(function() {
 	.done(function (result) {
 		swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
 		makeNoteList();
+		noteDetail(result.noteNo);
 		updateYn = false;
 		$("input[name=noteTitle]").val("");
 		$(".nicEdit-main").html("");
