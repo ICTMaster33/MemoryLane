@@ -44,8 +44,8 @@ public class NoteController {
 	private FileOutputStream fos;	//파일을 쓰기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private ObjectOutputStream oos;	//객체를 쓰기위한
-//	private String FILE_PATH = "C:/datatest/";
-	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
+	private String FILE_PATH = "C:/datatest/";
+//	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
 
 	@Autowired
 	private NoteService service;
