@@ -19,9 +19,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public boolean login(MemberVO vo, HttpSession session) {
-		MemberVO vo2 = dao.login(vo);
-		if(vo2 == null) return false;
-		return true;
+	public MemberVO login(MemberVO vo) {
+		return dao.login(vo);
 	}
 }

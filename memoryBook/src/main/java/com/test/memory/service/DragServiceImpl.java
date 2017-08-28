@@ -15,7 +15,7 @@ public class DragServiceImpl implements DragService{
 	private DragDao dao;
 
 	@Override
-	public void registDrag(DragVO drag) throws Exception {
+	public void insertDrag(DragVO drag) throws Exception {
 		dao.insertDrag(drag);
 	}
 
