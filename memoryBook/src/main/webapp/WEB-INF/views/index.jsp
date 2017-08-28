@@ -59,7 +59,7 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <h1>Memory Lane</h1>
-                <p>${sessionScope.name}님 This is main screen.</p>
+                <p>${name}님 This is main screen.</p>
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
             </div>
         </div>

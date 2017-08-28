@@ -1,11 +1,19 @@
 package com.test.memory.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,21 +26,44 @@ import com.test.memory.vo.DragVO;
 @RequestMapping("/drag")
 public class DragController {
 	
+	private FileInputStream fis;	//파일을 읽기위한
+	private FileOutputStream fos;	//파일을 쓰기위한
+	private ObjectInputStream ois;	//객체를 읽기위한
+	private ObjectOutputStream oos;	//객체를 쓰기위한
+	private String FILE_PATH = "C:/datatest/";
+//	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
+	
 	@Autowired
 	private DragService service;
 	
 	@RequestMapping("/registDrag")
-	public Map<String, String> registDrag(HttpServletRequest request) throws Exception {
+	public Map<String, String> registDrag(HttpServletRequest request, HttpSession session) throws Exception {
 		DragVO drag = new DragVO();
 		byte ptext[] = request.getParameter("dragContent").getBytes();
 		String value = new String(ptext, "UTF-8").replaceAll("amp;", "&");
-		drag.setDragContent(value);
+
+		//drag데이터 save
+		String FileName = UUID.randomUUID().toString();
+			try {
+				fos = new FileOutputStream(FILE_PATH + FileName);
+				oos = new ObjectOutputStream(fos);
+				oos.writeObject(value);
+			} catch (Exception e) {
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 쓰기에 실패했습니다.");
+			} finally {
+				closeStreams();
+				drag.setDragContent(FileName);
+			}
+		
+		//drag url추출부
 		if(request.getParameter("dragUrl") != null) {
 			drag.setDragUrl(request.getParameter("dragUrl").replaceAll("nun;", "=").replaceAll("amp;", "&"));
 		}
-		drag.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
-		
-		service.registDrag(drag);
+		//회원번호 추출부
+		drag.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
+
+		service.insertDrag(drag);
 		
 		Map<String, String> msg = new HashMap<>();
 		msg.put("msg", "새로운 드래그가 등록되었습니다.");
@@ -66,9 +97,25 @@ public class DragController {
 
 	@RequestMapping("/deleteDrag.do")
 	public Map<String, String> deleteNote(String dragNo) throws Exception {
+		DragVO data = service.selectDrag(Integer.parseInt(dragNo));
+		String fileName = data.getDragContent();
 		service.deleteNote(Integer.parseInt(dragNo));
+		File file = new File(FILE_PATH + fileName); //내용 데이터파일 경로
+		if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
 		Map<String, String> msg = new HashMap<>();
 		msg.put("msg", "드래그가 삭제 되었습니다.");
 		return msg;
+	}
+	
+	//파일 관련 스트림 close
+	private void closeStreams() {
+		try {
+			if(fis != null) fis.close();
+			if(fos != null) fos.close();
+			if(ois != null) ois.close();
+			if(oos != null) oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
