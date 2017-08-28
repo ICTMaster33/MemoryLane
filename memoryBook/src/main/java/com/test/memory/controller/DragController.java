@@ -1,17 +1,20 @@
 package com.test.memory.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -67,6 +70,28 @@ public class DragController {
 		
 		Map<String, String> msg = new HashMap<>();
 		msg.put("msg", "새로운 드래그가 등록되었습니다.");
+		return msg;
+	}
+	
+	@RequestMapping("/imageDown")
+	public Map<String, String> imageDown(String imageTag) throws Exception {
+		System.out.println("테스트라구요");
+		String imagePath = imageTag;
+		System.out.println("test입니다"+imagePath);
+	     
+	    BufferedImage image = null;
+	    //이미지를 읽어와서 BufferedImage에 넣는다.
+	    image = ImageIO.read(new URL(imagePath));
+	    //파일명 자르기
+	    String fileNm = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+	    try {
+	       // 해당경로에 이미지를 저장함.
+	        	ImageIO.write(image,"jpg", new File("C:/test/" + fileNm));
+	        } catch(Exception e) {
+	        	    e.printStackTrace();
+	       }
+	    Map<String, String> msg = new HashMap<>();
+		msg.put("msg", "이미지가 저장 되었습니다.");
 		return msg;
 	}
 	

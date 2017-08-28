@@ -247,6 +247,21 @@
     		return false;
     	 }
      });
+    
+  //정규표현식을 통한 이미지 태그주소 저장
+	var pattern = /(http[^\s]+(?=\.(jpg|gif|png))\.\2)/;
+	var image_tag = pattern.exec(text);
+	var imageTag;
+	for(var i = 0; i < 1; i++) {
+		imageTag = image_tag[i];
+	}
+	alert(imageTag);
+		$.ajax({
+			url:"/drag-note/drag/imageDown",
+			dataType:"json",
+			data: {"imageTag":imageTag},
+			type: "POST"
+		});
      
     // 드래그 노트에 추가하기.
     $("div[id^=drag]").click(function(event){
