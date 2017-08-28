@@ -76,7 +76,7 @@ public class DragController {
 		note.setNoteContent(FileName); //노트 내용 (내용은 파일로 생성됨)
 		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo"))); //회원번호
 		note.setCategoryNo(22); //카테고리
-		System.out.println(note);
+		System.out.println("★note: "+note);
 
 		//쿼리 실행부
 		service.registDrag(drag); // 드래그
