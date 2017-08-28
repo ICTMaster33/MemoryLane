@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.mlec.service.DragService;
+import kr.co.mlec.service.NoteService;
 import kr.co.mlec.vo.DragVO;
+import kr.co.mlec.vo.NoteVO;
 
 @RestController
 @RequestMapping("/drag")
@@ -34,14 +36,16 @@ public class DragController {
 	
 	@Autowired
 	private DragService service;
+	private NoteService nservice;
 	
 	@RequestMapping("/registDrag.do")
 	public Map<String, String> registDrag(HttpServletRequest request) throws Exception {
 		DragVO drag = new DragVO();
+		NoteVO note = new NoteVO();
 		byte ptext[] = request.getParameter("dragContent").getBytes();
 		String value = new String(ptext, "UTF-8").replaceAll("amp;", "&");
 		
-		//drag save
+		//drag데이터 save
 		String FileName = UUID.randomUUID().toString();
 		try{
 			fos = new FileOutputStream(FILE_PATH + FileName);
@@ -55,14 +59,30 @@ public class DragController {
 			drag.setDragContent(FileName);
 		}
 		
-		//drag url
+		//drag url추출부
 		if(request.getParameter("dragUrl") != null) {
 			drag.setDragUrl(request.getParameter("dragUrl").replaceAll("nun;", "=").replaceAll("amp;", "&"));
 		}
+		
+		//회원 ID추출부
 		drag.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
+
+		//노트 삽입자료 설정
+		if(request.getParameter("dragUrlTitle") != null) {
+			note.setNoteTitle(request.getParameter("dragUrlTitle")); //노트 제목
+		} else {
+			note.setNoteTitle("드래그노트"); //노트 제목
+		}
+		note.setNoteContent(FileName); //노트 내용 (내용은 파일로 생성됨)
+		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo"))); //회원번호
+		note.setCategoryNo(22); //카테고리
+		System.out.println(note);
+
+		//쿼리 실행부
+		service.registDrag(drag); // 드래그
+		nservice.note(note); // 노트(null발생)
 		
-		service.registDrag(drag);
-		
+		//결과메세지 출력
 		Map<String, String> msg = new HashMap<>();
 		msg.put("msg", "새로운 드래그가 등록되었습니다.");
 		return msg;
