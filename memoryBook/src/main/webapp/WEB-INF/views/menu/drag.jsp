@@ -30,8 +30,8 @@
 			<div>
 				<br>
 				<h3 class="tit_brunch">무슨 일이 벌어지고 있을까요, 뉴스 스탠드</h3>
-				<img src="http://localhost:8888/memory/resources/img/daumlogo.png"
-					height="50">
+				<img src="http://localhost:8888/memory/resources/img/daumlogo.png" height="50">
+				<img src="http://localhost:8888/memory/resources/img/naverlogo.png" height="50">
 				<p class="desc_brunch">
 					<span class="part">드래그만으로 원하는 기사를 담아보세요.<br></span>
 				</p>
@@ -214,31 +214,31 @@
     			range.insertNode(span);
     	
     	var text = htmlContent; //결과값을 text변수에 삽입
+
+    	//정규표현식을 통한 이미지 태그주소 저장
+    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png))\.\2)/;
+    	console.log("text: " + text);
+    	var image_tag = pattern.exec(text);
+    	console.log("image_tag: " + pattern.exec(text));
+    	var imageTag;
+    	if(image_tag != null) { //텍스트만 드래그 할 경우 null에러 방지
+	    	for(var i = 0; i < 1; i++) {
+	    		imageTag = image_tag[i];
+	    		console.log("image_tag[i]: " + image_tag[i]);
+	    	}
+    	}
     	// 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
     	if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
-    		 // 드래그 저장
+    		// 드래그 및 이미지 저장
     		console.log(text);
     		$.ajax({
     			url: "/memory/drag/registDrag",
-    			type: "POST",
-    			data: {"dragContent": text},
+    			type: "POST",	
+    			data: {"dragContent": text, "imageTag": imageTag},
     			success: function (result) {
     				alert("등록성공");
     				prevText = text;
     				makeDragList();
-    				var clipboard = new Clipboard('*', {
-    			        text: function() {
-    			            return text;
-    			        }
-    			    });
-
-    			    clipboard.on('success', function(e) {
-    			        console.log(e);
-    			    });
-
-    			    clipboard.on('error', function(e) {
-    			        console.log(e);
-    			    });
     			},
     			error: function (jqXhr, textStatus, errorText) {
     				alert("에러발생 : " + errorText);
@@ -248,21 +248,6 @@
     	 }
      });
     
-  //정규표현식을 통한 이미지 태그주소 저장
-	var pattern = /(http[^\s]+(?=\.(jpg|gif|png))\.\2)/;
-	var image_tag = pattern.exec(text);
-	var imageTag;
-	for(var i = 0; i < 1; i++) {
-		imageTag = image_tag[i];
-	}
-	alert(imageTag);
-		$.ajax({
-			url:"/drag-note/drag/imageDown",
-			dataType:"json",
-			data: {"imageTag":imageTag},
-			type: "POST"
-		});
-     
     // 드래그 노트에 추가하기.
     $("div[id^=drag]").click(function(event){
     	var addDragNo = event.target.id.substring(4);
