@@ -34,6 +34,7 @@ public class DragController {
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private ObjectOutputStream oos;	//객체를 쓰기위한
 	private String FILE_PATH = "C:/datatest/";
+	private String IMG_FILE_PATH = "C:/datatest/img/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
 	
 	@Autowired
@@ -68,30 +69,29 @@ public class DragController {
 
 		service.insertDrag(drag);
 		
-		Map<String, String> msg = new HashMap<>();
-		msg.put("msg", "새로운 드래그가 등록되었습니다.");
-		return msg;
-	}
-	
-	@RequestMapping("/imageDown")
-	public Map<String, String> imageDown(String imageTag) throws Exception {
-		System.out.println("테스트라구요");
-		String imagePath = imageTag;
-		System.out.println("test입니다"+imagePath);
+		//이미지 저장부
+		String imagePath = request.getParameter("imageTag");
 	     
 	    BufferedImage image = null;
 	    //이미지를 읽어와서 BufferedImage에 넣는다.
 	    image = ImageIO.read(new URL(imagePath));
 	    //파일명 자르기
-	    String fileNm = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+	    String imgFile = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+	    //확장자 자르기
+	    String imgFormat = imgFile.substring(imgFile.lastIndexOf(".") + 1);
+	    //파일이름 변환
+	    String imgName = UUID.randomUUID().toString();
 	    try {
 	       // 해당경로에 이미지를 저장함.
-	        	ImageIO.write(image,"jpg", new File("C:/test/" + fileNm));
+	        	ImageIO.write(image, imgFormat, new File(IMG_FILE_PATH + imgName));
 	        } catch(Exception e) {
 	        	    e.printStackTrace();
-	       }
-	    Map<String, String> msg = new HashMap<>();
-		msg.put("msg", "이미지가 저장 되었습니다.");
+	        } finally {
+	        	System.out.println("정상처리완료");
+	        }
+		
+		Map<String, String> msg = new HashMap<>();
+		msg.put("msg", "새로운 드래그가 등록되었습니다.");
 		return msg;
 	}
 	
