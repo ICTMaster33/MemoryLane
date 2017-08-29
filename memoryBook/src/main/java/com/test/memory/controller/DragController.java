@@ -70,28 +70,28 @@ public class DragController {
 		service.insertDrag(drag);
 		
 		//이미지 저장부
-//		String imagePath = request.getParameter("image_tag");
-		System.out.println("*imagePath: "+request.getParameter("image_tag"));
-//		if (imagePath != null) { //드래그에 이미지가 없을 경우에는 미작동
-//		    BufferedImage image = null;
-//		    //이미지를 읽어와서 BufferedImage에 넣는다.
-//		    image = ImageIO.read(new URL(imagePath));
-//		    //파일명 자르기
-//		    String imgFile = imagePath.substring(imagePath.lastIndexOf("/") + 1);
-//		    System.out.println("imgFile: "+imgFile);
-//		    //확장자 자르기
-//		    String imgFormat = imgFile.substring(imgFile.lastIndexOf(".") + 1);
-//		    //파일이름 변환
-//		    String imgName = UUID.randomUUID().toString();
-//		    try {
-//		       // 해당경로에 이미지를 저장함.
-//		        	ImageIO.write(image, imgFormat, new File(IMG_FILE_PATH + imgName));
-//		        } catch(Exception e) {
-//		        	    e.printStackTrace();
-//		        } finally {
-//		        	System.out.println("정상처리완료");
-//		        }
-//		}
+		String imagePath = request.getParameter("imageTag");
+		System.out.println("imagePath: "+request.getParameter("imageTag"));
+		if (imagePath != null) { //드래그에 이미지가 없을 경우에는 미작동
+		    BufferedImage image = null;
+		    //이미지를 읽어와서 BufferedImage에 넣는다.
+		    image = ImageIO.read(new URL(imagePath));
+		    //파일명 자르기
+		    String imgFile = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+		    System.out.println("imgFile: "+imgFile);
+		    //확장자 자르기
+		    String imgFormat = imgFile.substring(imgFile.lastIndexOf(".") + 1);
+		    //파일이름 변환
+		    String imgName = UUID.randomUUID().toString();
+		    try {
+		       // 해당경로에 이미지를 저장함.
+		        	ImageIO.write(image, imgFormat, new File(IMG_FILE_PATH + imgName));
+		        } catch(Exception e) {
+		        	    e.printStackTrace();
+		        } finally {
+		        	System.out.println("정상처리완료");
+		        }
+		}
 		Map<String, String> msg = new HashMap<>();
 		msg.put("msg", "새로운 드래그가 등록되었습니다.");
 		return msg;
