@@ -216,25 +216,27 @@
     	var text = htmlContent; //결과값을 text변수에 삽입
 
     	//정규표현식을 통한 이미지 태그주소 저장
-    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png))\.\2)/;
+    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png))\.\2)/gm;
     	console.log("text: " + text);
-    	var image_tag = pattern.exec(text);
-    	console.log("image_tag: " + pattern.exec(text));
-    	var imageTag;
+    	var image_tag = text.match(pattern);
+    	console.log("image_tag: " + image_tag);
+
     	if(image_tag != null) { //텍스트만 드래그 할 경우 null에러 방지
-	    	for(var i = 0; i < 1; i++) {
-	    		imageTag = image_tag[i];
-	    		console.log("image_tag[i]: " + image_tag[i]);
-	    	}
+    	var imageTag = new Array(image_tag);
+    			console.log("array: "+imageTag);
+   		for (var i = 0; i < image_tag.length; i++) {
+		    	imageTag[i] = image_tag[i];
+		    	console.log("imageTag[i]: " + imageTag[i]);
+			}
     	}
+    	console.log("imageTag: " + imageTag);
     	// 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
     	if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
     		// 드래그 및 이미지 저장
-    		console.log(text);
     		$.ajax({
     			url: "/memory/drag/registDrag",
     			type: "POST",	
-    			data: {"dragContent": text, "imageTag": imageTag},
+    			data: {"dragContent": text, "image_tag": imageTag},
     			success: function (result) {
     				alert("등록성공");
     				prevText = text;
