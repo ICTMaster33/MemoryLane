@@ -217,40 +217,43 @@
 
     	//정규표현식을 통한 이미지 태그주소 저장
     	var pattern = /(http[^\s]+(?=\.(jpg|gif|png))\.\2)/gm;
-    	console.log("text: " + text);
     	var image_tag = text.match(pattern);
-    	console.log("image_tag: " + image_tag);
 
-    	if(image_tag != null) { //텍스트만 드래그 할 경우 null에러 방지
-		var imageTag = image_tag[0];
-    	
-    	//여러개의 img태그 저장
-//    	var imageTag = new Array(image_tag); //image_tag변수를 array배열로 변환
-//    			console.log("array: "+imageTag);
-//   		for (var i = 0; i < image_tag.length; i++) {
-//		    	imageTag[i] = image_tag[i];
-//		    	console.log("imageTag[i]: " + imageTag[i]);
-//			}
-    	}
     	// 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
     	if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
-    		// 드래그 및 이미지 저장
-    		$.ajax({
-    			url: "/memory/drag/registDrag",
-    			type: "POST",	
-    			data: {"dragContent": text, "imageTag": imageTag},
-    			success: function (result) {
-    				alert("등록성공");
-    				prevText = text;
-    				makeDragList();
-    			},
-    			error: function (jqXhr, textStatus, errorText) {
-    				alert("에러발생 : " + errorText);
-    			}
-    		});
-    		return false;
-    	 }
-     });
+    		//이미지 저장
+    		if(image_tag != null) { //텍스트만 드래그 할 경우 null에러 방지
+	    	   	for (var i = 0; i < image_tag.length; i++) {
+	    	   		setTimeout(function(){
+	    	   		 }, 100);
+	    	  		$.ajax({
+	    	  			url: "/memory/drag/registDragImg",
+	    	  			type: "POST",	
+	    	  			data: {"imageTag": image_tag[i]},
+	    	  			success: function (result) {
+	    					console.log(image_tag[i] + "이미지 등록성공");
+	    	  			},
+	    	   			error: function (jqXhr, textStatus, errorText) {
+	    	   				alert("이미지 저장 에러발생 : " + errorText);
+	    				}
+	    			});
+	    		}
+    		}
+			$.ajax({
+		    	url: "/memory/drag/registDrag",
+		    	type: "POST",	
+		    	data: {"dragContent": text},
+		    	success: function (result) {
+		    		alert("등록성공");
+		    		prevText = text;
+		    		makeDragList();
+		    	},
+		    	error: function (jqXhr, textStatus, errorText) {
+		    		alert("에러발생 : " + errorText);
+		    	}
+		    });
+    	}
+	});
     
     // 드래그 노트에 추가하기.
     $("div[id^=drag]").click(function(event){
