@@ -30,8 +30,8 @@
 	<update id="updateNote" parameterType="noteVO">
 		update t_note 
 		   set note_title = #{noteTitle},
-		       note_content = #{noteContent}, 
-		       category_no= #{categoryNo},
+		       category_no = #{categoryNo},
+		       note_content = #{noteContent},
 		       note_update_date = SYSDATE
 	     where note_no = #{noteNo}
 	</update>

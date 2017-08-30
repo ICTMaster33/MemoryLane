@@ -1,10 +1,17 @@
 package kr.co.mlec.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.activation.CommandMap;
 import javax.activation.MailcapCommandMap;
@@ -33,38 +40,69 @@ import kr.co.mlec.vo.NoteVO;
 @RequestMapping("/note")
 public class NoteController {
 	
+	private FileInputStream fis;	//파일을 읽기위한
+	private FileOutputStream fos;	//파일을 쓰기위한
+	private ObjectInputStream ois;	//객체를 읽기위한
+	private ObjectOutputStream oos;	//객체를 쓰기위한
+	private String FILE_PATH = "C:/datatest/";
+//	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
+
 	@Autowired
 	private NoteService service;
 	
 	@RequestMapping("/note.do")
 	public Map<String, Object> note(HttpServletRequest request) throws Exception {
 		NoteVO note = new NoteVO();
-		note.setNoteTitle(request.getParameter("noteTitle"));
-		note.setNoteContent(request.getParameter("noteContent"));
-		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
-		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
-		
-		int noteNo = service.note(note);
-		
+		String FileName = UUID.randomUUID().toString(); //데이터 파일명 생성
+		note.setNoteTitle(request.getParameter("noteTitle")); //노트 제목
+		note.setNoteContent(FileName); //노트 내용 (내용은 파일로 생성됨)
+		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo"))); //회원번호
+		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo"))); //카테고리
 		Map<String, Object> msg = new HashMap<>();
-		msg.put("msg", "새로운 노트가 등록되었습니다.");
-		msg.put("noteNo", noteNo);
+		
+		//note save
+		try{
+			fos = new FileOutputStream(FILE_PATH + FileName);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(request.getParameter("noteContent"));
+		} catch(Exception e){
+			// e.printStackTrace();
+			System.out.println("[에러] 파일 쓰기에 실패했습니다.");
+		} finally {
+			closeStreams();
+			int noteNo = service.note(note);
+			msg.put("msg", "새로운 노트가 등록되었습니다.");
+			msg.put("noteNo", noteNo);
+		}
 		return msg;
 	}
 	@RequestMapping("/noteUpdate.do")
 	public Map<String, Object> noteUpdate(HttpServletRequest request) throws Exception {
 		NoteVO note = new NoteVO();
+		String modified = UUID.randomUUID().toString(); //수정 된 파일명 생성
 		note.setNoteTitle(request.getParameter("noteTitle"));
-		note.setNoteContent(request.getParameter("noteContent"));
 		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
 		note.setNoteNo(Integer.parseInt(request.getParameter("noteNo")));
 		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
-		
-		
-		service.noteUpdate(note);
+		note.setNoteContent(modified); //연결파일이름을 수정된 파일명으로 설정
 		Map<String, Object> msg = new HashMap<>();
-		msg.put("msg", "노트가 수정 되었습니다.");
-		msg.put("noteNo", request.getParameter("noteNo"));
+		//note edit commit
+		NoteVO data = service.noteDetail(note.getNoteNo()); //원본 파일명 추출
+		try{
+			fos = new FileOutputStream(FILE_PATH + modified);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(request.getParameter("noteContent"));
+			} catch(Exception e){
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 쓰기에 실패했습니다.");
+			} finally {
+				closeStreams();
+				service.noteUpdate(note);
+				File file = new File(FILE_PATH + data.getNoteContent()); //수정 전 내용 데이터파일 경로
+				if(file.exists()) file.delete(); //수정 전 내용 데이터파일 삭제처리
+				msg.put("msg", "노트가 수정 되었습니다.");
+				msg.put("noteNo", request.getParameter("noteNo"));
+		}
 		return msg;
 	}
 	@RequestMapping("/noteList.do")
@@ -76,12 +114,27 @@ public class NoteController {
 
 		List<NoteVO> noteList = service.noteList(note);
 		for(NoteVO n : noteList){
+			try{
+				// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+				fis = new FileInputStream(FILE_PATH + n.getNoteContent());
+				
+				// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+				ois = new ObjectInputStream(fis);
+				
+				// 오브젝트 스트림으로부터 오브젝트를 읽어 ArrayList<Human>으로 형변환
+				String content = (String) ois.readObject();
+				n.setNoteContent(content);
+				} catch(Exception e) {
+					// e.printStackTrace();
+					System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+				} finally {
+					closeStreams();
+			}
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(n.getNoteRegDate());
 			n.setNoteRegDate(cal.getTime());
 		}
 		return noteList;
-		
 	}
 	@RequestMapping("/noteCartegoryList.do")
 	public List<NoteVO> noteCartegoryList(HttpServletRequest request) throws Exception {
@@ -116,6 +169,22 @@ public class NoteController {
 	public NoteVO noteDetail(String noteNo) throws Exception {
 		NoteVO n = service.noteDetail(Integer.parseInt(noteNo));
 		System.out.println(n);
+		try{
+			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+			fis = new FileInputStream(FILE_PATH + n.getNoteContent());
+			
+			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+			ois = new ObjectInputStream(fis);
+			
+			// 오브젝트 스트림으로부터 오브젝트를 읽어 ArrayList<Human>으로 형변환
+			String content = (String) ois.readObject();
+			n.setNoteContent(content);
+			} catch(Exception e) {
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+			} finally {
+				closeStreams();
+		}
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(n.getNoteRegDate());
 		n.setNoteRegDate(cal.getTime());
@@ -124,7 +193,13 @@ public class NoteController {
 	
 	@RequestMapping("/deleteNote.do")
 	public Map<String, String> deleteNote(String noteNo) throws Exception {
+		//삭제부
+		NoteVO data = service.noteDetail(Integer.parseInt(noteNo));
+		String fileName = data.getNoteContent(); //내용 데이터파일 이름추출
 		service.deleteNote(Integer.parseInt(noteNo));
+		File file = new File(FILE_PATH + fileName); //내용 데이터파일 경로
+		if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
+
 		Map<String, String> msg = new HashMap<>();
 		msg.put("msg", "노트가 삭제되었습니다.");
 		return msg;
@@ -220,4 +295,16 @@ public class NoteController {
 		msg.put("msg", "이메일 보내기 완료");
         return msg;
     }
+	
+	//파일 관련 스트림 close
+	private void closeStreams() {
+		try {
+			if(fis != null) fis.close();
+			if(fos != null) fos.close();
+			if(ois != null) ois.close();
+			if(oos != null) oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

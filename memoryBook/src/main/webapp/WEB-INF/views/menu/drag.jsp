@@ -1,39 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+<title>Simple Sidebar - Start Bootstrap Template</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
-    <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
-	<script src="/memory/resources/clipboard.js-master/dist/clipboard.min.js"></script>
+<!-- Custom styles for this template -->
+<link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
+<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
+<script
+	src="/memory/resources/clipboard.js-master/dist/clipboard.min.js"></script>
 </head>
 
 <body>
 
-    <div id="wrapper" class="toggled">
+	<div id="wrapper" class="toggled">
 
-        <!-- 뉴스뷰 -->
+		<!-- 뉴스뷰 -->
 		<div id='myDrag' style="z-index: 4; min-height: 100%; width: 1200px;">
-		  	<div>
+			<div>
 				<br>
 				<h3 class="tit_brunch">무슨 일이 벌어지고 있을까요, 뉴스 스탠드</h3>
 				<img src="http://localhost:8888/memory/resources/img/daumlogo.png" height="50">
+				<img src="http://localhost:8888/memory/resources/img/naverlogo.png" height="50">
 				<p class="desc_brunch">
-				<span class="part">드래그만으로 원하는 기사를 담아보세요.<br></span>
+					<span class="part">드래그만으로 원하는 기사를 담아보세요.<br></span>
 				</p>
 			</div>
-		  	<div>
+			<div>
 				<ul class="nav nav-tabs" id="newsStand">
 					<li class="active"><a data-toggle="tab" onclick="getNews(2)">정치</a></li>
 					<li class="active"><a data-toggle="tab" onclick="getNews(3)">경제</a></li>
@@ -42,43 +45,48 @@
 					<li class="active"><a data-toggle="tab" onclick="getNews(6)">세계</a></li>
 					<li class="active"><a data-toggle="tab" onclick="getNews(7)">IT/과학</a></li>
 				</ul>
-				<div class="tab-content"><br><br>
-					<div id="newsSection" style='position:relative; width:100%; height:800px; overflow:auto;'></div>
-					<div id="newsDetailSection" style="display: none;position:relative; width:100%; height:800px; overflow:auto; background-color: #fbfbfb;">
-						<h2 id='newsTitleDiv'></h2><br>
-						<div id='newsDateDiv' style="text-align: right;font-size: 15px;"></div>
-						<div id='myCarousel' class="carousel" data-ride="carousel" style='width: 70%; margin: 5% 15% 5% 15%;'>
+				<div class="tab-content">
+					<br>
+					<br>
+					<div id="newsSection"
+						style='position: relative; width: 100%; height: 800px; overflow: auto;'></div>
+					<div id="newsDetailSection"
+						style="display: none; position: relative; width: 100%; height: 800px; overflow: auto; background-color: #fbfbfb;">
+						<h2 id='newsTitleDiv'></h2>
+						<br>
+						<div id='newsDateDiv' style="text-align: right; font-size: 15px;"></div>
+						<div id='myCarousel' class="carousel" data-ride="carousel"
+							style='width: 70%; margin: 5% 15% 5% 15%;'>
 							<!-- Indicators -->
-	   						<ol class="carousel-indicators">
-	   						</ol>
-	   						
-	   						<!-- Wrapper for slides -->
-	    					<div class="carousel-inner">
-	   						</div>
-	   						
-	   						<!-- Left and right controls -->
-						    <a class="left carousel-control" href="#myCarousel" data-slide="prev" style='color: gray;'>
-						      <span class="glyphicon glyphicon-chevron-left"></span>
-						      <span class="sr-only">Previous</span>
-						    </a>
-						    <a class="right carousel-control" href="#myCarousel" data-slide="next" style='color: gray;'>
-						      <span class="glyphicon glyphicon-chevron-right"></span>
-						      <span class="sr-only">Next</span>
-						    </a>
+							<ol class="carousel-indicators">
+							</ol>
+
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner"></div>
+
+							<!-- Left and right controls -->
+							<a class="left carousel-control" href="#myCarousel"
+								data-slide="prev" style='color: gray;'> <span
+								class="glyphicon glyphicon-chevron-left"></span> <span
+								class="sr-only">Previous</span>
+							</a> <a class="right carousel-control" href="#myCarousel"
+								data-slide="next" style='color: gray;'> <span
+								class="glyphicon glyphicon-chevron-right"></span> <span
+								class="sr-only">Next</span>
+							</a>
 						</div>
 						<br>
 						<div id='newsContentDiv'></div>
 					</div>
 				</div>
-		  	</div>
-	  	</div>
+			</div>
+		</div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="/memory/resources/js/jquery-3.2.1.js"></script>
-    <script src="/memory/resources/js/popper.min.js"></script>
-    <script src="/memory/resources/js/bootstrap.min.js"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script src="/memory/resources/js/popper.min.js"></script>
+		<script src="/memory/resources/js/bootstrap.min.js"></script>
 
-    <script>
+		<script>
 	//뉴스 상세 뿌리기
     function getNewsDetail(url) {
     	var urlToRead = "http://www.mlec.co.kr:10010/naverNewsDetail?url=" + url;
@@ -206,37 +214,35 @@
     			range.insertNode(span);
     	
     	var text = htmlContent; //결과값을 text변수에 삽입
+
+    	//정규표현식을 통한 이미지 태그주소 저장
+    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png))\.\2)/gm;
+    	console.log("text: " + text);
+    	var image_tag = text.match(pattern);
+    	console.log("image_tag: " + image_tag);
+
+    	if(image_tag != null) { //텍스트만 드래그 할 경우 null에러 방지
+		var imageTag = image_tag[0];
+    	
+    	//여러개의 img태그 저장
+//    	var imageTag = new Array(image_tag); //image_tag변수를 array배열로 변환
+//    			console.log("array: "+imageTag);
+//   		for (var i = 0; i < image_tag.length; i++) {
+//		    	imageTag[i] = image_tag[i];
+//		    	console.log("imageTag[i]: " + imageTag[i]);
+//			}
+    	}
     	// 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
     	if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
-    		 // 드래그 저장
-    		var dragfd = new FormData();
-    		
-    		dragfd.append("memberNo",localStorage.getItem("memberNo"));
-    		dragfd.append("dragContent", text);
+    		// 드래그 및 이미지 저장
     		$.ajax({
     			url: "/memory/drag/registDrag",
-    			type: "POST",
-    			data: dragfd,
-    			dataType: "json",
-    			processData: false,
-    			contentType: false,
+    			type: "POST",	
+    			data: {"dragContent": text, "imageTag": imageTag},
     			success: function (result) {
-    				swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡",result.msg,'success');
+    				alert("등록성공");
     				prevText = text;
     				makeDragList();
-    				var clipboard = new Clipboard('*', {
-    			        text: function() {
-    			            return text;
-    			        }
-    			    });
-
-    			    clipboard.on('success', function(e) {
-    			        console.log(e);
-    			    });
-
-    			    clipboard.on('error', function(e) {
-    			        console.log(e);
-    			    });
     			},
     			error: function (jqXhr, textStatus, errorText) {
     				alert("에러발생 : " + errorText);
@@ -245,16 +251,16 @@
     		return false;
     	 }
      });
-     
+    
     // 드래그 노트에 추가하기.
     $("div[id^=drag]").click(function(event){
     	var addDragNo = event.target.id.substring(4);
     	if (noteOpenYn) {
     		$.ajax({
     			url : "/memory/drag/selectDrag.do",
-    			type:"POST",
-    			data :{"dragNo" : addDragNo},
-    			dataType : "json"
+    			type: "POST",
+    			data: {"dragNo" : addDragNo},
+    			dataType: "json"
     		})
     		.done(function (result) {
     			$(".nicEdit-main").append(result.dragContent.replace("amp;", "&") + "<br>");
@@ -268,11 +274,10 @@
 
     // 드래그 리스트 만들기
     function makeDragList() {
-    	var memberNo = localStorage.getItem("memberNo");
     	$.ajax({
     		type: "POST",
     		url : "/memory/drag/dragList.do",
-    		data: {"memberNo" : memberNo},
+    		data: {"memberNo" : ${memberNo}},
     		dataType : "json"
     	})
     	.done(function (result) {
@@ -361,6 +366,5 @@
     	
     }	
     </script>
-
 </body>
 </html>

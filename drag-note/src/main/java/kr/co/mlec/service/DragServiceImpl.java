@@ -1,5 +1,6 @@
 package kr.co.mlec.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,12 @@ import kr.co.mlec.vo.DragVO;
 
 @Service
 public class DragServiceImpl implements DragService{
-	
+
 	@Autowired
 	private DragDao dao;
 
 	@Override
 	public void registDrag(DragVO drag) throws Exception {
-		System.out.println(drag);
 		dao.insertDrag(drag);
 	}
 
@@ -26,10 +26,10 @@ public class DragServiceImpl implements DragService{
 	}
 
 	@Override
-	public void deleteNote(int dragNo) throws Exception {
+	public void deleteDrag(int dragNo) throws Exception {
 		dao.deleteDrag(dragNo);
 	}
-
+	
 	@Override
 	public DragVO selectDrag(int dragNo) throws Exception {
 		return dao.selectDrag(dragNo);

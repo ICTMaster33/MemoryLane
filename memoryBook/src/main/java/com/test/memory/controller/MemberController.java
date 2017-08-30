@@ -36,12 +36,14 @@ public class MemberController {
 		
 		@RequestMapping(value = "login", method = RequestMethod.POST)
 		@ResponseBody
-		public boolean login(MemberVO vo, HttpSession session) {
-			boolean result = false;
-			result = service.login(vo, session);
+		public String login(MemberVO vo, HttpSession session, Model model) {
+			model.addAttribute(vo);
+			if(service.login(vo) == null) return "redirect:/";
+			vo = service.login(vo);
 			session.setAttribute("email", vo.getEmail());
+			session.setAttribute("memberNo", vo.getMemberNo());
 			session.setAttribute("name", vo.getName());
-			return result;
+			return "redirect:index";
 		}
 	
 }

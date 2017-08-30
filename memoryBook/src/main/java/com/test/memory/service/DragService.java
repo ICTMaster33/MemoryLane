@@ -6,7 +6,7 @@ import com.test.memory.vo.DragVO;
 
 public interface DragService {
 
-	public void registDrag(DragVO drag) throws Exception;
+	public void insertDrag(DragVO drag) throws Exception;
 
 	public List<DragVO> dragList(DragVO drag) throws Exception;
 

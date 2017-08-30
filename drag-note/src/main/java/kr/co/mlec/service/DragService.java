@@ -10,8 +10,7 @@ public interface DragService {
 
 	public List<DragVO> dragList(DragVO drag) throws Exception;
 
-	public void deleteNote(int dragNo) throws Exception;
+	public void deleteDrag(int dragNo) throws Exception;
 
 	public DragVO selectDrag(int dragNo) throws Exception;
-
 }
