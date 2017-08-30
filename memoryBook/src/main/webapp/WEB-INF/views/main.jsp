@@ -12,6 +12,10 @@
     <meta name="author" content="">
 
     <title>Stylish Portfolio - Start Bootstrap Theme</title>
+    
+    <!-- 	Favicon -->
+	<link rel="shortcut icon" href="/memory/resources/img/memory.ico">
+	<link rel="icon" href="/memory/resources/img/memory.ico">
 
     <!-- Bootstrap Core CSS -->
     <link href="/memory/resources/css/bootstrap.css" rel="stylesheet">
@@ -65,12 +69,16 @@
 
     <!-- Header -->
     <header id="top" class="header">
-        <div class="text-vertical-center">
-            <h1>Memory Lane</h1>
-            <h3>모든걸 기억해주는 당신만의 길을 만들어보세요</h3>
-            <br>
-            <a href="#about" class="btn btn-default btn-lg">Find Out More</a>
-        </div>
+	        <div class="text-vertical-center">
+	            <h1 class="title100">Memory Lane</h1>
+	            <p class="title101">더듬어 가는 기억</p>
+<!-- 	            <br> -->
+<!-- 	            <br> -->
+<!-- 	            <br> -->
+<!-- 	            <h3 class="title102">모든걸 기억해주는 당신만의 길을 만들어보세요</h3> -->
+<!-- 	            <br> -->
+<!-- 	            <a href="#about" class="btn btn-default btn-lg">Find Out More</a> -->
+	        </div>
     </header>
 
     <!-- About -->
@@ -78,8 +86,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-                    <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p>
+                    <h2 class="about-text">당신이 걸었던 길의 기억 한조각, 한조각을 남겨보세요</h2>
+                    <h3 class="about-text2">여행  책  영화  맛집  패션  뉴스  소셜  친구  쇼핑  공부 언어 </h3>
+<!--                     <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
                 </div>
             </div>
             <!-- /.row -->
@@ -93,7 +102,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Our Services</h2>
+                    <h2 class="service-text">메모리 레인은?</h2>
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
@@ -176,28 +185,28 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+                                    <img class="img-portfolio img-responsive" src="/memory/resources/img/portfolio-1.jpg">
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-2.jpg">
+                                    <img class="img-portfolio img-responsive" src="/memory/resources/img/portfolio-2.jpg">
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-3.jpg">
+                                    <img class="img-portfolio img-responsive" src="/memory/resources/img/portfolio-3.jpg">
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-4.jpg">
+                                    <img class="img-portfolio img-responsive" src="/memory/resources/img/portfolio-4.jpg">
                                 </a>
                             </div>
                         </div>
@@ -382,6 +391,19 @@
     	document.getElementById("joinModal").style.display = "none";
     	return false;
     })
+    //비밀번호 확인
+    $("#passwordConf").on("keyup",function(){
+      var f1 = document.joinfrm;
+      var pw1 = f1.password.value;
+      var pw2 = f1.passwordConf.value;
+      if(pw1!=pw2){
+       document.getElementById('checkPwd').style.color = "red";
+       document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+      }else{
+       document.getElementById('checkPwd').style.color = "green";
+       document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+      }
+    })
     
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
@@ -453,7 +475,6 @@
         }
         // Enable map zooming with mouse scroll when the user clicks the map
     $('.map').on('click', onMapClickHandler);
-    
         
     $("#loginBtn").click(function () {
 		$.ajax ({
