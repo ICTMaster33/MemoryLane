@@ -17,16 +17,41 @@ body {
 }
 
 .text-vertical-center {
-    display: table-cell;
+	padding-top: 120px;
+/*     display: table-cell; */
     text-align: center;
     vertical-align: middle;
 }
 
 .text-vertical-center h1 {
     margin: 0;
-    padding: 0;
-    font-size: 4.5em;
+    padding-bottom: 0;
+    font-size: 6.5em;
     font-weight: 700;
+}
+
+.title100 {
+	font-size:25pt; 
+	font-weight:60; 
+	font-style: italic;
+	line-height:2em;
+	color : #fff311;
+	font-family: "TmonMonsori";
+}
+
+.title101{
+	padding-top:0;
+/* 	padding-left: 370px; */
+	margin-top:-21px;
+	font-weight: 300px;
+	font-size:20pt;
+	font-weight: 900;
+/* 	font-family: "Tium"; */
+}
+
+.title102{
+	color : white;
+	font-size:35pt; 
 }
 
 /* Custom Button Styles */
@@ -155,7 +180,7 @@ hr.small {
     position: relative;
     width: 100%;
     height: 100%;
-    background: url(../img/road10.jpg) no-repeat center center scroll;
+    background: url(../img/road13.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -168,6 +193,21 @@ hr.small {
     padding: 50px 0;
 }
 
+.about-text{
+	margin-bottom: 35px;
+	font-size: 35px;
+	font-weight: 300;
+	line-height: 1.4;
+	font-family: "TmonMonsori";
+}
+
+.about-text2{
+	font-style: italic;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 1.4;
+/* 	font-family: "" */
+}
 /* Services */
 
 .services {
@@ -176,6 +216,11 @@ hr.small {
 
 .service-item {
     margin-bottom: 30px;
+}
+
+.service-text{
+	font-family: "Tium";
+	
 }
 
 /* Callout */
