@@ -231,7 +231,7 @@
     	var text = htmlContent; //결과값을 text변수에 삽입
 
     	//정규표현식을 통한 이미지 태그주소 저장
-    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png))\.\2)/gm;
+    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png|JPG|GIF|PNG))\.\2)/gm;
     	var image_tag = text.match(pattern);
 
     	// 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
