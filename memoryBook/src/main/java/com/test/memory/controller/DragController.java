@@ -52,6 +52,7 @@ public class DragController {
 	    BufferedImage image = ImageIO.read(new URL(imagePath));
 	    //파일명 자르기
 	    String imgFile = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+	    System.out.println(imgFile);
 	    //확장자 자르기
 	    String imgFormat = imgFile.substring(imgFile.lastIndexOf(".") + 1);
 	    //파일이름 변환
