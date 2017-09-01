@@ -34,6 +34,11 @@ public class MemberController {
 			return "/index"; 
 		}
 		
+		@RequestMapping(value = "main", method = RequestMethod.GET)
+		public String main() {
+			return "main"; 
+		}
+		
 		@RequestMapping(value = "login", method = RequestMethod.POST)
 		@ResponseBody
 		public String login(MemberVO vo, HttpSession session, Model model) {
@@ -45,6 +50,35 @@ public class MemberController {
 			session.setAttribute("name", vo.getName());
 			return "redirect:index";
 		}
+		
+		//로그아웃
+		@RequestMapping(value = "logout", method = RequestMethod.GET)
+		public String logout(HttpSession session) {
+			session.invalidate();
+			return "redirect:/member/main";
+		}
+		
+		//회원탈퇴
+		@RequestMapping(value = "unregister", method = RequestMethod.POST)
+		public String unregister(MemberVO vo, HttpSession session, Model model) {
+			String loginEmail = (String)session.getAttribute("email");
+			boolean checkResult = loginEmail.equals(vo.getEmail());
+			System.out.println(checkResult);
+			model.addAttribute("checkResult", checkResult);
+			if(checkResult){
+				boolean unregiResult = service.unregister(vo);
+				model.addAttribute("unregiResult", unregiResult);
+				if(unregiResult){
+					session.invalidate();
+					return "main";
+				}else return "redirect:/member/index";
+			}else return "redirect:/member/index";
+		}
+		
+		
+		
+		
+		
 		
 		@RequestMapping(value = "login_ex", method = RequestMethod.POST)
 		@ResponseBody

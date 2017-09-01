@@ -5,4 +5,5 @@ import com.test.memory.vo.MemberVO;
 public interface MemberMapper {
 	public int join(MemberVO vo);
 	public MemberVO login(MemberVO vo);
+	public boolean unregister(MemberVO vo);
 }

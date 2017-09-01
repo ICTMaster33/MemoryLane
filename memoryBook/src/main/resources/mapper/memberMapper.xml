@@ -15,4 +15,9 @@
 	<select id="login" parameterType="MemberVO" resultType="MemberVO">
 		SELECT mem_no, name, email FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{password}
 	</select>
+	
+	<!-- 	회원탈퇴 -->
+	<delete id="unregister" parameterType="MemberVO">
+		DELETE FROM T_MEMBER WHERE EMAIL = #{email} AND PASSWORD = #{password}
+	</delete>
 </mapper>

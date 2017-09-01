@@ -22,4 +22,9 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO login(MemberVO vo) {
 		return dao.login(vo);
 	}
+	
+	@Override
+	public boolean unregister(MemberVO vo) {
+		return dao.unregister(vo);
+	}
 }

@@ -53,7 +53,12 @@
                 <li>
                     <a href="#myFriend">Friend</a>
                 </li>
-                
+                <li>
+                    <a data-toggle="modal" data-target="#myModal">Unregister</a><a >
+                </li>
+                <li>
+                    <a href="#logout" onclick="logout()">Logout</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -87,7 +92,58 @@
 		
     </div>
     <!-- /#wrapper -->
-
+	
+	<div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content" style="width:400px;margin: 0 auto;">
+		        <div class="modal-header">
+		          <button type="button" class="close" id="modalClose" data-dismiss="modal">&times;</button>
+		          <br>
+		          <br>
+		          <h4 class="modal-title" id="dragNoteTitle" style="text-align: center;">Memory Lane Unregister</h4>
+		          <br>
+		        </div>
+		        <br>
+		        			        	
+		        <div class="modal-body" id="unregisterModal" >
+		          	
+		          	<form name="unregisterfrm" id="unregisterfrm" action="unregister" method="post">       
+			    	<table id="loginInfo">
+			    		<tr>
+			    			<div class="form-group">
+			    			 <label for="loginEmail">Email:</label>
+			    			 <input type="text" class="form-control" id="email" name="email" placeholder="email을 다시 입력해주세요" required="required" autofocus="autofocus" />
+			    			</div>
+			    		</tr>
+			    		<tr>
+			    			<div class="form-group">
+							    <label for="loginPassword">Password:</label>
+							    <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
+			    			</div>
+			    		</tr>
+			    		<br>
+					    <tr >
+					    	<td id="btns" colspan="2" style="width: 368px;">
+					    		<input type="submit" value="회원탈퇴" class="btn btn-default" style="width: 368px;background: #B2CCFF; margin: 0 auto;">
+<!-- 							    <button id="unregisterBtn" class="btn btn-default"  style="width: 368px;background: #B2CCFF; margin: 0 auto;">회원탈퇴</button>    -->
+					    	</td>
+					    </tr>
+					    <tr>
+					    	<td id="btns" colspan="2" style="width: 368px;">
+							    <div id="cancleBtn" class="btn btn-default"  style="width: 368px;background: #FFFFFF; margin: 0 auto;">취소</div>
+					    	</td>
+					    </tr>
+		    		</table>
+			    </form>
+		<!--           <div id="googleLoginDiv" align="center" class="g-signin2" data-onsuccess="onSignIn" style="width: 368px; text-align: center;"></div> -->
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+    
+	
     <!-- Bootstrap core JavaScript -->
     <script src="/memory/resources/js/jquery-3.2.1.js"></script>
     <script src="/memory/resources/js/popper.min.js"></script>
@@ -95,6 +151,26 @@
 
     <!-- Menu Toggle Script -->
     <script>
+    //탈퇴성공여부 로직(일단주석처리)
+//     $(function(){
+//     	if('${checkResult}' != null){
+// 	    	if('${checkResult}' == "false"){
+// 	    		alert("Email/PW를 체크해주세요");
+	    		
+// 	    	}else if ('${unregiResult}' == "false"){
+// 	    		alert("탈퇴실패");
+// 	    	}
+//     	}
+
+	//로그아웃
+    function logout(){
+    	var result = confirm("로그아웃하시겠습니까?");
+    	if(result){
+    		location.href='/memory/member/logout';
+    		alert("로그아웃완료");
+    	}
+    }
+    
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");

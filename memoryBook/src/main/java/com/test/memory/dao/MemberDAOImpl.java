@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.test.memory.vo.MemberVO;
 
+
 @Repository
 public class MemberDAOImpl implements MemberDAO{
 	
@@ -26,5 +27,11 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberVO login(MemberVO vo) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.login(vo);
+	}
+	
+	@Override
+	public boolean unregister(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+			return mapper.unregister(vo);
 	}
 }
