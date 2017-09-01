@@ -1,0 +1,13 @@
+{
+   "browser_action": {
+      "default_icon": "icon.png",
+      "default_popup": "popup.html"
+   },
+   "description": "My lovely note",
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAldqHGhssRr57AIgElPs8g46e9Q3XHd5D80REOIH/J7F4E9CRnL6YVkgaae+9D6JQIXcOh582x7Xx/GMUIYC1hSWIaKNwChJtytv5QNdG4z7rLXSp6g7ioXOqz4rVeEGBgTTH/wmZkcmaxccOsSHh/0sQA8ZYN1EBZYm66NNhSLd7XfpuYp6vGxF7oioOj3y/myDevGXII12PVMDayWgpqG2GAS2gZigRQZg51LeFJRqgHEW+rM1WGQsPfd9kV+WyIUp1ah0yMBUkv1TmRjIVQyKER5i3qxWQTQm4yyXRdHSwrLhwxc/vOIe2ORZFcSCeaMfXL1nxp7HabxCule2VmQIDAQAB",
+   "manifest_version": 2,
+   "name": "Drag Note",
+   "permissions": [ "activeTab", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.2"
+}

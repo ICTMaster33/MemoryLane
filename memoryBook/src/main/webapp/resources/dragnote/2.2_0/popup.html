@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
+    <style>
+      body{
+        width:300px;
+        padding:1rem;
+        text-align: center;
+        font-family: "Noto Sans DemiLight", "Malgun Gothic";
+
+      }
+      textarea{
+        width:100%;
+        font-size:2rem;
+      }
+      #result{
+        font-size:2.5rem;
+      }
+      h1 {
+        color: #3596E1;
+        font-family: 'Lobster', cursive ;
+      }
+      #loginForm{
+          padding:1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Drag Note</h1>
+    <div id='loginForm'>
+      <h3>드래그 노트 로그인 :)</h3><br>
+      <input type="text" id="email" class="form-control input-sm chat-input" placeholder="email" />
+      <input type="password" id="password" class="form-control input-sm chat-input" placeholder="password" />
+      <br>
+      <div class='btn btn-default' id="loginBtn">로그인</div>
+    </div>
+    <div id="afterLogin" style="display:none;">
+      <br>
+      <h4 id="welcome" style="font-weight:bold;">환영합니다.</h4><br>
+      <h4>원하는 텍스트를 드래그하세요 :)</h4><br>
+      <div class='btn btn-default' id="logoutBtn">로그아웃</div>
+      <div class='btn btn-default' id="homeOpenBtn">드래그노트 홈으로 이동</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

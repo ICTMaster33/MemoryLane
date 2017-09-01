@@ -45,5 +45,16 @@ public class MemberController {
 			session.setAttribute("name", vo.getName());
 			return "redirect:index";
 		}
-	
+		
+		@RequestMapping(value = "login_ex", method = RequestMethod.POST)
+		@ResponseBody
+		public boolean login_ex(MemberVO vo, HttpSession session, Model model) {
+			model.addAttribute(vo);
+			if(service.login(vo) == null) return false;
+			vo = service.login(vo);
+			session.setAttribute("email", vo.getEmail());
+			session.setAttribute("memberNo", vo.getMemberNo());
+			session.setAttribute("name", vo.getName());
+			return true;
+		}
 }
