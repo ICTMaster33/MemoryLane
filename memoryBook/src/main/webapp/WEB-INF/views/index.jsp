@@ -45,7 +45,10 @@
 					  </a>
                 </li>
                 <li>
-                    <a href="#myNote">My Note</a>
+      		          <a href="#" onclick="note_open()" class="w3-bar-item w3-button w3-padding-large">
+					    <i class="fa fa-inbox w3-xxlarge"></i>
+					    <p>My Note</p>
+					  </a>
                 </li>
                 <li>
                     <a href="#myFriend">Friend</a>
@@ -78,7 +81,7 @@
 		  	<%@ include file="menu/drag.jsp" %>
 	  	</div>
         
-        <div id="MyNote">
+        <div id="myNote">
             <%@ include file="menu/note.jsp" %>
         </div>
 		
@@ -101,8 +104,15 @@
     function drag_open() {
     	$("#page-content-wrapper").hide();
     	$("#profile").hide();
-    	$("#MyNote").hide();
+    	$("#myNote").hide();
     	$("#myDrag").show();
+    }
+    
+    function note_open() {
+    	$("#page-content-wrapper").hide();
+    	$("#profile").hide();
+    	$("#myNote").show();
+    	$("#myDrag").hide();
     }
     </script>
 

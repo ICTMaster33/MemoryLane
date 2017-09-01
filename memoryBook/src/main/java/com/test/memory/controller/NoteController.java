@@ -26,6 +26,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,12 +52,12 @@ public class NoteController {
 	private NoteService service;
 	
 	@RequestMapping("/note")
-	public Map<String, Object> note(HttpServletRequest request) throws Exception {
+	public Map<String, Object> note(HttpServletRequest request, HttpSession session) throws Exception {
 		NoteVO note = new NoteVO();
 		String FileName = UUID.randomUUID().toString(); //데이터 파일명 생성
 		note.setNoteTitle(request.getParameter("noteTitle")); //노트 제목
 		note.setNoteContent(FileName); //노트 내용 (내용은 파일로 생성됨)
-		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo"))); //회원번호
+		note.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString())); //회원번호
 		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo"))); //카테고리
 		Map<String, Object> msg = new HashMap<>();
 		
@@ -77,11 +78,11 @@ public class NoteController {
 		return msg;
 	}
 	@RequestMapping("/noteUpdate")
-	public Map<String, Object> noteUpdate(HttpServletRequest request) throws Exception {
+	public Map<String, Object> noteUpdate(HttpServletRequest request, HttpSession session) throws Exception {
 		NoteVO note = new NoteVO();
 		String modified = UUID.randomUUID().toString(); //수정 된 파일명 생성
 		note.setNoteTitle(request.getParameter("noteTitle"));
-		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
+		note.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
 		note.setNoteNo(Integer.parseInt(request.getParameter("noteNo")));
 		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
 		note.setNoteContent(modified); //연결파일이름을 수정된 파일명으로 설정
@@ -106,10 +107,10 @@ public class NoteController {
 		return msg;
 	}
 	@RequestMapping("/noteList")
-	public List<NoteVO> noteList(HttpServletRequest request) throws Exception {
+	public List<NoteVO> noteList(HttpServletRequest request, HttpSession session) throws Exception {
 		
 		NoteVO note = new NoteVO();
-		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
+		note.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
 		note.setSearchWrd(request.getParameter("searchWrd"));
 
 		List<NoteVO> noteList = service.noteList(note);
@@ -137,10 +138,10 @@ public class NoteController {
 		return noteList;
 	}
 	@RequestMapping("/noteCartegoryList")
-	public List<NoteVO> noteCartegoryList(HttpServletRequest request) throws Exception {
+	public List<NoteVO> noteCartegoryList(HttpServletRequest request, HttpSession session) throws Exception {
 		NoteVO note = new NoteVO();
 		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
-		note.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
+		note.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
 		
 		List<NoteVO> noteList = service.noteCartegoryList(note);
 		for(NoteVO n : noteList){
@@ -152,9 +153,9 @@ public class NoteController {
 		return noteList;
 	}
 	@RequestMapping("/noteByDate")
-	public List<NoteVO> noteByDate(HttpServletRequest request) throws Exception {
+	public List<NoteVO> noteByDate(HttpServletRequest request, HttpSession session) throws Exception {
 		String date = request.getParameter("date");
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		int memberNo = Integer.parseInt(session.getAttribute("memberNo").toString());
 		
 		List<NoteVO> noteList = service.noteByDate(date, memberNo);
 		for(NoteVO n : noteList){
@@ -213,10 +214,10 @@ public class NoteController {
 	}
 	
 	@RequestMapping("/addCategory")
-	public Map<String, Object> addCategory(HttpServletRequest request) throws Exception {
+	public Map<String, Object> addCategory(HttpServletRequest request, HttpSession session) throws Exception {
 		CategoryVO category = new CategoryVO();
 		category.setCategoryName(request.getParameter("categoryName"));
-		category.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
+		category.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
 		
 		List<CategoryVO> categoryList = service.addCategory(category);
 		Map<String, Object> msg = new HashMap<>();
@@ -225,9 +226,9 @@ public class NoteController {
 		return msg;
 	}
 	@RequestMapping("/getCategory")
-	public Map<String, Object> getCategory(HttpServletRequest request) throws Exception {
+	public Map<String, Object> getCategory(HttpServletRequest request, HttpSession session) throws Exception {
 		CategoryVO category = new CategoryVO();
-		category.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));
+		category.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
 		
 		List<CategoryVO> categoryList = service.getCategory(category);
 		Map<String, Object> msg = new HashMap<>();
@@ -235,10 +236,10 @@ public class NoteController {
 		return msg;
 	}
 	@RequestMapping("/mailNote")
-	public Map<String, Object> mailNote(HttpServletRequest request) throws Exception{
+	public Map<String, Object> mailNote(HttpServletRequest request, HttpSession m_session) throws Exception{
 	    String emailTo = request.getParameter("emailTo");
 	    int noteNo = Integer.parseInt(request.getParameter("noteNo"));
-	    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+	    int memberNo = Integer.parseInt(m_session.getAttribute("memberNo").toString());
 	   
 	    NoteVO note = new NoteVO();
 	    note.setNoteNo(noteNo);
