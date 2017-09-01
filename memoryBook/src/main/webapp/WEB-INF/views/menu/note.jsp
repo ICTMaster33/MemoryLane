@@ -274,7 +274,7 @@
 		var memberNo = localStorage.getItem("memberNo");
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/noteList.do",
+			url : "/drag-note/note/noteList",
 			data: {"searchWrd" : searchWrd,
 				   "memberNo" : memberNo
 			 	},
@@ -297,7 +297,7 @@
 		var memberNo = localStorage.getItem("memberNo");
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/drag/dragList.do",
+			url : "/drag-note/drag/dragList",
 			data: {"searchWrd" : searchWrd,
 					"memberNo" : memberNo},
 			dataType : "json"
@@ -318,7 +318,7 @@
 		var emailTo = $("#email").val()
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/mailNote.do",
+			url : "/drag-note/note/mailNote",
 			data: {"noteNo" : noteNo,
 				   "memberNo" : memberNo,
 				   "emailTo"  : emailTo
@@ -341,7 +341,7 @@
 	function noteDetail(noteNo){
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/noteDetail.do",
+			url : "/drag-note/note/noteDetail",
 			data: {"noteNo" : noteNo},
 			dataType : "json"
 		})
@@ -361,7 +361,7 @@
 			$("#title").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
 			$("#date").html(time);
 			$("#content").html(content);
-			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#'><i class='fa fa-text-width' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/drag-note/download/downloadNote.do?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>");
+			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#'><i class='fa fa-text-width' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/drag-note/download/downloadNote?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>");
 //	 		document.getElementById("editorBtnDiv").style.display = "none";
 			
 		})
@@ -390,7 +390,7 @@
 	        	var date = date.format()
 	        	$.ajax({
 	        		type: "POST",
-	        		url : "/drag-note/note/noteByDate.do",
+	        		url : "/drag-note/note/noteByDate",
 	        		data: {"memberNo" : localStorage.getItem("memberNo"),
 	        			   "date" : date
 	        		},
@@ -422,7 +422,7 @@
 	        					         
 	        			html += "<p class='blog-post-bottom pull-right'>";         
 	        			html += "   <span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'><a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></a></span>";
-	        			html += "	<span class='badge quote-badge'dragNote-toggle='tooltip' title='다운로드'><a href='/drag-note/download/downloadNote.do?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>";
+	        			html += "	<span class='badge quote-badge'dragNote-toggle='tooltip' title='다운로드'><a href='/drag-note/download/downloadNote?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>";
 	        			//시간 뿌리기 끝
 	        			html += "</div>";
 	        			html += "</div>";
@@ -455,7 +455,7 @@
 		var memberNo = localStorage.getItem("memberNo");
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/getCategory.do",
+			url : "/drag-note/note/getCategory",
 			data: {"memberNo" : memberNo},
 			dataType : "json"
 		})
@@ -493,7 +493,7 @@
 		var memberNo = localStorage.getItem("memberNo");
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/noteCartegoryList.do",
+			url : "/drag-note/note/noteCartegoryList",
 			data: {"memberNo" : memberNo,
 				   "categoryNo" : categoryNo		
 			},
@@ -512,7 +512,7 @@
 		var memberNo = localStorage.getItem("memberNo");
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/noteList.do",
+			url : "/drag-note/note/noteList",
 			data: {"memberNo" : memberNo},
 			dataType : "json"
 		})
@@ -678,7 +678,7 @@
 
 	//노트 다운로드
 	function downloadNote(noteNo){
-		var url = "/drag-note/download/downloadNote.do?noteNo=" + noteNo;
+		var url = "/drag-note/download/downloadNote?noteNo=" + noteNo;
 		$("#downloadNotePath").attr("href", url);
 	}
 
@@ -691,7 +691,7 @@
 		localStorage.setItem("noteNoToUpdate",noteNo);
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/noteDetail.do",
+			url : "/drag-note/note/noteDetail",
 			data: {"noteNo" : noteNo},
 			dataType : "json"
 		})
@@ -759,7 +759,7 @@
 		fd.append("noteContent",$(".nicEdit-main").html());
 		fd.append("categoryNo", $("#category").val());
 		$.ajax({
-			url : "/drag-note/note/note.do",
+			url : "/drag-note/note/note",
 			type:"POST",
 			data :fd,
 			dataType : "json",
@@ -803,7 +803,7 @@
 		fdUpdate.append("categoryNo", $("#category").val());
 		fdUpdate.append("noteNo", localStorage.getItem("noteNoToUpdate"));
 		$.ajax({
-			url : "/drag-note/note/noteUpdate.do",
+			url : "/drag-note/note/noteUpdate",
 			type:"POST",
 			data :fdUpdate,
 			dataType : "json",
@@ -832,7 +832,7 @@
 		var memberNo = localStorage.getItem("memberNo");
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/noteList.do",
+			url : "/drag-note/note/noteList",
 			data: {"memberNo" : memberNo},
 			dataType : "json"
 		})
@@ -862,7 +862,7 @@
 						         
 				html += "<p class='blog-post-bottom pull-right'>";         
 				html += "   <span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'><a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></a></span>";
-				html += "	<span class='badge quote-badge'dragNote-toggle='tooltip' title='다운로드'><a href='/drag-note/download/downloadNote.do?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>";
+				html += "	<span class='badge quote-badge'dragNote-toggle='tooltip' title='다운로드'><a href='/drag-note/download/downloadNote?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>";
 				//시간 뿌리기 끝
 				html += "</div>";
 				html += "</div>";
@@ -897,7 +897,7 @@
 			},
 			function(){
 				$.ajax({
-					url:"/drag-note/note/deleteNote.do",
+					url:"/drag-note/note/deleteNote",
 					dataType:"json",
 					data: {"noteNo":noteNo},
 					type: "POST"
@@ -922,7 +922,7 @@
 			},
 			function(){
 				$.ajax({
-					url:"/drag-note/note/deleteCategory.do",
+					url:"/drag-note/note/deleteCategory",
 					dataType:"json",
 					data: {"categoryNo":categoryNo},
 					type: "POST"
@@ -966,7 +966,7 @@
 		
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/addCategory.do",
+			url : "/drag-note/note/addCategory",
 			data: {"categoryName" : categoryName,
 					"memberNo"	  : memberNo},
 			dataType : "json"
@@ -1001,7 +1001,7 @@
 		var memberNo = localStorage.getItem("memberNo");
 		$.ajax({
 			type: "POST",
-			url : "/drag-note/note/getCategory.do",
+			url : "/drag-note/note/getCategory",
 			data: {"memberNo" : memberNo},
 			dataType : "json"
 		})
