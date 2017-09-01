@@ -6,9 +6,14 @@
 	<typeAliases>
 		<typeAlias type="com.test.memory.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.test.memory.vo.DragVO" alias="DragVO" />
+		<typeAlias type="com.test.memory.vo.DragImgVO" alias="DragImgVO" />
+		<typeAlias type="com.test.memory.vo.NoteVO" alias="NoteVO" />
+		<typeAlias type="com.test.memory.vo.NoteImgVO" alias="NoteImgVO" />
+		<typeAlias type="com.test.memory.vo.CategoryVO" alias="CategoryVO" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/memberMapper.xml" />
 		<mapper resource="mapper/dragMapper.xml" />
+		<mapper resource="mapper/noteMapper.xml" />
 	</mappers>
 </configuration>

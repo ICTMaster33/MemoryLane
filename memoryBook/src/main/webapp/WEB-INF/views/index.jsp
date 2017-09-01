@@ -79,11 +79,7 @@
 	  	</div>
         
         <div id="MyNote">
-            <div class="container-fluid">
-                <h1>Arrange your note</h1>
-                <p>show me the money</p>
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
-            </div>
+            <%@ include file="menu/note.jsp" %>
         </div>
 		
     </div>
