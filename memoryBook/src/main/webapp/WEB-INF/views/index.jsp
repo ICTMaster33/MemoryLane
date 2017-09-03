@@ -33,28 +33,31 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#main">Main</a>
+                    <a id="main" class="w3-bar-item w3-button w3-padding-large">
+					    <i class="fa fa-inbox w3-xxlarge"></i>
+					    Main
+					  </a>
                 </li>
                 <li>
                     <a href="#profile">Profile</a>
                 </li>
                 <li>
-                      <a href="#" onclick="drag_open()" class="w3-bar-item w3-button w3-padding-large">
+                      <a id="drag" class="w3-bar-item w3-button w3-padding-large">
 					    <i class="fa fa-inbox w3-xxlarge"></i>
-					    <p>My Drag</p>
+					    My Drag
 					  </a>
                 </li>
                 <li>
-      		          <a href="#" onclick="note_open()" class="w3-bar-item w3-button w3-padding-large">
+      		          <a id="note" class="w3-bar-item w3-button w3-padding-large">
 					    <i class="fa fa-inbox w3-xxlarge"></i>
-					    <p>My Note</p>
+					    My Note
 					  </a>
                 </li>
                 <li>
                     <a href="#myFriend">Friend</a>
                 </li>
                 <li>
-                    <a data-toggle="modal" data-target="#myModal">Unregister</a><a >
+                    <a data-toggle="modal" data-target="#myModal">Unregister</a>
                 </li>
                 <li>
                     <a href="#logout" onclick="logout()">Logout</a>
@@ -85,9 +88,9 @@
 		<div id='myDrag' style="z-index: 4; min-height: 100%; width: 1200px;">
 		  	<%@ include file="menu/drag.jsp" %>
 	  	</div>
-        
-        <div id="myNote">
-            <%@ include file="menu/note.jsp" %>
+
+        <div id='myNote' style="z-index: 4; min-height: 100%; width: 1200px;">
+            <%@ include file="menu/note2.jsp" %>
         </div>
 		
     </div>
@@ -123,8 +126,7 @@
 							    <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
 			    			</div>
 			    		</tr>
-			    		<br>
-					    <tr >
+					    <tr>
 					    	<td id="btns" colspan="2" style="width: 368px;">
 					    		<input type="submit" value="회원탈퇴" class="btn btn-default" style="width: 368px;background: #B2CCFF; margin: 0 auto;">
 <!-- 							    <button id="unregisterBtn" class="btn btn-default"  style="width: 368px;background: #B2CCFF; margin: 0 auto;">회원탈퇴</button>    -->
@@ -177,19 +179,23 @@
     });
     
     // 내비바 아이콘으로 열고 닫기
-    function drag_open() {
-    	$("#page-content-wrapper").hide();
-    	$("#profile").hide();
-    	$("#myNote").hide();
+    $("#main").click(function(e) {
+    	$("#profile").show();
     	$("#myDrag").show();
-    }
-    
-    function note_open() {
-    	$("#page-content-wrapper").hide();
-    	$("#profile").hide();
     	$("#myNote").show();
-    	$("#myDrag").hide();
-    }
+    });
+    
+    $("#drag").click(function(e) {
+    	document.getElementById("profile").style.display = "none";
+    	document.getElementById("myNote").style.display = "none";
+    	$("#myDrag").show();
+    });
+    
+    $("#note").click(function(e) {
+    	document.getElementById("profile").style.display = "none";
+    	document.getElementById("myDrag").style.display = "none";
+    	$("#myNote").show();
+    });
     </script>
 
 </body>
