@@ -487,7 +487,7 @@
     		success : function(result) {
 	    	    		if(result){
 	    	    			alert("로그인 완료")
-	    	    			location.href='member/index';
+	    	    			location.href='/memorymember/index';
 	    	    		}
 	    	    		else {
 	    	    			alert("ID/PWD를 확인해 주세요")
