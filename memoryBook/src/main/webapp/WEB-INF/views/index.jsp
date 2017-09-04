@@ -65,11 +65,7 @@
 					</a>
                 </li>
                 <li>
-<<<<<<< HEAD
                     <a data-toggle="modal" data-target="#myModal_m">Unregister</a>
-=======
-                    <a data-toggle="modal" data-target="#myModal2">Unregister</a>
->>>>>>> branch 'master' of https://github.com/ICTMaster33/MemoryLane.git
                 </li>
                 <li>
                     <a href="#logout" onclick="logout()">Logout</a>
@@ -116,11 +112,7 @@
     </div>
     <!-- /#wrapper -->
 	
-<<<<<<< HEAD
 	<div class="modal fade" id="myModal_m" role="dialog">
-=======
-	<div class="modal fade" id="myModal2" role="dialog">
->>>>>>> branch 'master' of https://github.com/ICTMaster33/MemoryLane.git
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
