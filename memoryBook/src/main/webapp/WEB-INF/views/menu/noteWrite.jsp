@@ -99,11 +99,15 @@
 
 	<script>
 	$("#cancelBtn").click(function(e) {
+		var chk;
+		chk = confirm("정말로 글 작성을 취소하시겠습니까?");
+		if(chk) {
     	document.getElementById("noteEditor").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
     	document.getElementById("mainView").style.display = "";
     	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
 		document.getElementById("mainView").style.height = window.innerHeight +"px";
+		}
     });
 	
 	//카테고리 수정

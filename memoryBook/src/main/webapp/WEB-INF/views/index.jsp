@@ -213,7 +213,7 @@
     	document.getElementById("profile").style.display = "none";
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
-    	$("#myNote").show();
+    	document.getElementById("myNote").style.display = "";
     });
     
     $("#friend").click(function(e) {
