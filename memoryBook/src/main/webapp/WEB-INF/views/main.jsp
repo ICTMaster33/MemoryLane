@@ -477,7 +477,19 @@
     $('.map').on('click', onMapClickHandler);
         
     $("#loginBtn").click(function () {
-		$.ajax ({
+    	var frm = document.loginfrm;
+    	if (frm.loginEmail.value == "") {
+    		frm.loginEmail.focus();
+    		alert("Please insert your email");
+    		return false;
+    	}
+    	if (frm.password.value == "") {
+    		frm.password.focus();
+    		alert("Please insert your email");
+    		return false;
+    	}
+    	
+    	$.ajax ({
     		url: "/memory/member/login",
     		type: "POST",
     		data: {

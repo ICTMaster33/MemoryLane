@@ -18,6 +18,6 @@
 	
 	<!-- 	회원탈퇴 -->
 	<delete id="unregister" parameterType="MemberVO">
-		DELETE FROM T_MEMBER WHERE EMAIL = #{email} AND PASSWORD = #{password}
+		DELETE FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{password}
 	</delete>
 </mapper>

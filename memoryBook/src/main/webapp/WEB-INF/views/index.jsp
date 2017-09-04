@@ -96,7 +96,7 @@
     </div>
     <!-- /#wrapper -->
 	
-	<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal fade" id="myModal2" role="dialog">
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
