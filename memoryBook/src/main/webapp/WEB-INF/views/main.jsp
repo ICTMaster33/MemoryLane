@@ -477,7 +477,7 @@
     $('.map').on('click', onMapClickHandler);
         
     $("#loginBtn").click(function () {
-		$.ajax ({
+    	$.ajax ({
     		url: "/memory/member/login",
     		type: "POST",
     		data: {
@@ -487,7 +487,7 @@
     		success : function(result) {
 	    	    		if(result){
 	    	    			alert("로그인 완료")
-	    	    			location.href='member/index';
+	    	    			location.href='/memory/member/index';
 	    	    		}
 	    	    		else {
 	    	    			alert("ID/PWD를 확인해 주세요")
@@ -554,4 +554,3 @@
 </body>
 
 </html>
-

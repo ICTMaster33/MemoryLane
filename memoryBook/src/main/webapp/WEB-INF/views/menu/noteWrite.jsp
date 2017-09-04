@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Simple Sidebar - Start Bootstrap Template</title>
+<title>Simple Sidebar - Start Bootstrap Template </title>
 
 <!-- Bootstrap core CSS -->
 <link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
