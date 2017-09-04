@@ -18,6 +18,8 @@
     <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
 
 	<script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
+	<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
+	<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
 </head>
 
 <body>
@@ -36,28 +38,34 @@
                     <a id="main" class="w3-bar-item w3-button w3-padding-large">
 					    <i class="fa fa-inbox w3-xxlarge"></i>
 					    Main
-					  </a>
+					</a>
                 </li>
                 <li>
-                    <a href="#profile">Profile</a>
+                    <a id="myProfile" class="w3-bar-item w3-button w3-padding-large">
+	                    <i class="fa fa-inbox w3-xxlarge"></i>
+	                    Profile
+                    </a>
                 </li>
                 <li>
-                      <a id="drag" class="w3-bar-item w3-button w3-padding-large">
+                    <a id="drag" class="w3-bar-item w3-button w3-padding-large">
 					    <i class="fa fa-inbox w3-xxlarge"></i>
 					    My Drag
-					  </a>
+					</a>
                 </li>
                 <li>
-      		          <a id="note" class="w3-bar-item w3-button w3-padding-large">
+      		        <a id="note" class="w3-bar-item w3-button w3-padding-large">
 					    <i class="fa fa-inbox w3-xxlarge"></i>
 					    My Note
-					  </a>
+					</a>
                 </li>
                 <li>
-                    <a href="#myFriend">Friend</a>
+                	<a id="friend" class="w3-bar-item w3-button w3-padding-large">
+					    <i class="fa fa-inbox w3-xxlarge"></i>
+					    My Friend
+					</a>
                 </li>
                 <li>
-                    <a data-toggle="modal" data-target="#myModal">Unregister</a>
+                    <a data-toggle="modal" data-target="#myModal_m">Unregister</a>
                 </li>
                 <li>
                     <a href="#logout" onclick="logout()">Logout</a>
@@ -84,19 +92,27 @@
             </div>
         </div>
         
-        <!-- 뉴스뷰 -->
-		<div id='myDrag' style="z-index: 4; min-height: 100%; width: 1200px;">
-		  	<%@ include file="menu/drag.jsp" %>
-	  	</div>
-
-        <div id='myNote' style="z-index: 4; min-height: 100%; width: 1200px;">
-            <%@ include file="menu/note2.jsp" %>
+        <div id='myNote'>
+			<div class="container-fluid">
+            <%@ include file="menu/note.jsp" %>
+            </div>
         </div>
-		
+        
+		<div id='myFriend'>
+			<div class="container-fluid">
+		  	<%@ include file="menu/friend.jsp" %>
+		  	</div>
+	  	</div>
+        
+		<div id='myDrag'>
+			<div class="container-fluid">
+		  	<%@ include file="menu/drag.jsp" %>
+		  	</div>
+	  	</div>
     </div>
     <!-- /#wrapper -->
 	
-	<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal fade" id="myModal_m" role="dialog">
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
@@ -179,22 +195,32 @@
     });
     
     // 내비바 아이콘으로 열고 닫기
-    $("#main").click(function(e) {
+    $("#myProfile").click(function(e) {
+    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myNote").style.display = "none";
+    	document.getElementById("myFriend").style.display = "none";
     	$("#profile").show();
-    	$("#myDrag").show();
-    	$("#myNote").show();
     });
     
     $("#drag").click(function(e) {
     	document.getElementById("profile").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
+    	document.getElementById("myFriend").style.display = "none";
     	$("#myDrag").show();
     });
     
     $("#note").click(function(e) {
     	document.getElementById("profile").style.display = "none";
     	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myFriend").style.display = "none";
     	$("#myNote").show();
+    });
+    
+    $("#friend").click(function(e) {
+    	document.getElementById("profile").style.display = "none";
+    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myNote").style.display = "none";
+    	$("#myFriend").show();
     });
     </script>
 
