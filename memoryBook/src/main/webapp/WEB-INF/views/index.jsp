@@ -188,8 +188,13 @@
     		alert("로그아웃완료");
     	}
     }
-    
-    $("#menu-toggle").click(function(e) {
+
+	//모달 취소버튼
+    $("#cancleBtn").click(function (){
+    	location.href='/memory/member/index';
+    })
+	
+	$("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });

@@ -26,7 +26,7 @@ public class MemberController {
 		@RequestMapping(value = "join", method = RequestMethod.POST)
 		@ResponseBody
 		public boolean join(MemberVO vo) {
-			return service.join(vo); 
+			return service.join(vo);
 		}
 		
 		@RequestMapping(value = "index", method = RequestMethod.GET)
@@ -41,14 +41,18 @@ public class MemberController {
 		
 		@RequestMapping(value = "login", method = RequestMethod.POST)
 		@ResponseBody
-		public String login(MemberVO vo, HttpSession session, Model model) {
+		public boolean login(MemberVO vo, HttpSession session, Model model) {
 			model.addAttribute(vo);
-			if(service.login(vo) == null) return "redirect:/";
-			vo = service.login(vo);
-			session.setAttribute("email", vo.getEmail());
-			session.setAttribute("memberNo", vo.getMemberNo());
-			session.setAttribute("name", vo.getName());
-			return "redirect:index";
+			MemberVO nvo = service.login(vo); 
+			if(nvo == null){
+				return false;
+			}
+			else{
+				session.setAttribute("email", nvo.getEmail());
+				session.setAttribute("memberNo", nvo.getMemberNo());
+				session.setAttribute("name", nvo.getName());
+				return true;
+			}
 		}
 		
 		//로그아웃
