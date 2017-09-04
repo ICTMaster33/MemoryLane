@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Simple Sidebar - Start Bootstrap Template </title>
+<title>Simple Sidebar - Start Bootstrap Template</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -102,6 +102,8 @@
 		var chk;
 		chk = confirm("정말로 글 작성을 취소하시겠습니까?");
 		if(chk) {
+		$("#noteTitle").val('');
+		$(".nicEdit-main").html('');
     	document.getElementById("noteEditor").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
     	document.getElementById("mainView").style.display = "";
@@ -184,12 +186,12 @@
 
 		var frm = document.noteFrm;
 		if (frm.noteTitle.value == "") {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","제목을 입력하세요.");
+			alert("제목을 입력하세요.");
 			frm.noteTitle.focus();
 			return false;
 		}
 		if (frm.category.value == "") {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 선택하세요.",'success');
+			alert("카테고리를 선택하세요.",'success');
 			return false;
 		}
 //	 	if (!confirm("노트를 등록하시겠습니까?"))
@@ -210,7 +212,7 @@
 			contentType:false
 		})
 		.done(function (result) {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+			alert(result.msg, "success");
 			makeNoteList();
 			$("input[name=noteTitle]").val("");
 			$(".nicEdit-main").html("");
@@ -227,12 +229,12 @@
 	$("#noteUpdateBtn").click(function() {
 		var frm = document.noteFrm;
 		if (frm.noteTitle.value == "") {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","제목을 입력하세요.");
+			alert("제목을 입력하세요.");
 			frm.noteTitle.focus();
 			return false;
 		}
 		if (frm.category.value == "") {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 선택하세요.");
+			alert("카테고리를 선택하세요.");
 			return false;
 		}
 //	 	if (!confirm("노트를 등록하시겠습니까?"))
@@ -254,7 +256,7 @@
 			contentType:false
 		})
 		.done(function (result) {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+			alert(result.msg, "success");
 			makeNoteList();
 			noteDetail(result.noteNo);
 			updateYn = false;
@@ -306,7 +308,7 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			swal(result.msg);
+			alert(result.msg);
 			appendCategory(result.categoryList);
 			document.getElementById("categoryToAdd").style.display = "none";
 		    document.getElementById("Category1").style.display = "none";

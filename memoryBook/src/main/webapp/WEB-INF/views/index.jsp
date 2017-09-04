@@ -188,15 +188,15 @@
     		alert("로그아웃완료");
     	}
     }
-
-	//모달 취소버튼
+    
+  //모달 취소버튼
     $("#cancleBtn").click(function (){
     	location.href='/memory/member/index';
-    })
-	
-	$("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+    });
+    
+    $("#menu-toggle").click(function(e){
+    	e.preventDefault();
+    	$("#wrapper").toggleClass("toggled");
     });
     
     // 내비바 아이콘으로 열고 닫기
