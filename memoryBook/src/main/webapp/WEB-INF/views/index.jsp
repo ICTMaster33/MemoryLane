@@ -57,7 +57,7 @@
                     <a href="#myFriend">Friend</a>
                 </li>
                 <li>
-                    <a data-toggle="modal" data-target="#myModal">Unregister</a>
+                    <a data-toggle="modal" data-target="#myModal2">Unregister</a>
                 </li>
                 <li>
                     <a href="#logout" onclick="logout()">Logout</a>
