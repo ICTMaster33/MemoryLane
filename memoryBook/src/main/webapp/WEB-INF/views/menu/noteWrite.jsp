@@ -39,19 +39,23 @@
 					<tr>
 						<td><label for="category">카테고리</label></td>
 						<td>&nbsp;&nbsp;</td>
-						<td><select name="category" id="category"
-							class="form-control">
+						<td><select name="category" id="category" class="form-control">
 						</select></td>
 						<td>&nbsp;&nbsp;</td>
-						<td><img src="/memory/resources/img/c_add.png" width="25px"	onclick="showInput();"></td>
-						<td>&nbsp;&nbsp;</td>
-						<td><input type="text" id="categoryToAdd"
-							name="categoryToAdd" style="display: none;" /></td>
-						<td>&nbsp;&nbsp;</td>
-						<td><img src="/memory/resources/img/c_check.png" width="25px" id="Category1" onclick="addCategory();" style="display: none;">
+						<td>
+						<i class="fa fa-plus-circle w3-xlarge" onclick="showInput();" style="color: #ccc;"></i>
 						</td>
 						<td>&nbsp;&nbsp;</td>
-						<td><img src="/memory/resources/img/c_close.png" width="25px" id="Category2" onclick="closeInput();" style="display: none;">
+						<td>
+				        	<input type ="text" id="categoryToAdd" name="categoryToAdd" style="display: none;" />
+						</td>
+						<td>&nbsp;&nbsp;</td>
+						<td>
+				        	<i id="Category1" style="display: none;color: #ccc;" class="fa fa-check-circle w3-xlarge" onclick="addCategory();"></i>
+						</td>
+						<td>&nbsp;&nbsp;</td>
+						<td>
+				        	<i id="Category2" style="display: none;color: #ccc;" class="fa fa-times-circle w3-xlarge" onclick="closeInput();"></i>
 						</td>
 					</tr>
 				</table>
@@ -92,7 +96,7 @@
 	<script>
 	$("#cancelBtn").click(function(e) {
 		var chk;
-		chk = confirm("정말로 글 작성을 취소하시겠습니까?");
+		chk = confirm("정말로 취소하시겠습니까?");
 		if(chk) {
 		$("#noteTitle").val('');
 		$(".nicEdit-main").html('');
@@ -147,32 +151,6 @@
 	}
 
 	var updateYn = false;
-
-	//노트 업데이트
-	function updateNote(noteNo){
-		localStorage.setItem("noteNoToUpdate",noteNo);
-		$.ajax({
-			type: "POST",
-			url : "/memory/note/noteDetail",
-			data: {"noteNo" : noteNo},
-			dataType : "json"
-		})
-		.done(function (result) {
-			var title = result.noteTitle;
-			var content = result.noteContent;
-			$("input[name=noteTitle]").val(title);
-			$(".nicEdit-main").html(content);
-			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo)
-			updateYn = true;
-			noteOpenYn = true;
-			getCategory();
-			open_editor();
-		})
-		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
-		});
-		
-	}
 
 	// 노트 등록
 	$("#noteSubmitBtn").click(function() {

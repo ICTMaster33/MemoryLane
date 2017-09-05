@@ -293,7 +293,7 @@
 			$("#title").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
 			$("#date").html(time);
 			$("#content").html(content);
-			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#'><i class='fa fa-text-width' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>");
+			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_note'><i class='fa fa-text-width' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_note'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_note'><i class='fa fa-download'></i></a></span></p>");
 //	 		document.getElementById("editorBtnDiv").style.display = "none";
 			
 		})
@@ -617,9 +617,12 @@
 
 	function open_editor() {
 //	 	document.getElementById("editorBtnDiv").style.display = "block";
-		document.getElementById("mainView").style.display = "none";
+//		document.getElementById("mainView").style.display = "none";
 //	 	document.getElementById("searchView").style.display = "none";
-		document.getElementById("newsView").style.display = "none";
+//		document.getElementById("newsView").style.display = "none";
+    	document.getElementById("mainView").style.display = "none";
+    	document.getElementById("profileModal").style.display = "none";
+    	document.getElementById("noteEditor").style.display = "";
 
 		if(updateYn){
 			document.getElementById("noteUpdateBtn").style.display = "block";
@@ -657,7 +660,7 @@
 			var content = result.noteContent;
 			$("input[name=noteTitle]").val(title);
 			$(".nicEdit-main").html(content);
-			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo)
+			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo);
 			updateYn = true;
 			noteOpenYn = true;
 			getCategory();

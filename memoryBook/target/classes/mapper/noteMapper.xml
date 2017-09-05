@@ -99,7 +99,7 @@
 	<select id="getCategory" parameterType="int" resultMap="categoryMap">
 		select *
 		  from t_category
-		 where mem_no = #{memberNo}
+		 where mem_no = #{memberNo} order by category_name
 	</select>
 	<!-- 카테고리 등록 -->
 	<insert id="addCategory" parameterType="categoryVO" useGeneratedKeys="true" keyProperty="noteNo">
