@@ -8,12 +8,12 @@
 
 	<!-- 회원 가입 정보 저장 -->
 	<insert id="join" parameterType="MemberVO">
-		INSERT INTO T_MEMBER VALUES (MEMBER_NO.NEXTVAL, #{name}, #{email}, #{password})
+		INSERT INTO T_MEMBER VALUES (MEMBER_NO.NEXTVAL, #{password}, #{name}, #{email})
 	</insert>
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="MemberVO" resultType="MemberVO">
-		SELECT mem_no, name, email FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{password}
+		SELECT * FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{password}
 	</select>
 	
 	<!-- 회원탈퇴 -->
