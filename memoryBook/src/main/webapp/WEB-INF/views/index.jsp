@@ -11,6 +11,15 @@
 
     <title>Simple Sidebar - Start Bootstrap Template</title>
 
+	<!-- StyleSheets -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/memory/resources/css/memory-sheet.css">
+
     <!-- Bootstrap core CSS -->
     <link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -35,32 +44,27 @@
                     </a>
                 </li>
                 <li>
-                    <a id="main" class="w3-bar-item w3-button w3-padding-large">
-					    <i class="fa fa-inbox w3-xxlarge"></i>
-					    Main
-					</a>
+                    <a id="main">
+	                    Main
+                    </a>
                 </li>
                 <li>
-                    <a id="myProfile" class="w3-bar-item w3-button w3-padding-large">
-	                    <i class="fa fa-inbox w3-xxlarge"></i>
+                    <a id="myProfile">
 	                    Profile
                     </a>
                 </li>
                 <li>
-                    <a id="drag" class="w3-bar-item w3-button w3-padding-large">
-					    <i class="fa fa-inbox w3-xxlarge"></i>
+                    <a id="drag">
 					    My Drag
 					</a>
                 </li>
                 <li>
-      		        <a id="note" class="w3-bar-item w3-button w3-padding-large">
-					    <i class="fa fa-inbox w3-xxlarge"></i>
+      		        <a id="note">
 					    My Note
 					</a>
                 </li>
                 <li>
-                	<a id="friend" class="w3-bar-item w3-button w3-padding-large">
-					    <i class="fa fa-inbox w3-xxlarge"></i>
+                	<a id="friend"y>
 					    My Friend
 					</a>
                 </li>

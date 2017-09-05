@@ -52,24 +52,21 @@ public class NoteController {
 	private NoteService service;
 	
 	@RequestMapping("/note")
-	public Map<String, Object> note(HttpServletRequest request, HttpSession session) throws Exception {
-		NoteVO note = new NoteVO();
+	public Map<String, Object> note(NoteVO note, HttpSession session) throws Exception {
+		System.out.println(note);
 		String FileName = UUID.randomUUID().toString(); //데이터 파일명 생성
-		note.setNoteTitle(request.getParameter("noteTitle")); //노트 제목
-		note.setNoteContent(FileName); //노트 내용 (내용은 파일로 생성됨)
-		note.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString())); //회원번호
-		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo"))); //카테고리
 		Map<String, Object> msg = new HashMap<>();
 		
 		//note save
 		try{
 			fos = new FileOutputStream(FILE_PATH + FileName);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(request.getParameter("noteContent"));
+			oos.writeObject(note.getNoteContent());
 		} catch(Exception e){
 			// e.printStackTrace();
 			System.out.println("[에러] 파일 쓰기에 실패했습니다.");
 		} finally {
+			note.setNoteContent(FileName); // 데이터 저장 후 내용을 파일이름으로 변경
 			closeStreams();
 			int noteNo = service.note(note);
 			msg.put("msg", "새로운 노트가 등록되었습니다.");
@@ -177,7 +174,7 @@ public class NoteController {
 			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
 			ois = new ObjectInputStream(fis);
 			
-			// 오브젝트 스트림으로부터 오브젝트를 읽어 ArrayList<Human>으로 형변환
+			// 오브젝트 스트림으로부터 오브젝트를 읽어 String형으로 형변환
 			String content = (String) ois.readObject();
 			n.setNoteContent(content);
 			} catch(Exception e) {
@@ -247,8 +244,24 @@ public class NoteController {
 	    NoteVO noteVO = service.emailNote(note);
 	    
 	    String email = "scmtest@naver.com";
-	    String t = noteVO.getNoteTitle();
-	    String c = noteVO.getNoteContent();
+	    String title = noteVO.getNoteTitle();
+	    String content = noteVO.getNoteContent();
+	    
+		try{
+			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+			fis = new FileInputStream(FILE_PATH + content);
+			
+			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+			ois = new ObjectInputStream(fis);
+			
+			// 오브젝트 스트림으로부터 오브젝트를 읽어 String형으로 형변환
+			content = (String) ois.readObject();
+			} catch(Exception e) {
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+			} finally {
+				closeStreams();
+		}
 	    
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
@@ -270,13 +283,13 @@ public class NoteController {
          
         MimeMessage message = new MimeMessage(session);
         message.setSender(new InternetAddress(email));
-        message.setSubject("[드래그 노트] " + t);
+        message.setSubject("[Memory Book] " + title);
  
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
          
         Multipart mp = new MimeMultipart();
         MimeBodyPart mbp1 = new MimeBodyPart();
-        mbp1.setContent(t+"<br>"+c, "text/html; charset=UTF-8");
+        mbp1.setContent(title+"<br>"+content, "text/html; charset=UTF-8");
         mp.addBodyPart(mbp1);
  
          

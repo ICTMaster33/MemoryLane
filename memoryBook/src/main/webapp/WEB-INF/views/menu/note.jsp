@@ -11,11 +11,6 @@
 
 <title>Simple Sidebar - Start Bootstrap Template </title>
 
-<!-- Bootstrap core CSS -->
-<link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
 <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
 <script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
 <script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
@@ -263,11 +258,11 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+			alert(result.msg, "success");
 	        $("#email").val("");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			swal("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
 		});
 	})
 	function saveNoteNo(noteNo){
@@ -475,7 +470,7 @@
 				var noteImgSrc = noteContent.split('src="')[1].split('"')[0];
 				html += '<figure><img id="note'+note.noteNo+'" src="' + noteImgSrc + '" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
 			} else {
-				html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
+				html += '<figure><img id="note'+note.noteNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="noteDetail('+note.noteNo+')" ></figure>';
 			}
 			html += "	<div  class='desc'><p>" + note.noteTitle + "</p></div>";
 			html += "</div>";
@@ -531,6 +526,7 @@
     	document.getElementById("mainView").style.display = "none";
     	document.getElementById("profileModal").style.display = "none";
     	document.getElementById("noteEditor").style.display = "";
+    	getCategory();
     });
 	
 	function drag_open() {
@@ -582,16 +578,41 @@
 	// }
 
 	function main_open() {
-		document.getElementById("newsView").style.display = "none";
-		document.getElementById("noteBar").style.display = "none";
-		document.getElementById("sideDragBar").style.display = "block";
+//		document.getElementById("newsView").style.display = "none";
+//		document.getElementById("noteBar").style.display = "none";
+//		document.getElementById("sideDragBar").style.display = "block";
 //	 	document.getElementById("editorBtnDiv").style.display = "none";
-		document.getElementById("mainView").style.display = "block";
+//		document.getElementById("mainView").style.display = "block";
+    	document.getElementById("noteEditor").style.display = "none";
+    	document.getElementById("profileModal").style.display = "";
+    	document.getElementById("mainView").style.display = "";
+    	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
+		document.getElementById("mainView").style.height = window.innerHeight +"px";
 		getMainCategory();
 		mainNoteList();
 		makeDragList();
 		$("#noteTitle").val("");
+		$(".nicEdit-main").html('');
 		noteOpenYn = false;
+	}
+	
+	// DB에서 카테고리 가져오기
+	function getCategory(){
+		var memberNo = ${memberNo};
+		$.ajax({
+			type: "POST",
+			url : "/memory/note/getCategory",
+			data: {"memberNo" : memberNo},
+			dataType : "json"
+		})
+		.done(function (result) {
+			appendCategory(result.categoryList);
+			var selcat = localStorage.getItem("selectedItem");
+			$("#"+selcat).attr("selected", "selected");
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+		});
 	}
 
 	function open_editor() {
@@ -676,12 +697,12 @@
 	$("#noteUpdateBtn").click(function() {
 		var frm = document.noteFrm;
 		if (frm.noteTitle.value == "") {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","제목을 입력하세요.");
+			alert("제목을 입력하세요.");
 			frm.noteTitle.focus();
 			return false;
 		}
 		if (frm.category.value == "") {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡","카테고리를 선택하세요.");
+			alert("카테고리를 선택하세요.");
 			return false;
 		}
 //	 	if (!confirm("노트를 등록하시겠습니까?"))
@@ -703,7 +724,7 @@
 			contentType:false
 		})
 		.done(function (result) {
-			swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, "success");
+			alert(result.msg, "success");
 			makeNoteList();
 			noteDetail(result.noteNo);
 			updateYn = false;
@@ -778,8 +799,8 @@
 		var noteNo = noteNo;
 		var memberNo = ${memberNo};
 		
-		swal({
-			  title: "* :-O",
+		alert({
+			  title: "확인",
 			  text: "노트를 삭제하시겠어요~?",
 			  type: "warning",
 			  showCancelButton: true,
@@ -794,7 +815,7 @@
 					data: {"noteNo":noteNo},
 					type: "POST"
 					}).done(function (result){
-						swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg,'success');
+						alert(result.msg,'success');
 						makeNoteList();
 						mainNoteList();
 				});
@@ -803,8 +824,8 @@
 	}
 	//카테고리 삭제
 	function deleteCategory(categoryNo) {
-		swal({
-			  title: "* :-O",
+		alert({
+			  title: "확인",
 			  text: "카테고리와 해당 게시물을 모두 삭제하시겠어요?",
 			  type: "warning",
 			  showCancelButton: true,
@@ -819,7 +840,7 @@
 					data: {"categoryNo":categoryNo},
 					type: "POST"
 					}).done(function (result){
-						swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg,'success');
+						alert(result.msg,'success');
 						makeNoteList();
 						mainNoteList();
 						getMainCategory();
@@ -864,7 +885,7 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			swal(result.msg);
+			alert(result.msg);
 			appendCategory(result.categoryList);
 			document.getElementById("categoryToAdd").style.display = "none";
 		    document.getElementById("Category1").style.display = "none";
@@ -877,36 +898,6 @@
 		});
 	}
 
-	// 카테고리 셀렉박스에 옵션 추가
-	function appendCategory(categoryList){
-		 $("#category option").remove();
-		 for(var i = 0; i < categoryList.length; i++){
-				var category = categoryList[i];
-				var categoryName = category.categoryName;
-				var categoryNo = category.categoryNo;
-				$("#category").append("<option value='"+categoryNo+"' id='categoryNo"+categoryNo+"'>"+categoryName+"</option>");
-		}
-	}
-
-	// DB에서 카테고리 가져오기
-	function getCategory(){
-		var memberNo = ${memberNo};
-		$.ajax({
-			type: "POST",
-			url : "/memory/note/getCategory",
-			data: {"memberNo" : memberNo},
-			dataType : "json"
-		})
-		.done(function (result) {
-			appendCategory(result.categoryList);
-			var selcat = localStorage.getItem("selectedItem");
-			$("#"+selcat).attr("selected", "selected");
-		})
-		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
-		});
-	}
-	
 	//Tooltip 효과
 	$(document).ready(function(){
 	    $('[dragNote-toggle="tooltip"]').tooltip();   

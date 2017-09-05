@@ -11,11 +11,6 @@
 
 <title>Simple Sidebar - Start Bootstrap Template</title>
 
-<!-- Bootstrap core CSS -->
-<link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
 <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
 <script src="/memory/resources/js/NicEdit-Korean/nicEdit.js" type="text/javascript"></script>
 <script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
@@ -48,18 +43,15 @@
 							class="form-control">
 						</select></td>
 						<td>&nbsp;&nbsp;</td>
-						<td><i class="fa fa-plus-circle w3-xlarge"
-							onclick="showInput();" style="color: #ccc;"></i></td>
+						<td><img src="/memory/resources/img/c_add.png" width="25px"	onclick="showInput();"></td>
 						<td>&nbsp;&nbsp;</td>
 						<td><input type="text" id="categoryToAdd"
 							name="categoryToAdd" style="display: none;" /></td>
 						<td>&nbsp;&nbsp;</td>
-						<td><i id="Category1" style="display: none; color: #ccc;"
-							class="fa fa-check-circle w3-xlarge" onclick="addCategory();"></i>
+						<td><img src="/memory/resources/img/c_check.png" width="25px" id="Category1" onclick="addCategory();" style="display: none;">
 						</td>
 						<td>&nbsp;&nbsp;</td>
-						<td><i id="Category2" style="display: none; color: #ccc;"
-							class="fa fa-times-circle w3-xlarge" onclick="closeInput();"></i>
+						<td><img src="/memory/resources/img/c_close.png" width="25px" id="Category2" onclick="closeInput();" style="display: none;">
 						</td>
 					</tr>
 				</table>
@@ -143,6 +135,7 @@
 		document.getElementById("mainView").style.display = "none";
 //	 	document.getElementById("searchView").style.display = "none";
 		document.getElementById("newsView").style.display = "none";
+		getCategory();
 
 		if(updateYn){
 			document.getElementById("noteUpdateBtn").style.display = "block";
@@ -197,19 +190,24 @@
 //	 	if (!confirm("노트를 등록하시겠습니까?"))
 //	 		return;
 
-		var fd = new FormData();
+//		var fd = new FormData();
 		
-		fd.append("memberNo",localStorage.getItem("memberNo"));
-		fd.append("noteTitle",$("input[name=noteTitle]").val());
-		fd.append("noteContent",$(".nicEdit-main").html());
-		fd.append("categoryNo", $("#category").val());
+//		fd.append("memberNo",localStorage.getItem("memberNo"));
+//		fd.append("noteTitle",$("input[name=noteTitle]").val());
+//		fd.append("noteContent",$(".nicEdit-main").html());
+//		fd.append("categoryNo", $("#category").val());
+		
+		var memNo = ${memberNo};
+		console.log("회원번호: "+memNo);
+		console.log("노트제목: "+$("input[name=noteTitle]").val());
+		console.log("노트내용: "+$(".nicEdit-main").html());
+		console.log("카테고리번호: "+$("#category").val());
 		$.ajax({
 			url : "/memory/note/note",
-			type:"POST",
-			data :fd,
-			dataType : "json",
-			processData: false,
-			contentType:false
+			type : "POST",
+			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : $(".nicEdit-main").html(), "categoryNo" : $("#category").val()},
+// 			processData: false,
+// 			contentType:false
 		})
 		.done(function (result) {
 			alert(result.msg, "success");
@@ -240,18 +238,19 @@
 //	 	if (!confirm("노트를 등록하시겠습니까?"))
 //	 		return;
 
-		var fdUpdate = new FormData();
+//		var fdUpdate = new FormData();
 		
-		fdUpdate.append("memberNo",localStorage.getItem("memberNo"));
-		fdUpdate.append("noteTitle",$("input[name=noteTitle]").val());
-		fdUpdate.append("noteContent",$(".nicEdit-main").html());
-		fdUpdate.append("categoryNo", $("#category").val());
-		fdUpdate.append("noteNo", localStorage.getItem("noteNoToUpdate"));
+//		fdUpdate.append("memberNo",localStorage.getItem("memberNo"));
+//		fdUpdate.append("noteTitle",$("input[name=noteTitle]").val());
+//		fdUpdate.append("noteContent",$(".nicEdit-main").html());
+//		fdUpdate.append("categoryNo", $("#category").val());
+//		fdUpdate.append("noteNo", localStorage.getItem("noteNoToUpdate"));
+		var memNo = ${memberNo};
 		$.ajax({
 			url : "/memory/note/noteUpdate",
-			type:"POST",
-			data :fdUpdate,
-			dataType : "json",
+			type : "POST",
+			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : $(".nicEdit-main").html(),
+				"categoryNo" : $("#category").val(), "noteNo" : 999},
 			processData: false,
 			contentType:false
 		})
@@ -330,25 +329,6 @@
 				var categoryNo = category.categoryNo;
 				$("#category").append("<option value='"+categoryNo+"' id='categoryNo"+categoryNo+"'>"+categoryName+"</option>");
 		}
-	}
-
-	// DB에서 카테고리 가져오기
-	function getCategory(){
-		var memberNo = ${memberNo};
-		$.ajax({
-			type: "POST",
-			url : "/memory/note/getCategory",
-			data: {"memberNo" : memberNo},
-			dataType : "json"
-		})
-		.done(function (result) {
-			appendCategory(result.categoryList);
-			var selcat = localStorage.getItem("selectedItem");
-			$("#"+selcat).attr("selected", "selected");
-		})
-		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
-		});
 	}
 	
 	//Tooltip 효과
