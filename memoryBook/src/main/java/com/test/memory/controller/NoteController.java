@@ -77,7 +77,7 @@ public class NoteController {
 	public Map<String, Object> noteUpdate(NoteVO note, HttpServletRequest request, HttpSession session) throws Exception {
 		String modified = UUID.randomUUID().toString(); //수정 된 파일명 생성
 		Map<String, Object> msg = new HashMap<>();
-		//note edit commit
+		//note edit commit.
 		NoteVO data = service.noteDetail(note.getNoteNo()); //원본 파일명 추출
 		try{
 			fos = new FileOutputStream(FILE_PATH + modified);

@@ -696,53 +696,6 @@
 		$("#editorCloseBtn").toggle();
 	});
 
-	// 노트 수정
-	$("#noteUpdateBtn").click(function() {
-		var frm = document.noteFrm;
-		if (frm.noteTitle.value == "") {
-			alert("제목을 입력하세요.");
-			frm.noteTitle.focus();
-			return false;
-		}
-		if (frm.category.value == "") {
-			alert("카테고리를 선택하세요.");
-			return false;
-		}
-//	 	if (!confirm("노트를 등록하시겠습니까?"))
-//	 		return;
-
-		var fdUpdate = new FormData();
-		
-		fdUpdate.append("memberNo",localStorage.getItem("memberNo"));
-		fdUpdate.append("noteTitle",$("input[name=noteTitle]").val());
-		fdUpdate.append("noteContent",$(".nicEdit-main").html());
-		fdUpdate.append("categoryNo", $("#category").val());
-		fdUpdate.append("noteNo", localStorage.getItem("noteNoToUpdate"));
-		$.ajax({
-			url : "/memory/note/noteUpdate",
-			type:"POST",
-			data :fdUpdate,
-			dataType : "json",
-			processData: false,
-			contentType:false
-		})
-		.done(function (result) {
-			alert(result.msg, "success");
-			makeNoteList();
-			noteDetail(result.noteNo);
-			updateYn = false;
-			$("input[name=noteTitle]").val("");
-			$(".nicEdit-main").html("");
-			$("#category").val("");
-			main_open();
-		})
-		.fail(function (jqXhr, textStatus, errorText) {
-			alert("에러발생 : " + errorText);
-		});
-		
-		return false;
-	});
-
 	// 노트리스트 만들기
 	function makeNoteList() {
 		var memberNo = ${memberNo};

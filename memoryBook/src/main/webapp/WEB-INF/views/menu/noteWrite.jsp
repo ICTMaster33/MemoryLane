@@ -216,13 +216,6 @@
 //	 	if (!confirm("노트를 등록하시겠습니까?"))
 //	 		return;
 
-//		var fdUpdate = new FormData();
-		
-//		fdUpdate.append("memberNo",localStorage.getItem("memberNo"));
-//		fdUpdate.append("noteTitle",$("input[name=noteTitle]").val());
-//		fdUpdate.append("noteContent",$(".nicEdit-main").html());
-//		fdUpdate.append("categoryNo", $("#category").val());
-//		fdUpdate.append("noteNo", localStorage.getItem("noteNoToUpdate"));
 		var memNo = ${memberNo};
 		console.log(localStorage.getItem("noteNoToUpdate"));
 		$.ajax({
