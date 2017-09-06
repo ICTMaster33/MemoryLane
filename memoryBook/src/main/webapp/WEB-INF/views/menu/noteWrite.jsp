@@ -224,13 +224,12 @@
 //		fdUpdate.append("categoryNo", $("#category").val());
 //		fdUpdate.append("noteNo", localStorage.getItem("noteNoToUpdate"));
 		var memNo = ${memberNo};
+		console.log(localStorage.getItem("noteNoToUpdate"));
 		$.ajax({
 			url : "/memory/note/noteUpdate",
 			type : "POST",
 			data : {"memberNo" : memNo, "noteTitle" : $("input[name=noteTitle]").val(), "noteContent" : $(".nicEdit-main").html(),
-				"categoryNo" : $("#category").val(), "noteNo" : 999},
-			processData: false,
-			contentType:false
+				"categoryNo" : $("#category").val(), "noteNo" : localStorage.getItem("noteNoToUpdate")}
 		})
 		.done(function (result) {
 			alert(result.msg, "success");

@@ -53,7 +53,6 @@ public class NoteController {
 	
 	@RequestMapping("/note")
 	public Map<String, Object> note(NoteVO note, HttpSession session) throws Exception {
-		System.out.println(note);
 		String FileName = UUID.randomUUID().toString(); //데이터 파일명 생성
 		Map<String, Object> msg = new HashMap<>();
 		
@@ -75,26 +74,21 @@ public class NoteController {
 		return msg;
 	}
 	@RequestMapping("/noteUpdate")
-	public Map<String, Object> noteUpdate(HttpServletRequest request, HttpSession session) throws Exception {
-		NoteVO note = new NoteVO();
+	public Map<String, Object> noteUpdate(NoteVO note, HttpServletRequest request, HttpSession session) throws Exception {
 		String modified = UUID.randomUUID().toString(); //수정 된 파일명 생성
-		note.setNoteTitle(request.getParameter("noteTitle"));
-		note.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));
-		note.setNoteNo(Integer.parseInt(request.getParameter("noteNo")));
-		note.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
-		note.setNoteContent(modified); //연결파일이름을 수정된 파일명으로 설정
 		Map<String, Object> msg = new HashMap<>();
 		//note edit commit
 		NoteVO data = service.noteDetail(note.getNoteNo()); //원본 파일명 추출
 		try{
 			fos = new FileOutputStream(FILE_PATH + modified);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(request.getParameter("noteContent"));
+			oos.writeObject(note.getNoteContent());
 			} catch(Exception e){
 				// e.printStackTrace();
 				System.out.println("[에러] 파일 쓰기에 실패했습니다.");
 			} finally {
 				closeStreams();
+				note.setNoteContent(modified); //연결파일이름을 수정된 파일명으로 설정
 				service.noteUpdate(note);
 				File file = new File(FILE_PATH + data.getNoteContent()); //수정 전 내용 데이터파일 경로
 				if(file.exists()) file.delete(); //수정 전 내용 데이터파일 삭제처리
