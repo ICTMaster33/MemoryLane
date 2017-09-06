@@ -11,13 +11,7 @@ public class DragVO {
 	private Date dragRegDate;
 	private Date dragUpdateDate;
 	private String searchWrd;
-	
-	public String getSearchWrd() {
-		return searchWrd;
-	}
-	public void setSearchWrd(String searchWrd) {
-		this.searchWrd = searchWrd;
-	}
+	private String imageTag;
 	public int getDragNo() {
 		return dragNo;
 	}
@@ -60,12 +54,23 @@ public class DragVO {
 	public void setDragUpdateDate(Date dragUpdateDate) {
 		this.dragUpdateDate = dragUpdateDate;
 	}
+	public String getSearchWrd() {
+		return searchWrd;
+	}
+	public void setSearchWrd(String searchWrd) {
+		this.searchWrd = searchWrd;
+	}
+	public String getImageTag() {
+		return imageTag;
+	}
+	public void setImageTag(String imageTag) {
+		this.imageTag = imageTag;
+	}
 
 	@Override
 	public String toString() {
 		return "DragVO [dragNo=" + dragNo + ", memberNo=" + memberNo + ", dragContent=" + dragContent + ", dragUrl="
 				+ dragUrl + ", dragUrlTitle=" + dragUrlTitle + ", dragRegDate=" + dragRegDate + ", dragUpdateDate="
-				+ dragUpdateDate + ", searchWrd=" + searchWrd + "]";
+				+ dragUpdateDate + ", searchWrd=" + searchWrd + ", imageTag=" + imageTag + "]";
 	}
-	
 }

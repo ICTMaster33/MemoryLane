@@ -113,7 +113,7 @@ public class NoteController {
 				// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
 				ois = new ObjectInputStream(fis);
 				
-				// 오브젝트 스트림으로부터 오브젝트를 읽어 ArrayList<Human>으로 형변환
+				// 오브젝트 스트림으로부터 오브젝트를 읽어 String으로 형변환
 				String content = (String) ois.readObject();
 				n.setNoteContent(content);
 				} catch(Exception e) {

@@ -31,7 +31,7 @@
 				5대 은행 주담대 대출 신청 건수·신청액 모두 급증<br><br><br>
 				<div><div class="articleMedia mediaImageZoom">
 				<span class="imageZoom"><span class="imgad_area">
-				<img id="mainimg0" style="cursor: pointer;" alt="기사이미지" src="http://thumbnews.nateimg.co.kr/view610/http://news.nateimg.co.kr/orgImg/yt/2017/08/29/AKR20170828168300002_01_i.jpg">
+				<img id="mainimg0" style="cursor: pointer;" alt="기사이미지" src="http://thumbnews.nateimg.co.kr/view610/http://news.nateimg.co.kr/orgImg/yt/2017/08/29/AKR20170828168300002_01_i.jpg?type=w540">
 				</span><span class="sub_tit">가계대출[연합뉴스 자료사진]</span></span></div></div><br><br>
 				(서울=연합뉴스) 이세원 박의래 기자 = 정부가 8·2 부동산대책을 통해 주택담보대출 조이기에 들어가자 정책 시행 전에 대출 신청자가 크게 늘어난 것으로 나타났다.<br><br>
 				29일 금융권에 따르면 KB국민·신한·우리·KEB하나·농협 등 5대 은행의 지난 21일과 22일 주택담보대출 신청 건수는 각각 3천643건, 3천215건을 기록했다.<br><br>
@@ -233,41 +233,58 @@
     	//정규표현식을 통한 이미지 태그주소 저장
     	var pattern = /(http[^\s]+(?=\.(jpg|gif|png|JPG|GIF|PNG))\.\2)/gm;
     	var image_tag = text.match(pattern);
-
+    	var img_Array = new Array(); //Array 배열생성
+    	var img_Obj = new Object(); //image_tag값을 저장 할 Object
+    	
+    	if(image_tag != null) {
+	    	for (var i = 0; i < image_tag.length; i++) {
+	    		img_Obj = new Object();
+	    		console.log(image_tag[i]);
+	    		img_Obj.img = image_tag[i];
+	    		img_Array.push(img_Obj);
+			}
+    	}
+    	
+    	console.log("arr: "+img_Array);
+		
     	// 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
     	if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
     		//이미지 저장
     		if(image_tag != null) { //텍스트만 드래그 할 경우 null에러 방지
-	    	   	for (var i = 0; i < image_tag.length; i++) {
-	    	   		setTimeout(function(){
-	    	   		 }, 100);
-	    	  		$.ajax({
-	    	  			url: "/memory/drag/registDragImg",
-	    	  			type: "POST",	
-	    	  			data: {"imageTag": image_tag[i]},
-	    	  			success: function (result) {
-	    					console.log(image_tag[i] + "이미지 등록성공");
-	    	  			},
-	    	   			error: function (jqXhr, textStatus, errorText) {
-	    	   				alert("이미지 저장 에러발생 : " + errorText);
-	    				}
-	    			});
-	    		}
+	    	   	//for (var i = 0; i < image_tag.length +1; i++) { //length에 +1 한 것은 이미지가 여러개 있는경우 태그파일 중복저장 방지를 위한 것.
+	    	   		$.ajax({
+	    		    	url: "/memory/drag/registDrag",
+	    		    	type: "POST",	
+	    		    	data: {"dragContent" : text, "imageTag" : JSON.stringify(img_Array)},
+	    		    	dataType: "json",
+	    		    	ContentType: "application/json",
+	    		    	success: function (data) {
+	    		    		alert("등록성공");
+	    		    		prevText = text;
+	    		    		makeDragList();
+	    		    	},
+	    		    	error: function (jqXhr, textStatus, errorText) {
+	    		    		alert("에러발생 : " + errorText);
+	    		    	}
+	    		    });
+	    		//}
     		}
-			$.ajax({
-		    	url: "/memory/drag/registDrag",
-		    	type: "POST",	
-		    	data: {"dragContent": text},
-		    	success: function (result) {
-		    		alert("등록성공");
-		    		prevText = text;
-		    		makeDragList();
-		    	},
-		    	error: function (jqXhr, textStatus, errorText) {
-		    		alert("에러발생 : " + errorText);
-		    	}
-		    });
-    	}
+    		if(image_tag == null) { //이미지가 없는경우
+				$.ajax({
+			    	url: "/memory/drag/registDrag",
+			    	type: "POST",	
+			    	data: {"dragContent": text},
+			    	success: function (result) {
+			    		alert("등록성공");
+			    		prevText = text;
+			    		makeDragList();
+			    	},
+			    	error: function (jqXhr, textStatus, errorText) {
+			    		alert("에러발생 : " + errorText);
+			    	}
+			    });
+	    	}
+	    }
 	});
     
     // 드래그 노트에 추가하기.
@@ -275,7 +292,7 @@
     	var addDragNo = event.target.id.substring(4);
     	if (noteOpenYn) {
     		$.ajax({
-    			url : "/memory/drag/selectDrag.do",
+    			url : "/memory/drag/selectDrag",
     			type: "POST",
     			data: {"dragNo" : addDragNo},
     			dataType: "json"
@@ -294,7 +311,7 @@
     function makeDragList() {
     	$.ajax({
     		type: "POST",
-    		url : "/memory/drag/dragList.do",
+    		url : "/memory/drag/dragList",
     		data: {"memberNo" : ${memberNo}},
     		dataType : "json"
     	})
