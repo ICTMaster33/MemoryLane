@@ -114,7 +114,6 @@
 
 	// 노트 등록
 	$("#noteSubmitBtn").click(function() {
-
 		var frm = document.noteFrm;
 		if (frm.noteTitle.value == "") {
 			alert("제목을 입력하세요.");
@@ -179,7 +178,6 @@
 			alert(result.msg, "success");
 			makeNoteList();
 			noteDetail(result.noteNo);
-			updateYn = false;
 			$("input[name=noteTitle]").val("");
 			$(".nicEdit-main").html("");
 			$("#category").val("");

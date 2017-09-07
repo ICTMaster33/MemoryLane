@@ -526,6 +526,8 @@
     	document.getElementById("mainView").style.display = "none";
     	document.getElementById("profileModal").style.display = "none";
     	document.getElementById("noteEditor").style.display = "";
+    	document.getElementById("noteUpdateBtn").style.display = "none";
+		document.getElementById("noteSubmitBtn").style.display = "block"
     	getCategory();
     });
 	
@@ -541,29 +543,6 @@
 
 	function drag_close() {
 		$("#noteBar").hide("slide", {direction: "left" }, 600);
-	}
-
-	var noteOpenYn = false;
-
-	function note_open() {
-		document.getElementById("newsView").style.display = "none";
-		document.getElementById("noteBar").style.display = "none";
-		document.getElementById("mainView").style.display = "none";
-//	 	document.getElementById("editorBtnDiv").style.display = "none";
-		document.getElementById("sideDragBar").style.display = "none";
-		$("#noteBar").show("slide", {direction: "left" }, 600);
-//	 	$("#editorBtnDiv").show("slide", {direction: "left" }, 600);
-		makeNoteList();
-		getMainCategory();
-		getCategory();
-		noteOpenYn = true;
-		if(updateYn){
-			document.getElementById("noteUpdateBtn").style.display = "block";
-			document.getElementById("noteSubmitBtn").style.display = "none";
-		} else {
-			document.getElementById("noteUpdateBtn").style.display = "none";
-			document.getElementById("noteSubmitBtn").style.display = "block";
-		}
 	}
 
 	// function note_close() {
@@ -593,7 +572,6 @@
 		makeDragList();
 		$("#noteTitle").val("");
 		$(".nicEdit-main").html('');
-		noteOpenYn = false;
 	}
 	
 	// DB에서 카테고리 가져오기
@@ -614,7 +592,7 @@
 			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
-
+	
 	function open_editor() {
 //	 	document.getElementById("editorBtnDiv").style.display = "block";
 //		document.getElementById("mainView").style.display = "none";
@@ -623,18 +601,7 @@
     	document.getElementById("mainView").style.display = "none";
     	document.getElementById("profileModal").style.display = "none";
     	document.getElementById("noteEditor").style.display = "";
-
-		if(updateYn){
-			document.getElementById("noteUpdateBtn").style.display = "block";
-			document.getElementById("noteSubmitBtn").style.display = "none";
-		} else {
-			document.getElementById("noteUpdateBtn").style.display = "none";
-			document.getElementById("noteSubmitBtn").style.display = "block";
-		}
 	}
-
-
-	var updateYn = false;
 
 	//노트 다운로드
 	function downloadNote(noteNo){
@@ -649,6 +616,8 @@
 	//노트 업데이트
 	function updateNote(noteNo){
 		localStorage.setItem("noteNoToUpdate",noteNo);
+    	document.getElementById("noteUpdateBtn").style.display = "block";
+		document.getElementById("noteSubmitBtn").style.display = "none"
 		$.ajax({
 			type: "POST",
 			url : "/memory/note/noteDetail",
@@ -661,8 +630,6 @@
 			$("input[name=noteTitle]").val(title);
 			$(".nicEdit-main").html(content);
 			localStorage.setItem("selectedItem", "categoryNo" + result.categoryNo);
-			updateYn = true;
-			noteOpenYn = true;
 			getCategory();
 			open_editor();
 		})
