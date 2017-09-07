@@ -204,7 +204,7 @@
     		document.getElementById("newsDetailSection").style.display = "none";
     	})
     	.fail(function(jqXhr, textStatus, errorText){
-    		alert("628에러발생: " + errorText + "<br>" + "상태: " + textStatus);
+    		alert("628오류: " + errorText + "<br>" + "오류코드: " + textStatus);
     	});
     }
 
@@ -264,7 +264,7 @@
 	    		    		makeDragList();
 	    		    	},
 	    		    	error: function (jqXhr, textStatus, errorText) {
-	    		    		alert("에러발생 : " + errorText);
+	    		    		alert("오류 : " + errorText);
 	    		    	}
 	    		    });
 	    		//}
@@ -280,7 +280,7 @@
 			    		makeDragList();
 			    	},
 			    	error: function (jqXhr, textStatus, errorText) {
-			    		alert("에러발생 : " + errorText);
+			    		alert("오류 : " + errorText);
 			    	}
 			    });
 	    	}
@@ -301,7 +301,7 @@
     			$(".nicEdit-main").append(result.dragContent.replace("amp;", "&") + "<br>");
     		})
     		.fail(function (jqXhr, textStatus, errorText) {
-//     			alert("에러발생 : " + errorText);
+//     			alert("오류 : " + errorText);
     		});
     		return false;
     	}
@@ -319,7 +319,7 @@
     		makeDragListAll(result);
     	})
     	.fail(function(jqXhr, textStatus, errorText){
-    		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+    		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
     	});
     }
 

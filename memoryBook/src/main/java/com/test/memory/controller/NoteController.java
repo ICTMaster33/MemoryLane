@@ -45,9 +45,12 @@ public class NoteController {
 	private FileOutputStream fos;	//파일을 쓰기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
 	private ObjectOutputStream oos;	//객체를 쓰기위한
-	private String FILE_PATH = "C:/datatest/";
+	private String FILE_PATH = "C:/Users/SCitmaster/git/MemoryLane/memoryBook/src/main/webapp/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
-
+	private String IMG_FILE_PATH = FILE_PATH+"img_data/"; //이미지파일 저장경로
+	private String FILE_PATH_WEB = "http://localhost:8888/memory/data/"; //데이터 태그경로
+	private String IMG_FILE_PATH_WEB = FILE_PATH_WEB+"img_data/"; //이미지파일 태그경로
+	
 	@Autowired
 	private NoteService service;
 	

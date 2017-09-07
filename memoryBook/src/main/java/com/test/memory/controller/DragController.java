@@ -39,9 +39,11 @@ public class DragController {
 	private ObjectOutputStream oos;	//객체를 쓰기위한 스트림
 	private ArrayList<String> IMG_REF = new ArrayList<>(); //이미지 경로를 저장하는 배열변수
 	private ArrayList<String> IMG_FILE = new ArrayList<>(); //이미지 파일명을 저장하는 배열변수
-	private String FILE_PATH = "C:/datatest/"; //내용파일(태그) 저장경로
-	private String IMG_FILE_PATH = FILE_PATH+"img/"; //이미지파일 저장경로
+	private String FILE_PATH = "C:/Users/SCitmaster/git/MemoryLane/memoryBook/src/main/webapp/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
+	private String IMG_FILE_PATH = FILE_PATH+"img_data/"; //이미지파일 저장경로
+	private String FILE_PATH_WEB = "http://localhost:8888/memory/data/"; //데이터 태그경로
+	private String IMG_FILE_PATH_WEB = FILE_PATH_WEB+"img_data/"; //이미지파일 태그경로
 	
 	@Autowired
 	private DragService service;
@@ -94,7 +96,7 @@ public class DragController {
 		// 이미지태그 경로 변환부 (img태그가 있는 경우에만 작동)
 		if (!IMG_REF.isEmpty()) {
 			for (int i = 0; i < IMG_REF.size(); i++) {
-				value = value.replaceAll(IMG_REF.get(i), IMG_FILE_PATH + IMG_FILE.get(i));
+				value = value.replaceAll(IMG_REF.get(i), IMG_FILE_PATH_WEB + IMG_FILE.get(i));
 			}
 		}
 

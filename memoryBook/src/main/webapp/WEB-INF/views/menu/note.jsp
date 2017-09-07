@@ -218,7 +218,7 @@
 			return false;
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 		
 	}
@@ -239,7 +239,7 @@
 			$("#searchWrd1").val("");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
 
@@ -262,7 +262,7 @@
 	        $("#email").val("");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	})
 	function saveNoteNo(noteNo){
@@ -298,7 +298,7 @@
 			
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
 	
@@ -370,7 +370,7 @@
 
 	        	})
 	        	.fail(function(jqXhr, textStatus, errorText){
-	        		alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+	        		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 	        	});
 	        }
 	        ,editable : false
@@ -406,7 +406,7 @@
 //	 		document.getElementById("noteView").style.display = "none";
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
 	//카테고리 수정
@@ -435,7 +435,7 @@
 			makeNoteCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
 
@@ -452,7 +452,7 @@
 			makeNoteCards(result);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
 
@@ -611,7 +611,7 @@
 			$("#"+selcat).attr("selected", "selected");
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
 
@@ -667,7 +667,7 @@
 			open_editor();
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 		
 	}
@@ -746,7 +746,7 @@
 			$("#noteList").html(html);
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
 	}
 
@@ -850,8 +850,19 @@
 			
 		})
 		.fail(function(jqXhr, textStatus, errorText){
-			alert("에러발생: " + errorText + "<br>" + "상태: " + status);
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
 		});
+	}
+	
+	// 카테고리 셀렉박스에 옵션 추가
+	function appendCategory(categoryList){
+		 $("#category option").remove();
+		 for(var i = 0; i < categoryList.length; i++){
+				var category = categoryList[i];
+				var categoryName = category.categoryName;
+				var categoryNo = category.categoryNo;
+				$("#category").append("<option value='"+categoryNo+"' id='categoryNo"+categoryNo+"'>"+categoryName+"</option>");
+		}
 	}
 
 	//Tooltip 효과
