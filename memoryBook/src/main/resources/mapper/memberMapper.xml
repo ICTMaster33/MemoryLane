@@ -8,7 +8,7 @@
 
 	<!-- 회원 가입 정보 저장 -->
 	<insert id="join" parameterType="MemberVO">
-		INSERT INTO T_MEMBER VALUES (MEMBER_NO.NEXTVAL, #{password}, #{name}, #{email})
+		INSERT INTO T_MEMBER VALUES (MEMBER_NO.NEXTVAL, #{password}, #{name}, #{email}, 0)
 	</insert>
 	
 	<!-- 로그인 -->
@@ -20,4 +20,21 @@
 	<delete id="unregister" parameterType="MemberVO">
 		DELETE FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{password}
 	</delete>
+	
+	<!-- 	회원목록 -->
+	<select id="getList" resultType="MemberVO">
+		SELECT * FROM T_MEMBER WHERE email !='admin'
+	</select>
+	
+	<!-- 	계정정지-->
+	<update id="click" parameterType="MemberVO">
+		UPDATE T_MEMBER SET 
+		<if test="approvalNum ==1">
+		approvalNum = '0' 
+		</if>
+		<if test="approvalNum ==0">
+		approvalNum = '1' 
+		</if>
+		WHERE NAME = #{name}
+	</update>
 </mapper>

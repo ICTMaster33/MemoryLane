@@ -1,5 +1,7 @@
 package com.test.memory.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -78,10 +80,19 @@ public class MemberController {
 				}else return "redirect:/member/index";
 			}else return "redirect:/member/index";
 		}
+		//리스트 출력
+		@RequestMapping(value = "getList", method = RequestMethod.GET)
+		@ResponseBody
+		public ArrayList<MemberVO> getList() {
+			return service.getList();
+		}
+		//정지 해제
+		@RequestMapping(value = "click")
+		@ResponseBody
+		public boolean click(MemberVO vo) {
 		
-		
-		
-		
+			return service.click(vo);
+		}
 		
 		
 		@RequestMapping(value = "login_ex", method = RequestMethod.POST)

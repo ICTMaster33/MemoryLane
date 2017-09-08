@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,13 +65,20 @@
 					</a>
                 </li>
                 <li>
-                	<a id="friend"y>
+                	<a id="friend">
 					    My Friend
 					</a>
                 </li>
                 <li>
                     <a data-toggle="modal" data-target="#myModal_m">Unregister</a>
                 </li>
+                <c:if test="${email eq 'admin'}">
+                <li>
+                	<a id="user">
+					    UserList
+					</a>
+                </li>
+                </c:if>
                 <li>
                     <a href="#logout" onclick="logout()">Logout</a>
                 </li>
@@ -105,6 +113,12 @@
 		<div id='myFriend'>
 			<div class="container-fluid">
 		  	<%@ include file="menu/friend.jsp" %>
+		  	</div>
+	  	</div>
+	  	
+	  	<div id='userList'>
+			<div class="container-fluid">
+		  	<%@ include file="menu/userList.jsp" %>
 		  	</div>
 	  	</div>
         
@@ -208,6 +222,7 @@
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
+    	document.getElementById("userList").style.display = "none";
     	$("#profile").show();
     });
     
@@ -215,6 +230,7 @@
     	document.getElementById("profile").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
+    	document.getElementById("userList").style.display = "none";
     	$("#myDrag").show();
     });
     
@@ -222,6 +238,7 @@
     	document.getElementById("profile").style.display = "none";
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
+    	document.getElementById("userList").style.display = "none";
     	document.getElementById("myNote").style.display = "";
     });
     
@@ -229,7 +246,16 @@
     	document.getElementById("profile").style.display = "none";
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
+    	document.getElementById("userList").style.display = "none";
     	$("#myFriend").show();
+    });
+    
+    $("#user").click(function(e) {
+    	document.getElementById("profile").style.display = "none";
+    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myNote").style.display = "none";
+    	document.getElementById("myFriend").style.display = "none";
+    	$("#userList").show();
     });
     </script>
 

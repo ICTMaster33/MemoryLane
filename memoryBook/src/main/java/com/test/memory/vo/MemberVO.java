@@ -5,6 +5,7 @@ public class MemberVO {
 	private String name;
 	private String email;
 	private String password;
+	private int approvalNum;
 	
 	public int getMemberNo() {
 		return mem_no;
@@ -30,4 +31,11 @@ public class MemberVO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public int getApprovalNum() {
+		return approvalNum;
+	}
+	public void setApprovalNum(int approvalNum) {
+		this.approvalNum = approvalNum;
+	}
+	
 }

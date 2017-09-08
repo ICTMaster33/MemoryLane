@@ -1,5 +1,7 @@
 package com.test.memory.service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +29,19 @@ public class MemberServiceImpl implements MemberService{
 	public boolean unregister(MemberVO vo) {
 		return dao.unregister(vo);
 	}
+
+	@Override
+	public ArrayList<MemberVO> getList() {
+		
+		return dao.getList();
+		
+	}
+
+	@Override
+	public boolean click(MemberVO vo) {
+		
+		return dao.click(vo);
+	}
+	
+	
 }

@@ -1,9 +1,12 @@
 package com.test.memory.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.test.memory.dao.MemberMapper;
 import com.test.memory.vo.MemberVO;
 
 
@@ -33,5 +36,17 @@ public class MemberDAOImpl implements MemberDAO{
 	public boolean unregister(MemberVO vo) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 			return mapper.unregister(vo);
+	}
+
+	@Override
+	public ArrayList<MemberVO> getList() {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.getList();
+	}
+	
+	@Override
+	public boolean click(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.click(vo);
 	}
 }
