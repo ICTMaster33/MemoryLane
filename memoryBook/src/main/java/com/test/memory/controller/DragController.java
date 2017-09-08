@@ -21,15 +21,12 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.memory.service.DragService;
 import com.test.memory.vo.DragVO;
-
-import net.sf.json.JSONArray;
 
 
 @RestController
@@ -43,7 +40,7 @@ public class DragController {
 	private ArrayList<String> IMG_REF = new ArrayList<>(); //이미지 경로를 저장하는 배열변수
 	private ArrayList<String> IMG_FILE = new ArrayList<>(); //이미지 파일명을 저장하는 배열변수
 	private String FILE_PATH = "C:/Users/SCitmaster/git/MemoryLane/memoryBook/src/main/webapp/data/";
-//	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
+//	private String FILE_PATH = "G:/SPRING/git/MemoryLane/memoryBook/src/main/webapp/data/";
 	private String IMG_FILE_PATH = FILE_PATH+"img_data/"; //이미지파일 저장경로
 	private String FILE_PATH_WEB = "http://localhost:8888/memory/data/"; //데이터 태그경로
 	private String IMG_FILE_PATH_WEB = FILE_PATH_WEB+"img_data/"; //이미지파일 태그경로
