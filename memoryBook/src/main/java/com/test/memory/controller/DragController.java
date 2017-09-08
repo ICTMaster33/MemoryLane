@@ -61,21 +61,21 @@ public class DragController {
 		Pattern p = Pattern.compile("<img\\s+([a-zA-Z0-9]+\\s*=\\s*\"?.*?)?\\s*src\\s*=\\s*\"?(.*?)[\"|>]", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(value);
 		while(m.find()) { 
-			System.out.println("결과: "+m.group(2));
 			String imagePath = m.group(2); // img 태그내 src값 추출결과
+			// 불필요한 옵션 자르기 (ex> ?type=w540)
+			imagePath = imagePath.substring(imagePath.indexOf("http"), imagePath.lastIndexOf("?"));
+
 			// 이미지를 읽어와서 BufferedImage에 넣는다.
 			BufferedImage image = ImageIO.read(new URL(imagePath));
 
 			// 파일명 자르기
 			String imgFile = imagePath.substring(imagePath.lastIndexOf("/") + 1);
-			System.out.println(imgFile);
 
 			// 확장자 자르기
 			String imgFormat = imgFile.substring(imgFile.lastIndexOf(".") + 1);
-
+			
 			// 파일이름 변환
 			String imgName = UUID.randomUUID().toString();
-//			String imgName = imgFile;
 
 			// 해당경로에 이미지를 저장함.
 			try {
@@ -107,7 +107,6 @@ public class DragController {
 		try {
 			fos = new FileOutputStream(FILE_PATH + FileName);
 			oos = new ObjectOutputStream(fos);
-			System.out.println("value: " + value);
 			oos.writeObject(value);
 		} catch (Exception e) { // 오류발생시 취소하면서 저장된 데이터 및 리스트 삭제
 			// e.printStackTrace();
