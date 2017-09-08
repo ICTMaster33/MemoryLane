@@ -74,13 +74,13 @@ public class DragController {
 			String imgFormat = imgFile.substring(imgFile.lastIndexOf(".") + 1);
 
 			// 파일이름 변환
-			// String imgName = UUID.randomUUID().toString();
-			String imgName = imgFile;
+			String imgName = UUID.randomUUID().toString();
+//			String imgName = imgFile;
 
 			// 해당경로에 이미지를 저장함.
 			try {
 				ImageIO.write(image, imgFormat, new File(IMG_FILE_PATH + imgName));
-			} catch (Exception e) { // 오류발생시 취소하면서 이미저장된 이미지파일 및 리스트 삭제
+			} catch (Exception e) { // 오류발생시 취소하면서 이미 저장된 이미지파일 및 리스트 삭제
 				//e.printStackTrace();
 				for (int i = 0; i < IMG_FILE.size(); i++) {
 					File file = new File(FILE_PATH + IMG_FILE.get(i)); //내용 데이터파일 경로
