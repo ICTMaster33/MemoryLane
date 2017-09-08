@@ -62,9 +62,11 @@ public class DragController {
 		Matcher m = p.matcher(value);
 		while(m.find()) { 
 			String imagePath = m.group(2); // img 태그내 src값 추출결과
-			// 불필요한 옵션 자르기 (ex> ?type=w540)
-			imagePath = imagePath.substring(imagePath.indexOf("http"), imagePath.lastIndexOf("?"));
-
+			// 불필요한 옵션 자르기 (ex> ?type=w540, 옵션이 있는 경우에만 작동)
+			if(imagePath.lastIndexOf("?") > 0) {
+				imagePath = imagePath.substring(0, imagePath.lastIndexOf("?"));
+			}
+			
 			// 이미지를 읽어와서 BufferedImage에 넣는다.
 			BufferedImage image = ImageIO.read(new URL(imagePath));
 
