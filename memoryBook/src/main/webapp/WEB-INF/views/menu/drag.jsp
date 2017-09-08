@@ -230,46 +230,23 @@
     	
     	var text = htmlContent; //결과값을 text변수에 삽입
 
-    	//정규표현식을 통한 이미지 태그주소 저장
-    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png|JPG|GIF|PNG))\.\2)/gm;
-    	var image_tag = text.match(pattern);
-    	var img_Array = new Array(); //Array 배열생성
-    	var img_Obj = new Object(); //image_tag값을 저장 할 Object
+    	//정규표현식을 통한 이미지 태그주소 저장 (미사용 로직, 공부용으로 백업)
+//    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png|JPG|GIF|PNG))\.\2)/gm;
+//    	var image_tag = text.match(pattern);
+//    	var img_Array = new Array(); //Array 배열생성
+//    	var img_Obj = new Object(); //image_tag값을 저장 할 Object
     	
-    	if(image_tag != null) {
-	    	for (var i = 0; i < image_tag.length; i++) {
-	    		img_Obj = new Object();
-	    		console.log(image_tag[i]);
-	    		img_Obj.img = image_tag[i];
-	    		img_Array.push(img_Obj);
-			}
-    	}
-    	
-    	console.log("arr: "+img_Array);
+//   	if(image_tag != null) {
+//	    	for (var i = 0; i < image_tag.length; i++) {
+//	    		img_Obj = new Object();
+//	    		console.log(image_tag[i]);
+//	    		img_Obj.img = image_tag[i];
+//	    		img_Array.push(img_Obj);
+//			}
+//    	}
 		
     	// 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
     	if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
-    		//이미지 저장
-    		if(image_tag != null) { //텍스트만 드래그 할 경우 null에러 방지
-	    	   	//for (var i = 0; i < image_tag.length +1; i++) { //length에 +1 한 것은 이미지가 여러개 있는경우 태그파일 중복저장 방지를 위한 것.
-	    	   		$.ajax({
-	    		    	url: "/memory/drag/registDrag",
-	    		    	type: "POST",	
-	    		    	data: {"dragContent" : text, "imageTag" : JSON.stringify(img_Array)},
-	    		    	dataType: "json",
-	    		    	ContentType: "application/json",
-	    		    	success: function (data) {
-	    		    		alert("등록성공");
-	    		    		prevText = text;
-	    		    		makeDragList();
-	    		    	},
-	    		    	error: function (jqXhr, textStatus, errorText) {
-	    		    		alert("오류 : " + errorText);
-	    		    	}
-	    		    });
-	    		//}
-    		}
-    		if(image_tag == null) { //이미지가 없는경우
 				$.ajax({
 			    	url: "/memory/drag/registDrag",
 			    	type: "POST",	
@@ -283,30 +260,9 @@
 			    		alert("오류 : " + errorText);
 			    	}
 			    });
-	    	}
 	    }
 	});
     
-    // 드래그 노트에 추가하기.
-    $("div[id^=drag]").click(function(event){
-    	var addDragNo = event.target.id.substring(4);
-    	if (noteOpenYn) {
-    		$.ajax({
-    			url : "/memory/drag/selectDrag",
-    			type: "POST",
-    			data: {"dragNo" : addDragNo},
-    			dataType: "json"
-    		})
-    		.done(function (result) {
-    			$(".nicEdit-main").append(result.dragContent.replace("amp;", "&") + "<br>");
-    		})
-    		.fail(function (jqXhr, textStatus, errorText) {
-//     			alert("오류 : " + errorText);
-    		});
-    		return false;
-    	}
-    });
-
     // 드래그 리스트 만들기
     function makeDragList() {
     	$.ajax({
@@ -321,49 +277,6 @@
     	.fail(function(jqXhr, textStatus, errorText){
     		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
     	});
-    }
-
-    function makeDragListAll(result) {
-    	var html = "";
-    	for (var i = 0; i < result.length; i++) {
-
-    		var drag = result[i];	
-    		var dragNo = drag.dragNo;
-    		
-    		html += "<div class='quote-box1 w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='drag"+ drag.dragNo+"'  >";
-    		html += "<p class='quotation-mark1' id='drag"+ drag.dragNo+"'> “ </p> ";
-    		html += "<br>";
-    		html += "<br>";
-    		html += "<div class='quote-text' style='overflow:auto;max-height:170px; font-size:15px;' id='drag"+ drag.dragNo+"'>";
-    		html += "		<p id='drag"+ drag.dragNo+"'>" + drag.dragContent.replace("amp;", "&") + "</p><br>";
-    		html += "</div>";
-    		html += " <hr>";
-    		html += " <div class='blog-post-actions'>";
-    		// 시간 뿌리기
-    		var date = new Date(drag.dragRegDate);
-    		var time = date.getFullYear() + "-" 
-    		         + (date.getMonth() + 1) + "-" 
-    		         + date.getDate() + " "
-    		         + date.getHours() + ":"
-    		         + date.getMinutes() + ":"
-    		         + date.getSeconds();
-    		html += "<p class='blog-post-bottom'>"+ time +"</p>";
-    		if(drag.dragUrlTitle != null){
-    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : "+ drag.dragUrlTitle +"</p>";
-    			html += "<p class='blog-post-bottom pull-right'><span class='badge quote-badge'dragNote-toggle='tooltip' title='링크'><i class='fa fa-link' dragNote-toggle='tooltip' title='링크' onclick='openUrl(event);' id='" + drag.dragUrl + "'></i></span></p>";
-    		}else {
-    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : 드래그노트 뉴스스탠드</p>";
-    		}
-    		html += "</div>";
-    		//시간 뿌리기 끝
-    		html += "</div>";
-    	}
-    	if (result.length == 0) {
-    		html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
-    		html += "<h6>드래그가 없습니다.</h6>";
-    		html += "</div>";
-    	}
-    	$("#dragList").html(html);
     }
 
     // 링크열기

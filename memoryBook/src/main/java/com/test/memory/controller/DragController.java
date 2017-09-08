@@ -14,11 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,51 +51,50 @@ public class DragController {
 	@Autowired
 	private DragService service;
 	
-	@RequestMapping("/registDragImg")
-	public void registDragImg(HttpServletRequest request) throws Exception {
-	}
-	
 	@RequestMapping("/registDrag")
-	public Map<String, String> registDrag(String imageTag, HttpServletRequest request, DragVO drag, HttpSession session) throws Exception {
-		
-		if(imageTag != null) { //이미지가 없는 경우에는 미작동
-			//drag.jsp에서 JSON값을 받아 ArrayList 및 MAP 생성
-			List<Map<String,Object>> imageList = new ArrayList<Map<String,Object>>();
-			imageList = JSONArray.fromObject(imageTag); //JSON Array 및 오브젝트받는 부분
-
-		    for (Map<String, Object> map : imageList) {
-		    	String imagePath = map.get("img").toString();
-				// 이미지를 읽어와서 BufferedImage에 넣는다.
-				BufferedImage image = ImageIO.read(new URL(imagePath));
-
-				// 파일명 자르기
-				String imgFile = imagePath.substring(imagePath.lastIndexOf("/") + 1);
-				System.out.println(imgFile);
-
-				// 확장자 자르기
-				String imgFormat = imgFile.substring(imgFile.lastIndexOf(".") + 1);
-
-				// 파일이름 변환
-				// String imgName = UUID.randomUUID().toString();
-				String imgName = imgFile;
-
-				// 해당경로에 이미지를 저장함.
-				try {
-					ImageIO.write(image, imgFormat, new File(IMG_FILE_PATH + imgName));
-				} catch (Exception e) {
-					IMG_FILE.clear();
-					e.printStackTrace();
-				} finally {
-					IMG_REF.add(map.get("img").toString());
-					IMG_FILE.add(imgName);
-				}
-		    }
-		}
-
+	public Map<String, String> registDrag(DragVO drag, HttpSession session) throws Exception {
 		// 태그 저장부
 		byte ptext[] = drag.getDragContent().getBytes();
-		String value = new String(ptext, "UTF-8").replaceAll("amp;", "&");
+		String value = new String(ptext, "UTF-8").replaceAll("amp;", "&").replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 
+		// 이미지 추출부
+		Pattern p = Pattern.compile("<img\\s+([a-zA-Z0-9]+\\s*=\\s*\"?.*?)?\\s*src\\s*=\\s*\"?(.*?)[\"|>]", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(value);
+		while(m.find()) { 
+			System.out.println("결과: "+m.group(2));
+			String imagePath = m.group(2); // img 태그내 src값 추출결과
+			// 이미지를 읽어와서 BufferedImage에 넣는다.
+			BufferedImage image = ImageIO.read(new URL(imagePath));
+
+			// 파일명 자르기
+			String imgFile = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+			System.out.println(imgFile);
+
+			// 확장자 자르기
+			String imgFormat = imgFile.substring(imgFile.lastIndexOf(".") + 1);
+
+			// 파일이름 변환
+			// String imgName = UUID.randomUUID().toString();
+			String imgName = imgFile;
+
+			// 해당경로에 이미지를 저장함.
+			try {
+				ImageIO.write(image, imgFormat, new File(IMG_FILE_PATH + imgName));
+			} catch (Exception e) { // 오류발생시 취소하면서 이미저장된 이미지파일 및 리스트 삭제
+				//e.printStackTrace();
+				for (int i = 0; i < IMG_FILE.size(); i++) {
+					File file = new File(FILE_PATH + IMG_FILE.get(i)); //내용 데이터파일 경로
+					if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
+				}
+				IMG_REF.clear();
+				IMG_FILE.clear();
+				System.out.println("[에러] 이미지파일 저장 실패");
+			} finally {
+				IMG_REF.add(imagePath);
+				IMG_FILE.add(imgName);
+			}
+		}
+		
 		// 이미지태그 경로 변환부 (img태그가 있는 경우에만 작동)
 		if (!IMG_REF.isEmpty()) {
 			for (int i = 0; i < IMG_REF.size(); i++) {
@@ -107,11 +109,17 @@ public class DragController {
 			oos = new ObjectOutputStream(fos);
 			System.out.println("value: " + value);
 			oos.writeObject(value);
-		} catch (Exception e) {
+		} catch (Exception e) { // 오류발생시 취소하면서 저장된 데이터 및 리스트 삭제
 			// e.printStackTrace();
+			for (int i = 0; i < IMG_FILE.size(); i++) {
+				File img_File = new File(FILE_PATH + IMG_FILE.get(i)); //이미지 데이터파일 경로
+				if(img_File.exists()) img_File.delete(); //해당 이미지파일 삭제처리
+			}
+			File data_File = new File(FILE_PATH + FileName); //내용 데이터파일 경로
+			if(data_File.exists()) data_File.delete(); //해당 데이터파일 삭제처리
 			IMG_FILE.clear();
 			IMG_REF.clear();
-			System.out.println("[에러] 파일 쓰기에 실패했습니다.");
+			System.out.println("[에러] 데이터 파일 쓰기 실패");
 		} finally {
 			closeStreams();
 			drag.setDragContent(FileName);
@@ -148,6 +156,22 @@ public class DragController {
 		
 		List<DragVO> dragList = service.dragList(drag);
 		for(DragVO n : dragList){
+			try{
+				// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+				fis = new FileInputStream(FILE_PATH + n.getDragContent());
+				
+				// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+				ois = new ObjectInputStream(fis);
+				
+				// 오브젝트 스트림으로부터 오브젝트를 읽어 String으로 형변환
+				String content = (String) ois.readObject();
+				n.setDragContent(content);
+				} catch(Exception e) {
+					// e.printStackTrace();
+					System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+				} finally {
+					closeStreams();
+			}
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(n.getDragRegDate());
 			n.setDragRegDate(cal.getTime());
@@ -159,6 +183,22 @@ public class DragController {
 	@RequestMapping("/selectDrag")
 	public DragVO selectDrag(String dragNo) throws Exception {
 		DragVO n = service.selectDrag(Integer.parseInt(dragNo));
+		try{
+			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+			fis = new FileInputStream(FILE_PATH + n.getDragContent());
+			
+			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+			ois = new ObjectInputStream(fis);
+			
+			// 오브젝트 스트림으로부터 오브젝트를 읽어 String으로 형변환
+			String content = (String) ois.readObject();
+			n.setDragContent(content);
+			} catch(Exception e) {
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+			} finally {
+				closeStreams();
+		}
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(n.getDragRegDate());
 		n.setDragRegDate(cal.getTime());

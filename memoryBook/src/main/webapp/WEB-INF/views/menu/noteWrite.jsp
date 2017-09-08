@@ -26,11 +26,21 @@
 
 			<p class="desc_brunch">
 				<span class="part">드래그 박스에서 원하는 항목을 클릭하여 글을 작성해보세요.<br></span>
-				<!-- 			<span class="part">그리고 다시 꺼내 보세요.<br></span>  -->
-				<!-- 			<span class="part"><span class="txt_brunch">서랍 속 간직하고 있는 글과 감성을.</span></span> -->
 			</p>
 		</div>
 
+		<!-- 드래그바 -->
+		<div class="w3-sidebar w3-round"
+			style="background-color: white; width: 300px; z-index: 102;"
+			id="sideDragBar">
+			<div style="padding: 8px 25px; margin-top: 20px; text-align: center; font-size: 18px;">
+				<i class="fa fa-inbox w3-xlarge"></i> DRAGS
+			</div>
+			<!-- 드래그 리스트 -->
+			<div id="dragList"></div>
+		</div>
+
+		<!-- 입력창 -->
 		<form name="noteFrm" id="noteFrm" method="POST"
 			enctype="multipart/form-data" style="z-index: 2; width: 1069px;">
 			<div>
@@ -97,7 +107,7 @@
 	// 글 쓰기/수정 로직 외 카테고리,리스트,삭제 등의 로직은 note.jsp에 있습니다. (로직은 note.jsp와 연동됩니다)
 	
 	// 에디터 가져오기
-	bkLib.onDomLoaded(nicEditors.allTextAreas); 
+	bkLib.onDomLoaded(nicEditors.allTextAreas);
 
 	// 로딩 시 위치 지정
 	window.onload = function () {
@@ -142,6 +152,7 @@
 			makeNoteList();
 			$("input[name=noteTitle]").val("");
 			$(".nicEdit-main").html("");
+			editor_chk = false;
 			main_open();
 		})
 		.fail(function (jqXhr, textStatus, errorText) {
@@ -181,6 +192,7 @@
 			$("input[name=noteTitle]").val("");
 			$(".nicEdit-main").html("");
 			$("#category").val("");
+			editor_chk = false;
 			main_open();
 		})
 		.fail(function (jqXhr, textStatus, errorText) {
@@ -195,6 +207,7 @@
 		var chk;
 		chk = confirm("정말로 취소하시겠습니까?");
 		if(chk) {
+		editor_chk = false;
 		$("#noteTitle").val('');
 		$(".nicEdit-main").html('');
     	document.getElementById("noteEditor").style.display = "none";
@@ -203,6 +216,70 @@
     	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
 		document.getElementById("mainView").style.height = window.innerHeight +"px";
 		}
+    });
+	
+	// 드래그내용 입력시 필요한 드래그 리스트 출력
+    function makeDragListAll(result) {
+    	var html = "";
+    	for (var i = 0; i < result.length; i++) {
+
+    		var drag = result[i];	
+    		var dragNo = drag.dragNo;
+    		
+    		html += "<div class='quote-box1 w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='drag"+ drag.dragNo+"'  >";
+    		html += "<p class='quotation-mark1' id='drag"+ drag.dragNo+"'> “ </p> ";
+    		html += "<br>";
+    		html += "<br>";
+    		html += "<div class='quote-text' style='overflow:auto;max-height:170px; font-size:15px;' id='drag"+ drag.dragNo+"'>";
+    		html += "		<p id='drag"+ drag.dragNo+"'>" + drag.dragContent.replace("amp;", "&") + "</p><br>";
+    		html += "</div>";
+    		html += " <hr>";
+    		html += " <div class='blog-post-actions'>";
+    		// 시간 뿌리기
+    		var date = new Date(drag.dragRegDate);
+    		var time = date.getFullYear() + "-" 
+    		         + (date.getMonth() + 1) + "-" 
+    		         + date.getDate() + " "
+    		         + date.getHours() + ":"
+    		         + date.getMinutes() + ":"
+    		         + date.getSeconds();
+    		html += "<p class='blog-post-bottom'>"+ time +"</p>";
+    		if(drag.dragUrlTitle != null){
+    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : "+ drag.dragUrlTitle +"</p>";
+    			html += "<p class='blog-post-bottom pull-right'><span class='badge quote-badge'dragNote-toggle='tooltip' title='링크'><i class='fa fa-link' dragNote-toggle='tooltip' title='링크' onclick='openUrl(event);' id='" + drag.dragUrl + "'></i></span></p>";
+    		}else {
+    			html += "<p class='blog-post-bottom pull-left' style='font-style:italic;font-size:12px;'>출처 : 알 수 없음</p>";
+    		}
+    		html += "</div>";
+    		//시간 뿌리기 끝
+    		html += "</div>";
+    	}
+    	if (result.length == 0) {
+    		html += "<div class='w3-container w3-card-2 w3-white w3-round w3-margin w3-padding'>";
+    		html += "<h6>드래그가 없습니다.</h6>";
+    		html += "</div>";
+    	}
+    	$("#dragList").html(html);
+    }
+	
+    //노트에 드래그 입력하기.
+    $("div[id^=drag]").click(function(event){
+    	var addDragNo = event.target.id.substring(4);
+    	if (editor_chk) {
+    		$.ajax({
+    			url : "/memory/drag/selectDrag",
+    			type: "POST",
+    			data: {"dragNo" : addDragNo},
+    			dataType: "json"
+    		})
+    		.done(function (result) {
+    			$(".nicEdit-main").append(result.dragContent.replace("amp;", "&") + "<br>");
+    		})
+    		.fail(function (jqXhr, textStatus, errorText) {
+//     			alert("오류 : " + errorText);
+    		});
+    		return false;
+    	}
     });
     </script>
 </body>

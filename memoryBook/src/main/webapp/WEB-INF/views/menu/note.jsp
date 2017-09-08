@@ -223,26 +223,6 @@
 		
 	}
 
-	//검색 드래그 리스트 만들기
-	function searchDragList() {
-		var searchWrd = $("#searchWrd1").val();
-		var memberNo = localStorage.getItem("memberNo");
-		$.ajax({
-			type: "POST",
-			url : "/memory/drag/dragList",
-			data: {"searchWrd" : searchWrd,
-					"memberNo" : memberNo},
-			dataType : "json"
-		})
-		.done(function (result) {
-			makeDragListAll(result);
-			$("#searchWrd1").val("");
-		})
-		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
-		});
-	}
-
 	//메일로 노트 보내기
 	$("#emailNoteSubmitBtn").click(function(){
 		var memberNo = localStorage.getItem("memberNo");
@@ -521,7 +501,8 @@
 		document.getElementById("mainView").style.height = window.innerHeight +"px";
 	});
 
-	// 내비바 아이콘으로 열고 닫기
+	// 에디터 열기
+	var editor_chk = false; // 드래그 입력시 에디터 on/off여부 체크
 	$("#noteWrite").click(function(e) {
     	document.getElementById("mainView").style.display = "none";
     	document.getElementById("profileModal").style.display = "none";
@@ -529,6 +510,7 @@
     	document.getElementById("noteUpdateBtn").style.display = "none";
 		document.getElementById("noteSubmitBtn").style.display = "block"
     	getCategory();
+		editor_chk = true;
     });
 	
 	function drag_open() {
