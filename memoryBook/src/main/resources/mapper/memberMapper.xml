@@ -37,4 +37,30 @@
 		</if>
 		WHERE NAME = #{name}
 	</update>
+	
+	<!--회원검색 -->
+	<select id="findMember" parameterType="String" resultType="MemberVO">
+		SELECT name, email FROM T_MEMBER WHERE NAME LIKE '%'||#{name}||'%' or EMAIL LIKE '%'||#{email}||'%' order by mem_no desc
+		
+<!-- 		SELECT m.name, m.email, f.mem_auth FROM T_MEMBER m, T_FRIEND f  -->
+<!-- 		WHERE f.mem_email = #{0} and m.email = f.friend_email and m.name LIKE '%'||#{1}||'%' or m.email LIKE '%'||#{1}||'%'  -->
+<!-- 		order by mem_no desc -->
+	</select>
+	
+	<!-- 친구추가 -->
+	<insert id="addFriend" parameterType="FriendVO">
+		INSERT INTO T_FRIEND VALUES (#{myEmail}, #{friend_Email}, '1')
+	</insert>
+	
+	<!-- 친구삭제 -->
+	<delete id="deleteFriend" parameterType="FriendVO">
+		DELETE FROM T_FRIEND WHERE FRIEND_EMAIL = #{friend_Email}
+	</delete>
+	
+	<!-- 친구목록 가져오기 -->
+	<select id="getFriendList" parameterType="String" resultType="FriendVO">
+		SELECT f.friend_Email, m.name FROM T_FRIEND f, T_MEMBER m
+		WHERE m.email = f.friend_Email and f.MEM_EMAIL = #{loginEmail}
+	</select>
+	
 </mapper>

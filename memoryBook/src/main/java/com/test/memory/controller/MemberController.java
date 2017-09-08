@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.memory.service.MemberService;
+import com.test.memory.vo.FriendVO;
 import com.test.memory.vo.MemberVO;
 
 @Controller
@@ -94,16 +95,35 @@ public class MemberController {
 			return service.click(vo);
 		}
 		
-		
-		@RequestMapping(value = "login_ex", method = RequestMethod.POST)
+		//멤버찾기
+		@RequestMapping(value = "findMember", method = RequestMethod.POST)
 		@ResponseBody
-		public boolean login_ex(MemberVO vo, HttpSession session, Model model) {
-			model.addAttribute(vo);
-			if(service.login(vo) == null) return false;
-			vo = service.login(vo);
-			session.setAttribute("email", vo.getEmail());
-			session.setAttribute("memberNo", vo.getMemberNo());
-			session.setAttribute("name", vo.getName());
-			return true;
+		public ArrayList<MemberVO> findMember(String findId, Model model) {
+//					String loginEmail = (String)session.getAttribute("email");
+			return service.findMember(findId);
 		}
+		
+		//친구추가
+		@RequestMapping(value = "addFriend", method = RequestMethod.POST)
+		@ResponseBody
+		public boolean addFriend(FriendVO friend) {
+			return service.addFriend(friend);
+		}
+		
+		//친구삭제
+		@RequestMapping(value = "deleteFriend", method = RequestMethod.POST)
+		@ResponseBody
+		public boolean deleteFriend(FriendVO friend) {
+			return service.deleteFriend(friend);
+		}
+		
+		//친구목록불러오기
+		@RequestMapping(value = "getFriendList", method = RequestMethod.POST)
+		@ResponseBody
+		public ArrayList<FriendVO> getFriendList(HttpSession session, Model model) {
+			String loginEmail = (String)session.getAttribute("email");
+			return service.getFriendList(loginEmail);
+		}
+
+				
 }

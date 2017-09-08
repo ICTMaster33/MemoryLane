@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.test.memory.dao.MemberMapper;
+import com.test.memory.vo.FriendVO;
 import com.test.memory.vo.MemberVO;
 
 
@@ -48,5 +48,38 @@ public class MemberDAOImpl implements MemberDAO{
 	public boolean click(MemberVO vo) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.click(vo);
+	}
+	
+	@Override
+	public ArrayList<MemberVO> findMember(String findId) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		ArrayList<MemberVO> list = mapper.findMember(findId); 
+		return list;
+	}
+	
+	@Override
+	public boolean addFriend(FriendVO friend) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		int num = mapper.addFriend(friend);
+		if(num == 1){
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean deleteFriend(FriendVO friend) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		int num = mapper.deleteFriend(friend);
+		if(num == 1){
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public ArrayList<FriendVO> getFriendList(String loginEmail) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.getFriendList(loginEmail);
 	}
 }
