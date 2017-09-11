@@ -62,7 +62,7 @@ public class MemberController {
 		@RequestMapping(value = "logout", method = RequestMethod.GET)
 		public String logout(HttpSession session) {
 			session.invalidate();
-			return "redirect:/member/main";
+			return "redirect:/";
 		}
 		
 		//회원탈퇴
@@ -77,7 +77,7 @@ public class MemberController {
 				model.addAttribute("unregiResult", unregiResult);
 				if(unregiResult){
 					session.invalidate();
-					return "main";
+					return "redirect:/";
 				}else return "redirect:/member/index";
 			}else return "redirect:/member/index";
 		}

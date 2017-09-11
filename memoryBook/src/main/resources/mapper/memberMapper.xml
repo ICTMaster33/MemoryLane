@@ -8,7 +8,7 @@
 
 	<!-- 회원 가입 정보 저장 -->
 	<insert id="join" parameterType="MemberVO">
-		INSERT INTO T_MEMBER VALUES (MEMBER_NO.NEXTVAL, #{password}, #{name}, #{email}, 0)
+		INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{password}, #{name}, #{email}, 0)
 	</insert>
 	
 	<!-- 로그인 -->
