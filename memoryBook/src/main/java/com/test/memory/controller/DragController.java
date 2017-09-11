@@ -41,8 +41,8 @@ public class DragController {
 	private ArrayList<String> IMG_FILE = new ArrayList<>(); //이미지 파일명을 저장하는 배열변수
 	private String FILE_PATH = "C:/Users/SCITMaster/git/MemoryLane/memoryBook/src/main/webapp/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/memoryBook/src/main/webapp/data/";
-	private String IMG_FILE_PATH = "C:/Users/SCITMaster/git/MemoryLane/memoryBook/src/main/webapp/drag_img/"; //이미지파일 저장경로
-	private String FILE_PATH_WEB = "http://localhost:8888/memory/img_src/"; //이미지파일 태그경로
+	private String IMG_FILE_PATH = FILE_PATH+"img_data/"; //이미지파일 저장경로
+	private String FILE_PATH_WEB = "http://localhost:8888/memory/data/img_data/"; //이미지파일 태그경로
 	
 	@Autowired
 	private DragService service;
@@ -81,7 +81,7 @@ public class DragController {
 			} catch (Exception e) { // 오류발생시 취소하면서 이미 저장된 이미지파일 및 리스트 삭제
 				//e.printStackTrace();
 				for (int i = 0; i < IMG_FILE.size(); i++) {
-					File file = new File(IMG_FILE_PATH + IMG_FILE.get(i)); //내용 데이터파일 경로
+					File file = new File(FILE_PATH + IMG_FILE.get(i)); //내용 데이터파일 경로
 					if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
 				}
 				IMG_REF.clear();

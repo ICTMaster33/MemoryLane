@@ -16,7 +16,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Handles HTTP GET requests for /drag_img/** by efficiently serving up static data in the ${webappRoot}/data directory -->
-	<resources mapping="/img_src/**" location="/drag_img/" />
+	<resources mapping="/data/**" location="/data/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
