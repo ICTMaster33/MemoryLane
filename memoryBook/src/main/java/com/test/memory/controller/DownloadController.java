@@ -6,12 +6,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,11 +29,10 @@ public class DownloadController {
 	
 	private FileInputStream fis;	//파일을 읽기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
-	private String FILE_PATH = "C:/Users/SCitmaster/git/MemoryLane/memoryBook/src/main/webapp/data/";
+	private String FILE_PATH = "C:/Users/SCITMaster/git/MemoryLane/memoryBook/src/main/webapp/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
-	private String IMG_FILE_PATH = FILE_PATH+"img_data/"; //이미지파일 저장경로
-	private String FILE_PATH_WEB = "http://localhost:8888/memory/data/"; //데이터 태그경로
-	private String IMG_FILE_PATH_WEB = FILE_PATH_WEB+"img_data/"; //이미지파일 태그경로
+	private String IMG_FILE_PATH = FILE_PATH+"img/"; //이미지파일 저장경로
+	private String FILE_PATH_WEB = "http://localhost:8888/memory/img_src/"; //이미지파일 태그경로
 
 	@Autowired
 	private NoteService service;
