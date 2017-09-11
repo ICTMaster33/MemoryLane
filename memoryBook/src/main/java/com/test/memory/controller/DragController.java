@@ -41,7 +41,7 @@ public class DragController {
 	private ArrayList<String> IMG_FILE = new ArrayList<>(); //이미지 파일명을 저장하는 배열변수
 	private String FILE_PATH = "C:/Users/SCITMaster/git/MemoryLane/memoryBook/src/main/webapp/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/memoryBook/src/main/webapp/data/";
-	private String IMG_FILE_PATH = FILE_PATH+"img/"; //이미지파일 저장경로
+	private String IMG_FILE_PATH = "C:/Users/SCITMaster/git/MemoryLane/memoryBook/src/main/webapp/drag_img/"; //이미지파일 저장경로
 	private String FILE_PATH_WEB = "http://localhost:8888/memory/img_src/"; //이미지파일 태그경로
 	
 	@Autowired
