@@ -17,8 +17,6 @@
 <!-- Custom styles for this template -->
 <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
 <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
-<script
-	src="/memory/resources/clipboard.js-master/dist/clipboard.min.js"></script>
 </head>
 
 <body>
