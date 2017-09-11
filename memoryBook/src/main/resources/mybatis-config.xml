@@ -11,10 +11,12 @@
 		<typeAlias type="com.test.memory.vo.NoteImgVO" alias="NoteImgVO" />
 		<typeAlias type="com.test.memory.vo.CategoryVO" alias="CategoryVO" />
 		<typeAlias type="com.test.memory.vo.FriendVO" alias="FriendVO" />
+		<typeAlias type="com.test.memory.vo.MemoVO" alias="MemoVO" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/memberMapper.xml" />
 		<mapper resource="mapper/dragMapper.xml" />
 		<mapper resource="mapper/noteMapper.xml" />
+		<mapper resource="mapper/memoMapper.xml" />
 	</mappers>
 </configuration>

@@ -74,6 +74,13 @@
                 </li>
                 <c:if test="${email eq 'admin'}">
                 <li>
+                <a id="memo">
+					    MemoList
+					</a>
+				</li>
+				 </c:if>
+				  <c:if test="${email eq 'admin'}">
+				<li>
                 	<a id="user">
 					    UserList
 					</a>
@@ -115,13 +122,19 @@
 		  	<%@ include file="menu/friend.jsp" %>
 		  	</div>
 	  	</div>
-	  	
-	  	<div id='userList'>
+	  	<%--  현재 에러
+	  	<div id='memoList'>
 			<div class="container-fluid">
-		  	<%@ include file="menu/userList.jsp" %>
+		  	<%@ include file="manager/receivedMemos.jsp" %>
 		  	</div>
 	  	</div>
-        
+	  	
+        --%>
+	  	<div id='userList'>
+			<div class="container-fluid">
+		  	<%@ include file="manager/userList.jsp" %>
+		  	</div>
+	  	</div> 
 		<div id='myDrag'>
 			<div class="container-fluid">
 		  	<%@ include file="menu/drag.jsp" %>
@@ -223,6 +236,7 @@
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
+    	document.getElementById("memoList").style.display = "none";
     	$("#profile").show();
     });
     
@@ -231,6 +245,7 @@
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
+    	document.getElementById("memoList").style.display = "none";
     	$("#myDrag").show();
     });
     
@@ -239,6 +254,7 @@
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
+    	document.getElementById("memoList").style.display = "none";
     	document.getElementById("myNote").style.display = "";
     });
     
@@ -247,6 +263,7 @@
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("userList").style.display = "none";
+    	document.getElementById("memoList").style.display = "none";
     	$("#myFriend").show();
     });
     
@@ -255,7 +272,17 @@
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
+    	document.getElementById("memoList").style.display = "none";
     	$("#userList").show();
+    });
+    
+    $("#memo").click(function(e) {
+    	document.getElementById("profile").style.display = "none";
+    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myNote").style.display = "none";
+    	document.getElementById("myFriend").style.display = "none";
+    	document.getElementById("userList").style.display = "none";
+    	$("#memoList").show();
     });
     </script>
 

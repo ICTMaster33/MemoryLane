@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 메모 처리 SQL --> 
+<mapper namespace="com.test.memory.dao.MemoDAO">
+	<!-- 유저 리스트 -->
+	<select id="showUserList" resultType="MemberVO" parameterType="String" >
+		select * from T_MEMBER
+	</select>
+	
+	<!--메모 보내기  -->
+	<insert id="write" parameterType="MemoVO">
+		insert 
+		into T_MEMOS
+		(num,fromEmail,toEmail,title,content)
+		values
+		(seq_memo.nextval,#{fromEmail},#{toEmail},#{title},#{content},sysdate)
+	</insert>
+	
+	<!--보낸 메모 보기-->	 
+	<select id="readSentMemos" resultType="MemoVO" parameterType="String">
+		select * from T_MEMOS
+		where fromEmail = #{fromEmail}
+		order by num desc
+	</select>
+	
+	<!-- 받은 메모 보기 -->
+ 	<select id="readReceivedMemos" resultType="MemoVO" parameterType="String">
+		select * from T_MEMOS
+		where toEmail = #{toEmail}
+		order by num desc
+	</select>
+	
+ </mapper>
+ 
