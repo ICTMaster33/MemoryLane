@@ -18,6 +18,8 @@
 <!-- Custom styles for this template -->
 <link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
 <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
+<script
+	src="/memory/resources/clipboard.js-master/dist/clipboard.min.js"></script>
 </head>
 
 <body>
@@ -88,12 +90,13 @@
 				"findId" : $("input[name=findId]").val()
 				},
 			success : function(result) {
+						$("#table").empty();
 						var addTitle = "<tr><th>이름</th>";
 						addTitle+= "<th>이메일</th>";
 						addTitle+= "<th>친구추가</th></tr>";
 						$("#table").append(addTitle);
 						var btn;
-						var Email = ${email};
+// 						var Email = ${email};
 						$(result).each(function(index, item) {
 							var addRow  = '<tr id="mlist"><td id="userName'+ index +'">' + item.name + '</td>';
 				                addRow += '<td id="userEmail">' + item.email + '</td>';
@@ -106,7 +109,7 @@
 									url: "/memory/member/addFriend",
 									dataType: "json",
 									type: "post",
-									data: {"myEmail": Email, "friend_Email" : item.email},
+									data: {"myEmail": '${email}', "friend_Email" : item.email},
 									success: function(result){
 										if(result){
 											alert("친구가 추가되었습니다.");
