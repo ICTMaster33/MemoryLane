@@ -66,10 +66,8 @@
 					</a>
                 </li>
                 <li>
-                    <a id="dragtest" class="noteImg">
-                    	<img src="/memory/resources/img/indexImg/dragHover.png" class="indexImg5">
-      		        	<img src="/memory/resources/img/indexImg/drag.png" class="indexImg6">
-					    Drag Test
+                    <a id="dragtest">
+					    My Drag_test
 					</a>
                 </li>
                 <li>
