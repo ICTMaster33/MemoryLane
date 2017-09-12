@@ -122,11 +122,12 @@
 		  	<%@ include file="menu/friend.jsp" %>
 		  	</div>
 	  	</div>
-
 	  	<div id='memoList'>
 			<div class="container-fluid">
-			<h1>MemoList</h1>
-<%-- 		  	<%@ include file="manager/receivedMemos.jsp" %> --%>
+				<h1>memoList</h1>
+		  	<%--  현재 에러
+		  	<%@ include file="manager/receivedMemos.jsp" %>
+    	    --%>
 		  	</div>
 	  	</div>
 	  	
