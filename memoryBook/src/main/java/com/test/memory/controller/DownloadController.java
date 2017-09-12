@@ -155,9 +155,7 @@ public class DownloadController {
 		// 파일 내용 가져오기
 		int dragNo = Integer.parseInt(request.getParameter("dragNo"));
 		System.out.println("다운로드 : " + dragNo);
-		DragVO dragVO = new DragVO();
-		System.out.println(dragVO);
-		dragVO = service_d.dragDetail(dragNo);
+		DragVO dragVO = service_d.dragDetail(dragNo);
 		// 노트 작성한 날짜로 파일 경로 만들기 
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyyMMdd");
 		String datePath = sdf.format(dragVO.getDragRegDate());
