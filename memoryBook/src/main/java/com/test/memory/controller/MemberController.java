@@ -44,17 +44,20 @@ public class MemberController {
 		
 		@RequestMapping(value = "login", method = RequestMethod.POST)
 		@ResponseBody
-		public boolean login(MemberVO vo, HttpSession session, Model model) {
+		public String login(MemberVO vo, HttpSession session, Model model) {
 			model.addAttribute(vo);
 			MemberVO nvo = service.login(vo); 
 			if(nvo == null){
-				return false;
+				return "false";
+			}
+			else if(nvo.getApprovalNum()==1){
+				return "stop";
 			}
 			else{
 				session.setAttribute("email", nvo.getEmail());
 				session.setAttribute("memberNo", nvo.getMemberNo());
 				session.setAttribute("name", nvo.getName());
-				return true;
+				return "true";
 			}
 		}
 		
