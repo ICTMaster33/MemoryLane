@@ -473,34 +473,6 @@
 //	 	return false;
 	// })
 
-	// 로딩 시 위치 지정
-	window.onload = function () {
-//	 	document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
-//	 	document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
-//	 	document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
-//	 	document.getElementById("searchView").style.height = window.innerHeight +"px";
-//	 	document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
-//	 	document.getElementById("noteView").style.height = window.innerHeight +"px";
-		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
-		document.getElementById("noteEditor").style.display = "none";
-		getMainCategory();
-		makeDragList();
-		mainNoteList();
-	}
-
-	// 브라우저 창 크기 변화 시 위치 지정 
-	$(window).resize(function(){
-//	 	document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
-//	 	document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
-//	 	document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
-//	 	document.getElementById("searchView").style.height = window.innerHeight +"px";
-//	 	document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
-//	 	document.getElementById("noteView").style.height = window.innerHeight +"px";
-		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
-	});
-
 	// 에디터 열기
 	var editor_chk = false; // 드래그 입력시 에디터 on/off여부 체크
 	$("#noteWrite").click(function(e) {
@@ -513,17 +485,17 @@
 		editor_chk = true;
     });
 	
-	function drag_open() {
+	function note_open() {
 		document.getElementById("sideDragBar").style.display = "none";
 //	 	document.getElementById("editorBtnDiv").style.display = "none";
 		document.getElementById("noteBar").style.display = "none";
 		$("#sideDragBar").show("slide", {direction: "left" }, 600);
 //	 	$("#editorBtnDiv").show("slide", {direction: "left" }, 600);
-	    makeDragList();
+	    makeDragList_mini();
 		getCategory(); // 카테고리 셀렉박스에 옵션 넣기
 	}
 
-	function drag_close() {
+	function note_close() {
 		$("#noteBar").hide("slide", {direction: "left" }, 600);
 	}
 
@@ -551,7 +523,7 @@
 		document.getElementById("mainView").style.height = window.innerHeight +"px";
 		getMainCategory();
 		mainNoteList();
-		makeDragList();
+		makeDragList_mini();
 		$("#noteTitle").val("");
 		$(".nicEdit-main").html('');
 	}

@@ -60,6 +60,11 @@
 					</a>
                 </li>
                 <li>
+                    <a id="dragtest">
+					    My Drag_test
+					</a>
+                </li>
+                <li>
       		        <a id="note">
 					    My Note
 					</a>
@@ -136,11 +141,16 @@
 		  	<%@ include file="manager/userList.jsp" %>
 		  	</div>
 	  	</div> 
-		<div id='myDrag'>
+		<div id='myDragList'>
 			<div class="container-fluid">
-		  	<%@ include file="menu/drag.jsp" %>
+ 		  	<%@ include file="menu/drag.jsp" %>
 		  	</div>
 	  	</div>
+		<div id='myDragtest'>
+			<div class="container-fluid">
+		  	<%@ include file="menu/drag_test.jsp" %>
+		  	</div>
+	  	</div>	  	
     </div>
     <!-- /#wrapper -->
 	
@@ -231,13 +241,60 @@
     	$("#wrapper").toggleClass("toggled");
     });
     
+	// 로딩 시 위치 지정
+	window.onload = function () {
+		//노트 리스트
+//	 	document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
+//	 	document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
+//	 	document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
+//	 	document.getElementById("searchView").style.height = window.innerHeight +"px";
+//	 	document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
+//	 	document.getElementById("noteView").style.height = window.innerHeight +"px";
+		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
+		document.getElementById("mainView").style.height = window.innerHeight +"px";
+		document.getElementById("noteEditor").style.display = "none";
+		getMainCategory();
+		makeDragList_mini();
+		mainNoteList();
+		
+		//노트 에디터
+		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
+		document.getElementById("editorView").style.height = window.innerHeight +"px";
+		getMainCategory();
+		
+		//드래그 리스트
+		document.getElementById("mainView_drag").style.height = window.innerHeight +"px";
+		makeDragList();
+		mainDragList();
+	}
+
+	// 브라우저 창 크기 변화 시 위치 지정 (통합)
+	$(window).resize(function(){
+//	 	document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
+//	 	document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
+//	 	document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
+//	 	document.getElementById("searchView").style.height = window.innerHeight +"px";
+//	 	document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
+//	 	document.getElementById("noteView").style.height = window.innerHeight +"px";
+		//노트 리스트
+		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
+		document.getElementById("mainView").style.height = window.innerHeight +"px";
+		//노트 에디터
+		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
+		document.getElementById("editorView").style.height = window.innerHeight +"px";
+		//드래그 리스트
+		document.getElementById("mainView_drag").style.width = (window.innerWidth - 420) +"px";
+		document.getElementById("mainView_drag").style.height = window.innerHeight +"px";
+	});
+    
     // 내비바 아이콘으로 열고 닫기
     $("#myProfile").click(function(e) {
-    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myDragList").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
+    	document.getElementById("myDragtest").style.display = "none";
     	document.getElementById("profile").style.display = "";
     });
     
@@ -247,42 +304,57 @@
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
-    	document.getElementById("myDrag").style.display = "";
+    	document.getElementById("myDragtest").style.display = "none";
+    	document.getElementById("myDragList").style.display = "";
+    });
+    
+    $("#dragtest").click(function(e) {
+    	document.getElementById("profile").style.display = "none";
+    	document.getElementById("myNote").style.display = "none";
+    	document.getElementById("myFriend").style.display = "none";
+    	document.getElementById("userList").style.display = "none";
+    	document.getElementById("memoList").style.display = "none";
+    	document.getElementById("myDragList").style.display = "none";
+    	document.getElementById("myDragtest").style.display = "";
     });
     
     $("#note").click(function(e) {
     	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myDragList").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
+    	document.getElementById("myDragtest").style.display = "none";
     	document.getElementById("myNote").style.display = "";
     });
     
     $("#friend").click(function(e) {
     	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myDragList").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("userList").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
+    	document.getElementById("myDragtest").style.display = "none";
     	document.getElementById("myFriend").style.display = "";
     });
     
     $("#user").click(function(e) {
     	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myDragList").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
+    	document.getElementById("myDragtest").style.display = "none";
     	document.getElementById("userList").style.display = "";
     });
     
     $("#memo").click(function(e) {
     	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myDrag").style.display = "none";
+    	document.getElementById("myDragList").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
+    	document.getElementById("myDragtest").style.display = "none";
     	document.getElementById("memoList").style.display = "";
     });
     </script>

@@ -9,308 +9,393 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Simple Sidebar - Start Bootstrap Template</title>
+<title>Simple Sidebar - Start Bootstrap Template </title>
 
-<!-- Bootstrap core CSS -->
-<link href="/memory/resources/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="/memory/resources/css/simple-sidebar.css" rel="stylesheet">
 <script src="/memory/resources/js/jquery-3.2.1.min.js"></script>
+<script src='/memory/resources/js/fullcalendar-3.2.0/lib/moment.min.js'></script>
+<script src='/memory/resources/js/fullcalendar-3.2.0/fullcalendar.js'></script>
 </head>
 
 <body>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal_drag" role="dialog">
+		<div class="modal-dialog">
 
-	<div id="wrapper" class="toggled">
-
-		<!-- 뉴스뷰 -->
-		<div id='myDrag' style="z-index: 4; min-height: 100%; width: 1200px;">
-			<div>
-				5대 은행 주담대 대출 신청 건수·신청액 모두 급증<br><br><br>
-				<div><div class="articleMedia mediaImageZoom">
-				<span class="imageZoom"><span class="imgad_area">
-				<img id="mainimg0" style="cursor: pointer;" alt="기사이미지" src="http://thumbnews.nateimg.co.kr/view610/http://news.nateimg.co.kr/orgImg/yt/2017/08/29/AKR20170828168300002_01_i.jpg?type=w540">
-				</span><span class="sub_tit">가계대출[연합뉴스 자료사진]</span></span></div></div><br><br>
-				(서울=연합뉴스) 이세원 박의래 기자 = 정부가 8·2 부동산대책을 통해 주택담보대출 조이기에 들어가자 정책 시행 전에 대출 신청자가 크게 늘어난 것으로 나타났다.<br><br>
-				29일 금융권에 따르면 KB국민·신한·우리·KEB하나·농협 등 5대 은행의 지난 21일과 22일 주택담보대출 신청 건수는 각각 3천643건, 3천215건을 기록했다.<br><br>
-				8월 일평균 대출 신청 건수가 2천 건대였던 것과 비교하면 약 1천 건 이상 늘어난 것이다.<br><br>
-				다만 지난 23일부터 정부의 8·2 부동산대책이 본격적으로 시행되면서 주택담보대출 증가세는 꺾일 것으로 보인다.<br><br>
-				실제로 LTV·DTI 강화가 시작된 첫날인 지난 23일에는 주택담보대출 신청 건수가 1천562건으로 줄었고 신청액도 1천556억원으로 감소했다.<br><br>
-				은행권 관계자는 "정부 부동산대책이 은행 대출에 영향을 미치는 것은 이제 시작"이라며 "다음 달 가계부채 대책까지 나오면 주택담보대출 증가세는 꺾일 것이란 전망이 많다"고 말했다.<br><br><br>
-				<div><div class="articleMedia mediaImageZoom"><span class="imageZoom"><img id="mainimg1" style="cursor: pointer;" alt="기사 이미지" src="http://thumbnews.nateimg.co.kr/view610/http://news.nateimg.co.kr/orgImg/yt/2017/08/29/AKR20170828168300002_02_i.jpg">
-				<span class="sub_tit">[연합뉴스 자료사진]</span></span></div></div><br><br>laecorp@yna.co.kr<br>(끝)<p><br></p>
-			</div>
-			<div>
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h2 class="modal-title">
+						<i class="fa fa-envelope" style="color: #555555;"></i> Share a
+						drag
+					</h2>
+				</div>
 				<br>
-				<h3 class="tit_brunch">무슨 일이 벌어지고 있을까요, 뉴스 스탠드</h3>
-				<img src="http://localhost:8888/memory/resources/img/daumlogo.png" height="50">
-				<img src="http://localhost:8888/memory/resources/img/naverlogo.png" height="50">
-				<p class="desc_brunch">
-					<span class="part">드래그만으로 원하는 기사를 담아보세요.<br></span>
-				</p>
-			</div>
-			<div>
-				<ul class="nav nav-tabs" id="newsStand">
-					<li class="active"><a data-toggle="tab" onclick="getNews(2)">정치</a></li>
-					<li class="active"><a data-toggle="tab" onclick="getNews(3)">경제</a></li>
-					<li class="active"><a data-toggle="tab" onclick="getNews(4)">사회</a></li>
-					<li class="active"><a data-toggle="tab" onclick="getNews(5)">생활/문화</a></li>
-					<li class="active"><a data-toggle="tab" onclick="getNews(6)">세계</a></li>
-					<li class="active"><a data-toggle="tab" onclick="getNews(7)">IT/과학</a></li>
-				</ul>
-				<div class="tab-content">
-					<br>
-					<br>
-					<div id="newsSection"
-						style='position: relative; width: 100%; height: 800px; overflow: auto;'></div>
-					<div id="newsDetailSection"
-						style="display: none; position: relative; width: 100%; height: 800px; overflow: auto; background-color: #fbfbfb;">
-						<h2 id='newsTitleDiv'></h2>
-						<br>
-						<div id='newsDateDiv' style="text-align: right; font-size: 15px;"></div>
-						<div id='myCarousel' class="carousel" data-ride="carousel"
-							style='width: 70%; margin: 5% 15% 5% 15%;'>
-							<!-- Indicators -->
-							<ol class="carousel-indicators">
-							</ol>
-
-							<!-- Wrapper for slides -->
-							<div class="carousel-inner"></div>
-
-							<!-- Left and right controls -->
-							<a class="left carousel-control" href="#myCarousel"
-								data-slide="prev" style='color: gray;'> <span
-								class="glyphicon glyphicon-chevron-left"></span> <span
-								class="sr-only">Previous</span>
-							</a> <a class="right carousel-control" href="#myCarousel"
-								data-slide="next" style='color: gray;'> <span
-								class="glyphicon glyphicon-chevron-right"></span> <span
-								class="sr-only">Next</span>
-							</a>
-						</div>
-						<br>
-						<div id='newsContentDiv'></div>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;드래그를 공유할 메일 주소를 입력해주세요.</p>
+				<div class="modal-body">
+					<div class="input-group">
+						<span class="input-group-addon"
+							style="box-shadow: 1px 2px 5px #bbb;"><i
+							class="fa fa-envelope"></i></span> <input id="email_drag" type="text"
+							style="box-shadow: 1px 2px 5px #bbb;" class="form-control"
+							name="email_drag" placeholder="받는 사람">
 					</div>
+				</div>
+				<div class="modal-footer">
+					<div id="emailDragSubmitBtn" class="btn btn-default"
+						data-dismiss="modal">
+						<i class="fa fa-share"></i>보내기
+					</div>
+					<div class="btn btn-default" data-dismiss="modal">취소</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="downloadDragModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+
+				<div class="modal-body">
+					<h1>[드래그 다운로드]</h1>
+					<br>
+					<h2>드래그를 다운로드 하겠습니까?</h2>
+					<br> <a id="downloadDragPath" class="btn btn-default">다운로드</a>
+					<div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- Bootstrap core JavaScript -->
-		<script src="/memory/resources/js/popper.min.js"></script>
-		<script src="/memory/resources/js/bootstrap.min.js"></script>
 
-		<script>
-	//뉴스 상세 뿌리기
-    function getNewsDetail(url) {
-    	var urlToRead = "http://www.mlec.co.kr:10010/naverNewsDetail?url=" + url;
-    	var html = "";
-    	$.ajax({
-    		type: "GET",
-    		url : urlToRead,
-    		dataType : "json"
-    	})
-    	.done(function (result) {
-    		$.ajax({
-    			type: "GET",
-    			url : "http://www.mlec.co.kr:10010/naverNewsDetailBack",
-    			dataType : "json"
-    		})
-    		.done(function (result) {
-    			$("#newsTitleDiv").html(result[0].title);
-    			$("#newsDateDiv").html(result[0].date);
-    			var imgs = "";
-    			var lis = "";
-    			if(result[0].images[0] != null){
-    				for(var i = 0; i < result[0].images.length; i++){
-    					$("#myCarousel").attr("style", "display:block;width: 70%; margin: 5% 15% 5% 15%;");
-    					if (i == 0){
-    						imgs += '<div class="item active">';
-    						imgs += "<img src='" + result[0].images[i] + "' alt='' style='width:100%;'>";
-    						imgs += "</div>";
-    						lis += '<li data-target="#myCarousel" data-slide-to="' + i + '" class="active"></li>';
-    					}else{
-    						imgs += '<div class="item">';
-    						imgs += "<img src='" + result[0].images[i] + "' alt='' style='width:100%;'>";
-    						imgs += "</div>";
-    						lis += '<li data-target="#myCarousel" data-slide-to="' + i + '"></li>';
-    					}
-    				}				
-    				$(".carousel-inner").html(imgs);
-    				$(".carousel-indicators").html(lis);
-    			}else {
-    				$(".carousel-inner").html("");
-    				$(".carousel-indicators").html("");
-    				$("#myCarousel").attr("style", "display:none;width: 70%; margin: 5% 15% 5% 15%;");
-    			}		
-//     			if(result[0].images[0].length > 0){
-//     				for(var i = 0; i < result[0].images.length; i++){
-//     					imgs += "<img src='" + result[0].images[i] + "'>";
-//     				}				
-//     				$("#newsImgDiv").html(imgs);
-//     			}else {
-//     				$("#newsImgDiv").html("");
-//     			}	
+	<!-- 드래그모달 -->
+	<div class="modal fade" id="detailModal_drag" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<div id='title_drag' class="w3-margin w3-padding"
+						style="text-align: center;"></div>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div id='date_drag' class="w3-margin w3-padding"
+								style="text-align: right;"></div>
+							<div id='content_drag' class="w3-margin w3-padding"
+								style="text-align: left;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<span id='update_drag' class="w3-margin w3-padding"
+						style="text-align: right;"> </span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 메인뷰 -->
+	<div id="mainView_drag" class="container" style="z-index: 7;">
+		<!-- 검색 -->
+		<div>
+			<br>
+			<h3 class="tit_brunch">드래그 리스트</h3>
+			<p class="desc_brunch">
+				<span class="part">드래그를 공유해 보세요.<br></span>
+				<!-- 			<span class="part">그리고 다시 꺼내 보세요.<br></span>  -->
+				<!-- 			<span class="part"><span class="txt_brunch">드래그 속 간직하고 있는 글과 감성을.</span></span> -->
+				<span class="part">
+					<div class="col-md-4 col-md-offset">
+						<div action="" class="search-form">
+							<div class="form-group has-feedback"
+								onkeydown="javascript:if(event.keyCode == 13) searchList_drag();">
+								<label for="search" class="sr-only">Search</label>
+									<input type="text" class="form-control" name="searchWrd_drag"
+									id="searchWrd_drag" placeholder="드래그 검색">
+									<span class="glyphicon glyphicon-search form-control-feedback"></span>
+							</div>
+						</div>
+					</div>
+				</span>
+		</div>
+		<br><br><br>
+			<!-- 드래그카드 뿌리기 -->
+			<div id="dragCardList"
+				style='position: relative; width: 100%; height: 500px;'></div>
+		</div>
+	</div>
+	
+	<!-- profile modal -->
+	<div id="profileModal_drag" class="modal fade" role="dialog">
+		<div class="modal-dialog">
 
-    			if(result[0].content.indexOf("{}") != -1){
-    				var beautifulContent = result[0].content.split("{}")[1].trim();
-    				$("#newsContentDiv").html(beautifulContent);
-    			}else{
-    				$("#newsContentDiv").html(result[0].content);
-    			}
-    			document.getElementById("newsSection").style.display = "none";
-    			document.getElementById("newsDetailSection").style.display = "block";
-    			return false;
-    		})		
-    	})
-    }
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">설정</h4>
+				</div>
+				<div class="modal-body">
 
-    //뉴스 뿌리기
-    function getNews(newsNo) {
-    	var urltoread = "";
-    	switch(newsNo){
-    	case 2: urltoread = "http://www.nate.com/"; break;
-    	case 3: urltoread = "http://www.mlec.co.kr:10003/naverNewsEconomy"; break;
-    	case 4: urltoread = "http://www.mlec.co.kr:10004/naverNewsSociety"; break;
-    	case 5: urltoread = "http://www.mlec.co.kr:10100/naverNewsCulture"; break;
-    	case 6: urltoread = "http://www.mlec.co.kr:10006/naverNewsGlobal"; break;
-    	case 7: urltoread = "http://www.mlec.co.kr:10007/naverNewsIT"; break;
-    	}
-    	var newshtml = "";
-    	$.ajax({
-    		type: "GET",
-    		url : urltoread,
-    		dataType : "json"
-    	})
-    	.done(function (result) {
-    		for (var i = 0; i < result.length; i++) {
-    			newshtml += " <div class='quote-box w3-margin w3-padding' onclick='please(event)' id='"+result[i].url+"'>";
-    			newshtml += " 	<p class='quotation-mark' onclick='please(event)' id='"+result[i].url+"' > “ </p><br> ";
-    			newshtml += " 	<p class='quote-text' onclick='please(event)' id='"+result[i].url+"'>";
-    			if(result[i].img != null){
-    				newshtml += "	<img src='" + result[i].img + "' id='"+result[i].url+"'>";
-    			}
-    			newshtml += result[i].title +" </p>";
-    			newshtml += " 	<hr>";
-    			newshtml += " 	<div class='blog-post-actions'>";					           
-    			newshtml += " 		<p onclick='please(event)' id='"+result[i].url+"'>" + result[i].content.split("…")[0] + "…</p>";
-    			newshtml += "	</div>";
-    			newshtml += "</div>";
-    		
-    		}
-    		$("#newsSection").html(newshtml);
-    		document.getElementById("newsSection").style.display = "block";
-    		document.getElementById("newsDetailSection").style.display = "none";
-    	})
-    	.fail(function(jqXhr, textStatus, errorText){
-    		alert("628오류: " + errorText + "<br>" + "오류코드: " + textStatus);
-    	});
-    }
+					<div class="container">
+						<h2>이메일 설정</h2>
+						<br>
+						<p>드래그 내용을 보낼 이메일을 설정해주세요 :)</p>
+						<br>
+						<form class="form-inline">
+							<div class="form-group">
+								<label for="email">Email:</label> <input type="email"
+									class="form-control" id="email_drag" placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label for="pwd">Password:</label> <input type="password"
+									class="form-control" id="pwd_drag" placeholder="Enter password">
+							</div>
+							<button type="submit" class="btn btn-default">설정</button>
+						</form>
+					</div>
 
-    function please(event){
-    	var url2 = event.target.id;
-    	getNewsDetail(url2);
-    }
-    
- // 이전 드래그 텍스트
-    var prevText;
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
 
-    // 뉴스뷰에서 드래그 등록
-    $("#myDrag").mouseup(function(){
-    	//html태그 추출부
-    	var range = window.getSelection().getRangeAt(0),
-    			  content = range.extractContents(),
-    			     span = document.createElement('SPAN');
-    	
-    			span.appendChild(content);
-    			var htmlContent = span.innerHTML;
-    	
-    			range.insertNode(span);
-    	
-    	var text = htmlContent; //결과값을 text변수에 삽입
+		</div>
+	</div>
+	<!-- 본문내용 끝 -->
 
-    	//정규표현식을 통한 이미지 태그주소 저장 (미사용 로직, 공부용으로 백업)
-//    	var pattern = /(http[^\s]+(?=\.(jpg|gif|png|JPG|GIF|PNG))\.\2)/gm;
-//    	var image_tag = text.match(pattern);
-//    	var img_Array = new Array(); //Array 배열생성
-//    	var img_Obj = new Object(); //image_tag값을 저장 할 Object
-    	
-//   	if(image_tag != null) {
-//	    	for (var i = 0; i < image_tag.length; i++) {
-//	    		img_Obj = new Object();
-//	    		console.log(image_tag[i]);
-//	    		img_Obj.img = image_tag[i];
-//	    		img_Array.push(img_Obj);
-//			}
-//    	}
+	<script>
+	//드래그 검색
+	function searchList_drag(){
+		var searchWrd_drag = $("#searchWrd_drag").val();
+		var memberNo = ${memberNo};
+		$.ajax({
+			type: "POST",
+			url : "/memory/drag/dragList",
+			data: {"searchWrd_drag" : searchWrd_drag,
+				   "memberNo" : memberNo
+			 	},
+			dataType : "json"
+		})
+		.done(function (result) {
+			makeDragCards(result);
+			$("#searchWrd_drag").val("");
+			return false;
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+		});
 		
-    	// 드래그 텍스트 공백인지 앞의 드래그와 중복되는지 체크!
-    	if (text !='' && text.length > 1 && $.trim(text).length != 0 && prevText != text) {
+	}
+
+	//메일로 드래그 보내기
+	$("#emailDragSubmitBtn").click(function(){
+		var memberNo = localStorage.getItem("memberNo");
+		var dragNo = localStorage.getItem("emailDragNo");
+		var emailTo = $("#email_drag").val()
+		$.ajax({
+			type: "POST",
+			url : "/memory/drag/mailDrag",
+			data: {"dragNo" : dragNo,
+				   "memberNo" : memberNo,
+				   "emailTo"  : emailTo
+			},
+			dataType : "json"
+		})
+		.done(function (result) {
+			alert(result.msg, "success");
+	        $("#email_drag").val("");
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+		});
+	})
+	function saveDragNo(dragNo){
+		localStorage.setItem("emailDragNo",dragNo);
+	}
+
+	//드래그 디테일
+	function dragDetail(dragNo){
+		$.ajax({
+			type: "POST",
+			url : "/memory/drag/dragDetail",
+			data: {"dragNo" : dragNo},
+			dataType : "json"
+		})
+		.done(function (result) {
+			var title = result.dragTitle;
+			var content = result.dragContent;
+			// 시간 뿌리기
+			var date = new Date(result.dragRegDate);
+			var time = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate() + " "
+			         + date.getHours() + ":"
+			         + date.getMinutes() + ":"
+			         + date.getSeconds();
+			//시간 뿌리기 끝
+//	 		document.getElementById("dragView").style.display = "block";
+			$("#title_drag").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
+			$("#date_drag").html(time);
+			$("#content_drag").html(content);
+			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_drag'><i class='fa fa-text-width' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_drag'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_drag'><i class='fa fa-download'></i></a></span></p>");
+//	 		document.getElementById("editorBtnDiv").style.display = "none";
+			
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+		});
+	}
+		
+	// 메인에 드래그 뿌리기
+	function mainDragList() {
+		var memberNo = localStorage.getItem("memberNo");
+		$.ajax({
+			type: "POST",
+			url : "/memory/drag/dragList",
+			data: {"memberNo" : memberNo},
+			dataType : "json"
+		})
+		.done(function (result) {
+			makeDragCards(result);
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+		});
+	}
+
+	function makeDragCards(result) {
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+
+			var drag = result[i];	
+			var dragNo = drag.dragNo;
+			html += "<div class='gallery' onclick='dragDetail("+drag.dragNo+")' style='box-shadow: 1px 2px 5px #bbb;' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"' data-toggle='modal' data-target='#detailModal_drag'  >";
+			// 이미지 뿌리기
+			var dragContent = drag.dragContent;
+			if(dragContent.indexOf('<img') != -1) {
+				var dragImgSrc = dragContent.split('src="')[1].split('"')[0];
+				html += '<figure><img id="drag'+drag.dragNo+'" src="' + dragImgSrc + '" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
+			} else {
+				html += '<figure><img id="drag'+drag.dragNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
+			}
+			html += "	<div  class='desc'><p>" + drag.dragTitle + "</p></div>";
+			html += "</div>";
+
+		}
+		if (result.length == 0) {
+			html += "<div class='gallery'>";
+			html += '	<img src="/memory/resources/img/D.png" alt="" width="300px" height="200px" >';
+			html += "	<div  class='desc'><p> 드래그가 없습니다. </p></div>";
+			html += "</div>";
+		}
+		$("#dragCardList").html(html);
+	}
+
+	//드래그 다운로드
+	function downloadDrag(dragNo){
+		var url = "/memory/download/downloadDrag?dragNo=" + dragNo;
+		$("#downloadDragPath").attr("href", url);
+	}
+
+	$("#downloadDragPath").click(function(){
+		$("#downloadDragModal").modal('hide');
+	})
+
+	// 검색 뒤로 가기
+	// function goBack() {
+//	 	document.getElementById("searchResult").style.display = "none";
+//	 	document.getElementById("daumView").style.display = "block";
+	// }
+
+	// 드래그리스트 만들기
+	function makeDragList() {
+		var memberNo = ${memberNo};
+		$.ajax({
+			type: "POST",
+			url : "/memory/drag/dragList",
+			data: {"memberNo" : memberNo},
+			dataType : "json"
+		})
+		.done(function (result) {
+			var html = "";
+			for (var i = 0; i < result.length; i++) {
+
+				var drag = result[i];	
+				var dragNo = drag.dragNo;
+				
+				console.log("드래그번호"+dragNo)
+				html += " <div class='quote-box w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='drag"+drag.dragNo+"' >";
+//	 			html += " <blockquote class='quote-box'>;
+				html += " <p class='quotation-mark' onclick='dragDetail("+drag.dragNo+")'data-toggle='modal' data-target='#detailModal_drag' > “ </p><br> ";
+				html += " <p class='quote-text' onclick='dragDetail("+drag.dragNo+")'data-toggle='modal' data-target='#detailModal_drag'>" + drag.dragTitle +" </p>";
+				html += " <hr>";
+				html += " <div class='blog-post-actions'>";
+				// 시간 뿌리기
+				var date = new Date(drag.dragRegDate);
+				var time = date.getFullYear() + "-" 
+				         + (date.getMonth() + 1) + "-" 
+				         + date.getDate() + " "
+				         + date.getHours() + ":"
+				         + date.getMinutes() + ":"
+				         + date.getSeconds();
+				html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
+						         
+				html += "<p class='blog-post-bottom pull-right'>";         
+				html += "   <span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'><a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' onclick='saveDragNo("+dragNo+");'></i></a></span>";
+				html += "	<span class='badge quote-badge'dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloaddrag?dragNo=" + dragNo +"'><i class='fa fa-download'></i></a></span></p>";
+				//시간 뿌리기 끝
+				html += "</div>";
+				html += "</div>";
+				
+		
+			}
+			if (result.length == 0) {
+				html += "<div class='container'>";
+				html += "<h6>등록 된 드래그가 없습니다.</h6>";
+				html += "</div>";
+			}
+			$("#dragList").html(html);
+		})
+		.fail(function(jqXhr, textStatus, errorText){
+			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
+		});
+	}
+
+	// 드래그 드래그로 삭제
+	function deleteDrag(dragNo) {
+		var dragNo = dragNo;
+		var memberNo = ${memberNo};
+		
+		alert({
+			  title: "확인",
+			  text: "드래그를 삭제하시겠어요~?",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonText: "네, 삭제해주세요 :)",
+			  cancelButtonText: "아니요!",
+			  closeOnConfirm: false
+			},
+			function(){
 				$.ajax({
-			    	url: "/memory/drag/registDrag",
-			    	type: "POST",	
-			    	data: {"dragContent": text},
-			    	success: function (result) {
-			    		alert("등록성공");
-			    		prevText = text;
-			    		makeDragList();
-			    	},
-			    	error: function (jqXhr, textStatus, errorText) {
-			    		alert("오류 : " + errorText);
-			    	}
-			    });
-	    }
-	});
-    
-    // 드래그 리스트 만들기
-    function makeDragList() {
-    	$.ajax({
-    		type: "POST",
-    		url : "/memory/drag/dragList",
-    		data: {"memberNo" : ${memberNo}},
-    		dataType : "json"
-    	})
-    	.done(function (result) {
-    		makeDragListAll(result);
-    	})
-    	.fail(function(jqXhr, textStatus, errorText){
-    		alert("오류: " + errorText + "<br>" + "오류코드: " + status);
-    	});
-    }
-
-    // 링크열기
-    function openUrl(event) {
-    	window.open(event.target.id, "_blank");
-    }
-
-
-    // 드래그 드래그로 삭제
-    function deleteDrag(dragNo) {
-    	var dragNo = dragNo;
-    	var memberNo = localStorage.getItem("memberNo");
-    	
-    	swal({
-    		  title: "* :-O",
-    		  text: "드래그를 삭제하시겠어요~?",
-    		  type: "warning",
-    		  showCancelButton: true,
-    		  confirmButtonText: "네, 삭제해주세요 :)",
-    		  cancelButtonText: "아니요!",
-    		  closeOnConfirm: false
-    		},
-    		function(){
-    			$.ajax({
-    				url:"/memory/drag/deleteDrag.do",
-    				dataType:"json",
-    				data: {"dragNo":dragNo},
-    				type: "POST"
-    				}).done(function (result){
-    					swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, 'success');
-    					makeDragList();
-    			});
-    		}
-    	);
-    	
-    }	
+					url:"/memory/drag/deleteDrag",
+					dataType:"json",
+					data: {"dragNo":dragNo},
+					type: "POST"
+					}).done(function (result){
+						alert(result.msg,'success');
+						makeDragList();
+						mainDragList();
+				});
+			}
+		);
+	}
     </script>
 </body>
 </html>

@@ -44,5 +44,16 @@
 		  from t_drag
 		 where drag_no = #{dragNo}
 	</select>
+	<!-- 드래그 디테일 -->
+	<select id="dragDetail" parameterType="int" resultMap="dragMap">
+		select drag_no,
+			   mem_no,
+		       drag_content,
+			   drag_url_title,
+			   drag_reg_date,
+			   drag_update_date
+		 from t_drag
+		 where drag_no = #{dragNo}
+	</select>
 </mapper>
 

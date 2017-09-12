@@ -3,6 +3,7 @@ package com.test.memory.service;
 import java.util.List;
 
 import com.test.memory.vo.DragVO;
+import com.test.memory.vo.NoteVO;
 
 public interface DragService {
 
@@ -10,8 +11,11 @@ public interface DragService {
 
 	public List<DragVO> dragList(DragVO drag) throws Exception;
 
-	public void deleteNote(int dragNo) throws Exception;
+	public void deleteDrag(int dragNo) throws Exception;
 
 	public DragVO selectDrag(int dragNo) throws Exception;
 
+	public DragVO emailDrag(DragVO drag) throws Exception;
+
+	public DragVO dragDetail(int dragNo) throws Exception;
 }

@@ -109,19 +109,6 @@
 	// 에디터 가져오기
 	bkLib.onDomLoaded(nicEditors.allTextAreas);
 
-	// 로딩 시 위치 지정
-	window.onload = function () {
-		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("editorView").style.height = window.innerHeight +"px";
-		getMainCategory();
-	}
-
-	// 브라우저 창 크기 변화 시 위치 지정 
-	$(window).resize(function(){
-		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("editorView").style.height = window.innerHeight +"px";
-	});
-
 	// 노트 등록
 	$("#noteSubmitBtn").click(function() {
 		var frm = document.noteFrm;

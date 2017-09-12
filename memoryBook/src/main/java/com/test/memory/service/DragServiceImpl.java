@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.test.memory.dao.DragDao;
 import com.test.memory.vo.DragVO;
+import com.test.memory.vo.NoteVO;
 
 @Service
 public class DragServiceImpl implements DragService{
@@ -25,12 +26,22 @@ public class DragServiceImpl implements DragService{
 	}
 
 	@Override
-	public void deleteNote(int dragNo) throws Exception {
+	public void deleteDrag(int dragNo) throws Exception {
 		dao.deleteDrag(dragNo);
 	}
 
 	@Override
 	public DragVO selectDrag(int dragNo) throws Exception {
 		return dao.selectDrag(dragNo);
+	}
+	
+	@Override
+	public DragVO emailDrag(DragVO drag) throws Exception {
+		return dao.emailDrag(drag);
+	}
+
+	@Override
+	public DragVO dragDetail(int dragNo) throws Exception {
+		return dao.dragDetail(dragNo);
 	}
 }

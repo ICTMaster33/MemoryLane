@@ -13,11 +13,24 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.activation.CommandMap;
+import javax.activation.MailcapCommandMap;
 import javax.imageio.ImageIO;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.memory.service.DragService;
 import com.test.memory.vo.DragVO;
+import com.test.memory.vo.NoteVO;
 
 
 @RestController
@@ -202,18 +216,122 @@ public class DragController {
 		n.setDragRegDate(cal.getTime());
 		return n;
 	}
+	
+	@RequestMapping("/dragDetail")
+	public DragVO dragDetail(String dragNo) throws Exception {
+		DragVO d = service.dragDetail(Integer.parseInt(dragNo));
+		System.out.println(d);
+		try{
+			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+			fis = new FileInputStream(FILE_PATH + d.getDragContent());
+			
+			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+			ois = new ObjectInputStream(fis);
+			
+			// 오브젝트 스트림으로부터 오브젝트를 읽어 String형으로 형변환
+			String content = (String) ois.readObject();
+			d.setDragContent(content);
+			} catch(Exception e) {
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+			} finally {
+				closeStreams();
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(d.getDragRegDate());
+		d.setDragRegDate(cal.getTime());
+		return d;
+	}
 
 	@RequestMapping("/deleteDrag")
 	public Map<String, String> deleteNote(String dragNo) throws Exception {
 		DragVO data = service.selectDrag(Integer.parseInt(dragNo));
 		String fileName = data.getDragContent();
-		service.deleteNote(Integer.parseInt(dragNo));
+		service.deleteDrag(Integer.parseInt(dragNo));
 		File file = new File(FILE_PATH + fileName); //내용 데이터파일 경로
 		if(file.exists()) file.delete(); //내용 데이터파일 삭제처리
 		Map<String, String> msg = new HashMap<>();
 		msg.put("msg", "드래그가 삭제 되었습니다.");
 		return msg;
 	}
+	
+	@RequestMapping("/mailDrag")
+	public Map<String, Object> mailDrag(HttpServletRequest request, HttpSession m_session) throws Exception{
+	    String emailTo = request.getParameter("emailTo");
+	    int dragNo = Integer.parseInt(request.getParameter("dragNo"));
+	    int memberNo = Integer.parseInt(m_session.getAttribute("memberNo").toString());
+	   
+	    DragVO drag = new DragVO();
+	    drag.setDragNo(dragNo);
+	    drag.setMemberNo(memberNo);
+	    DragVO dragVO = service.emailDrag(drag);
+	    
+	    String email = "scmtest@naver.com";
+	    String title = dragVO.getDragUrlTitle();
+	    String content = dragVO.getDragContent();
+	    
+		try{
+			// 파일 스트림으로부터 파일명에 해당하는 파일을 읽어들인다
+			fis = new FileInputStream(FILE_PATH + content);
+			
+			// 파일 스트림으로부터 오브젝트 스트림 형태로 변경
+			ois = new ObjectInputStream(fis);
+			
+			// 오브젝트 스트림으로부터 오브젝트를 읽어 String형으로 형변환
+			content = (String) ois.readObject();
+			} catch(Exception e) {
+				// e.printStackTrace();
+				System.out.println("[에러] 파일 읽기에 실패하였습니다.");
+			} finally {
+				closeStreams();
+		}
+	    
+        Properties props = new Properties();
+        props.setProperty("mail.transport.protocol", "smtp");
+        props.setProperty("mail.host", "smtp.naver.com");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.socketFactory.fallback", "false");
+        props.setProperty("mail.smtp.quitwait", "false");
+         
+        Authenticator auth = new Authenticator(){
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(email, "13adqezc");
+            }
+        };
+    
+        Session session = Session.getDefaultInstance(props,auth);
+         
+        MimeMessage message = new MimeMessage(session);
+        message.setSender(new InternetAddress(email));
+        message.setSubject("[Memory Book] " + title);
+ 
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
+         
+        Multipart mp = new MimeMultipart();
+        MimeBodyPart mbp1 = new MimeBodyPart();
+        mbp1.setContent(title+"<br>"+content, "text/html; charset=UTF-8");
+        mp.addBodyPart(mbp1);
+ 
+         
+        MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
+        mc.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
+        mc.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
+        mc.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
+        mc.addMailcap("multipart/*;; x-java-content-handler=com.sun.mail.handlers.multipart_mixed");
+        mc.addMailcap("message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
+        CommandMap.setDefaultCommandMap(mc);
+         
+        message.setContent(mp);
+         
+        Transport.send(message);
+        
+    	Map<String, Object> msg = new HashMap<>();
+		msg.put("msg", "이메일 보내기 완료");
+        return msg;
+    }
 	
 	//파일 관련 스트림 close
 	private void closeStreams() {

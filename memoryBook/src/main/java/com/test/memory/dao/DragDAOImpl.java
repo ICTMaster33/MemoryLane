@@ -27,6 +27,12 @@ public class DragDAOImpl implements DragDao{
 	}
 
 	@Override
+	public DragVO emailDrag(DragVO drag) throws Exception {
+		DragMapper mapper = sqlSession.getMapper(DragMapper.class);
+		return mapper.emailDrag(drag);
+	}
+
+	@Override
 	public void deleteDrag(int dragNo) throws Exception {
 		DragMapper mapper = sqlSession.getMapper(DragMapper.class);
 		mapper.deleteDrag(dragNo);
@@ -36,6 +42,12 @@ public class DragDAOImpl implements DragDao{
 	public DragVO selectDrag(int dragNo) throws Exception {
 		DragMapper mapper = sqlSession.getMapper(DragMapper.class);
 		return mapper.selectDrag(dragNo);
+	}
+
+	@Override
+	public DragVO dragDetail(int dragNo) throws Exception {
+		DragMapper mapper = sqlSession.getMapper(DragMapper.class);
+		return mapper.dragDetail(dragNo);
 	}
 	
 }
