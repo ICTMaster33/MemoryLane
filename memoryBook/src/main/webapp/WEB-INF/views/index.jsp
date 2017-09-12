@@ -236,7 +236,7 @@
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
+    	//document.getElementById("memoList").style.display = "none";
     	$("#profile").show();
     });
     
@@ -245,7 +245,7 @@
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
+    	//document.getElementById("memoList").style.display = "none";
     	$("#myDrag").show();
     });
     
@@ -254,7 +254,7 @@
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
+    	//document.getElementById("memoList").style.display = "none";
     	document.getElementById("myNote").style.display = "";
     });
     
@@ -263,7 +263,7 @@
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
+    	//document.getElementById("memoList").style.display = "none";
     	$("#myFriend").show();
     });
     
@@ -272,7 +272,7 @@
     	document.getElementById("myDrag").style.display = "none";
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
+    	//document.getElementById("memoList").style.display = "none";
     	$("#userList").show();
     });
     
@@ -282,7 +282,7 @@
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
-    	$("#memoList").show();
+    	//$("#memoList").show();
     });
     </script>
 
