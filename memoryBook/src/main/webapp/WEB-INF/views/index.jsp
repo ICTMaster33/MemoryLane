@@ -122,14 +122,14 @@
 		  	<%@ include file="menu/friend.jsp" %>
 		  	</div>
 	  	</div>
-	  	<%--  현재 에러
+
 	  	<div id='memoList'>
 			<div class="container-fluid">
-		  	<%@ include file="manager/receivedMemos.jsp" %>
+			<h1>MemoList</h1>
+<%-- 		  	<%@ include file="manager/receivedMemos.jsp" %> --%>
 		  	</div>
 	  	</div>
 	  	
-        --%>
 	  	<div id='userList'>
 			<div class="container-fluid">
 		  	<%@ include file="manager/userList.jsp" %>
@@ -237,7 +237,7 @@
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
-    	$("#profile").show();
+    	document.getElementById("profile").style.display = "";
     });
     
     $("#drag").click(function(e) {
@@ -246,7 +246,7 @@
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
-    	$("#myDrag").show();
+    	document.getElementById("myDrag").style.display = "";
     });
     
     $("#note").click(function(e) {
@@ -264,7 +264,7 @@
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("userList").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
-    	$("#myFriend").show();
+    	document.getElementById("myFriend").style.display = "";
     });
     
     $("#user").click(function(e) {
@@ -273,7 +273,7 @@
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("memoList").style.display = "none";
-    	$("#userList").show();
+    	document.getElementById("userList").style.display = "";
     });
     
     $("#memo").click(function(e) {
@@ -282,7 +282,7 @@
     	document.getElementById("myNote").style.display = "none";
     	document.getElementById("myFriend").style.display = "none";
     	document.getElementById("userList").style.display = "none";
-    	$("#memoList").show();
+    	document.getElementById("memoList").style.display = "";
     });
     </script>
 
