@@ -31,11 +31,12 @@ public class DownloadController {
 	
 	private FileInputStream fis;	//파일을 읽기위한
 	private ObjectInputStream ois;	//객체를 읽기위한
-	private String FILE_PATH = "C:/Users/SCITMaster/git/MemoryLane/memoryBook/src/main/webapp/data/";
+	private String FILE_PATH = "C:/data/";
 //	private String FILE_PATH = "G:/SPRING/git/MemoryLane/drag-note/src/main/webapp/html/data/";
 	private String IMG_FILE_PATH = FILE_PATH+"img/"; //이미지파일 저장경로
 	private String FILE_PATH_WEB = "http://localhost:8888/memory/img_src/"; //이미지파일 태그경로
-
+	private String SAVE_PATH = "C:/savedata/";
+	
 	@Autowired
 	private NoteService service_n;
 	private DragService service_d;
@@ -50,7 +51,7 @@ public class DownloadController {
 		// 노트 작성한 날짜로 파일 경로 만들기 
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyyMMdd");
 		String datePath = sdf.format(noteVO.getNoteRegDate());
-		String savePath = "C:/noteDownload" + datePath;
+		String savePath = SAVE_PATH + datePath;
 		File f = new File(savePath);
 		if (!f.exists()) f.mkdirs();
 		// 파일 내용 정하기
@@ -148,17 +149,19 @@ public class DownloadController {
 		return msg;
 	}
 	
-	@RequestMapping("/downloadNote")
+	@RequestMapping("/downloadDrag")
 	public Map<String, String> dragloadNote(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		// 파일 내용 가져오기
 		int dragNo = Integer.parseInt(request.getParameter("dragNo"));
 		System.out.println("다운로드 : " + dragNo);
-		DragVO dragVO = service_d.dragDetail(dragNo);
+		DragVO dragVO = new DragVO();
+		System.out.println(dragVO);
+		dragVO = service_d.dragDetail(dragNo);
 		// 노트 작성한 날짜로 파일 경로 만들기 
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyyMMdd");
 		String datePath = sdf.format(dragVO.getDragRegDate());
-		String savePath = "C:/noteDownload" + datePath;
+		String savePath = SAVE_PATH + datePath;
 		File f = new File(savePath);
 		if (!f.exists()) f.mkdirs();
 		// 파일 내용 정하기
