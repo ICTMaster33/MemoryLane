@@ -100,6 +100,8 @@
 			    		alert("등록성공");
 			    		prevText = text;
 			    		makeDragList_mini();
+			    		makeDragList();
+			    		mainDragList();
 			    	},
 			    	error: function (jqXhr, textStatus, errorText) {
 			    		alert("오류 : " + errorText);
@@ -153,6 +155,8 @@
     				}).done(function (result){
     					swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, 'success');
     					makeDragList_mini();
+    					makeDragList();
+    					mainDragList();
     			});
     		}
     	);
