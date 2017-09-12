@@ -50,6 +50,97 @@ body {
     margin-right: -250px;
 }
 
+/* index 버튼 이미지 위치 */
+.indexImg1 { 
+	position: absolute;
+	top : 98px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg2 { 
+	position: absolute;
+	top : 98px;
+	left : 15px;
+	z-index: 2;
+}
+
+.indexImg3 { 
+	position: absolute;
+	top : 169px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg4 { 
+	position: absolute;
+	top : 169px;
+	left : 15px;
+	z-index: 2;
+}
+
+.indexImg5 { 
+	position: absolute;
+	top : 242px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg6 { 
+	position: absolute;
+	top : 242px;
+	left : 15px;
+	z-index: 2;
+}
+
+.indexImg7 { 
+	position: absolute;
+	top : 308px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg8 { 
+	position: absolute;
+	top : 308px;
+	left : 15px;
+	z-index: 2;
+}
+
+.indexImg9 { 
+	position: absolute;
+	top : 376px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg10 { 
+	position: absolute;
+	top : 376px;
+	left : 15px;
+	z-index: 2;
+}
+
+.indexImg11 { 
+	position: absolute;
+	top : 450px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg12 { 
+	position: absolute;
+	top : 450px;
+	left : 15px;
+	z-index: 2;
+}
+
+.indexImg13 { 
+	position: absolute;
+	top : 516px;
+	left : 15px;
+	z-index: 1;
+}
+.indexImg14 { 
+	position: absolute;
+	top : 516px;
+	left : 15px;
+	z-index: 2;
+}
 
 /* Sidebar Styles */
 
@@ -63,12 +154,13 @@ body {
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
+	font-size : 23px;
+    text-indent: 55px;
+    line-height: 70px;
 }
 
 .sidebar-nav li a {
-    display: block;
+    display: block;++
     text-decoration: none;
     color: #999999;
 }
@@ -85,8 +177,8 @@ body {
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
+    height: 80px;
+    font-size: 28px;
     line-height: 60px;
 }
 
