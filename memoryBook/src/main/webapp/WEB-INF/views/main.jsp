@@ -268,7 +268,7 @@
 			    		<tr>
 			    			<div class="form-group">
 			    			 <label for="password">password:</label>
-			    			 <input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
+			    			 <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
 			    			</div>
 			    		</tr>
 			    		<tr>
@@ -482,7 +482,7 @@
     		type: "POST",
     		data: {
     			"email" : $("input[name=loginEmail]").val(),
-    			"password" : $("input[name=loginPassword]").val()
+    			"mem_pwd" : $("input[name=loginPassword]").val()
     			},
     		success : function(result) {
 	    	    		if(result == "true"){
@@ -535,7 +535,7 @@
 	     		data: {
 	 				"name" : $("input[name=name]").val(),    			
 	     			"email" : $("input[name=email]").val(),
-	     			"password" : $("input[name=password]").val()
+	     			"mem_pwd" : $("input[name=password]").val()
 	     			},
 	     		success : function(result) {
 	     				if(result){
