@@ -101,7 +101,7 @@
 	</div>
 
 	<!-- 메인뷰 -->
-	<div id="mainView_drag" style="z-index: 7;">
+	<div id="dragView" style="z-index: 7;">
 		<!-- 검색 -->
 		<div>
 			<br>

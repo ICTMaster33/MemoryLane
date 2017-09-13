@@ -311,9 +311,9 @@
 	function main_open() {
     	document.getElementById("noteEditor").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
-    	document.getElementById("mainView").style.display = "";
-    	document.getElementById("mainView").style.width = (screen.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = screen.innerHeight +"px";
+    	document.getElementById("noteView").style.display = "";
+    	document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("noteView").style.height = screen.innerHeight +"px";
 		getMainCategory();
 		mainNoteList();
 		makeDragList();

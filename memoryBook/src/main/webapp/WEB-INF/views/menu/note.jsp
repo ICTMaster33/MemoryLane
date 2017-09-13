@@ -100,7 +100,7 @@
 		</div>
 	</div>
 	<!-- 메인뷰 및 검색 -->
-	<div id="mainView" style="z-index: 7;">
+	<div id="noteView" style="z-index: 7;">
 		<!-- 검색 -->
 		<div>
 			<br>
@@ -462,7 +462,7 @@
 	// 에디터 열기
 	var editor_chk = false; // 드래그 입력시 에디터 on/off여부 체크
 	$("#noteWrite").click(function(e) {
-    	document.getElementById("mainView").style.display = "none";
+    	document.getElementById("noteView").style.display = "none";
     	document.getElementById("profileModal").style.display = "none";
     	document.getElementById("noteEditor").style.display = "";
     	document.getElementById("noteUpdateBtn").style.display = "none";
@@ -500,10 +500,10 @@
 	
 	function open_editor() {
 //	 	document.getElementById("editorBtnDiv").style.display = "block";
-//		document.getElementById("mainView").style.display = "none";
+//		document.getElementById("noteView").style.display = "none";
 //	 	document.getElementById("searchView").style.display = "none";
 //		document.getElementById("newsView").style.display = "none";
-    	document.getElementById("mainView").style.display = "none";
+    	document.getElementById("noteView").style.display = "none";
     	document.getElementById("profileModal").style.display = "none";
     	document.getElementById("noteEditor").style.display = "";
 	}
@@ -551,7 +551,7 @@
 
 	// 노트 에티터 뿌리기
 	$("#editorOpenBtn").click(function() {
-		document.getElementById("mainView").style.display = "none";
+		document.getElementById("noteView").style.display = "none";
 //	 	document.getElementById("searchView").style.display = "none";
 		document.getElementById("newsView").style.display = "none";
 		$("#editorView").show("slide", {direction: "left" }, 600);
