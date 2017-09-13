@@ -136,11 +136,12 @@
 		})
 		.done(function (result) {
 			alert(result.msg, "success");
-			makeNoteList();
+			mainNoteList();
 			$("input[name=noteTitle]").val("");
 			$(".nicEdit-main").html("");
-			editor_chk = false;
 			main_open();
+			console.log("정상작동");
+			editor_chk = false;
 		})
 		.fail(function (jqXhr, textStatus, errorText) {
 			alert("오류 : " + errorText);
@@ -174,7 +175,7 @@
 		})
 		.done(function (result) {
 			alert(result.msg, "success");
-			makeNoteList();
+			mainNoteList();
 			noteDetail(result.noteNo);
 			$("input[name=noteTitle]").val("");
 			$(".nicEdit-main").html("");

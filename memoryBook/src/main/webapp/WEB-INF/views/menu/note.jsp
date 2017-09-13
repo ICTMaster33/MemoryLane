@@ -584,7 +584,6 @@
 				type: "POST"
 				}).done(function (result){
 					alert(result.msg,'success');
-					makeNoteList();
 					mainNoteList();
 			});
 		}
@@ -609,7 +608,6 @@
 					type: "POST"
 					}).done(function (result){
 						alert(result.msg,'success');
-						makeNoteList();
 						mainNoteList();
 						getMainCategory();
 				});
