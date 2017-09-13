@@ -117,42 +117,53 @@
             <div class="container-fluid">
                 <h1>Memory Lane</h1>
                 <p>${name}님 This is main screen.</p>
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+                <a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
             </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-		<div id="container-fluid">
+            
 			<div id="profile">
+				<div class="container-fluid">
 				<h1>Your Profile</h1>
 				<p>this is your profile</p>
-				<a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+				</div>
 	        </div>
 	        
 	        <div id='myDragList'>
-	 		  	<%@ include file="menu/drag.jsp" %>
+	        	<div class="container-fluid">
+	 		  		<%@ include file="menu/drag.jsp" %>
+	 		  	</div>
 		  	</div>
 	        
 	        <div id='myNote'>
-	            <%@ include file="menu/note.jsp" %>
+	        	<div class="container-fluid">
+	            	<%@ include file="menu/note.jsp" %>
+	            </div>
 	        </div>
 	        
 			<div id='myFriend'>
-			  	<%@ include file="menu/friend.jsp" %>
+				<div class="container-fluid">
+			  		<%@ include file="menu/friend.jsp" %>
+			  	</div>
 		  	</div>
 		  	
 		  	<div id='memoList'>
+		  		<div class="container-fluid">
 					<h1>memoList</h1>
 			  	<%--  현재 에러
 			  	<%@ include file="manager/receivedMemos.jsp" %>
 	    	    --%>
+	    		</div>
 		  	</div>
 		  	
 		  	<div id='userList'>
-			  	<%@ include file="manager/userList.jsp" %>
+		  		<div class="container-fluid">
+			  		<%@ include file="manager/userList.jsp" %>
+			  	</div>
 		  	</div> 
 		  	
 			<div id='myDragtest'>
-			  	<%@ include file="menu/drag_test.jsp" %>
+				<div class="container-fluid">
+			  		<%@ include file="menu/drag_test.jsp" %>
+			  	</div>
 		  	</div>
 		</div>	
     </div>

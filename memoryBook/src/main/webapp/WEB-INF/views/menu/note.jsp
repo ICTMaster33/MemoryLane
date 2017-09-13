@@ -17,20 +17,6 @@
 </head>
 
 <body>
-	<!-- 노트바 -->
-	<div class="w3-sidebar w3-round"
-		style="display: none; background-color: white; width: 300px; z-index: 101;"
-		id="noteBar">
-		<div
-			style="padding: 8px 25px; margin-top: 20px; text-align: center; font-size: 18px;">
-			<i class="fa fa-book w3-xlarge"></i> NOTES
-		</div>
-		<!-- 노트 캘린더 -->
-		<div id='calendar' style="width: 260px;" class="w3-margin"></div>
-		<!-- 노트 리스트 -->
-		<div id="noteList"></div>
-	</div>
-
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog">
@@ -113,47 +99,45 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- 메인뷰 -->
-	<div id="mainView" class="container" style="z-index: 7;">
-		<!-- 검색 -->
-		<div>
-			<br>
-			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
-			<p class="desc_brunch">
-				<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
-				<!-- 			<span class="part">그리고 다시 꺼내 보세요.<br></span>  -->
-				<!-- 			<span class="part"><span class="txt_brunch">노트 속 간직하고 있는 글과 감성을.</span></span> -->
-				<span class="part">
-					<div class="col-md-4 col-md-offset">
-						<div action="" class="search-form">
-							<div class="form-group has-feedback"
-								onkeydown="javascript:if(event.keyCode == 13) searchList();">
-								<label for="search" class="sr-only">Search</label>
-									<input type="text" class="form-control" name="searchWrd"
-									id="searchWrd" placeholder="노트 검색">
-									<span class="glyphicon glyphicon-search form-control-feedback"></span>
-							</div>
+	<div>
+		<br>
+		<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
+		<p class="desc_brunch">
+			<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
+			<!-- 			<span class="part">그리고 다시 꺼내 보세요.<br></span>  -->
+			<!-- 			<span class="part"><span class="txt_brunch">노트 속 간직하고 있는 글과 감성을.</span></span> -->
+			<span class="part">
+				<div class="col-md-4 col-md-offset">
+					<div action="" class="search-form">
+						<div class="form-group has-feedback"
+							onkeydown="javascript:if(event.keyCode == 13) searchList();">
+							<label for="search" class="sr-only">Search</label> <input
+								type="text" class="form-control" name="searchWrd" id="searchWrd"
+								placeholder="노트 검색"> <span
+								class="glyphicon glyphicon-search form-control-feedback"></span>
 						</div>
 					</div>
-				</span>
-				<div class="btn btn-default" style="width: 90px;"
-							id="noteWrite">노트작성</div><br>
-		</div>
-		<br><br><br>
-		<!-- 카테고리 선택 -->
-		<ul class="nav nav-tabs" id="categoryList">
-
-		</ul>
-		<div class="tab-content">
-			<br>
-			<br>
-			<!-- 			<div id="categoryList" class="btn-group" style='position:relative; width:100%; height:60px;'></div> -->
-			<!-- 노트카드 뿌리기 -->
-			<div id="noteCardList"
-				style='position: relative; width: 100%; height: 500px;'></div>
-		</div>
+				</div>
+			</span>
+		<div class="btn btn-default" style="width: 90px;" id="noteWrite">노트작성</div>
+		<br>
 	</div>
+	<br><br><br>
 	
+	<!-- 카테고리 선택 -->
+	<ul class="nav nav-tabs" id="categoryList">
+
+	</ul>
+	<div class="tab-content">
+		<br> <br>
+		<!-- 			<div id="categoryList" class="btn-group" style='position:relative; width:100%; height:60px;'></div> -->
+		<!-- 노트카드 뿌리기 -->
+		<div id="noteCardList"
+			style='position: relative; width: 100%; height: 500px;'></div>
+	</div>
+
 	<div class="noteEditor" id="noteEditor">
 				<br><br><br>
 			<%@ include file="noteWrite.jsp" %>
@@ -283,7 +267,7 @@
 	}
 	
 	//노트 캘린더
-	makeCalendar();
+/*	makeCalendar();
 	function makeCalendar() {
 //	 	var events = [];
 //	 	if (result != null) {
@@ -297,7 +281,7 @@
 //	 		}
 //	 	}
 		
-	    $('#calendar').fullCalendar({
+ 	    $('#calendar').fullCalendar({
 	        dayClick: function(date) {
 	        	var date = date.format()
 	        	$.ajax({
@@ -361,7 +345,7 @@
 //	             return false
 	        
 	    })
-	}
+	} */
 	//메인에 카테고리 뿌리기
 	function getMainCategory(){
 		var memberNo = localStorage.getItem("memberNo");
@@ -581,60 +565,6 @@
 		$("#editorOpenBtn").toggle();
 		$("#editorCloseBtn").toggle();
 	});
-
-	// 노트리스트 만들기
-	function makeNoteList() {
-		var memberNo = ${memberNo};
-		$.ajax({
-			type: "POST",
-			url : "/memory/note/noteList",
-			data: {"memberNo" : memberNo},
-			dataType : "json"
-		})
-		.done(function (result) {
-			var html = "";
-			for (var i = 0; i < result.length; i++) {
-
-				var note = result[i];	
-				var noteNo = note.noteNo;
-				
-				console.log("노트번호"+noteNo)
-				html += " <div class='quote-box w3-margin w3-padding' ondragstart='drag(event)' draggable='true' id='note"+note.noteNo+"' >";
-//	 			html += " <blockquote class='quote-box'>;
-				html += " <p class='quotation-mark' onclick='noteDetail("+note.noteNo+")'data-toggle='modal' data-target='#detailModal' > “ </p><br> ";
-				html += " <p class='quote-text' onclick='noteDetail("+note.noteNo+")'data-toggle='modal' data-target='#detailModal'>" + note.noteTitle +" </p>";
-				html += " <hr>";
-				html += " <div class='blog-post-actions'>";
-				// 시간 뿌리기
-				var date = new Date(note.noteRegDate);
-				var time = date.getFullYear() + "-" 
-				         + (date.getMonth() + 1) + "-" 
-				         + date.getDate() + " "
-				         + date.getHours() + ":"
-				         + date.getMinutes() + ":"
-				         + date.getSeconds();
-				html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
-						         
-				html += "<p class='blog-post-bottom pull-right'>";         
-				html += "   <span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'><a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' onclick='saveNoteNo("+noteNo+");'></i></a></span>";
-				html += "	<span class='badge quote-badge'dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"'><i class='fa fa-download'></i></a></span></p>";
-				//시간 뿌리기 끝
-				html += "</div>";
-				html += "</div>";
-				
-		
-			}
-			if (result.length == 0) {
-				html += "<div class='container'>";
-				html += "<h6>작성된 노트가 없습니다.</h6>";
-				html += "</div>";
-			}
-			$("#noteList").html(html);
-		})
-		.fail(function(jqXhr, textStatus, errorText){
-			alert("오류: " + errorText + "<br>" + "오류코드: " + status);
-		});
-	}
 
 	// 노트 삭제
 		function deleteNote(noteNo) {
