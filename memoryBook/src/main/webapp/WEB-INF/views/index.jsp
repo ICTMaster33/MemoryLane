@@ -265,18 +265,18 @@
 		//노트 리스트 화면
 		document.getElementById("profileModal").style.display = "";
 		document.getElementById("mainView").style.display = "";
-		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
+		document.getElementById("mainView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("mainView").style.height = screen.innerHeight +"px";
 		document.getElementById("noteEditor").style.display = "none";
 		$("#noteTitle").val("");
 		$(".nicEdit-main").html('');
 		
 		//노트 에디터
-		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("editorView").style.height = window.innerHeight +"px";
+		document.getElementById("editorView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("editorView").style.height = screen.innerHeight +"px";
 		
 		//드래그 리스트
-		document.getElementById("mainView_drag").style.height = window.innerHeight +"px";
+		document.getElementById("mainView_drag").style.height = screen.innerHeight +"px";
 
 		//메뉴 이동시 에디터 체크
 		var chk_tf;
@@ -284,15 +284,15 @@
 
 	// 브라우저 창 크기 변화 시 위치 지정 (통합)
 	$(window).resize(function(){
-		//노트 리스트
-		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
-		//노트 에디터
-		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("editorView").style.height = window.innerHeight +"px";
 		//드래그 리스트
-		document.getElementById("mainView_drag").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView_drag").style.height = window.innerHeight +"px";
+		document.getElementById("mainView_drag").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("mainView_drag").style.height = screen.innerHeight +"px";
+		//노트 리스트
+		document.getElementById("mainView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("mainView").style.height = screen.innerHeight +"px";
+		//노트 에디터
+		document.getElementById("editorView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("editorView").style.height = screen.innerHeight +"px";
 	});
     
     // 내비바 아이콘으로 열고 닫기
@@ -456,8 +456,8 @@
     	document.getElementById("noteEditor").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
     	document.getElementById("mainView").style.display = "";
-    	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
+    	document.getElementById("mainView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("mainView").style.height = screen.innerHeight +"px";
 		chk_tf = true;
 		} else {
 		chk_tf = false;

@@ -99,8 +99,8 @@
 			</div>
 		</div>
 	</div>
-	<!-- 메인뷰 -->
-	<div id="mainView" class="container" style="z-index: 7;">
+	<!-- 메인뷰 및 검색 -->
+	<div id="mainView" style="z-index: 7;">
 		<!-- 검색 -->
 		<div>
 			<br>

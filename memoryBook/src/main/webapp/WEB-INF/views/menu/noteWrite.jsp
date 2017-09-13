@@ -312,8 +312,8 @@
     	document.getElementById("noteEditor").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
     	document.getElementById("mainView").style.display = "";
-    	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
+    	document.getElementById("mainView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("mainView").style.height = screen.innerHeight +"px";
 		getMainCategory();
 		mainNoteList();
 		makeDragList();
