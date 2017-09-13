@@ -71,7 +71,8 @@ public class DragController {
 		Matcher m = p.matcher(value);
 		while(m.find()) { 
 			String imagePath = m.group(2); // img 태그내 src값 추출결과
-			// 불필요한 옵션 자르기 (ex> ?type=w540, 옵션이 있는 경우에만 작동)
+			String imageTag = imagePath; // src태그에 삽입 될 내용 - 태그적용시 옵션 짤림방지
+			// 파일저장시 불필요한 옵션 자르기 (ex> ?type=w540, 옵션이 있는 경우에만 작동)
 			if(imagePath.lastIndexOf("?") > 0) {
 				imagePath = imagePath.substring(0, imagePath.lastIndexOf("?"));
 			}
@@ -101,7 +102,7 @@ public class DragController {
 				IMG_FILE.clear();
 				System.out.println("[에러] 이미지파일 저장 실패");
 			} finally {
-				IMG_REF.add(imagePath);
+				IMG_REF.add(imageTag);
 				IMG_FILE.add(imgName);
 			}
 		}

@@ -136,11 +136,12 @@
 		})
 		.done(function (result) {
 			alert(result.msg, "success");
-			makeNoteList();
+			mainNoteList();
 			$("input[name=noteTitle]").val("");
 			$(".nicEdit-main").html("");
-			editor_chk = false;
 			main_open();
+			console.log("정상작동");
+			editor_chk = false;
 		})
 		.fail(function (jqXhr, textStatus, errorText) {
 			alert("오류 : " + errorText);
@@ -174,7 +175,7 @@
 		})
 		.done(function (result) {
 			alert(result.msg, "success");
-			makeNoteList();
+			mainNoteList();
 			noteDetail(result.noteNo);
 			$("input[name=noteTitle]").val("");
 			$(".nicEdit-main").html("");
@@ -311,9 +312,9 @@
 	function main_open() {
     	document.getElementById("noteEditor").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
-    	document.getElementById("mainView").style.display = "";
-    	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
+    	document.getElementById("noteView").style.display = "";
+    	document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("noteView").style.height = screen.innerHeight +"px";
 		getMainCategory();
 		mainNoteList();
 		makeDragList();
