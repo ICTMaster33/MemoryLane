@@ -66,7 +66,9 @@
 					</a>
                 </li>
                 <li>
-                    <a id="dragtest">
+                    <a id="dragtest" class="noteImg">
+                	    <img src="/memory/resources/img/indexImg/dragHover.png" class="indexImg5">
+      		        	<img src="/memory/resources/img/indexImg/drag.png" class="indexImg6">
 					    My Drag_test
 					</a>
                 </li>
@@ -86,7 +88,7 @@
                 </li>
                 
                 <li>
-                    <a href="#logout" onclick="logout()" class="noteImg">
+                    <a onclick="logout()" class="noteImg">
                 	<img src="/memory/resources/img/indexImg/logoutHover.png" class="indexImg11">
       		        <img src="/memory/resources/img/indexImg/logout.png" class="indexImg12">
                     Logout
@@ -119,50 +121,40 @@
             </div>
         </div>
         <!-- /#page-content-wrapper -->
-		
-		<div id="profile">
-            <div class="container-fluid">
-                <h1>Your Profile</h1>
-                <p>this is your profile</p>
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
-            </div>
-        </div>
-        
-        <div id='myNote'>
-			<div class="container-fluid">
-            <%@ include file="menu/note.jsp" %>
-            </div>
-        </div>
-        
-		<div id='myFriend'>
-			<div class="container-fluid">
-		  	<%@ include file="menu/friend.jsp" %>
+		<div id="container-fluid">
+			<div id="profile">
+				<h1>Your Profile</h1>
+				<p>this is your profile</p>
+				<a class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+	        </div>
+	        
+	        <div id='myDragList'>
+	 		  	<%@ include file="menu/drag.jsp" %>
 		  	</div>
-	  	</div>
-	  	<div id='memoList'>
-			<div class="container-fluid">
-				<h1>memoList</h1>
-		  	<%--  현재 에러
-		  	<%@ include file="manager/receivedMemos.jsp" %>
-    	    --%>
+	        
+	        <div id='myNote'>
+	            <%@ include file="menu/note.jsp" %>
+	        </div>
+	        
+			<div id='myFriend'>
+			  	<%@ include file="menu/friend.jsp" %>
 		  	</div>
-	  	</div>
-	  	
-	  	<div id='userList'>
-			<div class="container-fluid">
-		  	<%@ include file="manager/userList.jsp" %>
+		  	
+		  	<div id='memoList'>
+					<h1>memoList</h1>
+			  	<%--  현재 에러
+			  	<%@ include file="manager/receivedMemos.jsp" %>
+	    	    --%>
 		  	</div>
-	  	</div> 
-		<div id='myDragList'>
-			<div class="container-fluid">
- 		  	<%@ include file="menu/drag.jsp" %>
+		  	
+		  	<div id='userList'>
+			  	<%@ include file="manager/userList.jsp" %>
+		  	</div> 
+		  	
+			<div id='myDragtest'>
+			  	<%@ include file="menu/drag_test.jsp" %>
 		  	</div>
-	  	</div>
-		<div id='myDragtest'>
-			<div class="container-fluid">
-		  	<%@ include file="menu/drag_test.jsp" %>
-		  	</div>
-	  	</div>	  	
+		</div>	
     </div>
     <!-- /#wrapper -->
 	
@@ -193,7 +185,7 @@
 			    		<tr>
 			    			<div class="form-group">
 							    <label for="loginPassword">Password:</label>
-							    <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
+							    <input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 다시 입력해주세요" required="required"/>
 			    			</div>
 			    		</tr>
 					    <tr>
@@ -255,29 +247,25 @@
     
 	// 로딩 시 위치 지정
 	window.onload = function () {
+		mainNoteList(); //노트 리스트
+		mainDragList(); //드래그 리스트
+		makeDragList_mini(); //글 작성창 드래그 리스트
+		getMainCategory(); //카테고리 리스트
 		//노트 리스트
-//	 	document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
-//	 	document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
-//	 	document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
-//	 	document.getElementById("searchView").style.height = window.innerHeight +"px";
-//	 	document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
-//	 	document.getElementById("noteView").style.height = window.innerHeight +"px";
+		document.getElementById("profileModal").style.display = "";
+		document.getElementById("mainView").style.display = "";
 		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
 		document.getElementById("mainView").style.height = window.innerHeight +"px";
 		document.getElementById("noteEditor").style.display = "none";
-		getMainCategory();
-		makeDragList_mini();
-		mainNoteList();
+		$("#noteTitle").val("");
+		$(".nicEdit-main").html('');
 		
 		//노트 에디터
 		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
 		document.getElementById("editorView").style.height = window.innerHeight +"px";
-		getMainCategory();
 		
 		//드래그 리스트
 		document.getElementById("mainView_drag").style.height = window.innerHeight +"px";
-		makeDragList();
-		mainDragList();
 	}
 
 	// 브라우저 창 크기 변화 시 위치 지정 (통합)

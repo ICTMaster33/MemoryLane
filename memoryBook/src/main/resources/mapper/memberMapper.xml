@@ -8,17 +8,17 @@
 
 	<!-- 회원 가입 정보 저장 -->
 	<insert id="join" parameterType="MemberVO">
-		INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{password}, #{name}, #{email}, 0)
+		INSERT INTO T_MEMBER VALUES (MEM_NO.NEXTVAL, #{mem_pwd}, #{name}, #{email}, 0)
 	</insert>
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="MemberVO" resultType="MemberVO">
-		SELECT * FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{password}
+		SELECT * FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{mem_pwd}
 	</select>
 	
 	<!-- 회원탈퇴 -->
 	<delete id="unregister" parameterType="MemberVO">
-		DELETE FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{password}
+		DELETE FROM T_MEMBER WHERE EMAIL = #{email} AND MEM_PWD = #{mem_pwd}
 	</delete>
 	
 	<!-- 	회원목록 -->

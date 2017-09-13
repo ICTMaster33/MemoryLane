@@ -150,7 +150,7 @@ public class DownloadController {
 	}
 	
 	@RequestMapping("/downloadDrag")
-	public Map<String, String> dragloadNote(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, String> downloadDrag(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		// 파일 내용 가져오기
 		int dragNo = Integer.parseInt(request.getParameter("dragNo"));

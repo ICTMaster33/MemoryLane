@@ -229,7 +229,7 @@
 			dataType : "json"
 		})
 		.done(function (result) {
-			var title = result.dragTitle;
+			var title = result.dragUrlTitle;
 			var content = result.dragContent;
 			// 시간 뿌리기
 			var date = new Date(result.dragRegDate);
@@ -239,12 +239,15 @@
 			         + date.getHours() + ":"
 			         + date.getMinutes() + ":"
 			         + date.getSeconds();
+			var time2 = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate();         
 			//시간 뿌리기 끝
 //	 		document.getElementById("dragView").style.display = "block";
-			$("#title_drag").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
+			$("#title_drag").html("<span>[ 드래그 데이터  "+time2+" ]</span><h3>" + title +"</h3>");
 			$("#date_drag").html(time);
 			$("#content_drag").html(content);
-			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_drag'><i class='fa fa-text-width' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_drag'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_drag'><i class='fa fa-download'></i></a></span></p>");
+			$("#update_drag").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_drag'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteDrag("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_drag'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' data-dismiss='modal' onclick='saveDragNo("+dragNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadDrag?dragNo=" + dragNo +"' class='btn_drag'><i class='fa fa-download'></i></a></span></p>");
 //	 		document.getElementById("editorBtnDiv").style.display = "none";
 			
 		})
@@ -285,7 +288,7 @@
 			} else {
 				html += '<figure><img id="drag'+drag.dragNo+'" src="/memory/resources/img/D.png" width="180" height="140" alt="" onclick="dragDetail('+drag.dragNo+')" ></figure>';
 			}
-			html += "	<div  class='desc'><p>" + drag.dragTitle + "</p></div>";
+			html += "	<div  class='desc'><p>" + drag.dragUrlTitle + "</p></div>";
 			html += "</div>";
 
 		}
@@ -346,10 +349,6 @@
 				         + date.getMinutes() + ":"
 				         + date.getSeconds();
 				html += "<p class='blog-post-bottom pull-left'>"+ time +"</p>";
-						         
-				html += "<p class='blog-post-bottom pull-right'>";         
-				html += "   <span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'><a href='#'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal_drag' onclick='saveDragNo("+dragNo+");'></i></a></span>";
-				html += "	<span class='badge quote-badge'dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloaddrag?dragNo=" + dragNo +"'><i class='fa fa-download'></i></a></span></p>";
 				//시간 뿌리기 끝
 				html += "</div>";
 				html += "</div>";
@@ -368,33 +367,27 @@
 		});
 	}
 
-	// 드래그 드래그로 삭제
+	// 드래그 삭제
 	function deleteDrag(dragNo) {
 		var dragNo = dragNo;
 		var memberNo = ${memberNo};
 		
-		alert({
-			  title: "확인",
-			  text: "드래그를 삭제하시겠어요~?",
-			  type: "warning",
-			  showCancelButton: true,
-			  confirmButtonText: "네, 삭제해주세요 :)",
-			  cancelButtonText: "아니요!",
-			  closeOnConfirm: false
-			},
-			function(){
-				$.ajax({
-					url:"/memory/drag/deleteDrag",
-					dataType:"json",
-					data: {"dragNo":dragNo},
-					type: "POST"
-					}).done(function (result){
-						alert(result.msg,'success');
-						makeDragList();
-						mainDragList();
-				});
-			}
-		);
+		var del_chk;
+		del_chk = confirm("정말 드래그를 삭제하시겠습니까?");
+		
+		if (del_chk) {
+			$.ajax({
+				url:"/memory/drag/deleteDrag",
+				dataType:"json",
+				data: {"dragNo":dragNo},
+				type: "POST"
+				}).done(function (result){
+					alert(result.msg,'success');
+					makeDragList();
+					makeDragList_mini();
+					mainDragList();
+			});
+		}
 	}
     </script>
 </body>

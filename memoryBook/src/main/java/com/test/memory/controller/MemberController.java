@@ -55,7 +55,7 @@ public class MemberController {
 			}
 			else{
 				session.setAttribute("email", nvo.getEmail());
-				session.setAttribute("memberNo", nvo.getMemberNo());
+				session.setAttribute("memberNo", nvo.getMem_no());
 				session.setAttribute("name", nvo.getName());
 				return "true";
 			}

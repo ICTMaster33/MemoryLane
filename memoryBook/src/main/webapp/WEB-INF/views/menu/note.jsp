@@ -273,7 +273,7 @@
 			$("#title").html("<span>[ "+ result.categoryName +" ]</span><h3>" + title +"</h3>");
 			$("#date").html(time);
 			$("#content").html(content);
-			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_note'><i class='fa fa-text-width' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_note'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_note'><i class='fa fa-download'></i></a></span></p>");
+			$("#update").html("<span class='badge quote-badge' dragNote-toggle='tooltip' title='수정'> <a href='#' class='btn_note'><i class='fa fa-text-width' dragNote-toggle='tooltip' title='수정' data-dismiss='modal' onclick='updateNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='삭제'> <a href='#' class='btn_note'><i class='fa fa-eraser' dragNote-toggle='tooltip' title='삭제' data-dismiss='modal' onclick='deleteNote("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge'dragNote-toggle='tooltip' title='메일로 보내기'> <a href='#' class='btn_note'><i class='fa fa-envelope-o' dragNote-toggle='tooltip' title='메일로 보내기' data-toggle='modal' data-target='#myModal' data-dismiss='modal' onclick='saveNoteNo("+noteNo+");'></i></a></span>&nbsp;<span class='badge quote-badge' dragNote-toggle='tooltip' title='다운로드'><a href='/memory/download/downloadNote?noteNo=" + noteNo +"' class='btn_note'><i class='fa fa-download'></i></a></span></p>");
 //	 		document.getElementById("editorBtnDiv").style.display = "none";
 			
 		})
@@ -488,46 +488,11 @@
 	function note_open() {
 		document.getElementById("sideDragBar").style.display = "none";
 //	 	document.getElementById("editorBtnDiv").style.display = "none";
-		document.getElementById("noteBar").style.display = "none";
 		$("#sideDragBar").show("slide", {direction: "left" }, 600);
 //	 	$("#editorBtnDiv").show("slide", {direction: "left" }, 600);
-	    makeDragList_mini();
 		getCategory(); // 카테고리 셀렉박스에 옵션 넣기
 	}
 
-	function note_close() {
-		$("#noteBar").hide("slide", {direction: "left" }, 600);
-	}
-
-	// function note_close() {
-//	     document.getElementById("noteBar").style.display = "none";
-	// }
-
-	// function search_open() {
-//	 	document.getElementById("mainView").style.display = "none";
-//	 	document.getElementById("newsView").style.display = "none";
-//	 	$("#sideDragBar").show("slide", {direction: "left" }, 600);
-//	 	document.getElementById("searchView").style.display = "block";
-	// }
-
-	function main_open() {
-//		document.getElementById("newsView").style.display = "none";
-//		document.getElementById("noteBar").style.display = "none";
-//		document.getElementById("sideDragBar").style.display = "block";
-//	 	document.getElementById("editorBtnDiv").style.display = "none";
-//		document.getElementById("mainView").style.display = "block";
-    	document.getElementById("noteEditor").style.display = "none";
-    	document.getElementById("profileModal").style.display = "";
-    	document.getElementById("mainView").style.display = "";
-    	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
-		getMainCategory();
-		mainNoteList();
-		makeDragList_mini();
-		$("#noteTitle").val("");
-		$(".nicEdit-main").html('');
-	}
-	
 	// DB에서 카테고리 가져오기
 	function getCategory(){
 		var memberNo = ${memberNo};
@@ -671,34 +636,28 @@
 		});
 	}
 
-	// 노트 드래그로 삭제
-	function deleteNote(noteNo) {
+	// 노트 삭제
+		function deleteNote(noteNo) {
 		var noteNo = noteNo;
 		var memberNo = ${memberNo};
 		
-		alert({
-			  title: "확인",
-			  text: "노트를 삭제하시겠어요~?",
-			  type: "warning",
-			  showCancelButton: true,
-			  confirmButtonText: "네, 삭제해주세요 :)",
-			  cancelButtonText: "아니요!",
-			  closeOnConfirm: false
-			},
-			function(){
-				$.ajax({
-					url:"/memory/note/deleteNote",
-					dataType:"json",
-					data: {"noteNo":noteNo},
-					type: "POST"
-					}).done(function (result){
-						alert(result.msg,'success');
-						makeNoteList();
-						mainNoteList();
-				});
-			}
-		);
+		var del_chk;
+		del_chk = confirm("정말 노트를 삭제하시겠습니까?");
+		
+		if (del_chk) {
+			$.ajax({
+				url:"/memory/note/deleteNote",
+				dataType:"json",
+				data: {"noteNo":noteNo},
+				type: "POST"
+				}).done(function (result){
+					alert(result.msg,'success');
+					makeNoteList();
+					mainNoteList();
+			});
+		}
 	}
+
 	//카테고리 삭제
 	function deleteCategory(categoryNo) {
 		alert({

@@ -142,6 +142,13 @@ public class DragController {
 		} else {
 			drag.setDragUrl("none");
 		}
+		
+		// drag 타이틀 추출부
+		if (drag.getDragUrlTitle() != null) {
+			drag.setDragUrlTitle(drag.getDragUrlTitle());
+		} else {
+			drag.setDragUrlTitle("제목 없음");
+		}
 
 		// 회원번호 추출부
 		drag.setMemberNo(Integer.parseInt(session.getAttribute("memberNo").toString()));

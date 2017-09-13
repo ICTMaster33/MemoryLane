@@ -268,7 +268,7 @@
 			    		<tr>
 			    			<div class="form-group">
 			    			 <label for="password">password:</label>
-			    			 <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
+			    			 <input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 입력하세요" required="" autofocus="" />
 			    			</div>
 			    		</tr>
 			    		<tr>

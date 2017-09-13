@@ -21,8 +21,6 @@
 
 <body>
 
-	<div id="wrapper" class="toggled">
-
 		<!-- 뉴스뷰 -->
 		<div id='myDrag' style="z-index: 4; min-height: 100%; width: 1200px;">
 			<div>
@@ -49,7 +47,6 @@
 					<span class="part">드래그만으로 원하는 기사를 담아보세요.<br></span>
 				</p>
 			</div>
-		</div>
 		</div>
 
 		<!-- Bootstrap core JavaScript -->
@@ -130,38 +127,6 @@
     function openUrl(event) {
     	window.open(event.target.id, "_blank");
     }
-
-
-    // 드래그 드래그로 삭제
-    function deleteDrag(dragNo) {
-    	var dragNo = dragNo;
-    	var memberNo = localStorage.getItem("memberNo");
-    	
-    	swal({
-    		  title: "* :-O",
-    		  text: "드래그를 삭제하시겠어요~?",
-    		  type: "warning",
-    		  showCancelButton: true,
-    		  confirmButtonText: "네, 삭제해주세요 :)",
-    		  cancelButtonText: "아니요!",
-    		  closeOnConfirm: false
-    		},
-    		function(){
-    			$.ajax({
-    				url:"/memory/drag/deleteDrag.do",
-    				dataType:"json",
-    				data: {"dragNo":dragNo},
-    				type: "POST"
-    				}).done(function (result){
-    					swal("₍ᐢ•ﻌ•ᐢ₎*･ﾟ｡", result.msg, 'success');
-    					makeDragList_mini();
-    					makeDragList();
-    					mainDragList();
-    			});
-    		}
-    	);
-    	
-    }	
     </script>
 </body>
 </html>
