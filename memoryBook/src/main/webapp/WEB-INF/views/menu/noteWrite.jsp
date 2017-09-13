@@ -191,18 +191,7 @@
 	
 	//글 작성 및 수정취소
 	$("#cancelBtn").click(function(e) {
-		var chk;
-		chk = confirm("정말로 취소하시겠습니까?");
-		if(chk) {
-		editor_chk = false;
-		$("#noteTitle").val('');
-		$(".nicEdit-main").html('');
-    	document.getElementById("noteEditor").style.display = "none";
-    	document.getElementById("profileModal").style.display = "";
-    	document.getElementById("mainView").style.display = "";
-    	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
-		}
+		editorCancelChk();
     });
 	
 	// 드래그내용 입력시 필요한 드래그 리스트 출력

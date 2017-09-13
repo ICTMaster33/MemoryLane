@@ -277,6 +277,9 @@
 		
 		//드래그 리스트
 		document.getElementById("mainView_drag").style.height = window.innerHeight +"px";
+
+		//메뉴 이동시 에디터 체크
+		var chk_tf;
 	}
 
 	// 브라우저 창 크기 변화 시 위치 지정 (통합)
@@ -294,85 +297,172 @@
     
     // 내비바 아이콘으로 열고 닫기
     $("#myProfile").click(function(e) {
-    	document.getElementById("myDragList").style.display = "none";
-    	document.getElementById("myNote").style.display = "none";
-    	document.getElementById("myFriend").style.display = "none";
-    	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
-    	document.getElementById("myDragtest").style.display = "none";
-    	document.getElementById("profile").style.display = "";
+    	function profile_menu(){
+	    	document.getElementById("myDragList").style.display = "none";
+	    	document.getElementById("myNote").style.display = "none";
+	    	document.getElementById("myFriend").style.display = "none";
+	    	document.getElementById("userList").style.display = "none";
+	    	document.getElementById("memoList").style.display = "none";
+	    	document.getElementById("myDragtest").style.display = "none";
+	    	document.getElementById("profile").style.display = "";
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			profile_menu();
+    		}
+    	} else {
+    		profile_menu();
+    	}
     });
     
     $("#drag").click(function(e) {
-    	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myNote").style.display = "none";
-    	document.getElementById("myFriend").style.display = "none";
-    	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
-    	document.getElementById("myDragtest").style.display = "none";
-    	document.getElementById("myDragList").style.display = "";
+    	function drag_menu(){
+    		document.getElementById("profile").style.display = "none";
+        	document.getElementById("myNote").style.display = "none";
+        	document.getElementById("myFriend").style.display = "none";
+        	document.getElementById("userList").style.display = "none";
+        	document.getElementById("memoList").style.display = "none";
+        	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("myDragList").style.display = "";
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			drag_menu();
+    		}
+    	} else {
+    		drag_menu();
+    	}
     });
     
     $("#dragtest").click(function(e) {
-    	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myNote").style.display = "none";
-    	document.getElementById("myFriend").style.display = "none";
-    	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
-    	document.getElementById("myDragList").style.display = "none";
-    	document.getElementById("myDragtest").style.display = "";
+    	function dragTest_menu(){
+    		document.getElementById("profile").style.display = "none";
+        	document.getElementById("myNote").style.display = "none";
+        	document.getElementById("myFriend").style.display = "none";
+        	document.getElementById("userList").style.display = "none";
+        	document.getElementById("memoList").style.display = "none";
+        	document.getElementById("myDragList").style.display = "none";
+        	document.getElementById("myDragtest").style.display = "";
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			dragTest_menu();
+    		}
+    	} else {
+    		dragTest_menu();
+    	}
     });
     
     $("#note").click(function(e) {
-    	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myDragList").style.display = "none";
-    	document.getElementById("myFriend").style.display = "none";
-    	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
-    	document.getElementById("myDragtest").style.display = "none";
-    	document.getElementById("myNote").style.display = "";
+    	function note_menu(){
+    		document.getElementById("profile").style.display = "none";
+        	document.getElementById("myDragList").style.display = "none";
+        	document.getElementById("myFriend").style.display = "none";
+        	document.getElementById("userList").style.display = "none";
+        	document.getElementById("memoList").style.display = "none";
+        	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("myNote").style.display = "";
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			note_menu();
+    		}
+    	} else {
+    		note_menu();
+    	}
     });
     
     $("#friend").click(function(e) {
-    	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myDragList").style.display = "none";
-    	document.getElementById("myNote").style.display = "none";
-    	document.getElementById("userList").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
-    	document.getElementById("myDragtest").style.display = "none";
-    	document.getElementById("myFriend").style.display = "";
+    	function friend_menu(){
+    		document.getElementById("profile").style.display = "none";
+        	document.getElementById("myDragList").style.display = "none";
+        	document.getElementById("myNote").style.display = "none";
+        	document.getElementById("userList").style.display = "none";
+        	document.getElementById("memoList").style.display = "none";
+        	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("myFriend").style.display = "";
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			friend_menu();
+    		}
+    	} else {
+    		friend_menu();
+    	}
     });
     
     $("#user").click(function(e) {
-    	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myDragList").style.display = "none";
-    	document.getElementById("myNote").style.display = "none";
-    	document.getElementById("myFriend").style.display = "none";
-    	document.getElementById("memoList").style.display = "none";
-    	document.getElementById("myDragtest").style.display = "none";
-    	document.getElementById("userList").style.display = "";
+    	function user_menu(){
+    		document.getElementById("profile").style.display = "none";
+        	document.getElementById("myDragList").style.display = "none";
+        	document.getElementById("myNote").style.display = "none";
+        	document.getElementById("myFriend").style.display = "none";
+        	document.getElementById("memoList").style.display = "none";
+        	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("userList").style.display = "";
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			user_menu();
+    		}
+    	} else {
+    		user_menu();
+    	}
     });
     
     $("#memo").click(function(e) {
-    	document.getElementById("profile").style.display = "none";
-    	document.getElementById("myDragList").style.display = "none";
-    	document.getElementById("myNote").style.display = "none";
-    	document.getElementById("myFriend").style.display = "none";
-    	document.getElementById("userList").style.display = "none";
-    	document.getElementById("myDragtest").style.display = "none";
-    	document.getElementById("memoList").style.display = "";
+    	function memo_menu(){
+    		document.getElementById("profile").style.display = "none";
+        	document.getElementById("myDragList").style.display = "none";
+        	document.getElementById("myNote").style.display = "none";
+        	document.getElementById("myFriend").style.display = "none";
+        	document.getElementById("userList").style.display = "none";
+        	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("memoList").style.display = "";
+    	}
+    	if(editor_chk){
+    		editorCancelChk();
+    		if(chk_tf) {
+    			memo_menu();
+    		}
+    	} else {
+    		memo_menu();
+    	}
     });
     
     //인덱스 메뉴 이미지 호버
     $(function(){
-
     	$(".noteImg").hover(function(){
     	     $("img",this).eq(1).stop().fadeToggle(500);
     	},function(){
     	     $("img",this).eq(1).stop().fadeToggle(500);
     	});
-
     });
+    
+    //에티터 작동중 취소여부 확인 (noteWrite.jsp에도 연동되어 같이 적용됨)
+	function editorCancelChk() {
+		var chk;
+		chk = confirm("정말로 취소하시겠습니까?");
+		if(chk) {
+		editor_chk = false;
+		$("#noteTitle").val('');
+		$(".nicEdit-main").html('');
+    	document.getElementById("noteEditor").style.display = "none";
+    	document.getElementById("profileModal").style.display = "";
+    	document.getElementById("mainView").style.display = "";
+    	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
+		document.getElementById("mainView").style.height = window.innerHeight +"px";
+		chk_tf = true;
+		} else {
+		chk_tf = false;
+		}
+	}
     </script>
 
 </body>
