@@ -88,7 +88,7 @@
                 </li>
                 <li>
                 	<a id="searchFriend" class="noteImg">
-					    Seach
+					    Friend Seach
 					</a>
                 </li>
                 <li>
