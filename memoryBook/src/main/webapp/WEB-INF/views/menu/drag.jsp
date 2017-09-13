@@ -101,30 +101,33 @@
 	</div>
 
 	<!-- 메인뷰 -->
-	<div>
-		<br>
-		<h3 class="tit_brunch">드래그 리스트</h3>
-		<p class="desc_brunch">
-			<span class="part">드래그를 공유해 보세요.<br></span> <span class="part">
-				<div class="col-md-4 col-md-offset">
-					<div action="" class="search-form">
-						<div class="form-group has-feedback"
-							onkeydown="javascript:if(event.keyCode == 13) searchList_drag();">
-							<label for="search" class="sr-only">Search</label> <input
-								type="text" class="form-control" name="searchWrd_drag"
-								id="searchWrd_drag" placeholder="드래그 검색"> <span
-								class="glyphicon glyphicon-search form-control-feedback"></span>
+	<div id="mainView_drag" class="container" style="z-index: 7;">
+		<!-- 검색 -->
+		<div>
+			<br>
+			<h3 class="tit_brunch">드래그 리스트</h3>
+			<p class="desc_brunch">
+				<span class="part">드래그를 공유해 보세요.<br></span>
+				<span class="part">
+					<div class="col-md-4 col-md-offset">
+						<div action="" class="search-form">
+							<div class="form-group has-feedback"
+								onkeydown="javascript:if(event.keyCode == 13) searchList_drag();">
+								<label for="search" class="sr-only">Search</label>
+									<input type="text" class="form-control" name="searchWrd_drag"
+									id="searchWrd_drag" placeholder="드래그 검색">
+									<span class="glyphicon glyphicon-search form-control-feedback"></span>
+							</div>
 						</div>
 					</div>
-				</div>
-			</span>
-	</div>
-	<br><br><br>
+				</span>
+		</div>
+		<br><br><br>
+			<!-- 드래그카드 뿌리기 -->
+			<div id="dragCardList"
+				style='position: relative; width: 100%; height: 500px;'></div>
+		</div>
 	
-	<!-- 드래그카드 뿌리기 -->
-	<div id="dragCardList"
-		style='position: relative; width: 100%; height: 500px;'></div>
-
 	<!-- profile modal -->
 	<div id="profileModal_drag" class="modal fade" role="dialog">
 		<div class="modal-dialog">

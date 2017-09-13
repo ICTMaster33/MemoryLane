@@ -99,45 +99,47 @@
 			</div>
 		</div>
 	</div>
-	
 	<!-- 메인뷰 -->
-	<div>
-		<br>
-		<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
-		<p class="desc_brunch">
-			<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
-			<!-- 			<span class="part">그리고 다시 꺼내 보세요.<br></span>  -->
-			<!-- 			<span class="part"><span class="txt_brunch">노트 속 간직하고 있는 글과 감성을.</span></span> -->
-			<span class="part">
-				<div class="col-md-4 col-md-offset">
-					<div action="" class="search-form">
-						<div class="form-group has-feedback"
-							onkeydown="javascript:if(event.keyCode == 13) searchList();">
-							<label for="search" class="sr-only">Search</label> <input
-								type="text" class="form-control" name="searchWrd" id="searchWrd"
-								placeholder="노트 검색"> <span
-								class="glyphicon glyphicon-search form-control-feedback"></span>
+	<div id="mainView" class="container" style="z-index: 7;">
+		<!-- 검색 -->
+		<div>
+			<br>
+			<h3 class="tit_brunch">드래그가 글이 되는 공간, 드래그노트</h3>
+			<p class="desc_brunch">
+				<span class="part">드래그만으로 원하는 텍스트를 담아보세요.<br></span>
+				<!-- 			<span class="part">그리고 다시 꺼내 보세요.<br></span>  -->
+				<!-- 			<span class="part"><span class="txt_brunch">노트 속 간직하고 있는 글과 감성을.</span></span> -->
+				<span class="part">
+					<div class="col-md-4 col-md-offset">
+						<div action="" class="search-form">
+							<div class="form-group has-feedback"
+								onkeydown="javascript:if(event.keyCode == 13) searchList();">
+								<label for="search" class="sr-only">Search</label>
+									<input type="text" class="form-control" name="searchWrd"
+									id="searchWrd" placeholder="노트 검색">
+									<span class="glyphicon glyphicon-search form-control-feedback"></span>
+							</div>
 						</div>
 					</div>
-				</div>
-			</span>
-		<div class="btn btn-default" style="width: 90px;" id="noteWrite">노트작성</div>
-		<br>
+				</span>
+				<div class="btn btn-default" style="width: 90px;"
+							id="noteWrite">노트작성</div><br>
+		</div>
+		<br><br><br>
+		<!-- 카테고리 선택 -->
+		<ul class="nav nav-tabs" id="categoryList">
+
+		</ul>
+		<div class="tab-content">
+			<br>
+			<br>
+			<!-- 			<div id="categoryList" class="btn-group" style='position:relative; width:100%; height:60px;'></div> -->
+			<!-- 노트카드 뿌리기 -->
+			<div id="noteCardList"
+				style='position: relative; width: 100%; height: 500px;'></div>
+		</div>
 	</div>
-	<br><br><br>
 	
-	<!-- 카테고리 선택 -->
-	<ul class="nav nav-tabs" id="categoryList">
-
-	</ul>
-	<div class="tab-content">
-		<br> <br>
-		<!-- 			<div id="categoryList" class="btn-group" style='position:relative; width:100%; height:60px;'></div> -->
-		<!-- 노트카드 뿌리기 -->
-		<div id="noteCardList"
-			style='position: relative; width: 100%; height: 500px;'></div>
-	</div>
-
 	<div class="noteEditor" id="noteEditor">
 				<br><br><br>
 			<%@ include file="noteWrite.jsp" %>

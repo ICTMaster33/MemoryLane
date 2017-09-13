@@ -281,12 +281,6 @@
 
 	// 브라우저 창 크기 변화 시 위치 지정 (통합)
 	$(window).resize(function(){
-//	 	document.getElementById("editorOpenBtn").style.top = (window.innerHeight - 36)/2 +"px";
-//	 	document.getElementById("editorCloseBtn").style.top = (window.innerHeight - 36)/2 +"px";
-//	 	document.getElementById("searchView").style.width = (window.innerWidth - 420) +"px";
-//	 	document.getElementById("searchView").style.height = window.innerHeight +"px";
-//	 	document.getElementById("noteView").style.width = (window.innerWidth - 420) +"px";
-//	 	document.getElementById("noteView").style.height = window.innerHeight +"px";
 		//노트 리스트
 		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
 		document.getElementById("mainView").style.height = window.innerHeight +"px";
