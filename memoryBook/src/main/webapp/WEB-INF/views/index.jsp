@@ -79,14 +79,18 @@
 					    My Note
 					</a>
                 </li>
-                <li>
-                	<a id="friend" class="noteImg">
+                 <li>
+                	<a id="myFriend" class="noteImg">
                 		<img src="/memory/resources/img/indexImg/friendHover.png" class="indexImg9">
       		        	<img src="/memory/resources/img/indexImg/friend.png" class="indexImg10">
 					    My Friend
 					</a>
                 </li>
-                
+                <li>
+                	<a id="searchFriend" class="noteImg">
+					    Seach
+					</a>
+                </li>
                 <li>
                     <a onclick="logout()" class="noteImg">
                 	<img src="/memory/resources/img/indexImg/logoutHover.png" class="indexImg11">
@@ -139,9 +143,15 @@
 	            </div>
 	        </div>
 	        
-			<div id='myFriend'>
+			<div id='friend'>
 				<div class="container-fluid">
-			  		<%@ include file="menu/friend.jsp" %>
+			  		<%@ include file="menu/friend.jsp" %> 
+			  	</div>
+		  	</div>
+	        
+			<div id='search'>
+				<div class="container-fluid">
+			  		<%@ include file="menu/seach.jsp" %>
 			  	</div>
 		  	</div>
 		  	
@@ -264,19 +274,19 @@
 		getMainCategory(); //카테고리 리스트
 		//노트 리스트 화면
 		document.getElementById("profileModal").style.display = "";
-		document.getElementById("mainView").style.display = "";
-		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
+		document.getElementById("noteView").style.display = "";
+		document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("noteView").style.height = screen.innerHeight +"px";
 		document.getElementById("noteEditor").style.display = "none";
 		$("#noteTitle").val("");
 		$(".nicEdit-main").html('');
 		
 		//노트 에디터
-		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("editorView").style.height = window.innerHeight +"px";
+		document.getElementById("editorView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("editorView").style.height = screen.innerHeight +"px";
 		
 		//드래그 리스트
-		document.getElementById("mainView_drag").style.height = window.innerHeight +"px";
+		document.getElementById("dragView").style.height = screen.innerHeight +"px";
 
 		//메뉴 이동시 에디터 체크
 		var chk_tf;
@@ -284,15 +294,15 @@
 
 	// 브라우저 창 크기 변화 시 위치 지정 (통합)
 	$(window).resize(function(){
-		//노트 리스트
-		document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
-		//노트 에디터
-		document.getElementById("editorView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("editorView").style.height = window.innerHeight +"px";
 		//드래그 리스트
-		document.getElementById("mainView_drag").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView_drag").style.height = window.innerHeight +"px";
+		document.getElementById("dragView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("dragView").style.height = screen.innerHeight +"px";
+		//노트 리스트
+		document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("noteView").style.height = screen.innerHeight +"px";
+		//노트 에디터
+		document.getElementById("editorView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("editorView").style.height = screen.innerHeight +"px";
 	});
     
     // 내비바 아이콘으로 열고 닫기
@@ -300,10 +310,11 @@
     	function profile_menu(){
 	    	document.getElementById("myDragList").style.display = "none";
 	    	document.getElementById("myNote").style.display = "none";
-	    	document.getElementById("myFriend").style.display = "none";
 	    	document.getElementById("userList").style.display = "none";
 	    	document.getElementById("memoList").style.display = "none";
+	    	document.getElementById("friend").style.display = "none";
 	    	document.getElementById("myDragtest").style.display = "none";
+	    	document.getElementById("search").style.display = "none";
 	    	document.getElementById("profile").style.display = "";
     	}
     	if(editor_chk){
@@ -320,9 +331,10 @@
     	function drag_menu(){
     		document.getElementById("profile").style.display = "none";
         	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("myFriend").style.display = "none";
         	document.getElementById("userList").style.display = "none";
+        	document.getElementById("friend").style.display = "none";
         	document.getElementById("memoList").style.display = "none";
+        	document.getElementById("search").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
         	document.getElementById("myDragList").style.display = "";
     	}
@@ -340,10 +352,11 @@
     	function dragTest_menu(){
     		document.getElementById("profile").style.display = "none";
         	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("myFriend").style.display = "none";
         	document.getElementById("userList").style.display = "none";
+        	document.getElementById("friend").style.display = "none";
         	document.getElementById("memoList").style.display = "none";
         	document.getElementById("myDragList").style.display = "none";
+        	document.getElementById("search").style.display = "none";
         	document.getElementById("myDragtest").style.display = "";
     	}
     	if(editor_chk){
@@ -360,10 +373,11 @@
     	function note_menu(){
     		document.getElementById("profile").style.display = "none";
         	document.getElementById("myDragList").style.display = "none";
-        	document.getElementById("myFriend").style.display = "none";
+        	document.getElementById("friend").style.display = "none";
         	document.getElementById("userList").style.display = "none";
         	document.getElementById("memoList").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("search").style.display = "none";
         	document.getElementById("myNote").style.display = "";
     	}
     	if(editor_chk){
@@ -376,15 +390,16 @@
     	}
     });
     
-    $("#friend").click(function(e) {
+    $("#myFriend").click(function(e) {
     	function friend_menu(){
     		document.getElementById("profile").style.display = "none";
         	document.getElementById("myDragList").style.display = "none";
         	document.getElementById("myNote").style.display = "none";
         	document.getElementById("userList").style.display = "none";
         	document.getElementById("memoList").style.display = "none";
+        	document.getElementById("search").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
-        	document.getElementById("myFriend").style.display = "";
+        	document.getElementById("friend").style.display = "";
     	}
     	if(editor_chk){
     		editorCancelChk();
@@ -396,14 +411,36 @@
     	}
     });
     
+    $("#searchFriend").click(function(e) {
+    	function search_menu(){
+	    	document.getElementById("profile").style.display = "none";
+	    	document.getElementById("myDragList").style.display = "none";
+	    	document.getElementById("myNote").style.display = "none";
+	    	document.getElementById("userList").style.display = "none";
+	    	document.getElementById("memoList").style.display = "none";
+	    	document.getElementById("myDragtest").style.display = "none";
+	    	document.getElementById("friend").style.display = "none";
+	    	document.getElementById("search").style.display = "";
+    	}
+	    if(editor_chk){
+			editorCancelChk();
+			if(chk_tf) {
+				search_menu();
+			}
+		} else {
+			search_menu();
+		}
+	});
+    
     $("#user").click(function(e) {
     	function user_menu(){
     		document.getElementById("profile").style.display = "none";
         	document.getElementById("myDragList").style.display = "none";
         	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("myFriend").style.display = "none";
+        	document.getElementById("friend").style.display = "none";
         	document.getElementById("memoList").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
+        	document.getElementById("search").style.display = "none";
         	document.getElementById("userList").style.display = "";
     	}
     	if(editor_chk){
@@ -421,8 +458,9 @@
     		document.getElementById("profile").style.display = "none";
         	document.getElementById("myDragList").style.display = "none";
         	document.getElementById("myNote").style.display = "none";
-        	document.getElementById("myFriend").style.display = "none";
+        	document.getElementById("friend").style.display = "none";
         	document.getElementById("userList").style.display = "none";
+        	document.getElementById("search").style.display = "none";
         	document.getElementById("myDragtest").style.display = "none";
         	document.getElementById("memoList").style.display = "";
     	}
@@ -455,9 +493,9 @@
 		$(".nicEdit-main").html('');
     	document.getElementById("noteEditor").style.display = "none";
     	document.getElementById("profileModal").style.display = "";
-    	document.getElementById("mainView").style.display = "";
-    	document.getElementById("mainView").style.width = (window.innerWidth - 420) +"px";
-		document.getElementById("mainView").style.height = window.innerHeight +"px";
+    	document.getElementById("noteView").style.display = "";
+    	document.getElementById("noteView").style.width = (screen.innerWidth - 420) +"px";
+		document.getElementById("noteView").style.height = screen.innerHeight +"px";
 		chk_tf = true;
 		} else {
 		chk_tf = false;
